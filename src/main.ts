@@ -1,8 +1,8 @@
-import"@/instrument";
+import"@Blithe/instrument";
 import { NestFactory, Reflector } from '@nestjs/core';
 import { AppModule } from './app.module';
-import { AllExceptionsFilter } from '@/common/filters/http-exception.filter';
-import { ResponseInterceptor } from '@/common/interceptors/response.interceptor';
+import { AllExceptionsFilter } from '@Blithe/common/filters/http-exception.filter';
+import { ResponseInterceptor } from '@Blithe/common/interceptors/response.interceptor';
 import { ValidationPipe } from '@nestjs/common/pipes/validation.pipe';
 
 async function bootstrap() {

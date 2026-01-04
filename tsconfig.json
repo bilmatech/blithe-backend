@@ -11,7 +11,7 @@
     "outDir": "./dist",
     "baseUrl": "./",
     "paths": {
-      "@/*": ["./src/*"],
+      "@Blithe/*": ["./src/*"],
       "@DB/Client": ["./generated/prisma"]
     },
     "incremental": true,
