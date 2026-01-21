@@ -1,4 +1,4 @@
-import"@Blithe/instrument";
+import '@Blithe/instrument';
 import { NestFactory, Reflector } from '@nestjs/core';
 import { AppModule } from './app.module';
 import { AllExceptionsFilter } from '@Blithe/common/filters/http-exception.filter';

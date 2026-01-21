@@ -19,3 +19,7 @@ export function uniqueId(length = 20, numbers = false): string {
   }
   return result;
 }
+
+export function generateTransactionReference(prefix: string = 'TXN'): string {
+  return `${prefix}${uniqueId(16, true)}`;
+}
