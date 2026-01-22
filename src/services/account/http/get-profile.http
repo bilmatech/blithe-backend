@@ -1,0 +1,3 @@
+GET {{ baseUrl }}/api/v1/account/profile
+Content-Type: application/json
+Authorization: Bearer {{ accessToken }}

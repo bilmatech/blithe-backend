@@ -1,4 +1,4 @@
-import { ResponseBody } from '@sabiflow/common/entity/response-body.entity';
+import { ResponseBody } from '@Blithe/common/entity/response-body.entity';
 import { ApiProperty } from '@nestjs/swagger';
 
 export class PinChallengeToken {

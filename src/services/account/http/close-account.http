@@ -1,0 +1,3 @@
+DELETE {{ baseUrl }}/api/v1/account/close
+Content-Type: application/json
+Authorization: Bearer {{ accessToken }}

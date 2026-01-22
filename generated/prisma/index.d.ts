@@ -24,6 +24,11 @@ export type User = $Result.DefaultSelection<Prisma.$UserPayload>
  */
 export type Credential = $Result.DefaultSelection<Prisma.$CredentialPayload>
 /**
+ * Model RefreshToken
+ * 
+ */
+export type RefreshToken = $Result.DefaultSelection<Prisma.$RefreshTokenPayload>
+/**
  * Model Administrator
  * 
  */
@@ -145,7 +150,7 @@ export type Ledger = $Result.DefaultSelection<Prisma.$LedgerPayload>
 export namespace $Enums {
   export const UserType: {
   administrator: 'administrator',
-  gaurdiant: 'gaurdiant',
+  guardian: 'guardian',
   school: 'school'
 };
 
@@ -155,7 +160,8 @@ export type UserType = (typeof UserType)[keyof typeof UserType]
 export const AccountStatus: {
   active: 'active',
   suspended: 'suspended',
-  blocked: 'blocked'
+  blocked: 'blocked',
+  deleted: 'deleted'
 };
 
 export type AccountStatus = (typeof AccountStatus)[keyof typeof AccountStatus]
@@ -260,6 +266,15 @@ export const WalletStatus: {
 
 export type WalletStatus = (typeof WalletStatus)[keyof typeof WalletStatus]
 
+
+export const VerificationType: {
+  account_activation: 'account_activation',
+  password_reset: 'password_reset',
+  pin_code_reset: 'pin_code_reset'
+};
+
+export type VerificationType = (typeof VerificationType)[keyof typeof VerificationType]
+
 }
 
 export type UserType = $Enums.UserType
@@ -313,6 +328,10 @@ export const KYCVerificationStatus: typeof $Enums.KYCVerificationStatus
 export type WalletStatus = $Enums.WalletStatus
 
 export const WalletStatus: typeof $Enums.WalletStatus
+
+export type VerificationType = $Enums.VerificationType
+
+export const VerificationType: typeof $Enums.VerificationType
 
 /**
  * ##  Prisma Client ʲˢ
@@ -450,6 +469,16 @@ export class PrismaClient<
     * ```
     */
   get credential(): Prisma.CredentialDelegate<ExtArgs, ClientOptions>;
+
+  /**
+   * `prisma.refreshToken`: Exposes CRUD operations for the **RefreshToken** model.
+    * Example usage:
+    * ```ts
+    * // Fetch zero or more RefreshTokens
+    * const refreshTokens = await prisma.refreshToken.findMany()
+    * ```
+    */
+  get refreshToken(): Prisma.RefreshTokenDelegate<ExtArgs, ClientOptions>;
 
   /**
    * `prisma.administrator`: Exposes CRUD operations for the **Administrator** model.
@@ -1116,6 +1145,7 @@ export namespace Prisma {
   export const ModelName: {
     User: 'User',
     Credential: 'Credential',
+    RefreshToken: 'RefreshToken',
     Administrator: 'Administrator',
     Guardian: 'Guardian',
     Verification: 'Verification',
@@ -1154,7 +1184,7 @@ export namespace Prisma {
       omit: GlobalOmitOptions
     }
     meta: {
-      modelProps: "user" | "credential" | "administrator" | "guardian" | "verification" | "school" | "schoolDirectorVerification" | "schoolOwnershipVerification" | "schoolVerification" | "schoolPayoutDetail" | "schoolAndPlatformLegalAgreement" | "class" | "academicSession" | "term" | "fees" | "feeBreakdown" | "invoice" | "student" | "linkedStudentProfile" | "transaction" | "transactionFee" | "payout" | "notification" | "wallet" | "ledger"
+      modelProps: "user" | "credential" | "refreshToken" | "administrator" | "guardian" | "verification" | "school" | "schoolDirectorVerification" | "schoolOwnershipVerification" | "schoolVerification" | "schoolPayoutDetail" | "schoolAndPlatformLegalAgreement" | "class" | "academicSession" | "term" | "fees" | "feeBreakdown" | "invoice" | "student" | "linkedStudentProfile" | "transaction" | "transactionFee" | "payout" | "notification" | "wallet" | "ledger"
       txIsolationLevel: Prisma.TransactionIsolationLevel
     }
     model: {
@@ -1303,6 +1333,80 @@ export namespace Prisma {
           count: {
             args: Prisma.CredentialCountArgs<ExtArgs>
             result: $Utils.Optional<CredentialCountAggregateOutputType> | number
+          }
+        }
+      }
+      RefreshToken: {
+        payload: Prisma.$RefreshTokenPayload<ExtArgs>
+        fields: Prisma.RefreshTokenFieldRefs
+        operations: {
+          findUnique: {
+            args: Prisma.RefreshTokenFindUniqueArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$RefreshTokenPayload> | null
+          }
+          findUniqueOrThrow: {
+            args: Prisma.RefreshTokenFindUniqueOrThrowArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$RefreshTokenPayload>
+          }
+          findFirst: {
+            args: Prisma.RefreshTokenFindFirstArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$RefreshTokenPayload> | null
+          }
+          findFirstOrThrow: {
+            args: Prisma.RefreshTokenFindFirstOrThrowArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$RefreshTokenPayload>
+          }
+          findMany: {
+            args: Prisma.RefreshTokenFindManyArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$RefreshTokenPayload>[]
+          }
+          create: {
+            args: Prisma.RefreshTokenCreateArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$RefreshTokenPayload>
+          }
+          createMany: {
+            args: Prisma.RefreshTokenCreateManyArgs<ExtArgs>
+            result: BatchPayload
+          }
+          createManyAndReturn: {
+            args: Prisma.RefreshTokenCreateManyAndReturnArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$RefreshTokenPayload>[]
+          }
+          delete: {
+            args: Prisma.RefreshTokenDeleteArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$RefreshTokenPayload>
+          }
+          update: {
+            args: Prisma.RefreshTokenUpdateArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$RefreshTokenPayload>
+          }
+          deleteMany: {
+            args: Prisma.RefreshTokenDeleteManyArgs<ExtArgs>
+            result: BatchPayload
+          }
+          updateMany: {
+            args: Prisma.RefreshTokenUpdateManyArgs<ExtArgs>
+            result: BatchPayload
+          }
+          updateManyAndReturn: {
+            args: Prisma.RefreshTokenUpdateManyAndReturnArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$RefreshTokenPayload>[]
+          }
+          upsert: {
+            args: Prisma.RefreshTokenUpsertArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$RefreshTokenPayload>
+          }
+          aggregate: {
+            args: Prisma.RefreshTokenAggregateArgs<ExtArgs>
+            result: $Utils.Optional<AggregateRefreshToken>
+          }
+          groupBy: {
+            args: Prisma.RefreshTokenGroupByArgs<ExtArgs>
+            result: $Utils.Optional<RefreshTokenGroupByOutputType>[]
+          }
+          count: {
+            args: Prisma.RefreshTokenCountArgs<ExtArgs>
+            result: $Utils.Optional<RefreshTokenCountAggregateOutputType> | number
           }
         }
       }
@@ -3118,6 +3222,7 @@ export namespace Prisma {
   export type GlobalOmitConfig = {
     user?: UserOmit
     credential?: CredentialOmit
+    refreshToken?: RefreshTokenOmit
     administrator?: AdministratorOmit
     guardian?: GuardianOmit
     verification?: VerificationOmit
@@ -3223,11 +3328,13 @@ export namespace Prisma {
   export type UserCountOutputType = {
     verifications: number
     notifications: number
+    refreshTokens: number
   }
 
   export type UserCountOutputTypeSelect<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     verifications?: boolean | UserCountOutputTypeCountVerificationsArgs
     notifications?: boolean | UserCountOutputTypeCountNotificationsArgs
+    refreshTokens?: boolean | UserCountOutputTypeCountRefreshTokensArgs
   }
 
   // Custom InputTypes
@@ -3253,6 +3360,13 @@ export namespace Prisma {
    */
   export type UserCountOutputTypeCountNotificationsArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     where?: NotificationWhereInput
+  }
+
+  /**
+   * UserCountOutputType without action
+   */
+  export type UserCountOutputTypeCountRefreshTokensArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    where?: RefreshTokenWhereInput
   }
 
 
@@ -3633,7 +3747,7 @@ export namespace Prisma {
     profileImage: string | null
     email: string | null
     type: $Enums.UserType | null
-    phoneNumber: string | null
+    phone: string | null
     accountStatus: $Enums.AccountStatus | null
     verifiedAt: Date | null
     lastSeenAt: Date | null
@@ -3649,7 +3763,7 @@ export namespace Prisma {
     profileImage: string | null
     email: string | null
     type: $Enums.UserType | null
-    phoneNumber: string | null
+    phone: string | null
     accountStatus: $Enums.AccountStatus | null
     verifiedAt: Date | null
     lastSeenAt: Date | null
@@ -3665,7 +3779,7 @@ export namespace Prisma {
     profileImage: number
     email: number
     type: number
-    phoneNumber: number
+    phone: number
     accountStatus: number
     verifiedAt: number
     lastSeenAt: number
@@ -3683,7 +3797,7 @@ export namespace Prisma {
     profileImage?: true
     email?: true
     type?: true
-    phoneNumber?: true
+    phone?: true
     accountStatus?: true
     verifiedAt?: true
     lastSeenAt?: true
@@ -3699,7 +3813,7 @@ export namespace Prisma {
     profileImage?: true
     email?: true
     type?: true
-    phoneNumber?: true
+    phone?: true
     accountStatus?: true
     verifiedAt?: true
     lastSeenAt?: true
@@ -3715,7 +3829,7 @@ export namespace Prisma {
     profileImage?: true
     email?: true
     type?: true
-    phoneNumber?: true
+    phone?: true
     accountStatus?: true
     verifiedAt?: true
     lastSeenAt?: true
@@ -3804,7 +3918,7 @@ export namespace Prisma {
     profileImage: string | null
     email: string
     type: $Enums.UserType
-    phoneNumber: string | null
+    phone: string | null
     accountStatus: $Enums.AccountStatus
     verifiedAt: Date | null
     lastSeenAt: Date | null
@@ -3837,7 +3951,7 @@ export namespace Prisma {
     profileImage?: boolean
     email?: boolean
     type?: boolean
-    phoneNumber?: boolean
+    phone?: boolean
     accountStatus?: boolean
     verifiedAt?: boolean
     lastSeenAt?: boolean
@@ -3852,6 +3966,7 @@ export namespace Prisma {
     notifications?: boolean | User$notificationsArgs<ExtArgs>
     credential?: boolean | User$credentialArgs<ExtArgs>
     wallet?: boolean | User$walletArgs<ExtArgs>
+    refreshTokens?: boolean | User$refreshTokensArgs<ExtArgs>
     _count?: boolean | UserCountOutputTypeDefaultArgs<ExtArgs>
   }, ExtArgs["result"]["user"]>
 
@@ -3862,7 +3977,7 @@ export namespace Prisma {
     profileImage?: boolean
     email?: boolean
     type?: boolean
-    phoneNumber?: boolean
+    phone?: boolean
     accountStatus?: boolean
     verifiedAt?: boolean
     lastSeenAt?: boolean
@@ -3878,7 +3993,7 @@ export namespace Prisma {
     profileImage?: boolean
     email?: boolean
     type?: boolean
-    phoneNumber?: boolean
+    phone?: boolean
     accountStatus?: boolean
     verifiedAt?: boolean
     lastSeenAt?: boolean
@@ -3894,7 +4009,7 @@ export namespace Prisma {
     profileImage?: boolean
     email?: boolean
     type?: boolean
-    phoneNumber?: boolean
+    phone?: boolean
     accountStatus?: boolean
     verifiedAt?: boolean
     lastSeenAt?: boolean
@@ -3903,7 +4018,7 @@ export namespace Prisma {
     updatedAt?: boolean
   }
 
-  export type UserOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "firstName" | "lastName" | "profileImage" | "email" | "type" | "phoneNumber" | "accountStatus" | "verifiedAt" | "lastSeenAt" | "isDeleted" | "createdAt" | "updatedAt", ExtArgs["result"]["user"]>
+  export type UserOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "firstName" | "lastName" | "profileImage" | "email" | "type" | "phone" | "accountStatus" | "verifiedAt" | "lastSeenAt" | "isDeleted" | "createdAt" | "updatedAt", ExtArgs["result"]["user"]>
   export type UserInclude<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     administrator?: boolean | User$administratorArgs<ExtArgs>
     guardian?: boolean | User$guardianArgs<ExtArgs>
@@ -3913,6 +4028,7 @@ export namespace Prisma {
     notifications?: boolean | User$notificationsArgs<ExtArgs>
     credential?: boolean | User$credentialArgs<ExtArgs>
     wallet?: boolean | User$walletArgs<ExtArgs>
+    refreshTokens?: boolean | User$refreshTokensArgs<ExtArgs>
     _count?: boolean | UserCountOutputTypeDefaultArgs<ExtArgs>
   }
   export type UserIncludeCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {}
@@ -3929,6 +4045,7 @@ export namespace Prisma {
       notifications: Prisma.$NotificationPayload<ExtArgs>[]
       credential: Prisma.$CredentialPayload<ExtArgs> | null
       wallet: Prisma.$WalletPayload<ExtArgs> | null
+      refreshTokens: Prisma.$RefreshTokenPayload<ExtArgs>[]
     }
     scalars: $Extensions.GetPayloadResult<{
       id: string
@@ -3937,7 +4054,7 @@ export namespace Prisma {
       profileImage: string | null
       email: string
       type: $Enums.UserType
-      phoneNumber: string | null
+      phone: string | null
       accountStatus: $Enums.AccountStatus
       verifiedAt: Date | null
       lastSeenAt: Date | null
@@ -4346,6 +4463,7 @@ export namespace Prisma {
     notifications<T extends User$notificationsArgs<ExtArgs> = {}>(args?: Subset<T, User$notificationsArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$NotificationPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
     credential<T extends User$credentialArgs<ExtArgs> = {}>(args?: Subset<T, User$credentialArgs<ExtArgs>>): Prisma__CredentialClient<$Result.GetResult<Prisma.$CredentialPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
     wallet<T extends User$walletArgs<ExtArgs> = {}>(args?: Subset<T, User$walletArgs<ExtArgs>>): Prisma__WalletClient<$Result.GetResult<Prisma.$WalletPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
+    refreshTokens<T extends User$refreshTokensArgs<ExtArgs> = {}>(args?: Subset<T, User$refreshTokensArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$RefreshTokenPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
     /**
      * Attaches callbacks for the resolution and/or rejection of the Promise.
      * @param onfulfilled The callback to execute when the Promise is resolved.
@@ -4381,7 +4499,7 @@ export namespace Prisma {
     readonly profileImage: FieldRef<"User", 'String'>
     readonly email: FieldRef<"User", 'String'>
     readonly type: FieldRef<"User", 'UserType'>
-    readonly phoneNumber: FieldRef<"User", 'String'>
+    readonly phone: FieldRef<"User", 'String'>
     readonly accountStatus: FieldRef<"User", 'AccountStatus'>
     readonly verifiedAt: FieldRef<"User", 'DateTime'>
     readonly lastSeenAt: FieldRef<"User", 'DateTime'>
@@ -4938,6 +5056,30 @@ export namespace Prisma {
   }
 
   /**
+   * User.refreshTokens
+   */
+  export type User$refreshTokensArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the RefreshToken
+     */
+    select?: RefreshTokenSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the RefreshToken
+     */
+    omit?: RefreshTokenOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: RefreshTokenInclude<ExtArgs> | null
+    where?: RefreshTokenWhereInput
+    orderBy?: RefreshTokenOrderByWithRelationInput | RefreshTokenOrderByWithRelationInput[]
+    cursor?: RefreshTokenWhereUniqueInput
+    take?: number
+    skip?: number
+    distinct?: RefreshTokenScalarFieldEnum | RefreshTokenScalarFieldEnum[]
+  }
+
+  /**
    * User without action
    */
   export type UserDefaultArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
@@ -4971,6 +5113,8 @@ export namespace Prisma {
     userId: string | null
     password: string | null
     pinCode: string | null
+    lastResetAt: Date | null
+    lastUsedAt: Date | null
     isDeleted: boolean | null
     createdAt: Date | null
     updatedAt: Date | null
@@ -4981,6 +5125,8 @@ export namespace Prisma {
     userId: string | null
     password: string | null
     pinCode: string | null
+    lastResetAt: Date | null
+    lastUsedAt: Date | null
     isDeleted: boolean | null
     createdAt: Date | null
     updatedAt: Date | null
@@ -4991,6 +5137,8 @@ export namespace Prisma {
     userId: number
     password: number
     pinCode: number
+    lastResetAt: number
+    lastUsedAt: number
     isDeleted: number
     createdAt: number
     updatedAt: number
@@ -5003,6 +5151,8 @@ export namespace Prisma {
     userId?: true
     password?: true
     pinCode?: true
+    lastResetAt?: true
+    lastUsedAt?: true
     isDeleted?: true
     createdAt?: true
     updatedAt?: true
@@ -5013,6 +5163,8 @@ export namespace Prisma {
     userId?: true
     password?: true
     pinCode?: true
+    lastResetAt?: true
+    lastUsedAt?: true
     isDeleted?: true
     createdAt?: true
     updatedAt?: true
@@ -5023,6 +5175,8 @@ export namespace Prisma {
     userId?: true
     password?: true
     pinCode?: true
+    lastResetAt?: true
+    lastUsedAt?: true
     isDeleted?: true
     createdAt?: true
     updatedAt?: true
@@ -5104,8 +5258,10 @@ export namespace Prisma {
   export type CredentialGroupByOutputType = {
     id: string
     userId: string
-    password: string
-    pinCode: string
+    password: string | null
+    pinCode: string | null
+    lastResetAt: Date | null
+    lastUsedAt: Date | null
     isDeleted: boolean
     createdAt: Date
     updatedAt: Date
@@ -5133,6 +5289,8 @@ export namespace Prisma {
     userId?: boolean
     password?: boolean
     pinCode?: boolean
+    lastResetAt?: boolean
+    lastUsedAt?: boolean
     isDeleted?: boolean
     createdAt?: boolean
     updatedAt?: boolean
@@ -5144,6 +5302,8 @@ export namespace Prisma {
     userId?: boolean
     password?: boolean
     pinCode?: boolean
+    lastResetAt?: boolean
+    lastUsedAt?: boolean
     isDeleted?: boolean
     createdAt?: boolean
     updatedAt?: boolean
@@ -5155,6 +5315,8 @@ export namespace Prisma {
     userId?: boolean
     password?: boolean
     pinCode?: boolean
+    lastResetAt?: boolean
+    lastUsedAt?: boolean
     isDeleted?: boolean
     createdAt?: boolean
     updatedAt?: boolean
@@ -5166,12 +5328,14 @@ export namespace Prisma {
     userId?: boolean
     password?: boolean
     pinCode?: boolean
+    lastResetAt?: boolean
+    lastUsedAt?: boolean
     isDeleted?: boolean
     createdAt?: boolean
     updatedAt?: boolean
   }
 
-  export type CredentialOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "userId" | "password" | "pinCode" | "isDeleted" | "createdAt" | "updatedAt", ExtArgs["result"]["credential"]>
+  export type CredentialOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "userId" | "password" | "pinCode" | "lastResetAt" | "lastUsedAt" | "isDeleted" | "createdAt" | "updatedAt", ExtArgs["result"]["credential"]>
   export type CredentialInclude<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     user?: boolean | UserDefaultArgs<ExtArgs>
   }
@@ -5190,8 +5354,10 @@ export namespace Prisma {
     scalars: $Extensions.GetPayloadResult<{
       id: string
       userId: string
-      password: string
-      pinCode: string
+      password: string | null
+      pinCode: string | null
+      lastResetAt: Date | null
+      lastUsedAt: Date | null
       isDeleted: boolean
       createdAt: Date
       updatedAt: Date
@@ -5623,6 +5789,8 @@ export namespace Prisma {
     readonly userId: FieldRef<"Credential", 'String'>
     readonly password: FieldRef<"Credential", 'String'>
     readonly pinCode: FieldRef<"Credential", 'String'>
+    readonly lastResetAt: FieldRef<"Credential", 'DateTime'>
+    readonly lastUsedAt: FieldRef<"Credential", 'DateTime'>
     readonly isDeleted: FieldRef<"Credential", 'Boolean'>
     readonly createdAt: FieldRef<"Credential", 'DateTime'>
     readonly updatedAt: FieldRef<"Credential", 'DateTime'>
@@ -6037,6 +6205,1103 @@ export namespace Prisma {
      * Choose, which related nodes to fetch as well
      */
     include?: CredentialInclude<ExtArgs> | null
+  }
+
+
+  /**
+   * Model RefreshToken
+   */
+
+  export type AggregateRefreshToken = {
+    _count: RefreshTokenCountAggregateOutputType | null
+    _min: RefreshTokenMinAggregateOutputType | null
+    _max: RefreshTokenMaxAggregateOutputType | null
+  }
+
+  export type RefreshTokenMinAggregateOutputType = {
+    id: string | null
+    userId: string | null
+    token: string | null
+    expiresAt: Date | null
+    revoked: boolean | null
+    isDeleted: boolean | null
+    updatedAt: Date | null
+    createdAt: Date | null
+  }
+
+  export type RefreshTokenMaxAggregateOutputType = {
+    id: string | null
+    userId: string | null
+    token: string | null
+    expiresAt: Date | null
+    revoked: boolean | null
+    isDeleted: boolean | null
+    updatedAt: Date | null
+    createdAt: Date | null
+  }
+
+  export type RefreshTokenCountAggregateOutputType = {
+    id: number
+    userId: number
+    token: number
+    expiresAt: number
+    revoked: number
+    isDeleted: number
+    updatedAt: number
+    createdAt: number
+    _all: number
+  }
+
+
+  export type RefreshTokenMinAggregateInputType = {
+    id?: true
+    userId?: true
+    token?: true
+    expiresAt?: true
+    revoked?: true
+    isDeleted?: true
+    updatedAt?: true
+    createdAt?: true
+  }
+
+  export type RefreshTokenMaxAggregateInputType = {
+    id?: true
+    userId?: true
+    token?: true
+    expiresAt?: true
+    revoked?: true
+    isDeleted?: true
+    updatedAt?: true
+    createdAt?: true
+  }
+
+  export type RefreshTokenCountAggregateInputType = {
+    id?: true
+    userId?: true
+    token?: true
+    expiresAt?: true
+    revoked?: true
+    isDeleted?: true
+    updatedAt?: true
+    createdAt?: true
+    _all?: true
+  }
+
+  export type RefreshTokenAggregateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Filter which RefreshToken to aggregate.
+     */
+    where?: RefreshTokenWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of RefreshTokens to fetch.
+     */
+    orderBy?: RefreshTokenOrderByWithRelationInput | RefreshTokenOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the start position
+     */
+    cursor?: RefreshTokenWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` RefreshTokens from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` RefreshTokens.
+     */
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Count returned RefreshTokens
+    **/
+    _count?: true | RefreshTokenCountAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to find the minimum value
+    **/
+    _min?: RefreshTokenMinAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to find the maximum value
+    **/
+    _max?: RefreshTokenMaxAggregateInputType
+  }
+
+  export type GetRefreshTokenAggregateType<T extends RefreshTokenAggregateArgs> = {
+        [P in keyof T & keyof AggregateRefreshToken]: P extends '_count' | 'count'
+      ? T[P] extends true
+        ? number
+        : GetScalarType<T[P], AggregateRefreshToken[P]>
+      : GetScalarType<T[P], AggregateRefreshToken[P]>
+  }
+
+
+
+
+  export type RefreshTokenGroupByArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    where?: RefreshTokenWhereInput
+    orderBy?: RefreshTokenOrderByWithAggregationInput | RefreshTokenOrderByWithAggregationInput[]
+    by: RefreshTokenScalarFieldEnum[] | RefreshTokenScalarFieldEnum
+    having?: RefreshTokenScalarWhereWithAggregatesInput
+    take?: number
+    skip?: number
+    _count?: RefreshTokenCountAggregateInputType | true
+    _min?: RefreshTokenMinAggregateInputType
+    _max?: RefreshTokenMaxAggregateInputType
+  }
+
+  export type RefreshTokenGroupByOutputType = {
+    id: string
+    userId: string
+    token: string
+    expiresAt: Date
+    revoked: boolean
+    isDeleted: boolean
+    updatedAt: Date
+    createdAt: Date
+    _count: RefreshTokenCountAggregateOutputType | null
+    _min: RefreshTokenMinAggregateOutputType | null
+    _max: RefreshTokenMaxAggregateOutputType | null
+  }
+
+  type GetRefreshTokenGroupByPayload<T extends RefreshTokenGroupByArgs> = Prisma.PrismaPromise<
+    Array<
+      PickEnumerable<RefreshTokenGroupByOutputType, T['by']> &
+        {
+          [P in ((keyof T) & (keyof RefreshTokenGroupByOutputType))]: P extends '_count'
+            ? T[P] extends boolean
+              ? number
+              : GetScalarType<T[P], RefreshTokenGroupByOutputType[P]>
+            : GetScalarType<T[P], RefreshTokenGroupByOutputType[P]>
+        }
+      >
+    >
+
+
+  export type RefreshTokenSelect<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
+    id?: boolean
+    userId?: boolean
+    token?: boolean
+    expiresAt?: boolean
+    revoked?: boolean
+    isDeleted?: boolean
+    updatedAt?: boolean
+    createdAt?: boolean
+    user?: boolean | UserDefaultArgs<ExtArgs>
+  }, ExtArgs["result"]["refreshToken"]>
+
+  export type RefreshTokenSelectCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
+    id?: boolean
+    userId?: boolean
+    token?: boolean
+    expiresAt?: boolean
+    revoked?: boolean
+    isDeleted?: boolean
+    updatedAt?: boolean
+    createdAt?: boolean
+    user?: boolean | UserDefaultArgs<ExtArgs>
+  }, ExtArgs["result"]["refreshToken"]>
+
+  export type RefreshTokenSelectUpdateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
+    id?: boolean
+    userId?: boolean
+    token?: boolean
+    expiresAt?: boolean
+    revoked?: boolean
+    isDeleted?: boolean
+    updatedAt?: boolean
+    createdAt?: boolean
+    user?: boolean | UserDefaultArgs<ExtArgs>
+  }, ExtArgs["result"]["refreshToken"]>
+
+  export type RefreshTokenSelectScalar = {
+    id?: boolean
+    userId?: boolean
+    token?: boolean
+    expiresAt?: boolean
+    revoked?: boolean
+    isDeleted?: boolean
+    updatedAt?: boolean
+    createdAt?: boolean
+  }
+
+  export type RefreshTokenOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "userId" | "token" | "expiresAt" | "revoked" | "isDeleted" | "updatedAt" | "createdAt", ExtArgs["result"]["refreshToken"]>
+  export type RefreshTokenInclude<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    user?: boolean | UserDefaultArgs<ExtArgs>
+  }
+  export type RefreshTokenIncludeCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    user?: boolean | UserDefaultArgs<ExtArgs>
+  }
+  export type RefreshTokenIncludeUpdateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    user?: boolean | UserDefaultArgs<ExtArgs>
+  }
+
+  export type $RefreshTokenPayload<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    name: "RefreshToken"
+    objects: {
+      user: Prisma.$UserPayload<ExtArgs>
+    }
+    scalars: $Extensions.GetPayloadResult<{
+      id: string
+      userId: string
+      token: string
+      expiresAt: Date
+      revoked: boolean
+      isDeleted: boolean
+      updatedAt: Date
+      createdAt: Date
+    }, ExtArgs["result"]["refreshToken"]>
+    composites: {}
+  }
+
+  type RefreshTokenGetPayload<S extends boolean | null | undefined | RefreshTokenDefaultArgs> = $Result.GetResult<Prisma.$RefreshTokenPayload, S>
+
+  type RefreshTokenCountArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> =
+    Omit<RefreshTokenFindManyArgs, 'select' | 'include' | 'distinct' | 'omit'> & {
+      select?: RefreshTokenCountAggregateInputType | true
+    }
+
+  export interface RefreshTokenDelegate<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs, GlobalOmitOptions = {}> {
+    [K: symbol]: { types: Prisma.TypeMap<ExtArgs>['model']['RefreshToken'], meta: { name: 'RefreshToken' } }
+    /**
+     * Find zero or one RefreshToken that matches the filter.
+     * @param {RefreshTokenFindUniqueArgs} args - Arguments to find a RefreshToken
+     * @example
+     * // Get one RefreshToken
+     * const refreshToken = await prisma.refreshToken.findUnique({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findUnique<T extends RefreshTokenFindUniqueArgs>(args: SelectSubset<T, RefreshTokenFindUniqueArgs<ExtArgs>>): Prisma__RefreshTokenClient<$Result.GetResult<Prisma.$RefreshTokenPayload<ExtArgs>, T, "findUnique", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find one RefreshToken that matches the filter or throw an error with `error.code='P2025'`
+     * if no matches were found.
+     * @param {RefreshTokenFindUniqueOrThrowArgs} args - Arguments to find a RefreshToken
+     * @example
+     * // Get one RefreshToken
+     * const refreshToken = await prisma.refreshToken.findUniqueOrThrow({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findUniqueOrThrow<T extends RefreshTokenFindUniqueOrThrowArgs>(args: SelectSubset<T, RefreshTokenFindUniqueOrThrowArgs<ExtArgs>>): Prisma__RefreshTokenClient<$Result.GetResult<Prisma.$RefreshTokenPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find the first RefreshToken that matches the filter.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {RefreshTokenFindFirstArgs} args - Arguments to find a RefreshToken
+     * @example
+     * // Get one RefreshToken
+     * const refreshToken = await prisma.refreshToken.findFirst({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findFirst<T extends RefreshTokenFindFirstArgs>(args?: SelectSubset<T, RefreshTokenFindFirstArgs<ExtArgs>>): Prisma__RefreshTokenClient<$Result.GetResult<Prisma.$RefreshTokenPayload<ExtArgs>, T, "findFirst", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find the first RefreshToken that matches the filter or
+     * throw `PrismaKnownClientError` with `P2025` code if no matches were found.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {RefreshTokenFindFirstOrThrowArgs} args - Arguments to find a RefreshToken
+     * @example
+     * // Get one RefreshToken
+     * const refreshToken = await prisma.refreshToken.findFirstOrThrow({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findFirstOrThrow<T extends RefreshTokenFindFirstOrThrowArgs>(args?: SelectSubset<T, RefreshTokenFindFirstOrThrowArgs<ExtArgs>>): Prisma__RefreshTokenClient<$Result.GetResult<Prisma.$RefreshTokenPayload<ExtArgs>, T, "findFirstOrThrow", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find zero or more RefreshTokens that matches the filter.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {RefreshTokenFindManyArgs} args - Arguments to filter and select certain fields only.
+     * @example
+     * // Get all RefreshTokens
+     * const refreshTokens = await prisma.refreshToken.findMany()
+     * 
+     * // Get first 10 RefreshTokens
+     * const refreshTokens = await prisma.refreshToken.findMany({ take: 10 })
+     * 
+     * // Only select the `id`
+     * const refreshTokenWithIdOnly = await prisma.refreshToken.findMany({ select: { id: true } })
+     * 
+     */
+    findMany<T extends RefreshTokenFindManyArgs>(args?: SelectSubset<T, RefreshTokenFindManyArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$RefreshTokenPayload<ExtArgs>, T, "findMany", GlobalOmitOptions>>
+
+    /**
+     * Create a RefreshToken.
+     * @param {RefreshTokenCreateArgs} args - Arguments to create a RefreshToken.
+     * @example
+     * // Create one RefreshToken
+     * const RefreshToken = await prisma.refreshToken.create({
+     *   data: {
+     *     // ... data to create a RefreshToken
+     *   }
+     * })
+     * 
+     */
+    create<T extends RefreshTokenCreateArgs>(args: SelectSubset<T, RefreshTokenCreateArgs<ExtArgs>>): Prisma__RefreshTokenClient<$Result.GetResult<Prisma.$RefreshTokenPayload<ExtArgs>, T, "create", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Create many RefreshTokens.
+     * @param {RefreshTokenCreateManyArgs} args - Arguments to create many RefreshTokens.
+     * @example
+     * // Create many RefreshTokens
+     * const refreshToken = await prisma.refreshToken.createMany({
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     *     
+     */
+    createMany<T extends RefreshTokenCreateManyArgs>(args?: SelectSubset<T, RefreshTokenCreateManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
+
+    /**
+     * Create many RefreshTokens and returns the data saved in the database.
+     * @param {RefreshTokenCreateManyAndReturnArgs} args - Arguments to create many RefreshTokens.
+     * @example
+     * // Create many RefreshTokens
+     * const refreshToken = await prisma.refreshToken.createManyAndReturn({
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     * 
+     * // Create many RefreshTokens and only return the `id`
+     * const refreshTokenWithIdOnly = await prisma.refreshToken.createManyAndReturn({
+     *   select: { id: true },
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * 
+     */
+    createManyAndReturn<T extends RefreshTokenCreateManyAndReturnArgs>(args?: SelectSubset<T, RefreshTokenCreateManyAndReturnArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$RefreshTokenPayload<ExtArgs>, T, "createManyAndReturn", GlobalOmitOptions>>
+
+    /**
+     * Delete a RefreshToken.
+     * @param {RefreshTokenDeleteArgs} args - Arguments to delete one RefreshToken.
+     * @example
+     * // Delete one RefreshToken
+     * const RefreshToken = await prisma.refreshToken.delete({
+     *   where: {
+     *     // ... filter to delete one RefreshToken
+     *   }
+     * })
+     * 
+     */
+    delete<T extends RefreshTokenDeleteArgs>(args: SelectSubset<T, RefreshTokenDeleteArgs<ExtArgs>>): Prisma__RefreshTokenClient<$Result.GetResult<Prisma.$RefreshTokenPayload<ExtArgs>, T, "delete", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Update one RefreshToken.
+     * @param {RefreshTokenUpdateArgs} args - Arguments to update one RefreshToken.
+     * @example
+     * // Update one RefreshToken
+     * const refreshToken = await prisma.refreshToken.update({
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: {
+     *     // ... provide data here
+     *   }
+     * })
+     * 
+     */
+    update<T extends RefreshTokenUpdateArgs>(args: SelectSubset<T, RefreshTokenUpdateArgs<ExtArgs>>): Prisma__RefreshTokenClient<$Result.GetResult<Prisma.$RefreshTokenPayload<ExtArgs>, T, "update", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Delete zero or more RefreshTokens.
+     * @param {RefreshTokenDeleteManyArgs} args - Arguments to filter RefreshTokens to delete.
+     * @example
+     * // Delete a few RefreshTokens
+     * const { count } = await prisma.refreshToken.deleteMany({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     * 
+     */
+    deleteMany<T extends RefreshTokenDeleteManyArgs>(args?: SelectSubset<T, RefreshTokenDeleteManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
+
+    /**
+     * Update zero or more RefreshTokens.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {RefreshTokenUpdateManyArgs} args - Arguments to update one or more rows.
+     * @example
+     * // Update many RefreshTokens
+     * const refreshToken = await prisma.refreshToken.updateMany({
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: {
+     *     // ... provide data here
+     *   }
+     * })
+     * 
+     */
+    updateMany<T extends RefreshTokenUpdateManyArgs>(args: SelectSubset<T, RefreshTokenUpdateManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
+
+    /**
+     * Update zero or more RefreshTokens and returns the data updated in the database.
+     * @param {RefreshTokenUpdateManyAndReturnArgs} args - Arguments to update many RefreshTokens.
+     * @example
+     * // Update many RefreshTokens
+     * const refreshToken = await prisma.refreshToken.updateManyAndReturn({
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     * 
+     * // Update zero or more RefreshTokens and only return the `id`
+     * const refreshTokenWithIdOnly = await prisma.refreshToken.updateManyAndReturn({
+     *   select: { id: true },
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * 
+     */
+    updateManyAndReturn<T extends RefreshTokenUpdateManyAndReturnArgs>(args: SelectSubset<T, RefreshTokenUpdateManyAndReturnArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$RefreshTokenPayload<ExtArgs>, T, "updateManyAndReturn", GlobalOmitOptions>>
+
+    /**
+     * Create or update one RefreshToken.
+     * @param {RefreshTokenUpsertArgs} args - Arguments to update or create a RefreshToken.
+     * @example
+     * // Update or create a RefreshToken
+     * const refreshToken = await prisma.refreshToken.upsert({
+     *   create: {
+     *     // ... data to create a RefreshToken
+     *   },
+     *   update: {
+     *     // ... in case it already exists, update
+     *   },
+     *   where: {
+     *     // ... the filter for the RefreshToken we want to update
+     *   }
+     * })
+     */
+    upsert<T extends RefreshTokenUpsertArgs>(args: SelectSubset<T, RefreshTokenUpsertArgs<ExtArgs>>): Prisma__RefreshTokenClient<$Result.GetResult<Prisma.$RefreshTokenPayload<ExtArgs>, T, "upsert", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+
+    /**
+     * Count the number of RefreshTokens.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {RefreshTokenCountArgs} args - Arguments to filter RefreshTokens to count.
+     * @example
+     * // Count the number of RefreshTokens
+     * const count = await prisma.refreshToken.count({
+     *   where: {
+     *     // ... the filter for the RefreshTokens we want to count
+     *   }
+     * })
+    **/
+    count<T extends RefreshTokenCountArgs>(
+      args?: Subset<T, RefreshTokenCountArgs>,
+    ): Prisma.PrismaPromise<
+      T extends $Utils.Record<'select', any>
+        ? T['select'] extends true
+          ? number
+          : GetScalarType<T['select'], RefreshTokenCountAggregateOutputType>
+        : number
+    >
+
+    /**
+     * Allows you to perform aggregations operations on a RefreshToken.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {RefreshTokenAggregateArgs} args - Select which aggregations you would like to apply and on what fields.
+     * @example
+     * // Ordered by age ascending
+     * // Where email contains prisma.io
+     * // Limited to the 10 users
+     * const aggregations = await prisma.user.aggregate({
+     *   _avg: {
+     *     age: true,
+     *   },
+     *   where: {
+     *     email: {
+     *       contains: "prisma.io",
+     *     },
+     *   },
+     *   orderBy: {
+     *     age: "asc",
+     *   },
+     *   take: 10,
+     * })
+    **/
+    aggregate<T extends RefreshTokenAggregateArgs>(args: Subset<T, RefreshTokenAggregateArgs>): Prisma.PrismaPromise<GetRefreshTokenAggregateType<T>>
+
+    /**
+     * Group by RefreshToken.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {RefreshTokenGroupByArgs} args - Group by arguments.
+     * @example
+     * // Group by city, order by createdAt, get count
+     * const result = await prisma.user.groupBy({
+     *   by: ['city', 'createdAt'],
+     *   orderBy: {
+     *     createdAt: true
+     *   },
+     *   _count: {
+     *     _all: true
+     *   },
+     * })
+     * 
+    **/
+    groupBy<
+      T extends RefreshTokenGroupByArgs,
+      HasSelectOrTake extends Or<
+        Extends<'skip', Keys<T>>,
+        Extends<'take', Keys<T>>
+      >,
+      OrderByArg extends True extends HasSelectOrTake
+        ? { orderBy: RefreshTokenGroupByArgs['orderBy'] }
+        : { orderBy?: RefreshTokenGroupByArgs['orderBy'] },
+      OrderFields extends ExcludeUnderscoreKeys<Keys<MaybeTupleToUnion<T['orderBy']>>>,
+      ByFields extends MaybeTupleToUnion<T['by']>,
+      ByValid extends Has<ByFields, OrderFields>,
+      HavingFields extends GetHavingFields<T['having']>,
+      HavingValid extends Has<ByFields, HavingFields>,
+      ByEmpty extends T['by'] extends never[] ? True : False,
+      InputErrors extends ByEmpty extends True
+      ? `Error: "by" must not be empty.`
+      : HavingValid extends False
+      ? {
+          [P in HavingFields]: P extends ByFields
+            ? never
+            : P extends string
+            ? `Error: Field "${P}" used in "having" needs to be provided in "by".`
+            : [
+                Error,
+                'Field ',
+                P,
+                ` in "having" needs to be provided in "by"`,
+              ]
+        }[HavingFields]
+      : 'take' extends Keys<T>
+      ? 'orderBy' extends Keys<T>
+        ? ByValid extends True
+          ? {}
+          : {
+              [P in OrderFields]: P extends ByFields
+                ? never
+                : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
+            }[OrderFields]
+        : 'Error: If you provide "take", you also need to provide "orderBy"'
+      : 'skip' extends Keys<T>
+      ? 'orderBy' extends Keys<T>
+        ? ByValid extends True
+          ? {}
+          : {
+              [P in OrderFields]: P extends ByFields
+                ? never
+                : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
+            }[OrderFields]
+        : 'Error: If you provide "skip", you also need to provide "orderBy"'
+      : ByValid extends True
+      ? {}
+      : {
+          [P in OrderFields]: P extends ByFields
+            ? never
+            : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
+        }[OrderFields]
+    >(args: SubsetIntersection<T, RefreshTokenGroupByArgs, OrderByArg> & InputErrors): {} extends InputErrors ? GetRefreshTokenGroupByPayload<T> : Prisma.PrismaPromise<InputErrors>
+  /**
+   * Fields of the RefreshToken model
+   */
+  readonly fields: RefreshTokenFieldRefs;
+  }
+
+  /**
+   * The delegate class that acts as a "Promise-like" for RefreshToken.
+   * Why is this prefixed with `Prisma__`?
+   * Because we want to prevent naming conflicts as mentioned in
+   * https://github.com/prisma/prisma-client-js/issues/707
+   */
+  export interface Prisma__RefreshTokenClient<T, Null = never, ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs, GlobalOmitOptions = {}> extends Prisma.PrismaPromise<T> {
+    readonly [Symbol.toStringTag]: "PrismaPromise"
+    user<T extends UserDefaultArgs<ExtArgs> = {}>(args?: Subset<T, UserDefaultArgs<ExtArgs>>): Prisma__UserClient<$Result.GetResult<Prisma.$UserPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | Null, Null, ExtArgs, GlobalOmitOptions>
+    /**
+     * Attaches callbacks for the resolution and/or rejection of the Promise.
+     * @param onfulfilled The callback to execute when the Promise is resolved.
+     * @param onrejected The callback to execute when the Promise is rejected.
+     * @returns A Promise for the completion of which ever callback is executed.
+     */
+    then<TResult1 = T, TResult2 = never>(onfulfilled?: ((value: T) => TResult1 | PromiseLike<TResult1>) | undefined | null, onrejected?: ((reason: any) => TResult2 | PromiseLike<TResult2>) | undefined | null): $Utils.JsPromise<TResult1 | TResult2>
+    /**
+     * Attaches a callback for only the rejection of the Promise.
+     * @param onrejected The callback to execute when the Promise is rejected.
+     * @returns A Promise for the completion of the callback.
+     */
+    catch<TResult = never>(onrejected?: ((reason: any) => TResult | PromiseLike<TResult>) | undefined | null): $Utils.JsPromise<T | TResult>
+    /**
+     * Attaches a callback that is invoked when the Promise is settled (fulfilled or rejected). The
+     * resolved value cannot be modified from the callback.
+     * @param onfinally The callback to execute when the Promise is settled (fulfilled or rejected).
+     * @returns A Promise for the completion of the callback.
+     */
+    finally(onfinally?: (() => void) | undefined | null): $Utils.JsPromise<T>
+  }
+
+
+
+
+  /**
+   * Fields of the RefreshToken model
+   */
+  interface RefreshTokenFieldRefs {
+    readonly id: FieldRef<"RefreshToken", 'String'>
+    readonly userId: FieldRef<"RefreshToken", 'String'>
+    readonly token: FieldRef<"RefreshToken", 'String'>
+    readonly expiresAt: FieldRef<"RefreshToken", 'DateTime'>
+    readonly revoked: FieldRef<"RefreshToken", 'Boolean'>
+    readonly isDeleted: FieldRef<"RefreshToken", 'Boolean'>
+    readonly updatedAt: FieldRef<"RefreshToken", 'DateTime'>
+    readonly createdAt: FieldRef<"RefreshToken", 'DateTime'>
+  }
+    
+
+  // Custom InputTypes
+  /**
+   * RefreshToken findUnique
+   */
+  export type RefreshTokenFindUniqueArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the RefreshToken
+     */
+    select?: RefreshTokenSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the RefreshToken
+     */
+    omit?: RefreshTokenOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: RefreshTokenInclude<ExtArgs> | null
+    /**
+     * Filter, which RefreshToken to fetch.
+     */
+    where: RefreshTokenWhereUniqueInput
+  }
+
+  /**
+   * RefreshToken findUniqueOrThrow
+   */
+  export type RefreshTokenFindUniqueOrThrowArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the RefreshToken
+     */
+    select?: RefreshTokenSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the RefreshToken
+     */
+    omit?: RefreshTokenOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: RefreshTokenInclude<ExtArgs> | null
+    /**
+     * Filter, which RefreshToken to fetch.
+     */
+    where: RefreshTokenWhereUniqueInput
+  }
+
+  /**
+   * RefreshToken findFirst
+   */
+  export type RefreshTokenFindFirstArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the RefreshToken
+     */
+    select?: RefreshTokenSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the RefreshToken
+     */
+    omit?: RefreshTokenOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: RefreshTokenInclude<ExtArgs> | null
+    /**
+     * Filter, which RefreshToken to fetch.
+     */
+    where?: RefreshTokenWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of RefreshTokens to fetch.
+     */
+    orderBy?: RefreshTokenOrderByWithRelationInput | RefreshTokenOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the position for searching for RefreshTokens.
+     */
+    cursor?: RefreshTokenWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` RefreshTokens from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` RefreshTokens.
+     */
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/distinct Distinct Docs}
+     * 
+     * Filter by unique combinations of RefreshTokens.
+     */
+    distinct?: RefreshTokenScalarFieldEnum | RefreshTokenScalarFieldEnum[]
+  }
+
+  /**
+   * RefreshToken findFirstOrThrow
+   */
+  export type RefreshTokenFindFirstOrThrowArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the RefreshToken
+     */
+    select?: RefreshTokenSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the RefreshToken
+     */
+    omit?: RefreshTokenOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: RefreshTokenInclude<ExtArgs> | null
+    /**
+     * Filter, which RefreshToken to fetch.
+     */
+    where?: RefreshTokenWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of RefreshTokens to fetch.
+     */
+    orderBy?: RefreshTokenOrderByWithRelationInput | RefreshTokenOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the position for searching for RefreshTokens.
+     */
+    cursor?: RefreshTokenWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` RefreshTokens from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` RefreshTokens.
+     */
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/distinct Distinct Docs}
+     * 
+     * Filter by unique combinations of RefreshTokens.
+     */
+    distinct?: RefreshTokenScalarFieldEnum | RefreshTokenScalarFieldEnum[]
+  }
+
+  /**
+   * RefreshToken findMany
+   */
+  export type RefreshTokenFindManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the RefreshToken
+     */
+    select?: RefreshTokenSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the RefreshToken
+     */
+    omit?: RefreshTokenOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: RefreshTokenInclude<ExtArgs> | null
+    /**
+     * Filter, which RefreshTokens to fetch.
+     */
+    where?: RefreshTokenWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of RefreshTokens to fetch.
+     */
+    orderBy?: RefreshTokenOrderByWithRelationInput | RefreshTokenOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the position for listing RefreshTokens.
+     */
+    cursor?: RefreshTokenWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` RefreshTokens from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` RefreshTokens.
+     */
+    skip?: number
+    distinct?: RefreshTokenScalarFieldEnum | RefreshTokenScalarFieldEnum[]
+  }
+
+  /**
+   * RefreshToken create
+   */
+  export type RefreshTokenCreateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the RefreshToken
+     */
+    select?: RefreshTokenSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the RefreshToken
+     */
+    omit?: RefreshTokenOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: RefreshTokenInclude<ExtArgs> | null
+    /**
+     * The data needed to create a RefreshToken.
+     */
+    data: XOR<RefreshTokenCreateInput, RefreshTokenUncheckedCreateInput>
+  }
+
+  /**
+   * RefreshToken createMany
+   */
+  export type RefreshTokenCreateManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * The data used to create many RefreshTokens.
+     */
+    data: RefreshTokenCreateManyInput | RefreshTokenCreateManyInput[]
+    skipDuplicates?: boolean
+  }
+
+  /**
+   * RefreshToken createManyAndReturn
+   */
+  export type RefreshTokenCreateManyAndReturnArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the RefreshToken
+     */
+    select?: RefreshTokenSelectCreateManyAndReturn<ExtArgs> | null
+    /**
+     * Omit specific fields from the RefreshToken
+     */
+    omit?: RefreshTokenOmit<ExtArgs> | null
+    /**
+     * The data used to create many RefreshTokens.
+     */
+    data: RefreshTokenCreateManyInput | RefreshTokenCreateManyInput[]
+    skipDuplicates?: boolean
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: RefreshTokenIncludeCreateManyAndReturn<ExtArgs> | null
+  }
+
+  /**
+   * RefreshToken update
+   */
+  export type RefreshTokenUpdateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the RefreshToken
+     */
+    select?: RefreshTokenSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the RefreshToken
+     */
+    omit?: RefreshTokenOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: RefreshTokenInclude<ExtArgs> | null
+    /**
+     * The data needed to update a RefreshToken.
+     */
+    data: XOR<RefreshTokenUpdateInput, RefreshTokenUncheckedUpdateInput>
+    /**
+     * Choose, which RefreshToken to update.
+     */
+    where: RefreshTokenWhereUniqueInput
+  }
+
+  /**
+   * RefreshToken updateMany
+   */
+  export type RefreshTokenUpdateManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * The data used to update RefreshTokens.
+     */
+    data: XOR<RefreshTokenUpdateManyMutationInput, RefreshTokenUncheckedUpdateManyInput>
+    /**
+     * Filter which RefreshTokens to update
+     */
+    where?: RefreshTokenWhereInput
+    /**
+     * Limit how many RefreshTokens to update.
+     */
+    limit?: number
+  }
+
+  /**
+   * RefreshToken updateManyAndReturn
+   */
+  export type RefreshTokenUpdateManyAndReturnArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the RefreshToken
+     */
+    select?: RefreshTokenSelectUpdateManyAndReturn<ExtArgs> | null
+    /**
+     * Omit specific fields from the RefreshToken
+     */
+    omit?: RefreshTokenOmit<ExtArgs> | null
+    /**
+     * The data used to update RefreshTokens.
+     */
+    data: XOR<RefreshTokenUpdateManyMutationInput, RefreshTokenUncheckedUpdateManyInput>
+    /**
+     * Filter which RefreshTokens to update
+     */
+    where?: RefreshTokenWhereInput
+    /**
+     * Limit how many RefreshTokens to update.
+     */
+    limit?: number
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: RefreshTokenIncludeUpdateManyAndReturn<ExtArgs> | null
+  }
+
+  /**
+   * RefreshToken upsert
+   */
+  export type RefreshTokenUpsertArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the RefreshToken
+     */
+    select?: RefreshTokenSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the RefreshToken
+     */
+    omit?: RefreshTokenOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: RefreshTokenInclude<ExtArgs> | null
+    /**
+     * The filter to search for the RefreshToken to update in case it exists.
+     */
+    where: RefreshTokenWhereUniqueInput
+    /**
+     * In case the RefreshToken found by the `where` argument doesn't exist, create a new RefreshToken with this data.
+     */
+    create: XOR<RefreshTokenCreateInput, RefreshTokenUncheckedCreateInput>
+    /**
+     * In case the RefreshToken was found with the provided `where` argument, update it with this data.
+     */
+    update: XOR<RefreshTokenUpdateInput, RefreshTokenUncheckedUpdateInput>
+  }
+
+  /**
+   * RefreshToken delete
+   */
+  export type RefreshTokenDeleteArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the RefreshToken
+     */
+    select?: RefreshTokenSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the RefreshToken
+     */
+    omit?: RefreshTokenOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: RefreshTokenInclude<ExtArgs> | null
+    /**
+     * Filter which RefreshToken to delete.
+     */
+    where: RefreshTokenWhereUniqueInput
+  }
+
+  /**
+   * RefreshToken deleteMany
+   */
+  export type RefreshTokenDeleteManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Filter which RefreshTokens to delete
+     */
+    where?: RefreshTokenWhereInput
+    /**
+     * Limit how many RefreshTokens to delete.
+     */
+    limit?: number
+  }
+
+  /**
+   * RefreshToken without action
+   */
+  export type RefreshTokenDefaultArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the RefreshToken
+     */
+    select?: RefreshTokenSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the RefreshToken
+     */
+    omit?: RefreshTokenOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: RefreshTokenInclude<ExtArgs> | null
   }
 
 
@@ -8358,9 +9623,11 @@ export namespace Prisma {
   export type VerificationMinAggregateOutputType = {
     id: string | null
     userId: string | null
+    type: $Enums.VerificationType | null
     code: string | null
     expiresAt: Date | null
     resendCount: number | null
+    used: boolean | null
     isDeleted: boolean | null
     createdAt: Date | null
     updatedAt: Date | null
@@ -8369,9 +9636,11 @@ export namespace Prisma {
   export type VerificationMaxAggregateOutputType = {
     id: string | null
     userId: string | null
+    type: $Enums.VerificationType | null
     code: string | null
     expiresAt: Date | null
     resendCount: number | null
+    used: boolean | null
     isDeleted: boolean | null
     createdAt: Date | null
     updatedAt: Date | null
@@ -8380,9 +9649,11 @@ export namespace Prisma {
   export type VerificationCountAggregateOutputType = {
     id: number
     userId: number
+    type: number
     code: number
     expiresAt: number
     resendCount: number
+    used: number
     isDeleted: number
     createdAt: number
     updatedAt: number
@@ -8401,9 +9672,11 @@ export namespace Prisma {
   export type VerificationMinAggregateInputType = {
     id?: true
     userId?: true
+    type?: true
     code?: true
     expiresAt?: true
     resendCount?: true
+    used?: true
     isDeleted?: true
     createdAt?: true
     updatedAt?: true
@@ -8412,9 +9685,11 @@ export namespace Prisma {
   export type VerificationMaxAggregateInputType = {
     id?: true
     userId?: true
+    type?: true
     code?: true
     expiresAt?: true
     resendCount?: true
+    used?: true
     isDeleted?: true
     createdAt?: true
     updatedAt?: true
@@ -8423,9 +9698,11 @@ export namespace Prisma {
   export type VerificationCountAggregateInputType = {
     id?: true
     userId?: true
+    type?: true
     code?: true
     expiresAt?: true
     resendCount?: true
+    used?: true
     isDeleted?: true
     createdAt?: true
     updatedAt?: true
@@ -8521,9 +9798,11 @@ export namespace Prisma {
   export type VerificationGroupByOutputType = {
     id: string
     userId: string
+    type: $Enums.VerificationType
     code: string
     expiresAt: Date
     resendCount: number
+    used: boolean
     isDeleted: boolean
     createdAt: Date
     updatedAt: Date
@@ -8551,9 +9830,11 @@ export namespace Prisma {
   export type VerificationSelect<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
     id?: boolean
     userId?: boolean
+    type?: boolean
     code?: boolean
     expiresAt?: boolean
     resendCount?: boolean
+    used?: boolean
     isDeleted?: boolean
     createdAt?: boolean
     updatedAt?: boolean
@@ -8563,9 +9844,11 @@ export namespace Prisma {
   export type VerificationSelectCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
     id?: boolean
     userId?: boolean
+    type?: boolean
     code?: boolean
     expiresAt?: boolean
     resendCount?: boolean
+    used?: boolean
     isDeleted?: boolean
     createdAt?: boolean
     updatedAt?: boolean
@@ -8575,9 +9858,11 @@ export namespace Prisma {
   export type VerificationSelectUpdateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
     id?: boolean
     userId?: boolean
+    type?: boolean
     code?: boolean
     expiresAt?: boolean
     resendCount?: boolean
+    used?: boolean
     isDeleted?: boolean
     createdAt?: boolean
     updatedAt?: boolean
@@ -8587,15 +9872,17 @@ export namespace Prisma {
   export type VerificationSelectScalar = {
     id?: boolean
     userId?: boolean
+    type?: boolean
     code?: boolean
     expiresAt?: boolean
     resendCount?: boolean
+    used?: boolean
     isDeleted?: boolean
     createdAt?: boolean
     updatedAt?: boolean
   }
 
-  export type VerificationOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "userId" | "code" | "expiresAt" | "resendCount" | "isDeleted" | "createdAt" | "updatedAt", ExtArgs["result"]["verification"]>
+  export type VerificationOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "userId" | "type" | "code" | "expiresAt" | "resendCount" | "used" | "isDeleted" | "createdAt" | "updatedAt", ExtArgs["result"]["verification"]>
   export type VerificationInclude<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     user?: boolean | UserDefaultArgs<ExtArgs>
   }
@@ -8614,9 +9901,11 @@ export namespace Prisma {
     scalars: $Extensions.GetPayloadResult<{
       id: string
       userId: string
+      type: $Enums.VerificationType
       code: string
       expiresAt: Date
       resendCount: number
+      used: boolean
       isDeleted: boolean
       createdAt: Date
       updatedAt: Date
@@ -9046,9 +10335,11 @@ export namespace Prisma {
   interface VerificationFieldRefs {
     readonly id: FieldRef<"Verification", 'String'>
     readonly userId: FieldRef<"Verification", 'String'>
+    readonly type: FieldRef<"Verification", 'VerificationType'>
     readonly code: FieldRef<"Verification", 'String'>
     readonly expiresAt: FieldRef<"Verification", 'DateTime'>
     readonly resendCount: FieldRef<"Verification", 'Int'>
+    readonly used: FieldRef<"Verification", 'Boolean'>
     readonly isDeleted: FieldRef<"Verification", 'Boolean'>
     readonly createdAt: FieldRef<"Verification", 'DateTime'>
     readonly updatedAt: FieldRef<"Verification", 'DateTime'>
@@ -32988,7 +34279,7 @@ export namespace Prisma {
     profileImage: 'profileImage',
     email: 'email',
     type: 'type',
-    phoneNumber: 'phoneNumber',
+    phone: 'phone',
     accountStatus: 'accountStatus',
     verifiedAt: 'verifiedAt',
     lastSeenAt: 'lastSeenAt',
@@ -33005,12 +34296,28 @@ export namespace Prisma {
     userId: 'userId',
     password: 'password',
     pinCode: 'pinCode',
+    lastResetAt: 'lastResetAt',
+    lastUsedAt: 'lastUsedAt',
     isDeleted: 'isDeleted',
     createdAt: 'createdAt',
     updatedAt: 'updatedAt'
   };
 
   export type CredentialScalarFieldEnum = (typeof CredentialScalarFieldEnum)[keyof typeof CredentialScalarFieldEnum]
+
+
+  export const RefreshTokenScalarFieldEnum: {
+    id: 'id',
+    userId: 'userId',
+    token: 'token',
+    expiresAt: 'expiresAt',
+    revoked: 'revoked',
+    isDeleted: 'isDeleted',
+    updatedAt: 'updatedAt',
+    createdAt: 'createdAt'
+  };
+
+  export type RefreshTokenScalarFieldEnum = (typeof RefreshTokenScalarFieldEnum)[keyof typeof RefreshTokenScalarFieldEnum]
 
 
   export const AdministratorScalarFieldEnum: {
@@ -33043,9 +34350,11 @@ export namespace Prisma {
   export const VerificationScalarFieldEnum: {
     id: 'id',
     userId: 'userId',
+    type: 'type',
     code: 'code',
     expiresAt: 'expiresAt',
     resendCount: 'resendCount',
+    used: 'used',
     isDeleted: 'isDeleted',
     createdAt: 'createdAt',
     updatedAt: 'updatedAt'
@@ -33464,6 +34773,20 @@ export namespace Prisma {
 
 
   /**
+   * Reference to a field of type 'VerificationType'
+   */
+  export type EnumVerificationTypeFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'VerificationType'>
+    
+
+
+  /**
+   * Reference to a field of type 'VerificationType[]'
+   */
+  export type ListEnumVerificationTypeFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'VerificationType[]'>
+    
+
+
+  /**
    * Reference to a field of type 'Int'
    */
   export type IntFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'Int'>
@@ -33672,7 +34995,7 @@ export namespace Prisma {
     profileImage?: StringNullableFilter<"User"> | string | null
     email?: StringFilter<"User"> | string
     type?: EnumUserTypeFilter<"User"> | $Enums.UserType
-    phoneNumber?: StringNullableFilter<"User"> | string | null
+    phone?: StringNullableFilter<"User"> | string | null
     accountStatus?: EnumAccountStatusFilter<"User"> | $Enums.AccountStatus
     verifiedAt?: DateTimeNullableFilter<"User"> | Date | string | null
     lastSeenAt?: DateTimeNullableFilter<"User"> | Date | string | null
@@ -33687,6 +35010,7 @@ export namespace Prisma {
     notifications?: NotificationListRelationFilter
     credential?: XOR<CredentialNullableScalarRelationFilter, CredentialWhereInput> | null
     wallet?: XOR<WalletNullableScalarRelationFilter, WalletWhereInput> | null
+    refreshTokens?: RefreshTokenListRelationFilter
   }
 
   export type UserOrderByWithRelationInput = {
@@ -33696,7 +35020,7 @@ export namespace Prisma {
     profileImage?: SortOrderInput | SortOrder
     email?: SortOrder
     type?: SortOrder
-    phoneNumber?: SortOrderInput | SortOrder
+    phone?: SortOrderInput | SortOrder
     accountStatus?: SortOrder
     verifiedAt?: SortOrderInput | SortOrder
     lastSeenAt?: SortOrderInput | SortOrder
@@ -33711,6 +35035,7 @@ export namespace Prisma {
     notifications?: NotificationOrderByRelationAggregateInput
     credential?: CredentialOrderByWithRelationInput
     wallet?: WalletOrderByWithRelationInput
+    refreshTokens?: RefreshTokenOrderByRelationAggregateInput
   }
 
   export type UserWhereUniqueInput = Prisma.AtLeast<{
@@ -33723,7 +35048,7 @@ export namespace Prisma {
     lastName?: StringFilter<"User"> | string
     profileImage?: StringNullableFilter<"User"> | string | null
     type?: EnumUserTypeFilter<"User"> | $Enums.UserType
-    phoneNumber?: StringNullableFilter<"User"> | string | null
+    phone?: StringNullableFilter<"User"> | string | null
     accountStatus?: EnumAccountStatusFilter<"User"> | $Enums.AccountStatus
     verifiedAt?: DateTimeNullableFilter<"User"> | Date | string | null
     lastSeenAt?: DateTimeNullableFilter<"User"> | Date | string | null
@@ -33738,6 +35063,7 @@ export namespace Prisma {
     notifications?: NotificationListRelationFilter
     credential?: XOR<CredentialNullableScalarRelationFilter, CredentialWhereInput> | null
     wallet?: XOR<WalletNullableScalarRelationFilter, WalletWhereInput> | null
+    refreshTokens?: RefreshTokenListRelationFilter
   }, "id" | "email">
 
   export type UserOrderByWithAggregationInput = {
@@ -33747,7 +35073,7 @@ export namespace Prisma {
     profileImage?: SortOrderInput | SortOrder
     email?: SortOrder
     type?: SortOrder
-    phoneNumber?: SortOrderInput | SortOrder
+    phone?: SortOrderInput | SortOrder
     accountStatus?: SortOrder
     verifiedAt?: SortOrderInput | SortOrder
     lastSeenAt?: SortOrderInput | SortOrder
@@ -33769,7 +35095,7 @@ export namespace Prisma {
     profileImage?: StringNullableWithAggregatesFilter<"User"> | string | null
     email?: StringWithAggregatesFilter<"User"> | string
     type?: EnumUserTypeWithAggregatesFilter<"User"> | $Enums.UserType
-    phoneNumber?: StringNullableWithAggregatesFilter<"User"> | string | null
+    phone?: StringNullableWithAggregatesFilter<"User"> | string | null
     accountStatus?: EnumAccountStatusWithAggregatesFilter<"User"> | $Enums.AccountStatus
     verifiedAt?: DateTimeNullableWithAggregatesFilter<"User"> | Date | string | null
     lastSeenAt?: DateTimeNullableWithAggregatesFilter<"User"> | Date | string | null
@@ -33784,8 +35110,10 @@ export namespace Prisma {
     NOT?: CredentialWhereInput | CredentialWhereInput[]
     id?: StringFilter<"Credential"> | string
     userId?: StringFilter<"Credential"> | string
-    password?: StringFilter<"Credential"> | string
-    pinCode?: StringFilter<"Credential"> | string
+    password?: StringNullableFilter<"Credential"> | string | null
+    pinCode?: StringNullableFilter<"Credential"> | string | null
+    lastResetAt?: DateTimeNullableFilter<"Credential"> | Date | string | null
+    lastUsedAt?: DateTimeNullableFilter<"Credential"> | Date | string | null
     isDeleted?: BoolFilter<"Credential"> | boolean
     createdAt?: DateTimeFilter<"Credential"> | Date | string
     updatedAt?: DateTimeFilter<"Credential"> | Date | string
@@ -33795,8 +35123,10 @@ export namespace Prisma {
   export type CredentialOrderByWithRelationInput = {
     id?: SortOrder
     userId?: SortOrder
-    password?: SortOrder
-    pinCode?: SortOrder
+    password?: SortOrderInput | SortOrder
+    pinCode?: SortOrderInput | SortOrder
+    lastResetAt?: SortOrderInput | SortOrder
+    lastUsedAt?: SortOrderInput | SortOrder
     isDeleted?: SortOrder
     createdAt?: SortOrder
     updatedAt?: SortOrder
@@ -33809,8 +35139,10 @@ export namespace Prisma {
     AND?: CredentialWhereInput | CredentialWhereInput[]
     OR?: CredentialWhereInput[]
     NOT?: CredentialWhereInput | CredentialWhereInput[]
-    password?: StringFilter<"Credential"> | string
-    pinCode?: StringFilter<"Credential"> | string
+    password?: StringNullableFilter<"Credential"> | string | null
+    pinCode?: StringNullableFilter<"Credential"> | string | null
+    lastResetAt?: DateTimeNullableFilter<"Credential"> | Date | string | null
+    lastUsedAt?: DateTimeNullableFilter<"Credential"> | Date | string | null
     isDeleted?: BoolFilter<"Credential"> | boolean
     createdAt?: DateTimeFilter<"Credential"> | Date | string
     updatedAt?: DateTimeFilter<"Credential"> | Date | string
@@ -33820,8 +35152,10 @@ export namespace Prisma {
   export type CredentialOrderByWithAggregationInput = {
     id?: SortOrder
     userId?: SortOrder
-    password?: SortOrder
-    pinCode?: SortOrder
+    password?: SortOrderInput | SortOrder
+    pinCode?: SortOrderInput | SortOrder
+    lastResetAt?: SortOrderInput | SortOrder
+    lastUsedAt?: SortOrderInput | SortOrder
     isDeleted?: SortOrder
     createdAt?: SortOrder
     updatedAt?: SortOrder
@@ -33836,11 +35170,83 @@ export namespace Prisma {
     NOT?: CredentialScalarWhereWithAggregatesInput | CredentialScalarWhereWithAggregatesInput[]
     id?: StringWithAggregatesFilter<"Credential"> | string
     userId?: StringWithAggregatesFilter<"Credential"> | string
-    password?: StringWithAggregatesFilter<"Credential"> | string
-    pinCode?: StringWithAggregatesFilter<"Credential"> | string
+    password?: StringNullableWithAggregatesFilter<"Credential"> | string | null
+    pinCode?: StringNullableWithAggregatesFilter<"Credential"> | string | null
+    lastResetAt?: DateTimeNullableWithAggregatesFilter<"Credential"> | Date | string | null
+    lastUsedAt?: DateTimeNullableWithAggregatesFilter<"Credential"> | Date | string | null
     isDeleted?: BoolWithAggregatesFilter<"Credential"> | boolean
     createdAt?: DateTimeWithAggregatesFilter<"Credential"> | Date | string
     updatedAt?: DateTimeWithAggregatesFilter<"Credential"> | Date | string
+  }
+
+  export type RefreshTokenWhereInput = {
+    AND?: RefreshTokenWhereInput | RefreshTokenWhereInput[]
+    OR?: RefreshTokenWhereInput[]
+    NOT?: RefreshTokenWhereInput | RefreshTokenWhereInput[]
+    id?: StringFilter<"RefreshToken"> | string
+    userId?: StringFilter<"RefreshToken"> | string
+    token?: StringFilter<"RefreshToken"> | string
+    expiresAt?: DateTimeFilter<"RefreshToken"> | Date | string
+    revoked?: BoolFilter<"RefreshToken"> | boolean
+    isDeleted?: BoolFilter<"RefreshToken"> | boolean
+    updatedAt?: DateTimeFilter<"RefreshToken"> | Date | string
+    createdAt?: DateTimeFilter<"RefreshToken"> | Date | string
+    user?: XOR<UserScalarRelationFilter, UserWhereInput>
+  }
+
+  export type RefreshTokenOrderByWithRelationInput = {
+    id?: SortOrder
+    userId?: SortOrder
+    token?: SortOrder
+    expiresAt?: SortOrder
+    revoked?: SortOrder
+    isDeleted?: SortOrder
+    updatedAt?: SortOrder
+    createdAt?: SortOrder
+    user?: UserOrderByWithRelationInput
+  }
+
+  export type RefreshTokenWhereUniqueInput = Prisma.AtLeast<{
+    id?: string
+    AND?: RefreshTokenWhereInput | RefreshTokenWhereInput[]
+    OR?: RefreshTokenWhereInput[]
+    NOT?: RefreshTokenWhereInput | RefreshTokenWhereInput[]
+    userId?: StringFilter<"RefreshToken"> | string
+    token?: StringFilter<"RefreshToken"> | string
+    expiresAt?: DateTimeFilter<"RefreshToken"> | Date | string
+    revoked?: BoolFilter<"RefreshToken"> | boolean
+    isDeleted?: BoolFilter<"RefreshToken"> | boolean
+    updatedAt?: DateTimeFilter<"RefreshToken"> | Date | string
+    createdAt?: DateTimeFilter<"RefreshToken"> | Date | string
+    user?: XOR<UserScalarRelationFilter, UserWhereInput>
+  }, "id">
+
+  export type RefreshTokenOrderByWithAggregationInput = {
+    id?: SortOrder
+    userId?: SortOrder
+    token?: SortOrder
+    expiresAt?: SortOrder
+    revoked?: SortOrder
+    isDeleted?: SortOrder
+    updatedAt?: SortOrder
+    createdAt?: SortOrder
+    _count?: RefreshTokenCountOrderByAggregateInput
+    _max?: RefreshTokenMaxOrderByAggregateInput
+    _min?: RefreshTokenMinOrderByAggregateInput
+  }
+
+  export type RefreshTokenScalarWhereWithAggregatesInput = {
+    AND?: RefreshTokenScalarWhereWithAggregatesInput | RefreshTokenScalarWhereWithAggregatesInput[]
+    OR?: RefreshTokenScalarWhereWithAggregatesInput[]
+    NOT?: RefreshTokenScalarWhereWithAggregatesInput | RefreshTokenScalarWhereWithAggregatesInput[]
+    id?: StringWithAggregatesFilter<"RefreshToken"> | string
+    userId?: StringWithAggregatesFilter<"RefreshToken"> | string
+    token?: StringWithAggregatesFilter<"RefreshToken"> | string
+    expiresAt?: DateTimeWithAggregatesFilter<"RefreshToken"> | Date | string
+    revoked?: BoolWithAggregatesFilter<"RefreshToken"> | boolean
+    isDeleted?: BoolWithAggregatesFilter<"RefreshToken"> | boolean
+    updatedAt?: DateTimeWithAggregatesFilter<"RefreshToken"> | Date | string
+    createdAt?: DateTimeWithAggregatesFilter<"RefreshToken"> | Date | string
   }
 
   export type AdministratorWhereInput = {
@@ -33996,9 +35402,11 @@ export namespace Prisma {
     NOT?: VerificationWhereInput | VerificationWhereInput[]
     id?: StringFilter<"Verification"> | string
     userId?: StringFilter<"Verification"> | string
+    type?: EnumVerificationTypeFilter<"Verification"> | $Enums.VerificationType
     code?: StringFilter<"Verification"> | string
     expiresAt?: DateTimeFilter<"Verification"> | Date | string
     resendCount?: IntFilter<"Verification"> | number
+    used?: BoolFilter<"Verification"> | boolean
     isDeleted?: BoolFilter<"Verification"> | boolean
     createdAt?: DateTimeFilter<"Verification"> | Date | string
     updatedAt?: DateTimeFilter<"Verification"> | Date | string
@@ -34008,9 +35416,11 @@ export namespace Prisma {
   export type VerificationOrderByWithRelationInput = {
     id?: SortOrder
     userId?: SortOrder
+    type?: SortOrder
     code?: SortOrder
     expiresAt?: SortOrder
     resendCount?: SortOrder
+    used?: SortOrder
     isDeleted?: SortOrder
     createdAt?: SortOrder
     updatedAt?: SortOrder
@@ -34024,8 +35434,10 @@ export namespace Prisma {
     OR?: VerificationWhereInput[]
     NOT?: VerificationWhereInput | VerificationWhereInput[]
     userId?: StringFilter<"Verification"> | string
+    type?: EnumVerificationTypeFilter<"Verification"> | $Enums.VerificationType
     expiresAt?: DateTimeFilter<"Verification"> | Date | string
     resendCount?: IntFilter<"Verification"> | number
+    used?: BoolFilter<"Verification"> | boolean
     isDeleted?: BoolFilter<"Verification"> | boolean
     createdAt?: DateTimeFilter<"Verification"> | Date | string
     updatedAt?: DateTimeFilter<"Verification"> | Date | string
@@ -34035,9 +35447,11 @@ export namespace Prisma {
   export type VerificationOrderByWithAggregationInput = {
     id?: SortOrder
     userId?: SortOrder
+    type?: SortOrder
     code?: SortOrder
     expiresAt?: SortOrder
     resendCount?: SortOrder
+    used?: SortOrder
     isDeleted?: SortOrder
     createdAt?: SortOrder
     updatedAt?: SortOrder
@@ -34054,9 +35468,11 @@ export namespace Prisma {
     NOT?: VerificationScalarWhereWithAggregatesInput | VerificationScalarWhereWithAggregatesInput[]
     id?: StringWithAggregatesFilter<"Verification"> | string
     userId?: StringWithAggregatesFilter<"Verification"> | string
+    type?: EnumVerificationTypeWithAggregatesFilter<"Verification"> | $Enums.VerificationType
     code?: StringWithAggregatesFilter<"Verification"> | string
     expiresAt?: DateTimeWithAggregatesFilter<"Verification"> | Date | string
     resendCount?: IntWithAggregatesFilter<"Verification"> | number
+    used?: BoolWithAggregatesFilter<"Verification"> | boolean
     isDeleted?: BoolWithAggregatesFilter<"Verification"> | boolean
     createdAt?: DateTimeWithAggregatesFilter<"Verification"> | Date | string
     updatedAt?: DateTimeWithAggregatesFilter<"Verification"> | Date | string
@@ -35778,7 +37194,7 @@ export namespace Prisma {
     profileImage?: string | null
     email: string
     type: $Enums.UserType
-    phoneNumber?: string | null
+    phone?: string | null
     accountStatus?: $Enums.AccountStatus
     verifiedAt?: Date | string | null
     lastSeenAt?: Date | string | null
@@ -35793,6 +37209,7 @@ export namespace Prisma {
     notifications?: NotificationCreateNestedManyWithoutUserInput
     credential?: CredentialCreateNestedOneWithoutUserInput
     wallet?: WalletCreateNestedOneWithoutUserInput
+    refreshTokens?: RefreshTokenCreateNestedManyWithoutUserInput
   }
 
   export type UserUncheckedCreateInput = {
@@ -35802,7 +37219,7 @@ export namespace Prisma {
     profileImage?: string | null
     email: string
     type: $Enums.UserType
-    phoneNumber?: string | null
+    phone?: string | null
     accountStatus?: $Enums.AccountStatus
     verifiedAt?: Date | string | null
     lastSeenAt?: Date | string | null
@@ -35817,6 +37234,7 @@ export namespace Prisma {
     notifications?: NotificationUncheckedCreateNestedManyWithoutUserInput
     credential?: CredentialUncheckedCreateNestedOneWithoutUserInput
     wallet?: WalletUncheckedCreateNestedOneWithoutUserInput
+    refreshTokens?: RefreshTokenUncheckedCreateNestedManyWithoutUserInput
   }
 
   export type UserUpdateInput = {
@@ -35826,7 +37244,7 @@ export namespace Prisma {
     profileImage?: NullableStringFieldUpdateOperationsInput | string | null
     email?: StringFieldUpdateOperationsInput | string
     type?: EnumUserTypeFieldUpdateOperationsInput | $Enums.UserType
-    phoneNumber?: NullableStringFieldUpdateOperationsInput | string | null
+    phone?: NullableStringFieldUpdateOperationsInput | string | null
     accountStatus?: EnumAccountStatusFieldUpdateOperationsInput | $Enums.AccountStatus
     verifiedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     lastSeenAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
@@ -35841,6 +37259,7 @@ export namespace Prisma {
     notifications?: NotificationUpdateManyWithoutUserNestedInput
     credential?: CredentialUpdateOneWithoutUserNestedInput
     wallet?: WalletUpdateOneWithoutUserNestedInput
+    refreshTokens?: RefreshTokenUpdateManyWithoutUserNestedInput
   }
 
   export type UserUncheckedUpdateInput = {
@@ -35850,7 +37269,7 @@ export namespace Prisma {
     profileImage?: NullableStringFieldUpdateOperationsInput | string | null
     email?: StringFieldUpdateOperationsInput | string
     type?: EnumUserTypeFieldUpdateOperationsInput | $Enums.UserType
-    phoneNumber?: NullableStringFieldUpdateOperationsInput | string | null
+    phone?: NullableStringFieldUpdateOperationsInput | string | null
     accountStatus?: EnumAccountStatusFieldUpdateOperationsInput | $Enums.AccountStatus
     verifiedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     lastSeenAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
@@ -35865,6 +37284,7 @@ export namespace Prisma {
     notifications?: NotificationUncheckedUpdateManyWithoutUserNestedInput
     credential?: CredentialUncheckedUpdateOneWithoutUserNestedInput
     wallet?: WalletUncheckedUpdateOneWithoutUserNestedInput
+    refreshTokens?: RefreshTokenUncheckedUpdateManyWithoutUserNestedInput
   }
 
   export type UserCreateManyInput = {
@@ -35874,7 +37294,7 @@ export namespace Prisma {
     profileImage?: string | null
     email: string
     type: $Enums.UserType
-    phoneNumber?: string | null
+    phone?: string | null
     accountStatus?: $Enums.AccountStatus
     verifiedAt?: Date | string | null
     lastSeenAt?: Date | string | null
@@ -35890,7 +37310,7 @@ export namespace Prisma {
     profileImage?: NullableStringFieldUpdateOperationsInput | string | null
     email?: StringFieldUpdateOperationsInput | string
     type?: EnumUserTypeFieldUpdateOperationsInput | $Enums.UserType
-    phoneNumber?: NullableStringFieldUpdateOperationsInput | string | null
+    phone?: NullableStringFieldUpdateOperationsInput | string | null
     accountStatus?: EnumAccountStatusFieldUpdateOperationsInput | $Enums.AccountStatus
     verifiedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     lastSeenAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
@@ -35906,7 +37326,7 @@ export namespace Prisma {
     profileImage?: NullableStringFieldUpdateOperationsInput | string | null
     email?: StringFieldUpdateOperationsInput | string
     type?: EnumUserTypeFieldUpdateOperationsInput | $Enums.UserType
-    phoneNumber?: NullableStringFieldUpdateOperationsInput | string | null
+    phone?: NullableStringFieldUpdateOperationsInput | string | null
     accountStatus?: EnumAccountStatusFieldUpdateOperationsInput | $Enums.AccountStatus
     verifiedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     lastSeenAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
@@ -35917,8 +37337,10 @@ export namespace Prisma {
 
   export type CredentialCreateInput = {
     id?: string
-    password: string
-    pinCode: string
+    password?: string | null
+    pinCode?: string | null
+    lastResetAt?: Date | string | null
+    lastUsedAt?: Date | string | null
     isDeleted?: boolean
     createdAt?: Date | string
     updatedAt?: Date | string
@@ -35928,8 +37350,10 @@ export namespace Prisma {
   export type CredentialUncheckedCreateInput = {
     id?: string
     userId: string
-    password: string
-    pinCode: string
+    password?: string | null
+    pinCode?: string | null
+    lastResetAt?: Date | string | null
+    lastUsedAt?: Date | string | null
     isDeleted?: boolean
     createdAt?: Date | string
     updatedAt?: Date | string
@@ -35937,8 +37361,10 @@ export namespace Prisma {
 
   export type CredentialUpdateInput = {
     id?: StringFieldUpdateOperationsInput | string
-    password?: StringFieldUpdateOperationsInput | string
-    pinCode?: StringFieldUpdateOperationsInput | string
+    password?: NullableStringFieldUpdateOperationsInput | string | null
+    pinCode?: NullableStringFieldUpdateOperationsInput | string | null
+    lastResetAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    lastUsedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     isDeleted?: BoolFieldUpdateOperationsInput | boolean
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
@@ -35948,8 +37374,10 @@ export namespace Prisma {
   export type CredentialUncheckedUpdateInput = {
     id?: StringFieldUpdateOperationsInput | string
     userId?: StringFieldUpdateOperationsInput | string
-    password?: StringFieldUpdateOperationsInput | string
-    pinCode?: StringFieldUpdateOperationsInput | string
+    password?: NullableStringFieldUpdateOperationsInput | string | null
+    pinCode?: NullableStringFieldUpdateOperationsInput | string | null
+    lastResetAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    lastUsedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     isDeleted?: BoolFieldUpdateOperationsInput | boolean
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
@@ -35958,8 +37386,10 @@ export namespace Prisma {
   export type CredentialCreateManyInput = {
     id?: string
     userId: string
-    password: string
-    pinCode: string
+    password?: string | null
+    pinCode?: string | null
+    lastResetAt?: Date | string | null
+    lastUsedAt?: Date | string | null
     isDeleted?: boolean
     createdAt?: Date | string
     updatedAt?: Date | string
@@ -35967,8 +37397,10 @@ export namespace Prisma {
 
   export type CredentialUpdateManyMutationInput = {
     id?: StringFieldUpdateOperationsInput | string
-    password?: StringFieldUpdateOperationsInput | string
-    pinCode?: StringFieldUpdateOperationsInput | string
+    password?: NullableStringFieldUpdateOperationsInput | string | null
+    pinCode?: NullableStringFieldUpdateOperationsInput | string | null
+    lastResetAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    lastUsedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     isDeleted?: BoolFieldUpdateOperationsInput | boolean
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
@@ -35977,11 +37409,89 @@ export namespace Prisma {
   export type CredentialUncheckedUpdateManyInput = {
     id?: StringFieldUpdateOperationsInput | string
     userId?: StringFieldUpdateOperationsInput | string
-    password?: StringFieldUpdateOperationsInput | string
-    pinCode?: StringFieldUpdateOperationsInput | string
+    password?: NullableStringFieldUpdateOperationsInput | string | null
+    pinCode?: NullableStringFieldUpdateOperationsInput | string | null
+    lastResetAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    lastUsedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     isDeleted?: BoolFieldUpdateOperationsInput | boolean
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type RefreshTokenCreateInput = {
+    id?: string
+    token: string
+    expiresAt: Date | string
+    revoked?: boolean
+    isDeleted?: boolean
+    updatedAt?: Date | string
+    createdAt?: Date | string
+    user: UserCreateNestedOneWithoutRefreshTokensInput
+  }
+
+  export type RefreshTokenUncheckedCreateInput = {
+    id?: string
+    userId: string
+    token: string
+    expiresAt: Date | string
+    revoked?: boolean
+    isDeleted?: boolean
+    updatedAt?: Date | string
+    createdAt?: Date | string
+  }
+
+  export type RefreshTokenUpdateInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    token?: StringFieldUpdateOperationsInput | string
+    expiresAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    revoked?: BoolFieldUpdateOperationsInput | boolean
+    isDeleted?: BoolFieldUpdateOperationsInput | boolean
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    user?: UserUpdateOneRequiredWithoutRefreshTokensNestedInput
+  }
+
+  export type RefreshTokenUncheckedUpdateInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    userId?: StringFieldUpdateOperationsInput | string
+    token?: StringFieldUpdateOperationsInput | string
+    expiresAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    revoked?: BoolFieldUpdateOperationsInput | boolean
+    isDeleted?: BoolFieldUpdateOperationsInput | boolean
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type RefreshTokenCreateManyInput = {
+    id?: string
+    userId: string
+    token: string
+    expiresAt: Date | string
+    revoked?: boolean
+    isDeleted?: boolean
+    updatedAt?: Date | string
+    createdAt?: Date | string
+  }
+
+  export type RefreshTokenUpdateManyMutationInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    token?: StringFieldUpdateOperationsInput | string
+    expiresAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    revoked?: BoolFieldUpdateOperationsInput | boolean
+    isDeleted?: BoolFieldUpdateOperationsInput | boolean
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type RefreshTokenUncheckedUpdateManyInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    userId?: StringFieldUpdateOperationsInput | string
+    token?: StringFieldUpdateOperationsInput | string
+    expiresAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    revoked?: BoolFieldUpdateOperationsInput | boolean
+    isDeleted?: BoolFieldUpdateOperationsInput | boolean
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
   }
 
   export type AdministratorCreateInput = {
@@ -36147,9 +37657,11 @@ export namespace Prisma {
 
   export type VerificationCreateInput = {
     id?: string
+    type: $Enums.VerificationType
     code: string
     expiresAt: Date | string
     resendCount?: number
+    used?: boolean
     isDeleted?: boolean
     createdAt?: Date | string
     updatedAt?: Date | string
@@ -36159,9 +37671,11 @@ export namespace Prisma {
   export type VerificationUncheckedCreateInput = {
     id?: string
     userId: string
+    type: $Enums.VerificationType
     code: string
     expiresAt: Date | string
     resendCount?: number
+    used?: boolean
     isDeleted?: boolean
     createdAt?: Date | string
     updatedAt?: Date | string
@@ -36169,9 +37683,11 @@ export namespace Prisma {
 
   export type VerificationUpdateInput = {
     id?: StringFieldUpdateOperationsInput | string
+    type?: EnumVerificationTypeFieldUpdateOperationsInput | $Enums.VerificationType
     code?: StringFieldUpdateOperationsInput | string
     expiresAt?: DateTimeFieldUpdateOperationsInput | Date | string
     resendCount?: IntFieldUpdateOperationsInput | number
+    used?: BoolFieldUpdateOperationsInput | boolean
     isDeleted?: BoolFieldUpdateOperationsInput | boolean
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
@@ -36181,9 +37697,11 @@ export namespace Prisma {
   export type VerificationUncheckedUpdateInput = {
     id?: StringFieldUpdateOperationsInput | string
     userId?: StringFieldUpdateOperationsInput | string
+    type?: EnumVerificationTypeFieldUpdateOperationsInput | $Enums.VerificationType
     code?: StringFieldUpdateOperationsInput | string
     expiresAt?: DateTimeFieldUpdateOperationsInput | Date | string
     resendCount?: IntFieldUpdateOperationsInput | number
+    used?: BoolFieldUpdateOperationsInput | boolean
     isDeleted?: BoolFieldUpdateOperationsInput | boolean
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
@@ -36192,9 +37710,11 @@ export namespace Prisma {
   export type VerificationCreateManyInput = {
     id?: string
     userId: string
+    type: $Enums.VerificationType
     code: string
     expiresAt: Date | string
     resendCount?: number
+    used?: boolean
     isDeleted?: boolean
     createdAt?: Date | string
     updatedAt?: Date | string
@@ -36202,9 +37722,11 @@ export namespace Prisma {
 
   export type VerificationUpdateManyMutationInput = {
     id?: StringFieldUpdateOperationsInput | string
+    type?: EnumVerificationTypeFieldUpdateOperationsInput | $Enums.VerificationType
     code?: StringFieldUpdateOperationsInput | string
     expiresAt?: DateTimeFieldUpdateOperationsInput | Date | string
     resendCount?: IntFieldUpdateOperationsInput | number
+    used?: BoolFieldUpdateOperationsInput | boolean
     isDeleted?: BoolFieldUpdateOperationsInput | boolean
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
@@ -36213,9 +37735,11 @@ export namespace Prisma {
   export type VerificationUncheckedUpdateManyInput = {
     id?: StringFieldUpdateOperationsInput | string
     userId?: StringFieldUpdateOperationsInput | string
+    type?: EnumVerificationTypeFieldUpdateOperationsInput | $Enums.VerificationType
     code?: StringFieldUpdateOperationsInput | string
     expiresAt?: DateTimeFieldUpdateOperationsInput | Date | string
     resendCount?: IntFieldUpdateOperationsInput | number
+    used?: BoolFieldUpdateOperationsInput | boolean
     isDeleted?: BoolFieldUpdateOperationsInput | boolean
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
@@ -38197,6 +39721,12 @@ export namespace Prisma {
     isNot?: WalletWhereInput | null
   }
 
+  export type RefreshTokenListRelationFilter = {
+    every?: RefreshTokenWhereInput
+    some?: RefreshTokenWhereInput
+    none?: RefreshTokenWhereInput
+  }
+
   export type SortOrderInput = {
     sort: SortOrder
     nulls?: NullsOrder
@@ -38210,6 +39740,10 @@ export namespace Prisma {
     _count?: SortOrder
   }
 
+  export type RefreshTokenOrderByRelationAggregateInput = {
+    _count?: SortOrder
+  }
+
   export type UserCountOrderByAggregateInput = {
     id?: SortOrder
     firstName?: SortOrder
@@ -38217,7 +39751,7 @@ export namespace Prisma {
     profileImage?: SortOrder
     email?: SortOrder
     type?: SortOrder
-    phoneNumber?: SortOrder
+    phone?: SortOrder
     accountStatus?: SortOrder
     verifiedAt?: SortOrder
     lastSeenAt?: SortOrder
@@ -38233,7 +39767,7 @@ export namespace Prisma {
     profileImage?: SortOrder
     email?: SortOrder
     type?: SortOrder
-    phoneNumber?: SortOrder
+    phone?: SortOrder
     accountStatus?: SortOrder
     verifiedAt?: SortOrder
     lastSeenAt?: SortOrder
@@ -38249,7 +39783,7 @@ export namespace Prisma {
     profileImage?: SortOrder
     email?: SortOrder
     type?: SortOrder
-    phoneNumber?: SortOrder
+    phone?: SortOrder
     accountStatus?: SortOrder
     verifiedAt?: SortOrder
     lastSeenAt?: SortOrder
@@ -38360,6 +39894,8 @@ export namespace Prisma {
     userId?: SortOrder
     password?: SortOrder
     pinCode?: SortOrder
+    lastResetAt?: SortOrder
+    lastUsedAt?: SortOrder
     isDeleted?: SortOrder
     createdAt?: SortOrder
     updatedAt?: SortOrder
@@ -38370,6 +39906,8 @@ export namespace Prisma {
     userId?: SortOrder
     password?: SortOrder
     pinCode?: SortOrder
+    lastResetAt?: SortOrder
+    lastUsedAt?: SortOrder
     isDeleted?: SortOrder
     createdAt?: SortOrder
     updatedAt?: SortOrder
@@ -38380,9 +39918,44 @@ export namespace Prisma {
     userId?: SortOrder
     password?: SortOrder
     pinCode?: SortOrder
+    lastResetAt?: SortOrder
+    lastUsedAt?: SortOrder
     isDeleted?: SortOrder
     createdAt?: SortOrder
     updatedAt?: SortOrder
+  }
+
+  export type RefreshTokenCountOrderByAggregateInput = {
+    id?: SortOrder
+    userId?: SortOrder
+    token?: SortOrder
+    expiresAt?: SortOrder
+    revoked?: SortOrder
+    isDeleted?: SortOrder
+    updatedAt?: SortOrder
+    createdAt?: SortOrder
+  }
+
+  export type RefreshTokenMaxOrderByAggregateInput = {
+    id?: SortOrder
+    userId?: SortOrder
+    token?: SortOrder
+    expiresAt?: SortOrder
+    revoked?: SortOrder
+    isDeleted?: SortOrder
+    updatedAt?: SortOrder
+    createdAt?: SortOrder
+  }
+
+  export type RefreshTokenMinOrderByAggregateInput = {
+    id?: SortOrder
+    userId?: SortOrder
+    token?: SortOrder
+    expiresAt?: SortOrder
+    revoked?: SortOrder
+    isDeleted?: SortOrder
+    updatedAt?: SortOrder
+    createdAt?: SortOrder
   }
 
   export type AdministratorCountOrderByAggregateInput = {
@@ -38488,6 +40061,13 @@ export namespace Prisma {
     updatedAt?: SortOrder
   }
 
+  export type EnumVerificationTypeFilter<$PrismaModel = never> = {
+    equals?: $Enums.VerificationType | EnumVerificationTypeFieldRefInput<$PrismaModel>
+    in?: $Enums.VerificationType[] | ListEnumVerificationTypeFieldRefInput<$PrismaModel>
+    notIn?: $Enums.VerificationType[] | ListEnumVerificationTypeFieldRefInput<$PrismaModel>
+    not?: NestedEnumVerificationTypeFilter<$PrismaModel> | $Enums.VerificationType
+  }
+
   export type IntFilter<$PrismaModel = never> = {
     equals?: number | IntFieldRefInput<$PrismaModel>
     in?: number[] | ListIntFieldRefInput<$PrismaModel>
@@ -38502,9 +40082,11 @@ export namespace Prisma {
   export type VerificationCountOrderByAggregateInput = {
     id?: SortOrder
     userId?: SortOrder
+    type?: SortOrder
     code?: SortOrder
     expiresAt?: SortOrder
     resendCount?: SortOrder
+    used?: SortOrder
     isDeleted?: SortOrder
     createdAt?: SortOrder
     updatedAt?: SortOrder
@@ -38517,9 +40099,11 @@ export namespace Prisma {
   export type VerificationMaxOrderByAggregateInput = {
     id?: SortOrder
     userId?: SortOrder
+    type?: SortOrder
     code?: SortOrder
     expiresAt?: SortOrder
     resendCount?: SortOrder
+    used?: SortOrder
     isDeleted?: SortOrder
     createdAt?: SortOrder
     updatedAt?: SortOrder
@@ -38528,9 +40112,11 @@ export namespace Prisma {
   export type VerificationMinOrderByAggregateInput = {
     id?: SortOrder
     userId?: SortOrder
+    type?: SortOrder
     code?: SortOrder
     expiresAt?: SortOrder
     resendCount?: SortOrder
+    used?: SortOrder
     isDeleted?: SortOrder
     createdAt?: SortOrder
     updatedAt?: SortOrder
@@ -38538,6 +40124,16 @@ export namespace Prisma {
 
   export type VerificationSumOrderByAggregateInput = {
     resendCount?: SortOrder
+  }
+
+  export type EnumVerificationTypeWithAggregatesFilter<$PrismaModel = never> = {
+    equals?: $Enums.VerificationType | EnumVerificationTypeFieldRefInput<$PrismaModel>
+    in?: $Enums.VerificationType[] | ListEnumVerificationTypeFieldRefInput<$PrismaModel>
+    notIn?: $Enums.VerificationType[] | ListEnumVerificationTypeFieldRefInput<$PrismaModel>
+    not?: NestedEnumVerificationTypeWithAggregatesFilter<$PrismaModel> | $Enums.VerificationType
+    _count?: NestedIntFilter<$PrismaModel>
+    _min?: NestedEnumVerificationTypeFilter<$PrismaModel>
+    _max?: NestedEnumVerificationTypeFilter<$PrismaModel>
   }
 
   export type IntWithAggregatesFilter<$PrismaModel = never> = {
@@ -39851,6 +41447,13 @@ export namespace Prisma {
     connect?: WalletWhereUniqueInput
   }
 
+  export type RefreshTokenCreateNestedManyWithoutUserInput = {
+    create?: XOR<RefreshTokenCreateWithoutUserInput, RefreshTokenUncheckedCreateWithoutUserInput> | RefreshTokenCreateWithoutUserInput[] | RefreshTokenUncheckedCreateWithoutUserInput[]
+    connectOrCreate?: RefreshTokenCreateOrConnectWithoutUserInput | RefreshTokenCreateOrConnectWithoutUserInput[]
+    createMany?: RefreshTokenCreateManyUserInputEnvelope
+    connect?: RefreshTokenWhereUniqueInput | RefreshTokenWhereUniqueInput[]
+  }
+
   export type AdministratorUncheckedCreateNestedOneWithoutUserInput = {
     create?: XOR<AdministratorCreateWithoutUserInput, AdministratorUncheckedCreateWithoutUserInput>
     connectOrCreate?: AdministratorCreateOrConnectWithoutUserInput
@@ -39899,6 +41502,13 @@ export namespace Prisma {
     create?: XOR<WalletCreateWithoutUserInput, WalletUncheckedCreateWithoutUserInput>
     connectOrCreate?: WalletCreateOrConnectWithoutUserInput
     connect?: WalletWhereUniqueInput
+  }
+
+  export type RefreshTokenUncheckedCreateNestedManyWithoutUserInput = {
+    create?: XOR<RefreshTokenCreateWithoutUserInput, RefreshTokenUncheckedCreateWithoutUserInput> | RefreshTokenCreateWithoutUserInput[] | RefreshTokenUncheckedCreateWithoutUserInput[]
+    connectOrCreate?: RefreshTokenCreateOrConnectWithoutUserInput | RefreshTokenCreateOrConnectWithoutUserInput[]
+    createMany?: RefreshTokenCreateManyUserInputEnvelope
+    connect?: RefreshTokenWhereUniqueInput | RefreshTokenWhereUniqueInput[]
   }
 
   export type StringFieldUpdateOperationsInput = {
@@ -40017,6 +41627,20 @@ export namespace Prisma {
     update?: XOR<XOR<WalletUpdateToOneWithWhereWithoutUserInput, WalletUpdateWithoutUserInput>, WalletUncheckedUpdateWithoutUserInput>
   }
 
+  export type RefreshTokenUpdateManyWithoutUserNestedInput = {
+    create?: XOR<RefreshTokenCreateWithoutUserInput, RefreshTokenUncheckedCreateWithoutUserInput> | RefreshTokenCreateWithoutUserInput[] | RefreshTokenUncheckedCreateWithoutUserInput[]
+    connectOrCreate?: RefreshTokenCreateOrConnectWithoutUserInput | RefreshTokenCreateOrConnectWithoutUserInput[]
+    upsert?: RefreshTokenUpsertWithWhereUniqueWithoutUserInput | RefreshTokenUpsertWithWhereUniqueWithoutUserInput[]
+    createMany?: RefreshTokenCreateManyUserInputEnvelope
+    set?: RefreshTokenWhereUniqueInput | RefreshTokenWhereUniqueInput[]
+    disconnect?: RefreshTokenWhereUniqueInput | RefreshTokenWhereUniqueInput[]
+    delete?: RefreshTokenWhereUniqueInput | RefreshTokenWhereUniqueInput[]
+    connect?: RefreshTokenWhereUniqueInput | RefreshTokenWhereUniqueInput[]
+    update?: RefreshTokenUpdateWithWhereUniqueWithoutUserInput | RefreshTokenUpdateWithWhereUniqueWithoutUserInput[]
+    updateMany?: RefreshTokenUpdateManyWithWhereWithoutUserInput | RefreshTokenUpdateManyWithWhereWithoutUserInput[]
+    deleteMany?: RefreshTokenScalarWhereInput | RefreshTokenScalarWhereInput[]
+  }
+
   export type AdministratorUncheckedUpdateOneWithoutUserNestedInput = {
     create?: XOR<AdministratorCreateWithoutUserInput, AdministratorUncheckedCreateWithoutUserInput>
     connectOrCreate?: AdministratorCreateOrConnectWithoutUserInput
@@ -40105,6 +41729,20 @@ export namespace Prisma {
     update?: XOR<XOR<WalletUpdateToOneWithWhereWithoutUserInput, WalletUpdateWithoutUserInput>, WalletUncheckedUpdateWithoutUserInput>
   }
 
+  export type RefreshTokenUncheckedUpdateManyWithoutUserNestedInput = {
+    create?: XOR<RefreshTokenCreateWithoutUserInput, RefreshTokenUncheckedCreateWithoutUserInput> | RefreshTokenCreateWithoutUserInput[] | RefreshTokenUncheckedCreateWithoutUserInput[]
+    connectOrCreate?: RefreshTokenCreateOrConnectWithoutUserInput | RefreshTokenCreateOrConnectWithoutUserInput[]
+    upsert?: RefreshTokenUpsertWithWhereUniqueWithoutUserInput | RefreshTokenUpsertWithWhereUniqueWithoutUserInput[]
+    createMany?: RefreshTokenCreateManyUserInputEnvelope
+    set?: RefreshTokenWhereUniqueInput | RefreshTokenWhereUniqueInput[]
+    disconnect?: RefreshTokenWhereUniqueInput | RefreshTokenWhereUniqueInput[]
+    delete?: RefreshTokenWhereUniqueInput | RefreshTokenWhereUniqueInput[]
+    connect?: RefreshTokenWhereUniqueInput | RefreshTokenWhereUniqueInput[]
+    update?: RefreshTokenUpdateWithWhereUniqueWithoutUserInput | RefreshTokenUpdateWithWhereUniqueWithoutUserInput[]
+    updateMany?: RefreshTokenUpdateManyWithWhereWithoutUserInput | RefreshTokenUpdateManyWithWhereWithoutUserInput[]
+    deleteMany?: RefreshTokenScalarWhereInput | RefreshTokenScalarWhereInput[]
+  }
+
   export type UserCreateNestedOneWithoutCredentialInput = {
     create?: XOR<UserCreateWithoutCredentialInput, UserUncheckedCreateWithoutCredentialInput>
     connectOrCreate?: UserCreateOrConnectWithoutCredentialInput
@@ -40117,6 +41755,20 @@ export namespace Prisma {
     upsert?: UserUpsertWithoutCredentialInput
     connect?: UserWhereUniqueInput
     update?: XOR<XOR<UserUpdateToOneWithWhereWithoutCredentialInput, UserUpdateWithoutCredentialInput>, UserUncheckedUpdateWithoutCredentialInput>
+  }
+
+  export type UserCreateNestedOneWithoutRefreshTokensInput = {
+    create?: XOR<UserCreateWithoutRefreshTokensInput, UserUncheckedCreateWithoutRefreshTokensInput>
+    connectOrCreate?: UserCreateOrConnectWithoutRefreshTokensInput
+    connect?: UserWhereUniqueInput
+  }
+
+  export type UserUpdateOneRequiredWithoutRefreshTokensNestedInput = {
+    create?: XOR<UserCreateWithoutRefreshTokensInput, UserUncheckedCreateWithoutRefreshTokensInput>
+    connectOrCreate?: UserCreateOrConnectWithoutRefreshTokensInput
+    upsert?: UserUpsertWithoutRefreshTokensInput
+    connect?: UserWhereUniqueInput
+    update?: XOR<XOR<UserUpdateToOneWithWhereWithoutRefreshTokensInput, UserUpdateWithoutRefreshTokensInput>, UserUncheckedUpdateWithoutRefreshTokensInput>
   }
 
   export type UserCreateNestedOneWithoutAdministratorInput = {
@@ -40319,6 +41971,10 @@ export namespace Prisma {
     create?: XOR<UserCreateWithoutVerificationsInput, UserUncheckedCreateWithoutVerificationsInput>
     connectOrCreate?: UserCreateOrConnectWithoutVerificationsInput
     connect?: UserWhereUniqueInput
+  }
+
+  export type EnumVerificationTypeFieldUpdateOperationsInput = {
+    set?: $Enums.VerificationType
   }
 
   export type IntFieldUpdateOperationsInput = {
@@ -41958,6 +43614,23 @@ export namespace Prisma {
     _max?: NestedDateTimeFilter<$PrismaModel>
   }
 
+  export type NestedEnumVerificationTypeFilter<$PrismaModel = never> = {
+    equals?: $Enums.VerificationType | EnumVerificationTypeFieldRefInput<$PrismaModel>
+    in?: $Enums.VerificationType[] | ListEnumVerificationTypeFieldRefInput<$PrismaModel>
+    notIn?: $Enums.VerificationType[] | ListEnumVerificationTypeFieldRefInput<$PrismaModel>
+    not?: NestedEnumVerificationTypeFilter<$PrismaModel> | $Enums.VerificationType
+  }
+
+  export type NestedEnumVerificationTypeWithAggregatesFilter<$PrismaModel = never> = {
+    equals?: $Enums.VerificationType | EnumVerificationTypeFieldRefInput<$PrismaModel>
+    in?: $Enums.VerificationType[] | ListEnumVerificationTypeFieldRefInput<$PrismaModel>
+    notIn?: $Enums.VerificationType[] | ListEnumVerificationTypeFieldRefInput<$PrismaModel>
+    not?: NestedEnumVerificationTypeWithAggregatesFilter<$PrismaModel> | $Enums.VerificationType
+    _count?: NestedIntFilter<$PrismaModel>
+    _min?: NestedEnumVerificationTypeFilter<$PrismaModel>
+    _max?: NestedEnumVerificationTypeFilter<$PrismaModel>
+  }
+
   export type NestedIntWithAggregatesFilter<$PrismaModel = never> = {
     equals?: number | IntFieldRefInput<$PrismaModel>
     in?: number[] | ListIntFieldRefInput<$PrismaModel>
@@ -42284,9 +43957,11 @@ export namespace Prisma {
 
   export type VerificationCreateWithoutUserInput = {
     id?: string
+    type: $Enums.VerificationType
     code: string
     expiresAt: Date | string
     resendCount?: number
+    used?: boolean
     isDeleted?: boolean
     createdAt?: Date | string
     updatedAt?: Date | string
@@ -42294,9 +43969,11 @@ export namespace Prisma {
 
   export type VerificationUncheckedCreateWithoutUserInput = {
     id?: string
+    type: $Enums.VerificationType
     code: string
     expiresAt: Date | string
     resendCount?: number
+    used?: boolean
     isDeleted?: boolean
     createdAt?: Date | string
     updatedAt?: Date | string
@@ -42444,8 +44121,10 @@ export namespace Prisma {
 
   export type CredentialCreateWithoutUserInput = {
     id?: string
-    password: string
-    pinCode: string
+    password?: string | null
+    pinCode?: string | null
+    lastResetAt?: Date | string | null
+    lastUsedAt?: Date | string | null
     isDeleted?: boolean
     createdAt?: Date | string
     updatedAt?: Date | string
@@ -42453,8 +44132,10 @@ export namespace Prisma {
 
   export type CredentialUncheckedCreateWithoutUserInput = {
     id?: string
-    password: string
-    pinCode: string
+    password?: string | null
+    pinCode?: string | null
+    lastResetAt?: Date | string | null
+    lastUsedAt?: Date | string | null
     isDeleted?: boolean
     createdAt?: Date | string
     updatedAt?: Date | string
@@ -42498,6 +44179,36 @@ export namespace Prisma {
   export type WalletCreateOrConnectWithoutUserInput = {
     where: WalletWhereUniqueInput
     create: XOR<WalletCreateWithoutUserInput, WalletUncheckedCreateWithoutUserInput>
+  }
+
+  export type RefreshTokenCreateWithoutUserInput = {
+    id?: string
+    token: string
+    expiresAt: Date | string
+    revoked?: boolean
+    isDeleted?: boolean
+    updatedAt?: Date | string
+    createdAt?: Date | string
+  }
+
+  export type RefreshTokenUncheckedCreateWithoutUserInput = {
+    id?: string
+    token: string
+    expiresAt: Date | string
+    revoked?: boolean
+    isDeleted?: boolean
+    updatedAt?: Date | string
+    createdAt?: Date | string
+  }
+
+  export type RefreshTokenCreateOrConnectWithoutUserInput = {
+    where: RefreshTokenWhereUniqueInput
+    create: XOR<RefreshTokenCreateWithoutUserInput, RefreshTokenUncheckedCreateWithoutUserInput>
+  }
+
+  export type RefreshTokenCreateManyUserInputEnvelope = {
+    data: RefreshTokenCreateManyUserInput | RefreshTokenCreateManyUserInput[]
+    skipDuplicates?: boolean
   }
 
   export type AdministratorUpsertWithoutUserInput = {
@@ -42590,9 +44301,11 @@ export namespace Prisma {
     NOT?: VerificationScalarWhereInput | VerificationScalarWhereInput[]
     id?: StringFilter<"Verification"> | string
     userId?: StringFilter<"Verification"> | string
+    type?: EnumVerificationTypeFilter<"Verification"> | $Enums.VerificationType
     code?: StringFilter<"Verification"> | string
     expiresAt?: DateTimeFilter<"Verification"> | Date | string
     resendCount?: IntFilter<"Verification"> | number
+    used?: BoolFilter<"Verification"> | boolean
     isDeleted?: BoolFilter<"Verification"> | boolean
     createdAt?: DateTimeFilter<"Verification"> | Date | string
     updatedAt?: DateTimeFilter<"Verification"> | Date | string
@@ -42752,8 +44465,10 @@ export namespace Prisma {
 
   export type CredentialUpdateWithoutUserInput = {
     id?: StringFieldUpdateOperationsInput | string
-    password?: StringFieldUpdateOperationsInput | string
-    pinCode?: StringFieldUpdateOperationsInput | string
+    password?: NullableStringFieldUpdateOperationsInput | string | null
+    pinCode?: NullableStringFieldUpdateOperationsInput | string | null
+    lastResetAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    lastUsedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     isDeleted?: BoolFieldUpdateOperationsInput | boolean
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
@@ -42761,8 +44476,10 @@ export namespace Prisma {
 
   export type CredentialUncheckedUpdateWithoutUserInput = {
     id?: StringFieldUpdateOperationsInput | string
-    password?: StringFieldUpdateOperationsInput | string
-    pinCode?: StringFieldUpdateOperationsInput | string
+    password?: NullableStringFieldUpdateOperationsInput | string | null
+    pinCode?: NullableStringFieldUpdateOperationsInput | string | null
+    lastResetAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    lastUsedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     isDeleted?: BoolFieldUpdateOperationsInput | boolean
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
@@ -42809,6 +44526,36 @@ export namespace Prisma {
     Transaction?: TransactionUncheckedUpdateManyWithoutWalletNestedInput
   }
 
+  export type RefreshTokenUpsertWithWhereUniqueWithoutUserInput = {
+    where: RefreshTokenWhereUniqueInput
+    update: XOR<RefreshTokenUpdateWithoutUserInput, RefreshTokenUncheckedUpdateWithoutUserInput>
+    create: XOR<RefreshTokenCreateWithoutUserInput, RefreshTokenUncheckedCreateWithoutUserInput>
+  }
+
+  export type RefreshTokenUpdateWithWhereUniqueWithoutUserInput = {
+    where: RefreshTokenWhereUniqueInput
+    data: XOR<RefreshTokenUpdateWithoutUserInput, RefreshTokenUncheckedUpdateWithoutUserInput>
+  }
+
+  export type RefreshTokenUpdateManyWithWhereWithoutUserInput = {
+    where: RefreshTokenScalarWhereInput
+    data: XOR<RefreshTokenUpdateManyMutationInput, RefreshTokenUncheckedUpdateManyWithoutUserInput>
+  }
+
+  export type RefreshTokenScalarWhereInput = {
+    AND?: RefreshTokenScalarWhereInput | RefreshTokenScalarWhereInput[]
+    OR?: RefreshTokenScalarWhereInput[]
+    NOT?: RefreshTokenScalarWhereInput | RefreshTokenScalarWhereInput[]
+    id?: StringFilter<"RefreshToken"> | string
+    userId?: StringFilter<"RefreshToken"> | string
+    token?: StringFilter<"RefreshToken"> | string
+    expiresAt?: DateTimeFilter<"RefreshToken"> | Date | string
+    revoked?: BoolFilter<"RefreshToken"> | boolean
+    isDeleted?: BoolFilter<"RefreshToken"> | boolean
+    updatedAt?: DateTimeFilter<"RefreshToken"> | Date | string
+    createdAt?: DateTimeFilter<"RefreshToken"> | Date | string
+  }
+
   export type UserCreateWithoutCredentialInput = {
     id?: string
     firstName: string
@@ -42816,7 +44563,7 @@ export namespace Prisma {
     profileImage?: string | null
     email: string
     type: $Enums.UserType
-    phoneNumber?: string | null
+    phone?: string | null
     accountStatus?: $Enums.AccountStatus
     verifiedAt?: Date | string | null
     lastSeenAt?: Date | string | null
@@ -42830,6 +44577,7 @@ export namespace Prisma {
     schoolAndPlatformLegalAgreement?: SchoolAndPlatformLegalAgreementCreateNestedOneWithoutSignedByInput
     notifications?: NotificationCreateNestedManyWithoutUserInput
     wallet?: WalletCreateNestedOneWithoutUserInput
+    refreshTokens?: RefreshTokenCreateNestedManyWithoutUserInput
   }
 
   export type UserUncheckedCreateWithoutCredentialInput = {
@@ -42839,7 +44587,7 @@ export namespace Prisma {
     profileImage?: string | null
     email: string
     type: $Enums.UserType
-    phoneNumber?: string | null
+    phone?: string | null
     accountStatus?: $Enums.AccountStatus
     verifiedAt?: Date | string | null
     lastSeenAt?: Date | string | null
@@ -42853,6 +44601,7 @@ export namespace Prisma {
     schoolAndPlatformLegalAgreement?: SchoolAndPlatformLegalAgreementUncheckedCreateNestedOneWithoutSignedByInput
     notifications?: NotificationUncheckedCreateNestedManyWithoutUserInput
     wallet?: WalletUncheckedCreateNestedOneWithoutUserInput
+    refreshTokens?: RefreshTokenUncheckedCreateNestedManyWithoutUserInput
   }
 
   export type UserCreateOrConnectWithoutCredentialInput = {
@@ -42878,7 +44627,7 @@ export namespace Prisma {
     profileImage?: NullableStringFieldUpdateOperationsInput | string | null
     email?: StringFieldUpdateOperationsInput | string
     type?: EnumUserTypeFieldUpdateOperationsInput | $Enums.UserType
-    phoneNumber?: NullableStringFieldUpdateOperationsInput | string | null
+    phone?: NullableStringFieldUpdateOperationsInput | string | null
     accountStatus?: EnumAccountStatusFieldUpdateOperationsInput | $Enums.AccountStatus
     verifiedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     lastSeenAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
@@ -42892,6 +44641,7 @@ export namespace Prisma {
     schoolAndPlatformLegalAgreement?: SchoolAndPlatformLegalAgreementUpdateOneWithoutSignedByNestedInput
     notifications?: NotificationUpdateManyWithoutUserNestedInput
     wallet?: WalletUpdateOneWithoutUserNestedInput
+    refreshTokens?: RefreshTokenUpdateManyWithoutUserNestedInput
   }
 
   export type UserUncheckedUpdateWithoutCredentialInput = {
@@ -42901,7 +44651,7 @@ export namespace Prisma {
     profileImage?: NullableStringFieldUpdateOperationsInput | string | null
     email?: StringFieldUpdateOperationsInput | string
     type?: EnumUserTypeFieldUpdateOperationsInput | $Enums.UserType
-    phoneNumber?: NullableStringFieldUpdateOperationsInput | string | null
+    phone?: NullableStringFieldUpdateOperationsInput | string | null
     accountStatus?: EnumAccountStatusFieldUpdateOperationsInput | $Enums.AccountStatus
     verifiedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     lastSeenAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
@@ -42915,6 +44665,119 @@ export namespace Prisma {
     schoolAndPlatformLegalAgreement?: SchoolAndPlatformLegalAgreementUncheckedUpdateOneWithoutSignedByNestedInput
     notifications?: NotificationUncheckedUpdateManyWithoutUserNestedInput
     wallet?: WalletUncheckedUpdateOneWithoutUserNestedInput
+    refreshTokens?: RefreshTokenUncheckedUpdateManyWithoutUserNestedInput
+  }
+
+  export type UserCreateWithoutRefreshTokensInput = {
+    id?: string
+    firstName: string
+    lastName: string
+    profileImage?: string | null
+    email: string
+    type: $Enums.UserType
+    phone?: string | null
+    accountStatus?: $Enums.AccountStatus
+    verifiedAt?: Date | string | null
+    lastSeenAt?: Date | string | null
+    isDeleted?: boolean
+    createdAt?: Date | string
+    updatedAt?: Date | string
+    administrator?: AdministratorCreateNestedOneWithoutUserInput
+    guardian?: GuardianCreateNestedOneWithoutUserInput
+    verifications?: VerificationCreateNestedManyWithoutUserInput
+    school?: SchoolCreateNestedOneWithoutOwnerInput
+    schoolAndPlatformLegalAgreement?: SchoolAndPlatformLegalAgreementCreateNestedOneWithoutSignedByInput
+    notifications?: NotificationCreateNestedManyWithoutUserInput
+    credential?: CredentialCreateNestedOneWithoutUserInput
+    wallet?: WalletCreateNestedOneWithoutUserInput
+  }
+
+  export type UserUncheckedCreateWithoutRefreshTokensInput = {
+    id?: string
+    firstName: string
+    lastName: string
+    profileImage?: string | null
+    email: string
+    type: $Enums.UserType
+    phone?: string | null
+    accountStatus?: $Enums.AccountStatus
+    verifiedAt?: Date | string | null
+    lastSeenAt?: Date | string | null
+    isDeleted?: boolean
+    createdAt?: Date | string
+    updatedAt?: Date | string
+    administrator?: AdministratorUncheckedCreateNestedOneWithoutUserInput
+    guardian?: GuardianUncheckedCreateNestedOneWithoutUserInput
+    verifications?: VerificationUncheckedCreateNestedManyWithoutUserInput
+    school?: SchoolUncheckedCreateNestedOneWithoutOwnerInput
+    schoolAndPlatformLegalAgreement?: SchoolAndPlatformLegalAgreementUncheckedCreateNestedOneWithoutSignedByInput
+    notifications?: NotificationUncheckedCreateNestedManyWithoutUserInput
+    credential?: CredentialUncheckedCreateNestedOneWithoutUserInput
+    wallet?: WalletUncheckedCreateNestedOneWithoutUserInput
+  }
+
+  export type UserCreateOrConnectWithoutRefreshTokensInput = {
+    where: UserWhereUniqueInput
+    create: XOR<UserCreateWithoutRefreshTokensInput, UserUncheckedCreateWithoutRefreshTokensInput>
+  }
+
+  export type UserUpsertWithoutRefreshTokensInput = {
+    update: XOR<UserUpdateWithoutRefreshTokensInput, UserUncheckedUpdateWithoutRefreshTokensInput>
+    create: XOR<UserCreateWithoutRefreshTokensInput, UserUncheckedCreateWithoutRefreshTokensInput>
+    where?: UserWhereInput
+  }
+
+  export type UserUpdateToOneWithWhereWithoutRefreshTokensInput = {
+    where?: UserWhereInput
+    data: XOR<UserUpdateWithoutRefreshTokensInput, UserUncheckedUpdateWithoutRefreshTokensInput>
+  }
+
+  export type UserUpdateWithoutRefreshTokensInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    firstName?: StringFieldUpdateOperationsInput | string
+    lastName?: StringFieldUpdateOperationsInput | string
+    profileImage?: NullableStringFieldUpdateOperationsInput | string | null
+    email?: StringFieldUpdateOperationsInput | string
+    type?: EnumUserTypeFieldUpdateOperationsInput | $Enums.UserType
+    phone?: NullableStringFieldUpdateOperationsInput | string | null
+    accountStatus?: EnumAccountStatusFieldUpdateOperationsInput | $Enums.AccountStatus
+    verifiedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    lastSeenAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    isDeleted?: BoolFieldUpdateOperationsInput | boolean
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    administrator?: AdministratorUpdateOneWithoutUserNestedInput
+    guardian?: GuardianUpdateOneWithoutUserNestedInput
+    verifications?: VerificationUpdateManyWithoutUserNestedInput
+    school?: SchoolUpdateOneWithoutOwnerNestedInput
+    schoolAndPlatformLegalAgreement?: SchoolAndPlatformLegalAgreementUpdateOneWithoutSignedByNestedInput
+    notifications?: NotificationUpdateManyWithoutUserNestedInput
+    credential?: CredentialUpdateOneWithoutUserNestedInput
+    wallet?: WalletUpdateOneWithoutUserNestedInput
+  }
+
+  export type UserUncheckedUpdateWithoutRefreshTokensInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    firstName?: StringFieldUpdateOperationsInput | string
+    lastName?: StringFieldUpdateOperationsInput | string
+    profileImage?: NullableStringFieldUpdateOperationsInput | string | null
+    email?: StringFieldUpdateOperationsInput | string
+    type?: EnumUserTypeFieldUpdateOperationsInput | $Enums.UserType
+    phone?: NullableStringFieldUpdateOperationsInput | string | null
+    accountStatus?: EnumAccountStatusFieldUpdateOperationsInput | $Enums.AccountStatus
+    verifiedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    lastSeenAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    isDeleted?: BoolFieldUpdateOperationsInput | boolean
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    administrator?: AdministratorUncheckedUpdateOneWithoutUserNestedInput
+    guardian?: GuardianUncheckedUpdateOneWithoutUserNestedInput
+    verifications?: VerificationUncheckedUpdateManyWithoutUserNestedInput
+    school?: SchoolUncheckedUpdateOneWithoutOwnerNestedInput
+    schoolAndPlatformLegalAgreement?: SchoolAndPlatformLegalAgreementUncheckedUpdateOneWithoutSignedByNestedInput
+    notifications?: NotificationUncheckedUpdateManyWithoutUserNestedInput
+    credential?: CredentialUncheckedUpdateOneWithoutUserNestedInput
+    wallet?: WalletUncheckedUpdateOneWithoutUserNestedInput
   }
 
   export type UserCreateWithoutAdministratorInput = {
@@ -42924,7 +44787,7 @@ export namespace Prisma {
     profileImage?: string | null
     email: string
     type: $Enums.UserType
-    phoneNumber?: string | null
+    phone?: string | null
     accountStatus?: $Enums.AccountStatus
     verifiedAt?: Date | string | null
     lastSeenAt?: Date | string | null
@@ -42938,6 +44801,7 @@ export namespace Prisma {
     notifications?: NotificationCreateNestedManyWithoutUserInput
     credential?: CredentialCreateNestedOneWithoutUserInput
     wallet?: WalletCreateNestedOneWithoutUserInput
+    refreshTokens?: RefreshTokenCreateNestedManyWithoutUserInput
   }
 
   export type UserUncheckedCreateWithoutAdministratorInput = {
@@ -42947,7 +44811,7 @@ export namespace Prisma {
     profileImage?: string | null
     email: string
     type: $Enums.UserType
-    phoneNumber?: string | null
+    phone?: string | null
     accountStatus?: $Enums.AccountStatus
     verifiedAt?: Date | string | null
     lastSeenAt?: Date | string | null
@@ -42961,6 +44825,7 @@ export namespace Prisma {
     notifications?: NotificationUncheckedCreateNestedManyWithoutUserInput
     credential?: CredentialUncheckedCreateNestedOneWithoutUserInput
     wallet?: WalletUncheckedCreateNestedOneWithoutUserInput
+    refreshTokens?: RefreshTokenUncheckedCreateNestedManyWithoutUserInput
   }
 
   export type UserCreateOrConnectWithoutAdministratorInput = {
@@ -42986,7 +44851,7 @@ export namespace Prisma {
     profileImage?: NullableStringFieldUpdateOperationsInput | string | null
     email?: StringFieldUpdateOperationsInput | string
     type?: EnumUserTypeFieldUpdateOperationsInput | $Enums.UserType
-    phoneNumber?: NullableStringFieldUpdateOperationsInput | string | null
+    phone?: NullableStringFieldUpdateOperationsInput | string | null
     accountStatus?: EnumAccountStatusFieldUpdateOperationsInput | $Enums.AccountStatus
     verifiedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     lastSeenAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
@@ -43000,6 +44865,7 @@ export namespace Prisma {
     notifications?: NotificationUpdateManyWithoutUserNestedInput
     credential?: CredentialUpdateOneWithoutUserNestedInput
     wallet?: WalletUpdateOneWithoutUserNestedInput
+    refreshTokens?: RefreshTokenUpdateManyWithoutUserNestedInput
   }
 
   export type UserUncheckedUpdateWithoutAdministratorInput = {
@@ -43009,7 +44875,7 @@ export namespace Prisma {
     profileImage?: NullableStringFieldUpdateOperationsInput | string | null
     email?: StringFieldUpdateOperationsInput | string
     type?: EnumUserTypeFieldUpdateOperationsInput | $Enums.UserType
-    phoneNumber?: NullableStringFieldUpdateOperationsInput | string | null
+    phone?: NullableStringFieldUpdateOperationsInput | string | null
     accountStatus?: EnumAccountStatusFieldUpdateOperationsInput | $Enums.AccountStatus
     verifiedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     lastSeenAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
@@ -43023,6 +44889,7 @@ export namespace Prisma {
     notifications?: NotificationUncheckedUpdateManyWithoutUserNestedInput
     credential?: CredentialUncheckedUpdateOneWithoutUserNestedInput
     wallet?: WalletUncheckedUpdateOneWithoutUserNestedInput
+    refreshTokens?: RefreshTokenUncheckedUpdateManyWithoutUserNestedInput
   }
 
   export type UserCreateWithoutGuardianInput = {
@@ -43032,7 +44899,7 @@ export namespace Prisma {
     profileImage?: string | null
     email: string
     type: $Enums.UserType
-    phoneNumber?: string | null
+    phone?: string | null
     accountStatus?: $Enums.AccountStatus
     verifiedAt?: Date | string | null
     lastSeenAt?: Date | string | null
@@ -43046,6 +44913,7 @@ export namespace Prisma {
     notifications?: NotificationCreateNestedManyWithoutUserInput
     credential?: CredentialCreateNestedOneWithoutUserInput
     wallet?: WalletCreateNestedOneWithoutUserInput
+    refreshTokens?: RefreshTokenCreateNestedManyWithoutUserInput
   }
 
   export type UserUncheckedCreateWithoutGuardianInput = {
@@ -43055,7 +44923,7 @@ export namespace Prisma {
     profileImage?: string | null
     email: string
     type: $Enums.UserType
-    phoneNumber?: string | null
+    phone?: string | null
     accountStatus?: $Enums.AccountStatus
     verifiedAt?: Date | string | null
     lastSeenAt?: Date | string | null
@@ -43069,6 +44937,7 @@ export namespace Prisma {
     notifications?: NotificationUncheckedCreateNestedManyWithoutUserInput
     credential?: CredentialUncheckedCreateNestedOneWithoutUserInput
     wallet?: WalletUncheckedCreateNestedOneWithoutUserInput
+    refreshTokens?: RefreshTokenUncheckedCreateNestedManyWithoutUserInput
   }
 
   export type UserCreateOrConnectWithoutGuardianInput = {
@@ -43250,7 +45119,7 @@ export namespace Prisma {
     profileImage?: NullableStringFieldUpdateOperationsInput | string | null
     email?: StringFieldUpdateOperationsInput | string
     type?: EnumUserTypeFieldUpdateOperationsInput | $Enums.UserType
-    phoneNumber?: NullableStringFieldUpdateOperationsInput | string | null
+    phone?: NullableStringFieldUpdateOperationsInput | string | null
     accountStatus?: EnumAccountStatusFieldUpdateOperationsInput | $Enums.AccountStatus
     verifiedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     lastSeenAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
@@ -43264,6 +45133,7 @@ export namespace Prisma {
     notifications?: NotificationUpdateManyWithoutUserNestedInput
     credential?: CredentialUpdateOneWithoutUserNestedInput
     wallet?: WalletUpdateOneWithoutUserNestedInput
+    refreshTokens?: RefreshTokenUpdateManyWithoutUserNestedInput
   }
 
   export type UserUncheckedUpdateWithoutGuardianInput = {
@@ -43273,7 +45143,7 @@ export namespace Prisma {
     profileImage?: NullableStringFieldUpdateOperationsInput | string | null
     email?: StringFieldUpdateOperationsInput | string
     type?: EnumUserTypeFieldUpdateOperationsInput | $Enums.UserType
-    phoneNumber?: NullableStringFieldUpdateOperationsInput | string | null
+    phone?: NullableStringFieldUpdateOperationsInput | string | null
     accountStatus?: EnumAccountStatusFieldUpdateOperationsInput | $Enums.AccountStatus
     verifiedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     lastSeenAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
@@ -43287,6 +45157,7 @@ export namespace Prisma {
     notifications?: NotificationUncheckedUpdateManyWithoutUserNestedInput
     credential?: CredentialUncheckedUpdateOneWithoutUserNestedInput
     wallet?: WalletUncheckedUpdateOneWithoutUserNestedInput
+    refreshTokens?: RefreshTokenUncheckedUpdateManyWithoutUserNestedInput
   }
 
   export type InvoiceUpsertWithWhereUniqueWithoutGuardianInput = {
@@ -43430,7 +45301,7 @@ export namespace Prisma {
     profileImage?: string | null
     email: string
     type: $Enums.UserType
-    phoneNumber?: string | null
+    phone?: string | null
     accountStatus?: $Enums.AccountStatus
     verifiedAt?: Date | string | null
     lastSeenAt?: Date | string | null
@@ -43444,6 +45315,7 @@ export namespace Prisma {
     notifications?: NotificationCreateNestedManyWithoutUserInput
     credential?: CredentialCreateNestedOneWithoutUserInput
     wallet?: WalletCreateNestedOneWithoutUserInput
+    refreshTokens?: RefreshTokenCreateNestedManyWithoutUserInput
   }
 
   export type UserUncheckedCreateWithoutVerificationsInput = {
@@ -43453,7 +45325,7 @@ export namespace Prisma {
     profileImage?: string | null
     email: string
     type: $Enums.UserType
-    phoneNumber?: string | null
+    phone?: string | null
     accountStatus?: $Enums.AccountStatus
     verifiedAt?: Date | string | null
     lastSeenAt?: Date | string | null
@@ -43467,6 +45339,7 @@ export namespace Prisma {
     notifications?: NotificationUncheckedCreateNestedManyWithoutUserInput
     credential?: CredentialUncheckedCreateNestedOneWithoutUserInput
     wallet?: WalletUncheckedCreateNestedOneWithoutUserInput
+    refreshTokens?: RefreshTokenUncheckedCreateNestedManyWithoutUserInput
   }
 
   export type UserCreateOrConnectWithoutVerificationsInput = {
@@ -43492,7 +45365,7 @@ export namespace Prisma {
     profileImage?: NullableStringFieldUpdateOperationsInput | string | null
     email?: StringFieldUpdateOperationsInput | string
     type?: EnumUserTypeFieldUpdateOperationsInput | $Enums.UserType
-    phoneNumber?: NullableStringFieldUpdateOperationsInput | string | null
+    phone?: NullableStringFieldUpdateOperationsInput | string | null
     accountStatus?: EnumAccountStatusFieldUpdateOperationsInput | $Enums.AccountStatus
     verifiedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     lastSeenAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
@@ -43506,6 +45379,7 @@ export namespace Prisma {
     notifications?: NotificationUpdateManyWithoutUserNestedInput
     credential?: CredentialUpdateOneWithoutUserNestedInput
     wallet?: WalletUpdateOneWithoutUserNestedInput
+    refreshTokens?: RefreshTokenUpdateManyWithoutUserNestedInput
   }
 
   export type UserUncheckedUpdateWithoutVerificationsInput = {
@@ -43515,7 +45389,7 @@ export namespace Prisma {
     profileImage?: NullableStringFieldUpdateOperationsInput | string | null
     email?: StringFieldUpdateOperationsInput | string
     type?: EnumUserTypeFieldUpdateOperationsInput | $Enums.UserType
-    phoneNumber?: NullableStringFieldUpdateOperationsInput | string | null
+    phone?: NullableStringFieldUpdateOperationsInput | string | null
     accountStatus?: EnumAccountStatusFieldUpdateOperationsInput | $Enums.AccountStatus
     verifiedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     lastSeenAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
@@ -43529,6 +45403,7 @@ export namespace Prisma {
     notifications?: NotificationUncheckedUpdateManyWithoutUserNestedInput
     credential?: CredentialUncheckedUpdateOneWithoutUserNestedInput
     wallet?: WalletUncheckedUpdateOneWithoutUserNestedInput
+    refreshTokens?: RefreshTokenUncheckedUpdateManyWithoutUserNestedInput
   }
 
   export type UserCreateWithoutSchoolInput = {
@@ -43538,7 +45413,7 @@ export namespace Prisma {
     profileImage?: string | null
     email: string
     type: $Enums.UserType
-    phoneNumber?: string | null
+    phone?: string | null
     accountStatus?: $Enums.AccountStatus
     verifiedAt?: Date | string | null
     lastSeenAt?: Date | string | null
@@ -43552,6 +45427,7 @@ export namespace Prisma {
     notifications?: NotificationCreateNestedManyWithoutUserInput
     credential?: CredentialCreateNestedOneWithoutUserInput
     wallet?: WalletCreateNestedOneWithoutUserInput
+    refreshTokens?: RefreshTokenCreateNestedManyWithoutUserInput
   }
 
   export type UserUncheckedCreateWithoutSchoolInput = {
@@ -43561,7 +45437,7 @@ export namespace Prisma {
     profileImage?: string | null
     email: string
     type: $Enums.UserType
-    phoneNumber?: string | null
+    phone?: string | null
     accountStatus?: $Enums.AccountStatus
     verifiedAt?: Date | string | null
     lastSeenAt?: Date | string | null
@@ -43575,6 +45451,7 @@ export namespace Prisma {
     notifications?: NotificationUncheckedCreateNestedManyWithoutUserInput
     credential?: CredentialUncheckedCreateNestedOneWithoutUserInput
     wallet?: WalletUncheckedCreateNestedOneWithoutUserInput
+    refreshTokens?: RefreshTokenUncheckedCreateNestedManyWithoutUserInput
   }
 
   export type UserCreateOrConnectWithoutSchoolInput = {
@@ -43901,7 +45778,7 @@ export namespace Prisma {
     profileImage?: NullableStringFieldUpdateOperationsInput | string | null
     email?: StringFieldUpdateOperationsInput | string
     type?: EnumUserTypeFieldUpdateOperationsInput | $Enums.UserType
-    phoneNumber?: NullableStringFieldUpdateOperationsInput | string | null
+    phone?: NullableStringFieldUpdateOperationsInput | string | null
     accountStatus?: EnumAccountStatusFieldUpdateOperationsInput | $Enums.AccountStatus
     verifiedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     lastSeenAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
@@ -43915,6 +45792,7 @@ export namespace Prisma {
     notifications?: NotificationUpdateManyWithoutUserNestedInput
     credential?: CredentialUpdateOneWithoutUserNestedInput
     wallet?: WalletUpdateOneWithoutUserNestedInput
+    refreshTokens?: RefreshTokenUpdateManyWithoutUserNestedInput
   }
 
   export type UserUncheckedUpdateWithoutSchoolInput = {
@@ -43924,7 +45802,7 @@ export namespace Prisma {
     profileImage?: NullableStringFieldUpdateOperationsInput | string | null
     email?: StringFieldUpdateOperationsInput | string
     type?: EnumUserTypeFieldUpdateOperationsInput | $Enums.UserType
-    phoneNumber?: NullableStringFieldUpdateOperationsInput | string | null
+    phone?: NullableStringFieldUpdateOperationsInput | string | null
     accountStatus?: EnumAccountStatusFieldUpdateOperationsInput | $Enums.AccountStatus
     verifiedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     lastSeenAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
@@ -43938,6 +45816,7 @@ export namespace Prisma {
     notifications?: NotificationUncheckedUpdateManyWithoutUserNestedInput
     credential?: CredentialUncheckedUpdateOneWithoutUserNestedInput
     wallet?: WalletUncheckedUpdateOneWithoutUserNestedInput
+    refreshTokens?: RefreshTokenUncheckedUpdateManyWithoutUserNestedInput
   }
 
   export type SchoolDirectorVerificationUpsertWithoutSchoolInput = {
@@ -44909,7 +46788,7 @@ export namespace Prisma {
     profileImage?: string | null
     email: string
     type: $Enums.UserType
-    phoneNumber?: string | null
+    phone?: string | null
     accountStatus?: $Enums.AccountStatus
     verifiedAt?: Date | string | null
     lastSeenAt?: Date | string | null
@@ -44923,6 +46802,7 @@ export namespace Prisma {
     notifications?: NotificationCreateNestedManyWithoutUserInput
     credential?: CredentialCreateNestedOneWithoutUserInput
     wallet?: WalletCreateNestedOneWithoutUserInput
+    refreshTokens?: RefreshTokenCreateNestedManyWithoutUserInput
   }
 
   export type UserUncheckedCreateWithoutSchoolAndPlatformLegalAgreementInput = {
@@ -44932,7 +46812,7 @@ export namespace Prisma {
     profileImage?: string | null
     email: string
     type: $Enums.UserType
-    phoneNumber?: string | null
+    phone?: string | null
     accountStatus?: $Enums.AccountStatus
     verifiedAt?: Date | string | null
     lastSeenAt?: Date | string | null
@@ -44946,6 +46826,7 @@ export namespace Prisma {
     notifications?: NotificationUncheckedCreateNestedManyWithoutUserInput
     credential?: CredentialUncheckedCreateNestedOneWithoutUserInput
     wallet?: WalletUncheckedCreateNestedOneWithoutUserInput
+    refreshTokens?: RefreshTokenUncheckedCreateNestedManyWithoutUserInput
   }
 
   export type UserCreateOrConnectWithoutSchoolAndPlatformLegalAgreementInput = {
@@ -45046,7 +46927,7 @@ export namespace Prisma {
     profileImage?: NullableStringFieldUpdateOperationsInput | string | null
     email?: StringFieldUpdateOperationsInput | string
     type?: EnumUserTypeFieldUpdateOperationsInput | $Enums.UserType
-    phoneNumber?: NullableStringFieldUpdateOperationsInput | string | null
+    phone?: NullableStringFieldUpdateOperationsInput | string | null
     accountStatus?: EnumAccountStatusFieldUpdateOperationsInput | $Enums.AccountStatus
     verifiedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     lastSeenAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
@@ -45060,6 +46941,7 @@ export namespace Prisma {
     notifications?: NotificationUpdateManyWithoutUserNestedInput
     credential?: CredentialUpdateOneWithoutUserNestedInput
     wallet?: WalletUpdateOneWithoutUserNestedInput
+    refreshTokens?: RefreshTokenUpdateManyWithoutUserNestedInput
   }
 
   export type UserUncheckedUpdateWithoutSchoolAndPlatformLegalAgreementInput = {
@@ -45069,7 +46951,7 @@ export namespace Prisma {
     profileImage?: NullableStringFieldUpdateOperationsInput | string | null
     email?: StringFieldUpdateOperationsInput | string
     type?: EnumUserTypeFieldUpdateOperationsInput | $Enums.UserType
-    phoneNumber?: NullableStringFieldUpdateOperationsInput | string | null
+    phone?: NullableStringFieldUpdateOperationsInput | string | null
     accountStatus?: EnumAccountStatusFieldUpdateOperationsInput | $Enums.AccountStatus
     verifiedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     lastSeenAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
@@ -45083,6 +46965,7 @@ export namespace Prisma {
     notifications?: NotificationUncheckedUpdateManyWithoutUserNestedInput
     credential?: CredentialUncheckedUpdateOneWithoutUserNestedInput
     wallet?: WalletUncheckedUpdateOneWithoutUserNestedInput
+    refreshTokens?: RefreshTokenUncheckedUpdateManyWithoutUserNestedInput
   }
 
   export type SchoolCreateWithoutClassesInput = {
@@ -47609,7 +49492,7 @@ export namespace Prisma {
     profileImage?: string | null
     email: string
     type: $Enums.UserType
-    phoneNumber?: string | null
+    phone?: string | null
     accountStatus?: $Enums.AccountStatus
     verifiedAt?: Date | string | null
     lastSeenAt?: Date | string | null
@@ -47623,6 +49506,7 @@ export namespace Prisma {
     schoolAndPlatformLegalAgreement?: SchoolAndPlatformLegalAgreementCreateNestedOneWithoutSignedByInput
     credential?: CredentialCreateNestedOneWithoutUserInput
     wallet?: WalletCreateNestedOneWithoutUserInput
+    refreshTokens?: RefreshTokenCreateNestedManyWithoutUserInput
   }
 
   export type UserUncheckedCreateWithoutNotificationsInput = {
@@ -47632,7 +49516,7 @@ export namespace Prisma {
     profileImage?: string | null
     email: string
     type: $Enums.UserType
-    phoneNumber?: string | null
+    phone?: string | null
     accountStatus?: $Enums.AccountStatus
     verifiedAt?: Date | string | null
     lastSeenAt?: Date | string | null
@@ -47646,6 +49530,7 @@ export namespace Prisma {
     schoolAndPlatformLegalAgreement?: SchoolAndPlatformLegalAgreementUncheckedCreateNestedOneWithoutSignedByInput
     credential?: CredentialUncheckedCreateNestedOneWithoutUserInput
     wallet?: WalletUncheckedCreateNestedOneWithoutUserInput
+    refreshTokens?: RefreshTokenUncheckedCreateNestedManyWithoutUserInput
   }
 
   export type UserCreateOrConnectWithoutNotificationsInput = {
@@ -47671,7 +49556,7 @@ export namespace Prisma {
     profileImage?: NullableStringFieldUpdateOperationsInput | string | null
     email?: StringFieldUpdateOperationsInput | string
     type?: EnumUserTypeFieldUpdateOperationsInput | $Enums.UserType
-    phoneNumber?: NullableStringFieldUpdateOperationsInput | string | null
+    phone?: NullableStringFieldUpdateOperationsInput | string | null
     accountStatus?: EnumAccountStatusFieldUpdateOperationsInput | $Enums.AccountStatus
     verifiedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     lastSeenAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
@@ -47685,6 +49570,7 @@ export namespace Prisma {
     schoolAndPlatformLegalAgreement?: SchoolAndPlatformLegalAgreementUpdateOneWithoutSignedByNestedInput
     credential?: CredentialUpdateOneWithoutUserNestedInput
     wallet?: WalletUpdateOneWithoutUserNestedInput
+    refreshTokens?: RefreshTokenUpdateManyWithoutUserNestedInput
   }
 
   export type UserUncheckedUpdateWithoutNotificationsInput = {
@@ -47694,7 +49580,7 @@ export namespace Prisma {
     profileImage?: NullableStringFieldUpdateOperationsInput | string | null
     email?: StringFieldUpdateOperationsInput | string
     type?: EnumUserTypeFieldUpdateOperationsInput | $Enums.UserType
-    phoneNumber?: NullableStringFieldUpdateOperationsInput | string | null
+    phone?: NullableStringFieldUpdateOperationsInput | string | null
     accountStatus?: EnumAccountStatusFieldUpdateOperationsInput | $Enums.AccountStatus
     verifiedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     lastSeenAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
@@ -47708,6 +49594,7 @@ export namespace Prisma {
     schoolAndPlatformLegalAgreement?: SchoolAndPlatformLegalAgreementUncheckedUpdateOneWithoutSignedByNestedInput
     credential?: CredentialUncheckedUpdateOneWithoutUserNestedInput
     wallet?: WalletUncheckedUpdateOneWithoutUserNestedInput
+    refreshTokens?: RefreshTokenUncheckedUpdateManyWithoutUserNestedInput
   }
 
   export type UserCreateWithoutWalletInput = {
@@ -47717,7 +49604,7 @@ export namespace Prisma {
     profileImage?: string | null
     email: string
     type: $Enums.UserType
-    phoneNumber?: string | null
+    phone?: string | null
     accountStatus?: $Enums.AccountStatus
     verifiedAt?: Date | string | null
     lastSeenAt?: Date | string | null
@@ -47731,6 +49618,7 @@ export namespace Prisma {
     schoolAndPlatformLegalAgreement?: SchoolAndPlatformLegalAgreementCreateNestedOneWithoutSignedByInput
     notifications?: NotificationCreateNestedManyWithoutUserInput
     credential?: CredentialCreateNestedOneWithoutUserInput
+    refreshTokens?: RefreshTokenCreateNestedManyWithoutUserInput
   }
 
   export type UserUncheckedCreateWithoutWalletInput = {
@@ -47740,7 +49628,7 @@ export namespace Prisma {
     profileImage?: string | null
     email: string
     type: $Enums.UserType
-    phoneNumber?: string | null
+    phone?: string | null
     accountStatus?: $Enums.AccountStatus
     verifiedAt?: Date | string | null
     lastSeenAt?: Date | string | null
@@ -47754,6 +49642,7 @@ export namespace Prisma {
     schoolAndPlatformLegalAgreement?: SchoolAndPlatformLegalAgreementUncheckedCreateNestedOneWithoutSignedByInput
     notifications?: NotificationUncheckedCreateNestedManyWithoutUserInput
     credential?: CredentialUncheckedCreateNestedOneWithoutUserInput
+    refreshTokens?: RefreshTokenUncheckedCreateNestedManyWithoutUserInput
   }
 
   export type UserCreateOrConnectWithoutWalletInput = {
@@ -47861,7 +49750,7 @@ export namespace Prisma {
     profileImage?: NullableStringFieldUpdateOperationsInput | string | null
     email?: StringFieldUpdateOperationsInput | string
     type?: EnumUserTypeFieldUpdateOperationsInput | $Enums.UserType
-    phoneNumber?: NullableStringFieldUpdateOperationsInput | string | null
+    phone?: NullableStringFieldUpdateOperationsInput | string | null
     accountStatus?: EnumAccountStatusFieldUpdateOperationsInput | $Enums.AccountStatus
     verifiedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     lastSeenAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
@@ -47875,6 +49764,7 @@ export namespace Prisma {
     schoolAndPlatformLegalAgreement?: SchoolAndPlatformLegalAgreementUpdateOneWithoutSignedByNestedInput
     notifications?: NotificationUpdateManyWithoutUserNestedInput
     credential?: CredentialUpdateOneWithoutUserNestedInput
+    refreshTokens?: RefreshTokenUpdateManyWithoutUserNestedInput
   }
 
   export type UserUncheckedUpdateWithoutWalletInput = {
@@ -47884,7 +49774,7 @@ export namespace Prisma {
     profileImage?: NullableStringFieldUpdateOperationsInput | string | null
     email?: StringFieldUpdateOperationsInput | string
     type?: EnumUserTypeFieldUpdateOperationsInput | $Enums.UserType
-    phoneNumber?: NullableStringFieldUpdateOperationsInput | string | null
+    phone?: NullableStringFieldUpdateOperationsInput | string | null
     accountStatus?: EnumAccountStatusFieldUpdateOperationsInput | $Enums.AccountStatus
     verifiedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     lastSeenAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
@@ -47898,6 +49788,7 @@ export namespace Prisma {
     schoolAndPlatformLegalAgreement?: SchoolAndPlatformLegalAgreementUncheckedUpdateOneWithoutSignedByNestedInput
     notifications?: NotificationUncheckedUpdateManyWithoutUserNestedInput
     credential?: CredentialUncheckedUpdateOneWithoutUserNestedInput
+    refreshTokens?: RefreshTokenUncheckedUpdateManyWithoutUserNestedInput
   }
 
   export type LedgerUpsertWithWhereUniqueWithoutWalletInput = {
@@ -48115,9 +50006,11 @@ export namespace Prisma {
 
   export type VerificationCreateManyUserInput = {
     id?: string
+    type: $Enums.VerificationType
     code: string
     expiresAt: Date | string
     resendCount?: number
+    used?: boolean
     isDeleted?: boolean
     createdAt?: Date | string
     updatedAt?: Date | string
@@ -48134,11 +50027,23 @@ export namespace Prisma {
     updatedAt?: Date | string
   }
 
+  export type RefreshTokenCreateManyUserInput = {
+    id?: string
+    token: string
+    expiresAt: Date | string
+    revoked?: boolean
+    isDeleted?: boolean
+    updatedAt?: Date | string
+    createdAt?: Date | string
+  }
+
   export type VerificationUpdateWithoutUserInput = {
     id?: StringFieldUpdateOperationsInput | string
+    type?: EnumVerificationTypeFieldUpdateOperationsInput | $Enums.VerificationType
     code?: StringFieldUpdateOperationsInput | string
     expiresAt?: DateTimeFieldUpdateOperationsInput | Date | string
     resendCount?: IntFieldUpdateOperationsInput | number
+    used?: BoolFieldUpdateOperationsInput | boolean
     isDeleted?: BoolFieldUpdateOperationsInput | boolean
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
@@ -48146,9 +50051,11 @@ export namespace Prisma {
 
   export type VerificationUncheckedUpdateWithoutUserInput = {
     id?: StringFieldUpdateOperationsInput | string
+    type?: EnumVerificationTypeFieldUpdateOperationsInput | $Enums.VerificationType
     code?: StringFieldUpdateOperationsInput | string
     expiresAt?: DateTimeFieldUpdateOperationsInput | Date | string
     resendCount?: IntFieldUpdateOperationsInput | number
+    used?: BoolFieldUpdateOperationsInput | boolean
     isDeleted?: BoolFieldUpdateOperationsInput | boolean
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
@@ -48156,9 +50063,11 @@ export namespace Prisma {
 
   export type VerificationUncheckedUpdateManyWithoutUserInput = {
     id?: StringFieldUpdateOperationsInput | string
+    type?: EnumVerificationTypeFieldUpdateOperationsInput | $Enums.VerificationType
     code?: StringFieldUpdateOperationsInput | string
     expiresAt?: DateTimeFieldUpdateOperationsInput | Date | string
     resendCount?: IntFieldUpdateOperationsInput | number
+    used?: BoolFieldUpdateOperationsInput | boolean
     isDeleted?: BoolFieldUpdateOperationsInput | boolean
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
@@ -48195,6 +50104,36 @@ export namespace Prisma {
     isDeleted?: BoolFieldUpdateOperationsInput | boolean
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type RefreshTokenUpdateWithoutUserInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    token?: StringFieldUpdateOperationsInput | string
+    expiresAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    revoked?: BoolFieldUpdateOperationsInput | boolean
+    isDeleted?: BoolFieldUpdateOperationsInput | boolean
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type RefreshTokenUncheckedUpdateWithoutUserInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    token?: StringFieldUpdateOperationsInput | string
+    expiresAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    revoked?: BoolFieldUpdateOperationsInput | boolean
+    isDeleted?: BoolFieldUpdateOperationsInput | boolean
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type RefreshTokenUncheckedUpdateManyWithoutUserInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    token?: StringFieldUpdateOperationsInput | string
+    expiresAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    revoked?: BoolFieldUpdateOperationsInput | boolean
+    isDeleted?: BoolFieldUpdateOperationsInput | boolean
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
   }
 
   export type InvoiceCreateManyGuardianInput = {

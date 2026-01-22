@@ -2,9 +2,9 @@ import { Inject, Injectable } from '@nestjs/common';
 import authConfig from './configs/auth.config';
 import { ConfigType } from '@nestjs/config';
 import { JwtService } from '@nestjs/jwt';
-import { AppError } from '@sabiflow/common/utils/error-handler.util';
+import { AppError } from '@Blithe/common/utils/error-handler.util';
 import { AuthChallengeType } from './auth.type';
-import { PrismaService } from '@sabiflow/database/prisma.service';
+import { PrismaService } from '../database/prisma.service';
 
 @Injectable()
 export class TokenService {
@@ -25,13 +25,13 @@ export class TokenService {
     const refreshToken = this.generateRefreshToken(userId);
 
     // Invalidate any tokens that the user had then before issuing new tokens
-    await this.prisma.credential.updateMany({
+    await this.prisma.refreshToken.updateMany({
       where: { userId, isDeleted: false },
       data: { revoked: true },
     });
 
     // save refresh token in the database
-    await this.prisma.credential.create({
+    await this.prisma.refreshToken.create({
       data: {
         userId,
         token: refreshToken,
@@ -53,7 +53,7 @@ export class TokenService {
    */
   async rotateTokens(oldRefreshToken: string) {
     // Validate the old refresh token
-    const existingToken = await this.prisma.credential.findFirst({
+    const existingToken = await this.prisma.refreshToken.findFirst({
       where: { token: oldRefreshToken, isDeleted: false },
     });
     if (!existingToken || existingToken.revoked) {
@@ -67,7 +67,7 @@ export class TokenService {
       });
     } catch (error) {
       // revoke the token if it fails verification
-      await this.prisma.credential.updateMany({
+      await this.prisma.refreshToken.updateMany({
         where: { token: oldRefreshToken, isDeleted: false },
         data: { revoked: true },
       });
@@ -81,7 +81,7 @@ export class TokenService {
     }
 
     // Invalidate the old refresh token
-    await this.prisma.credential.updateMany({
+    await this.prisma.refreshToken.updateMany({
       where: { token: oldRefreshToken, isDeleted: false },
       data: { revoked: true },
     });
@@ -91,7 +91,7 @@ export class TokenService {
     const newRefreshToken = this.generateRefreshToken(userId);
 
     // Save the new refresh token in the database
-    await this.prisma.credential.create({
+    await this.prisma.refreshToken.create({
       data: {
         userId,
         token: newRefreshToken,
@@ -115,8 +115,8 @@ export class TokenService {
    * @param userId The user ID
    * @returns Number of tokens revoked
    */
-  async revokeUserTokens(userId: string) {
-    return this.prisma.credential.updateMany({
+  revokeUserTokens(userId: string) {
+    return this.prisma.refreshToken.updateMany({
       where: { userId, isDeleted: false },
       data: { revoked: true },
     });

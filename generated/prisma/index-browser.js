@@ -127,7 +127,7 @@ exports.Prisma.UserScalarFieldEnum = {
   profileImage: 'profileImage',
   email: 'email',
   type: 'type',
-  phoneNumber: 'phoneNumber',
+  phone: 'phone',
   accountStatus: 'accountStatus',
   verifiedAt: 'verifiedAt',
   lastSeenAt: 'lastSeenAt',
@@ -141,9 +141,22 @@ exports.Prisma.CredentialScalarFieldEnum = {
   userId: 'userId',
   password: 'password',
   pinCode: 'pinCode',
+  lastResetAt: 'lastResetAt',
+  lastUsedAt: 'lastUsedAt',
   isDeleted: 'isDeleted',
   createdAt: 'createdAt',
   updatedAt: 'updatedAt'
+};
+
+exports.Prisma.RefreshTokenScalarFieldEnum = {
+  id: 'id',
+  userId: 'userId',
+  token: 'token',
+  expiresAt: 'expiresAt',
+  revoked: 'revoked',
+  isDeleted: 'isDeleted',
+  updatedAt: 'updatedAt',
+  createdAt: 'createdAt'
 };
 
 exports.Prisma.AdministratorScalarFieldEnum = {
@@ -170,9 +183,11 @@ exports.Prisma.GuardianScalarFieldEnum = {
 exports.Prisma.VerificationScalarFieldEnum = {
   id: 'id',
   userId: 'userId',
+  type: 'type',
   code: 'code',
   expiresAt: 'expiresAt',
   resendCount: 'resendCount',
+  used: 'used',
   isDeleted: 'isDeleted',
   createdAt: 'createdAt',
   updatedAt: 'updatedAt'
@@ -451,14 +466,21 @@ exports.Prisma.NullsOrder = {
 };
 exports.UserType = exports.$Enums.UserType = {
   administrator: 'administrator',
-  gaurdiant: 'gaurdiant',
+  guardian: 'guardian',
   school: 'school'
 };
 
 exports.AccountStatus = exports.$Enums.AccountStatus = {
   active: 'active',
   suspended: 'suspended',
-  blocked: 'blocked'
+  blocked: 'blocked',
+  deleted: 'deleted'
+};
+
+exports.VerificationType = exports.$Enums.VerificationType = {
+  account_activation: 'account_activation',
+  password_reset: 'password_reset',
+  pin_code_reset: 'pin_code_reset'
 };
 
 exports.SchoolType = exports.$Enums.SchoolType = {
@@ -531,6 +553,7 @@ exports.WalletStatus = exports.$Enums.WalletStatus = {
 exports.Prisma.ModelName = {
   User: 'User',
   Credential: 'Credential',
+  RefreshToken: 'RefreshToken',
   Administrator: 'Administrator',
   Guardian: 'Guardian',
   Verification: 'Verification',

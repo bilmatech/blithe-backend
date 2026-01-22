@@ -1,0 +1,8 @@
+PATCH {{ baseUrl }}/api/v1/account/profile
+Content-Type: application/json
+Authorization: Bearer {{ accessToken }}
+{
+    "firstName": "Obi",
+    "lastName": "Pascal",
+    "phone": "+2348012345678"     
+}

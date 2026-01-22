@@ -1,32 +1,29 @@
 import {
   BadRequestException,
-  forwardRef,
   Inject,
   Injectable,
   InternalServerErrorException,
   UnauthorizedException,
 } from '@nestjs/common';
-import { CreateAuthDto } from './dto/create-auth.dto';
+import { CreateAuthUserDto } from './dto/create-auth-user.dto';
 import { TokenService } from './token.service';
-import { FirebaseService } from '@sabiflow/common/firebase/firebase.service';
-import { AppError } from '@sabiflow/common/utils/error-handler.util';
-import { AccountService } from '@sabiflow/account/account.service';
-import { DecodedIdToken } from 'firebase-admin/lib/auth/token-verifier';
-import { CreateAccountDto } from '@sabiflow/account/dto/create-account.dto';
-import { AccountStatus } from '@DB/Client';
-import { NotificationEmitterService } from '@sabiflow/notifications/notification-emitter.service';
-import { ApppinService } from '@sabiflow/account/apppin.service';
+import { AppError } from '@Blithe/common/utils/error-handler.util';
+import { UserType, VerificationType } from '@DB/Client';
 import { AuthChallengeType } from './auth.type';
 import * as Sentry from '@sentry/nestjs';
-import { SecurityService } from '@sabiflow/security/security.service';
-import { generateDeviceSignature } from '@sabiflow/common/utils/device-signature.util';
 import authConfig from './configs/auth.config';
 import { ConfigType } from '@nestjs/config';
-import { VerificationService } from '@sabiflow/verification/verification.service';
-import { Request } from 'express';
-import { WalletEmitterService } from '@sabiflow/wallet/wallet-emitter.service';
-import appConfig from '@sabiflow/common/config/app.config';
-import { FirebaseMessagingService } from '@sabiflow/firebase-messaging/firebase-messaging.service';
+import { VerificationService } from '@Blithe/services/verification/verification.service';
+import appConfig from '@Blithe/common/config/app.config';
+import { AccountService } from '../account/account.service';
+import { CredentialsService } from '../account/credentials.service';
+import { ForgotPasswordDto } from './dto/forgot-password.dto';
+import { VerificationCodeDto } from '../account/dto/verificaiton-code.dto';
+import { NotificationType } from '../notifications/queue/notification.queue';
+import { ResendCodeDto } from './dto/resend-code.dto';
+import { maskEmail } from '@Blithe/common/utils/funcs.util';
+import { EncryptionService } from '../encryption/encryption.service';
+import { ResetPasswordDto } from '../account/dto/reset-password.dto';
 
 @Injectable()
 export class AuthService {
@@ -34,168 +31,274 @@ export class AuthService {
     @Inject(authConfig.KEY)
     private readonly config: ConfigType<typeof authConfig>,
     @Inject(appConfig.KEY)
-    private readonly appConfigs: ConfigType<typeof appConfig>,
     private readonly tokenService: TokenService,
-    private readonly firebaseService: FirebaseService,
     private readonly accountService: AccountService,
-    private readonly appPinService: ApppinService,
-    private readonly notificationEmitterService: NotificationEmitterService,
-    @Inject(forwardRef(() => SecurityService))
-    private readonly securityService: SecurityService,
+    private readonly credentialsService: CredentialsService,
     private readonly verificationService: VerificationService,
-    private readonly walletEmitterService: WalletEmitterService,
-    private readonly firebaseMessagingSvc: FirebaseMessagingService,
+    private readonly encryptionService: EncryptionService,
   ) {}
 
   /**
-   * Create or authorize a user using their Firebase ID token.
-   * @param createAuthDto The user create account data
-   * @returns The authorized user and their credentials.
+   * Create a new user account along with credentials and send verification code.
+   * @param createAccountDto Data transfer object containing user account details
+   * @param type The type of user account to create
+   * @returns The newly created user account
    */
-  async authorize(createAuthDto: CreateAuthDto, req: Request) {
+  async createAccount(createAccountDto: CreateAuthUserDto, type: UserType) {
     try {
-      // Gather client info from request
-      const clientIp =
-        req.ip ||
-        req.headers['x-forwarded-for'] ||
-        req.socket.remoteAddress ||
-        null;
-      const userAgent = req.headers['user-agent'] || null;
+      const newUser = await this.accountService.create(createAccountDto, type);
 
-      // Update DTO with client info
-      createAuthDto.deviceInfo.ip = clientIp as string;
-      createAuthDto.deviceInfo.userAgent = userAgent as string;
-
-      // Verify the Firebase ID token
-      const decodedToken = await this.firebaseService.verifyIdToken(
-        createAuthDto.idToken,
+      // Create user credentials
+      await this.credentialsService.setPassword(
+        newUser.id,
+        createAccountDto.password,
       );
 
-      // Get user email
-      const email = decodedToken.email as string;
-      if (!email) throw new AppError('Invalid user Id token.');
-
-      // The user expected credentials
-      const authCredentials: {
-        user: any;
-        credential: any;
-        isNewUser: boolean;
-      } = {
-        user: null,
-        credential: null,
-        isNewUser: false,
-      };
-
-      // check if the user already exist
-      const userExist = await this.accountService.findByEmail(email);
-      if (userExist) {
-        // Make sure the user is not deleted
-        if (
-          userExist.accountStatus === AccountStatus.Deleted ||
-          userExist.isDeleted
-        ) {
-          throw new UnauthorizedException(
-            this.appConfigs.accountDeletedMessage,
-          );
-        }
-
-        // Authorize user and issue new access tokens.
-        const credential = await this.tokenService.issueTokens(userExist.id);
-
-        // Update user's last seen
-        const now = new Date();
-        const updatedUser = await this.accountService.update(userExist.id, {
-          lastSeen: now,
-        });
-        // Return the user and their credentials
-        authCredentials.user = updatedUser;
-        authCredentials.credential = credential;
-
-        if (!(await this.appPinService.hasPin(userExist.id))) {
-          // If user does not have an app PIN, set isNewUser to true
-          authCredentials.isNewUser = true;
-        } else {
-          authCredentials.isNewUser = false;
-        }
-      } else {
-        // If user does not exist, create a new user account
-        const user = await this.handleUserSignUp(createAuthDto, decodedToken);
-        if (!user) throw new AppError('Unable to create user account.');
-
-        // Emit user wallet creation
-        await this.walletEmitterService.emitCreateWalletJob(user.id);
-
-        // Emit user created event
-        await this.notificationEmitterService.emitUserCreatedEvent(
-          `${user.firstName} ${user.lastName}`,
-          user.email,
-        );
-
-        // Issue access and refresh tokens
-        const credential = await this.tokenService.issueTokens(user.id);
-        authCredentials.user = user;
-        authCredentials.credential = credential;
-
-        authCredentials.isNewUser = true;
-      }
-
-      // Validate user device registration
-      const deviceSig = this.generateDeviceSignature(createAuthDto.deviceInfo);
-
-      // Get the user existing device
-      const currentRegisteredDevice = await this.securityService.getDevice(
-        authCredentials.user.id,
+      // Send verification code
+      await this.verificationService.sendVerificationCode(
+        newUser.id,
+        newUser.email,
+        VerificationType.account_activation,
+        NotificationType.AccountVerification,
       );
 
-      const isTrusted = await this.securityService.isDeviceTrusted(
-        authCredentials.user.id,
-        deviceSig,
-      );
-
-      // If device is not trusted, register it
-      if (!currentRegisteredDevice && !isTrusted) {
-        await this.securityService.registerDevice({
-          userId: authCredentials.user.id,
-          deviceSig: deviceSig,
-          deviceInfo: createAuthDto.deviceInfo,
-          isTrusted: true, // By default, mark new device as trusted
-          deviceName: createAuthDto.deviceInfo.deviceName,
-          platform: createAuthDto.deviceInfo.platform,
-          lastActive: new Date(),
-        });
-      }
-
-      // if device exist, but not trusted throw an access forbidden error
-      if (currentRegisteredDevice && !isTrusted) {
-        // Emit verify device event
-        await this.verificationService.createDeviceVerification(
-          authCredentials.user,
-          createAuthDto.deviceInfo,
-          'New device sign-in verification',
-        );
-
-        // Throw an unauthorized exception
-        throw new UnauthorizedException(
-          'Access from untrusted device. Please verify your device to continue.',
-        );
-      }
-
-      // If FCM token is provided, save or update it
-      if (createAuthDto.fcmToken) {
-        await this.firebaseMessagingSvc.create(
-          authCredentials.user.id,
-          createAuthDto.fcmToken,
-        );
-      }
-
-      return authCredentials;
+      return newUser;
     } catch (error) {
       if (error instanceof AppError) {
         throw new BadRequestException(error.message, { cause: error });
       }
 
-      if (error instanceof UnauthorizedException) {
-        throw error;
+      throw new InternalServerErrorException(
+        "We couldn't process your request at the moment. Please try again later.",
+        { cause: error },
+      );
+    }
+  }
+
+  async resendAccountVerificationCode(resendCodeDto: ResendCodeDto) {
+    try {
+      const account = await this.accountService.findByEmail(
+        resendCodeDto.email,
+      );
+      if (!account) {
+        throw new AppError(
+          'Sorry, we could not find an account with that email address.',
+        );
+      }
+
+      // if email verified, no need to resend code
+      if (account.verifiedAt) {
+        throw new AppError('This account is already verified.');
+      }
+
+      // Send verification code
+      await this.verificationService.sendVerificationCode(
+        account.id,
+        account.email,
+        VerificationType.account_activation,
+        NotificationType.AccountVerification,
+      );
+
+      return {
+        message: `A new verification code has been sent to ${maskEmail(account.email)}`,
+      };
+    } catch (error) {
+      if (error instanceof AppError) {
+        throw new BadRequestException(error.message, { cause: error });
+      }
+
+      throw new InternalServerErrorException(
+        "We couldn't process your request at the moment. Please try again later.",
+        { cause: error },
+      );
+    }
+  }
+
+  /**
+   * Verify user account using the provided verification code.
+   * @param verificationCodeDto The verification code sent to the user
+   * @returns Auth tokens and user information upon successful verification
+   */
+  async verifyAccount(verificationCodeDto: VerificationCodeDto) {
+    try {
+      // Verify user account and generate tokens
+      const verification = await this.verificationService.verifyCode(
+        verificationCodeDto.code,
+      );
+      if (!verification.valid) throw new AppError('Invalid verification code.');
+
+      // Generate auth tokens
+      const tokenInfo = await this.tokenService.issueTokens(
+        verification.user.id,
+      );
+
+      // TODO: Initialize other user account services here (e.g., wallet)
+
+      return { tokens: tokenInfo, user: verification.user };
+    } catch (error) {
+      if (error instanceof AppError) {
+        throw new BadRequestException(error.message, { cause: error });
+      }
+
+      throw new InternalServerErrorException(
+        "We couldn't process your request at the moment. Please try again later.",
+        { cause: error },
+      );
+    }
+  }
+
+  /**
+   * Initiate the forgot password process by sending a reset code to the user's email.
+   * @param forgotPasswordDto The DTO containing the user's email
+   * @returns A message indicating that the reset code has been sent
+   */
+  async forgotPassword(forgotPasswordDto: ForgotPasswordDto) {
+    try {
+      // Verify that the email exists
+      const account = await this.accountService.findByEmail(
+        forgotPasswordDto.email,
+      );
+      if (!account) {
+        throw new AppError(
+          'Sorry, we could not find an account with that email address.',
+        );
+      }
+
+      // Send password reset verification code
+      await this.verificationService.sendVerificationCode(
+        account.id,
+        account.email,
+        VerificationType.password_reset,
+        NotificationType.ForgotPassword,
+      );
+
+      return {
+        message: `A reset code has been sent to ${maskEmail(account.email)}`,
+      };
+    } catch (error) {
+      if (error instanceof AppError) {
+        throw new BadRequestException(error.message, { cause: error });
+      }
+
+      throw new InternalServerErrorException(
+        "We couldn't process your request at the moment. Please try again later.",
+        { cause: error },
+      );
+    }
+  }
+
+  /**
+   * Resend the password reset code to the user's email.
+   * @param resendCodeDto The DTO containing the user's email
+   * @returns A message indicating that the new reset code has been sent
+   */
+  async resendPasswordResetCode(resendCodeDto: ResendCodeDto) {
+    try {
+      const account = await this.accountService.findByEmail(
+        resendCodeDto.email,
+      );
+      if (!account) {
+        throw new AppError(
+          'Sorry, we could not find an account with that email address.',
+        );
+      }
+
+      // Send password reset verification code
+      await this.verificationService.sendVerificationCode(
+        account.id,
+        account.email,
+        VerificationType.password_reset,
+        NotificationType.ForgotPassword,
+      );
+
+      return {
+        message: `A new reset code has been sent to ${maskEmail(account.email)}`,
+      };
+    } catch (error) {
+      if (error instanceof AppError) {
+        throw new BadRequestException(error.message, { cause: error });
+      }
+
+      throw new InternalServerErrorException(
+        "We couldn't process your request at the moment. Please try again later.",
+        { cause: error },
+      );
+    }
+  }
+
+  /**
+   * Verify the password reset code and issue a reset token.
+   * @param verificationCodeDto The DTO containing the reset code
+   * @returns A reset token valid for a limited time
+   */
+  async verifyPasswordResetCode(verificationCodeDto: VerificationCodeDto) {
+    try {
+      // Verify password reset code
+      const verification = await this.verificationService.verifyCode(
+        verificationCodeDto.code,
+      );
+      if (!verification.valid) throw new AppError('Invalid verification code.');
+
+      // Reset token expires after 10 minutes delay
+      const resetTokenExpiresAt = new Date();
+      resetTokenExpiresAt.setMinutes(resetTokenExpiresAt.getMinutes() + 10);
+
+      const resetToken = this.encryptionService.encrypt(
+        JSON.stringify({
+          userId: verification.user.id,
+          code: verificationCodeDto.code,
+          expiresAt: resetTokenExpiresAt.toISOString(),
+        }),
+      );
+
+      return resetToken;
+    } catch (error) {
+      if (error instanceof AppError) {
+        throw new BadRequestException(error.message, { cause: error });
+      }
+
+      throw new InternalServerErrorException(
+        "We couldn't process your request at the moment. Please try again later.",
+        { cause: error },
+      );
+    }
+  }
+
+  /**
+   * Reset user password using the provided reset token and new password.
+   * @param resetPasswordDto The DTO containing the reset token and new password
+   * @returns A message indicating successful password reset
+   */
+  async resetPassword(resetPasswordDto: ResetPasswordDto) {
+    try {
+      const { token, newPassword } = resetPasswordDto;
+
+      // Decrypt and validate reset token
+      const decryptedToken = this.encryptionService.decrypt(token);
+      const { userId, code, expiresAt } = JSON.parse(decryptedToken);
+
+      // User must have verified the reset code before resetting password
+      const verification = await this.verificationService.findOne(code);
+      if (!verification || verification.used == false) {
+        throw new AppError(
+          'Sorry, kindly verify the reset code before resetting password.',
+        );
+      }
+
+      // Check if reset token has expired
+      if (new Date(expiresAt) < new Date()) {
+        throw new AppError(
+          'Reset token has expired. Please restart the password reset process.',
+        );
+      }
+
+      // Update user password
+      await this.credentialsService.setPassword(userId, newPassword);
+
+      return { message: 'Password has been reset successfully.' };
+    } catch (error) {
+      if (error instanceof AppError) {
+        throw new BadRequestException(error.message, { cause: error });
       }
 
       throw new InternalServerErrorException(
@@ -249,13 +352,13 @@ export class AuthService {
   }
 
   /**
-   *  Verify user app PIN and issue a PIN challenge token.
+   *  Verify user PIN and issue a PIN challenge token.
    * @param userId The user Id
    * @param pin The user  app PIN
    */
-  async verifyAppPin(userId: string, pin: string) {
+  async verifyPin(userId: string, pin: string) {
     try {
-      const isVerified = await this.appPinService.verifyAppPin(
+      const isVerified = await this.credentialsService.verifyPin(
         userId,
         pin.toString(),
       );
@@ -308,56 +411,4 @@ export class AuthService {
   // ---------------------------------------------------------
   // ||                 HELPERS                             ||
   // ---------------------------------------------------------
-
-  /**
-   * Handle user sign up by creating a new account.
-   * @param createAuthDto The account sign up data
-   * @param decodedToken The decoded token
-   * @returns The newly sign up user.
-   */
-  private handleUserSignUp(
-    createAuthDto: CreateAuthDto,
-    decodedToken: DecodedIdToken,
-  ) {
-    // Get user info
-    const email = decodedToken.email as string;
-    const phone = decodedToken.phone_number;
-    const names = decodedToken.name || null;
-    const picture = decodedToken.picture;
-
-    // format first & last names
-    let firstName = undefined;
-    let lastName = undefined;
-    if (names) {
-      const nameParts = names.split(' ');
-      firstName = nameParts[0];
-      lastName = nameParts.length > 1 ? nameParts.slice(1).join(' ') : null;
-    }
-
-    const createAccountDto: CreateAccountDto = {
-      accountType: createAuthDto.accountType,
-      accountStatus: AccountStatus.Active,
-      firstName,
-      lastName,
-      phone,
-      picture,
-      email,
-      lastSeen: new Date(),
-      // TODO: Implement the referer code validation and pass the referer here.
-    };
-
-    return this.accountService.create(createAccountDto);
-  }
-
-  /**
-   * Generate a device signature based on device info.
-   * @param deviceInfo The device information
-   * @returns The generated device signature
-   */
-  generateDeviceSignature(deviceInfo: CreateAuthDto['deviceInfo']) {
-    return generateDeviceSignature(
-      deviceInfo,
-      this.config.deviceSignatureSecret,
-    );
-  }
 }

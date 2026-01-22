@@ -1,0 +1,6 @@
+POST {{ baseUrl }}/api/v1/account/set_app_pin
+Authorization: Bearer {{ accessToken}}
+Content-Type: application/json
+{
+    "pin": 1234
+}
