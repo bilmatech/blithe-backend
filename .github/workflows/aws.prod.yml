@@ -1,0 +1,107 @@
+# This workflow will build and push a new container image to Amazon ECR,
+# and then will deploy a new task definition to Amazon ECS, when there is a push to the "main" branch.
+#
+# To use this workflow, you will need to complete the following set-up steps:
+#
+# 1. Create an ECR repository to store your images.
+#    For example: `aws ecr create-repository --repository-name my-ecr-repo --region us-east-2`.
+#    Replace the value of the `ECR_REPOSITORY` environment variable in the workflow below with your repository's name.
+#    Replace the value of the `AWS_REGION` environment variable in the workflow below with your repository's region.
+#
+# 2. Create an ECS task definition, an ECS cluster, and an ECS service.
+#    For example, follow the Getting Started guide on the ECS console:
+#      https://us-east-2.console.aws.amazon.com/ecs/home?region=us-east-2#/firstRun
+#    Replace the value of the `ECS_SERVICE` environment variable in the workflow below with the name you set for the Amazon ECS service.
+#    Replace the value of the `ECS_CLUSTER` environment variable in the workflow below with the name you set for the cluster.
+#
+# 3. Store your ECS task definition as a JSON file in your repository.
+#    The format should follow the output of `aws ecs register-task-definition --generate-cli-skeleton`.
+#    Replace the value of the `ECS_TASK_DEFINITION` environment variable in the workflow below with the path to the JSON file.
+#    Replace the value of the `CONTAINER_NAME` environment variable in the workflow below with the name of the container
+#    in the `containerDefinitions` section of the task definition.
+#
+# 4. Store an IAM user access key in GitHub Actions secrets named `AWS_ACCESS_KEY_ID` and `AWS_SECRET_ACCESS_KEY`.
+#    See the documentation for each action used below for the recommended IAM policies for this IAM user,
+#    and best practices on handling the access key credentials.
+
+name: Deploy to Amazon ECS
+
+on:
+  push:
+    branches: ["production"]
+
+env:
+  AWS_REGION: ${{ vars.AWS_DEFAULT_REGION }} # set this to your preferred AWS region, e.g. us-west-1
+  ECR_REPOSITORY: ${{ vars.ECR_REPOSITORY }} # set this to your Amazon ECR repository name
+  # Rest api service image name
+  ECR_API_SERVICE_IMAGE: ${{ secrets.AWS_ACCOUNT_ID }}.dkr.ecr.${{ vars.AWS_DEFAULT_REGION }}.amazonaws.com/${{ vars.ECR_PROD_REPOSITORY }}:restapi-service
+  # Recommendation service image name
+  ECR_RECOMMENDATION_SERVICE_IMAGE: ${{ secrets.AWS_ACCOUNT_ID }}.dkr.ecr.${{ vars.AWS_DEFAULT_REGION }}.amazonaws.com/${{ vars.ECR_PROD_REPOSITORY }}:recommendation-service
+
+permissions:
+  contents: read
+
+jobs:
+  deploy:
+    name: Deploy
+    runs-on: ubuntu-latest
+
+    steps:
+      # 1️⃣ Checkout repo
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      # 2️⃣ Configure AWS credentials
+      - name: Configure AWS credentials
+        uses: aws-actions/configure-aws-credentials@v1
+        with:
+          aws-access-key-id: ${{ secrets.AWS_ACCESS_KEY_ID }}
+          aws-secret-access-key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
+          aws-region: ${{ env.AWS_REGION }}
+
+      # 3️⃣ Login to ECR
+      - name: Login to Amazon ECR
+        id: login-ecr
+        uses: aws-actions/amazon-ecr-login@v1
+
+      # 4️⃣ API Service
+      # ----------------- [API Service] --------------------------------------
+      - name: Build, tag, and push API SERVICE image to Amazon ECR
+        id: build-api-image
+        env:
+          ECR_REGISTRY: ${{ steps.login-ecr.outputs.registry }}
+          IMAGE_TAG: ${{ github.sha }}
+        run: |
+          # Build a docker container and
+          # push it to ECR
+          docker build -f ./restapi/prod.Dockerfile -t $ECR_API_SERVICE_IMAGE ./restapi
+          docker push $ECR_API_SERVICE_IMAGE
+          echo "image=$ECR_API_SERVICE_IMAGE" >> $GITHUB_OUTPUT
+      # ----------------------------------------------------------------------
+      # 5️⃣ Recommendation Service
+      # ----------------- [Recommendation Service] ---------------------------
+      - name: Build, tag, and push RECOMMENDATION SERVICE image to Amazon ECR
+        id: build-recommendation-image
+        env:
+          ECR_REGISTRY: ${{ steps.login-ecr.outputs.registry }}
+          IMAGE_TAG: ${{ github.sha }}
+        run: |
+          # Build a docker container and
+          # push it to ECR
+          docker build -f ./recommendation_service/prod.Dockerfile -t $ECR_RECOMMENDATION_SERVICE_IMAGE ./recommendation_service
+          docker push $ECR_RECOMMENDATION_SERVICE_IMAGE
+          echo "image=$ECR_RECOMMENDATION_SERVICE_IMAGE" >> $GITHUB_OUTPUT
+
+      # 6️⃣ Lightsail Deployment
+      - name: 🚀 Deploy to Lightsail
+        uses: appleboy/ssh-action@v1.2.0
+        with:
+          host: ${{ secrets.LIGHTSAIL_PROD_HOST }}
+          username: ${{ secrets.LIGHTSAIL_PROD_USER }}
+          key: ${{ secrets.LIGHTSAIL_SSH_PROD_KEY }}
+          script: |
+            export AWS_ACCESS_KEY_ID=${{ secrets.AWS_ACCESS_KEY_ID }}
+            export AWS_SECRET_ACCESS_KEY=${{ secrets.AWS_SECRET_ACCESS_KEY }}
+            export AWS_REGION=${{ env.AWS_REGION }}
+            cd /home/ubuntu
+            bash deploy.sh

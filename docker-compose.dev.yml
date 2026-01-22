@@ -1,0 +1,18 @@
+version: "3.8"
+services:
+  # Rest API Service
+  restapi-service:
+    container_name: restapi_service
+    ports:
+      - "3000:3000"
+    build:
+      context: ./restapi
+      dockerfile: Dockerfile
+
+    volumes:
+      - type: bind
+        source: ./restapi
+        target: /restapi
+      - /restapi/node_modules
+    env_file:
+      - ./.env.local

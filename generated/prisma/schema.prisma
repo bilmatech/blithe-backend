@@ -1,0 +1,711 @@
+// This is your Prisma schema file,
+// learn more about it in the docs: https://pris.ly/d/prisma-schema
+
+// Looking for ways to speed up your queries, or scale easily with your serverless or edge functions?
+// Try Prisma Accelerate: https://pris.ly/cli/accelerate-init
+
+generator client {
+  provider = "prisma-client-js"
+  output   = "../generated/prisma"
+}
+
+datasource db {
+  provider = "postgresql"
+}
+
+// ======================== [ ENUMS] ==================== // 
+enum UserType {
+  administrator
+  gaurdiant
+  school
+}
+
+enum AccountStatus {
+  active
+  suspended
+  blocked
+}
+
+enum SchoolStatus {
+  active
+  inactive
+}
+
+enum SchoolType {
+  primary
+  secondary
+}
+
+enum SchoolOwnership {
+  private
+  public
+  missionary
+}
+
+enum DirectorIDType {
+  drivers_license
+  international_passport
+  nin
+  voters_id
+}
+
+enum InvoiceStatus {
+  pending
+  paid
+}
+
+enum StudentStatus {
+  active
+  inactive
+}
+
+enum TransactionStatus {
+  pending
+  abandoned
+  failed
+  reversed
+  success
+}
+
+enum PayoutStatus {
+  pending
+  sent
+  failed
+  success
+}
+
+enum NotificationStatus {
+  new
+  read
+}
+
+enum KYCVerificationStatus {
+  pending
+  verified
+  rejected
+}
+
+enum WalletStatus {
+  Active
+  // Temporarily frozen and cannot be used.
+  Freezed
+  // Funds cannot be used until further notice.
+  Suspended
+  // Permanently blocked from use.
+  Blocked
+  // Wallet has been deleted.
+  Deleted
+}
+
+// ======================== [ MODELS ] ==================== //
+
+model User {
+  id            String        @id @default(cuid())
+  firstName     String
+  lastName      String
+  profileImage  String?
+  email         String        @unique
+  type          UserType
+  phoneNumber   String?
+  accountStatus AccountStatus @default(active)
+  verifiedAt    DateTime?
+  lastSeenAt    DateTime?
+
+  isDeleted Boolean  @default(false)
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  // Relations
+  administrator                   Administrator?
+  guardian                        Guardian?
+  verifications                   Verification[]
+  school                          School?
+  schoolAndPlatformLegalAgreement SchoolAndPlatformLegalAgreement?
+  notifications                   Notification[]
+  credential                      Credential?
+  wallet                          Wallet?
+
+  @@index([email, isDeleted])
+  @@index([type, accountStatus, isDeleted])
+  @@index([accountStatus, isDeleted])
+  @@index([verifiedAt, isDeleted])
+  @@index([createdAt, isDeleted])
+}
+
+model Credential {
+  id       String @id @default(cuid())
+  userId   String @unique
+  password String
+  pinCode  String
+
+  isDeleted Boolean  @default(false)
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  // Relations
+  user User @relation(fields: [userId], references: [id], onDelete: Cascade)
+
+  @@index([userId, isDeleted])
+}
+
+model Administrator {
+  id     String @id @default(cuid())
+  userId String @unique
+
+  isDeleted Boolean  @default(false)
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  // Relations
+  user User @relation(fields: [userId], references: [id], onDelete: Cascade)
+
+  @@index([userId, isDeleted])
+  @@index([isDeleted, createdAt])
+}
+
+model Guardian {
+  id         String  @id @default(cuid())
+  userId     String  @unique
+  address    String?
+  city       String?
+  state      String?
+  country    String?
+  postalCode String?
+
+  isDeleted Boolean  @default(false)
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  // Relations
+  user                  User                   @relation(fields: [userId], references: [id], onDelete: Cascade)
+  invoices              Invoice[]
+  students              Student[]
+  linkedStudentProfiles LinkedStudentProfile[]
+  transactions          Transaction[]
+
+  @@index([userId, isDeleted])
+  @@index([city, state, country, isDeleted])
+}
+
+model Verification {
+  id          String   @id @default(cuid())
+  userId      String
+  code        String   @unique
+  expiresAt   DateTime
+  resendCount Int      @default(0)
+
+  isDeleted Boolean  @default(false)
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  // Relations
+  user User @relation(fields: [userId], references: [id], onDelete: Cascade)
+
+  @@index([userId, isDeleted])
+  @@index([code, expiresAt, isDeleted])
+  @@index([expiresAt, isDeleted])
+  @@index([userId, createdAt, isDeleted])
+}
+
+model School {
+  id              String          @id @default(cuid())
+  ownerId         String          @unique
+  name            String
+  address         String?
+  city            String?
+  state           String?
+  country         String?
+  lga             String?
+  postalCode      String?
+  email           String          @unique
+  phoneNumber     String?
+  establishedYear Int?
+  website         String?
+  logo            String?
+  schoolType      SchoolType
+  ownership       SchoolOwnership
+  status          SchoolStatus    @default(active)
+
+  isDeleted Boolean  @default(false)
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  // Relations
+  owner                           User                             @relation(fields: [ownerId], references: [id], onDelete: Cascade)
+  schoolDirectorVerification      SchoolDirectorVerification?
+  schoolOwnershipVerification     SchoolOwnershipVerification?
+  schoolVerification              SchoolVerification?
+  schoolPayoutDetail              SchoolPayoutDetail?
+  schoolAndPlatformLegalAgreement SchoolAndPlatformLegalAgreement?
+  classes                         Class[]
+  academicSessions                AcademicSession[]
+  terms                           Term[]
+  fees                            Fees[]
+  payouts                         Payout[]
+
+  @@index([email, isDeleted])
+  @@index([ownerId, isDeleted])
+  @@index([status, isDeleted])
+  @@index([schoolType, status, isDeleted])
+  @@index([ownership, status, isDeleted])
+  @@index([city, state, country, isDeleted])
+  @@index([state, country, isDeleted])
+  @@index([createdAt, isDeleted])
+}
+
+model SchoolDirectorVerification {
+  id               String                @id @default(cuid())
+  schoolId         String                @unique
+  directorFullName String
+  directorIDType   DirectorIDType
+  directorIDNumber String
+  document         String
+  status           KYCVerificationStatus @default(pending)
+
+  isDeleted Boolean  @default(false)
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  // Relations
+  school School @relation(fields: [schoolId], references: [id], onDelete: Cascade)
+
+  @@index([schoolId, isDeleted])
+  @@index([status, isDeleted])
+  @@index([schoolId, status, isDeleted])
+  @@index([createdAt, isDeleted])
+}
+
+model SchoolOwnershipVerification {
+  id                    String                @id @default(cuid())
+  schoolId              String                @unique
+  cacform7              String
+  cacShareAllotmentForm String
+  status                KYCVerificationStatus @default(pending)
+
+  isDeleted Boolean  @default(false)
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  // Relations
+  school School @relation(fields: [schoolId], references: [id], onDelete: Cascade)
+
+  @@index([schoolId, isDeleted])
+  @@index([status, isDeleted])
+  @@index([schoolId, status, isDeleted])
+  @@index([createdAt, isDeleted])
+}
+
+model SchoolVerification {
+  id                      String                @id @default(cuid())
+  schoolId                String                @unique
+  cacCertificate          String
+  accreditationDocument   String
+  taxIdentificationNumber String
+  licenseDocument         String
+  status                  KYCVerificationStatus @default(pending)
+
+  isDeleted Boolean  @default(false)
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  // Relations
+  school School @relation(fields: [schoolId], references: [id], onDelete: Cascade)
+
+  @@index([schoolId, isDeleted])
+  @@index([status, isDeleted])
+  @@index([schoolId, status, isDeleted])
+  @@index([createdAt, isDeleted])
+}
+
+model SchoolPayoutDetail {
+  id            String @id @default(cuid())
+  schoolId      String @unique
+  bankName      String
+  bankCode      String
+  accountNumber String
+  accountName   String
+
+  isDeleted Boolean  @default(false)
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  // Relations
+  school School @relation(fields: [schoolId], references: [id], onDelete: Cascade)
+
+  @@index([schoolId, isDeleted])
+  @@index([bankCode, accountNumber, isDeleted])
+}
+
+model SchoolAndPlatformLegalAgreement {
+  id               String                @id @default(cuid())
+  schoolId         String                @unique
+  signedById       String                @unique
+  signature        String
+  signedAt         DateTime
+  legalDocumentRef String
+  status           KYCVerificationStatus @default(pending)
+
+  isDeleted Boolean  @default(false)
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  // Relations
+  school   School @relation(fields: [schoolId], references: [id], onDelete: Cascade)
+  signedBy User   @relation(fields: [signedById], references: [id], onDelete: Cascade)
+
+  @@index([schoolId, isDeleted])
+  @@index([signedById, isDeleted])
+  @@index([status, isDeleted])
+  @@index([schoolId, status, isDeleted])
+  @@index([signedAt, isDeleted])
+}
+
+model Class {
+  id       String @id @default(cuid())
+  name     String
+  schoolId String
+
+  isDeleted Boolean  @default(false)
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  // Relations
+  school   School    @relation(fields: [schoolId], references: [id], onDelete: Cascade)
+  fees     Fees[]
+  invoices Invoice[]
+  students Student[]
+
+  @@index([schoolId, isDeleted])
+  @@index([schoolId, name, isDeleted])
+  @@index([name, isDeleted])
+}
+
+model AcademicSession {
+  id       String @id @default(cuid())
+  name     String
+  schoolId String
+
+  isDeleted Boolean  @default(false)
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  // Relations
+  school   School    @relation(fields: [schoolId], references: [id], onDelete: Cascade)
+  fees     Fees[]
+  invoices Invoice[]
+
+  @@index([schoolId, isDeleted])
+  @@index([schoolId, name, isDeleted])
+  @@index([name, isDeleted])
+}
+
+model Term {
+  id       String @id @default(cuid())
+  name     String
+  schoolId String
+
+  isDeleted Boolean  @default(false)
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  // Relations
+  school   School    @relation(fields: [schoolId], references: [id], onDelete: Cascade)
+  fees     Fees[]
+  invoices Invoice[]
+
+  @@index([schoolId, isDeleted])
+  @@index([schoolId, name, isDeleted])
+  @@index([name, isDeleted])
+}
+
+model Fees {
+  id             String   @id @default(cuid())
+  dueAt          DateTime
+  latePaymentFee Decimal  @default(0.00) @db.Decimal(10, 2)
+  schoolId       String
+  classId        String
+  sessionId      String
+  termId         String
+
+  isDeleted Boolean  @default(false)
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  // Relations
+  class           Class           @relation(fields: [classId], references: [id], onDelete: Cascade)
+  academicSession AcademicSession @relation(fields: [sessionId], references: [id], onDelete: Cascade)
+  term            Term            @relation(fields: [termId], references: [id], onDelete: Cascade)
+  school          School          @relation(fields: [schoolId], references: [id], onDelete: Cascade)
+  feeBreakdowns   FeeBreakdown[]
+
+  @@index([schoolId, isDeleted])
+  @@index([classId, isDeleted])
+  @@index([sessionId, isDeleted])
+  @@index([termId, isDeleted])
+  @@index([schoolId, classId, sessionId, termId, isDeleted])
+  @@index([schoolId, sessionId, termId, isDeleted])
+  @@index([dueAt, isDeleted])
+  @@index([schoolId, dueAt, isDeleted])
+}
+
+model FeeBreakdown {
+  id     String  @id @default(cuid())
+  feeId  String
+  title  String
+  amount Decimal @default(0.00) @db.Decimal(10, 2)
+
+  isDeleted Boolean  @default(false)
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  // Relations
+  fee Fees @relation(fields: [feeId], references: [id], onDelete: Cascade)
+
+  @@index([feeId, isDeleted])
+  @@index([feeId, createdAt, isDeleted])
+}
+
+model Invoice {
+  id         String @id @default(cuid())
+  invoiceNo  String @unique
+  feeId      String
+  guardianId String
+  classId    String
+  sessionId  String
+  termId     String
+
+  totalAmount Decimal       @default(0.00) @db.Decimal(10, 2)
+  status      InvoiceStatus @default(pending)
+  dueAt       DateTime
+  paidAt      DateTime?
+
+  isDeleted Boolean  @default(false)
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  // Relations
+  guardian        Guardian        @relation(fields: [guardianId], references: [id], onDelete: Cascade)
+  class           Class           @relation(fields: [classId], references: [id], onDelete: Cascade)
+  academicSession AcademicSession @relation(fields: [sessionId], references: [id], onDelete: Cascade)
+  term            Term            @relation(fields: [termId], references: [id], onDelete: Cascade)
+  transactions    Transaction[]
+
+  @@index([feeId, isDeleted])
+  @@index([guardianId, isDeleted])
+  @@index([guardianId, status, isDeleted])
+  @@index([guardianId, classId, sessionId, termId, isDeleted])
+  @@index([classId, sessionId, termId, isDeleted])
+  @@index([status, isDeleted])
+  @@index([status, dueAt, isDeleted])
+  @@index([dueAt, isDeleted])
+  @@index([paidAt, isDeleted])
+  @@index([createdAt, isDeleted])
+}
+
+model Student {
+  id                 String        @id @default(cuid())
+  firstName          String
+  lastName           String
+  image              String?
+  classId            String
+  guardianId         String?
+  registrationNumber String        @unique
+  status             StudentStatus @default(active)
+
+  isDeleted Boolean  @default(false)
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  // Relations
+  class                Class                 @relation(fields: [classId], references: [id], onDelete: Cascade)
+  guardian             Guardian?             @relation(fields: [guardianId], references: [id], onDelete: Cascade)
+  linkedStudentProfile LinkedStudentProfile?
+
+  @@index([classId, isDeleted])
+  @@index([guardianId, isDeleted])
+  @@index([classId, guardianId, status, isDeleted])
+  @@index([status, isDeleted])
+  @@index([registrationNumber, isDeleted])
+  @@index([lastName, firstName, isDeleted])
+  @@index([classId, status, isDeleted])
+}
+
+model LinkedStudentProfile {
+  id                   String   @id @default(cuid())
+  studentId            String   @unique
+  guardianId           String
+  lastGuardiantChanged DateTime
+
+  isDeleted Boolean  @default(false)
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  // Relations
+  student  Student  @relation(fields: [studentId], references: [id], onDelete: Cascade)
+  guardian Guardian @relation(fields: [guardianId], references: [id], onDelete: Cascade)
+
+  @@index([studentId, isDeleted])
+  @@index([guardianId, isDeleted])
+  @@index([guardianId, studentId, isDeleted])
+  @@index([lastGuardiantChanged, isDeleted])
+}
+
+model Transaction {
+  id            String            @id @default(cuid())
+  guardianId    String
+  invoiceId     String
+  reference     String            @unique
+  amount        Decimal           @default(0.00) @db.Decimal(10, 2)
+  fees          Decimal           @default(0.00) @db.Decimal(10, 2)
+  status        TransactionStatus @default(pending)
+  transactionAt DateTime?
+  processedAt   DateTime?
+  description   String?
+
+  isDeleted Boolean  @default(false)
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  // Relations
+  invoice        Invoice         @relation(fields: [invoiceId], references: [id], onDelete: Cascade)
+  guardian       Guardian        @relation(fields: [guardianId], references: [id], onDelete: Cascade)
+  transactionFee TransactionFee?
+  wallet         Wallet?         @relation(fields: [walletId], references: [id])
+  walletId       String?
+  ledger         Ledger?
+
+  @@index([guardianId, isDeleted])
+  @@index([invoiceId, isDeleted])
+  @@index([guardianId, status, isDeleted])
+  @@index([guardianId, invoiceId, status, isDeleted])
+  @@index([status, isDeleted])
+  @@index([status, createdAt, isDeleted])
+  @@index([reference, isDeleted])
+  @@index([transactionAt, isDeleted])
+  @@index([processedAt, isDeleted])
+  @@index([createdAt, isDeleted])
+}
+
+model TransactionFee {
+  id             String  @id @default(cuid())
+  transactionId  String  @unique
+  platformFee    Decimal @default(0.00) @db.Decimal(10, 2)
+  latePaymentFee Decimal @default(0.00) @db.Decimal(10, 2)
+  processingFee  Decimal @default(0.00) @db.Decimal(10, 2)
+
+  isDeleted Boolean  @default(false)
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  // Relations
+  transaction Transaction @relation(fields: [transactionId], references: [id], onDelete: Cascade)
+
+  @@index([transactionId, isDeleted])
+  @@index([createdAt, isDeleted])
+}
+
+model Payout {
+  id            String       @id @default(cuid())
+  schoolId      String
+  amount        Decimal      @default(0.00) @db.Decimal(10, 2)
+  processingFee Decimal      @default(0.00) @db.Decimal(10, 2)
+  status        PayoutStatus @default(pending)
+  initiatedAt   DateTime
+  completedAt   DateTime?
+
+  isDeleted Boolean  @default(false)
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  // Relations
+  school School @relation(fields: [schoolId], references: [id], onDelete: Cascade)
+
+  @@index([schoolId, isDeleted])
+  @@index([schoolId, status, isDeleted])
+  @@index([status, isDeleted])
+  @@index([status, initiatedAt, isDeleted])
+  @@index([initiatedAt, isDeleted])
+  @@index([completedAt, isDeleted])
+  @@index([schoolId, initiatedAt, isDeleted])
+}
+
+model Notification {
+  id      String             @id @default(cuid())
+  userId  String
+  title   String
+  message String
+  status  NotificationStatus @default(new)
+  sentAt  DateTime
+
+  isDeleted Boolean  @default(false)
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  // Relations
+  user User @relation(fields: [userId], references: [id], onDelete: Cascade)
+
+  @@index([userId, isDeleted])
+  @@index([userId, status, isDeleted])
+  @@index([userId, sentAt, isDeleted])
+  @@index([status, isDeleted])
+  @@index([sentAt, isDeleted])
+  @@index([userId, status, sentAt, isDeleted])
+}
+
+model Wallet {
+  id            String       @id @default(cuid())
+  userId        String       @unique
+  // The dedicated virtual account (DVA)
+  address       String       @unique
+  // The bank name e.g.: Paystack Titan
+  name          String
+  // the name displayed when the address is entered (e.g: BilmaPay/Obi Pascal) 
+  tag           String
+  // this is the bank code
+  routingNumber String
+  // Wallet encrypted balance which is encrypted and decrypted on runtime 
+  balance       String
+  // wallet status e.g. active, suspended, blocked, deleted
+  status        WalletStatus @default(Active)
+
+  isDeleted Boolean  @default(false)
+  updatedAt DateTime @updatedAt
+  createdAt DateTime @default(now())
+
+  // Relations
+  user        User          @relation(fields: [userId], references: [id], onDelete: Cascade)
+  Ledger      Ledger[]
+  Transaction Transaction[]
+
+  // Optimized indexes for wallet operations (userId and address already have unique indexes)
+  @@index([id, status, isDeleted])
+  @@index([address, status, isDeleted])
+  @@index([userId, status, isDeleted])
+  @@index([status, isDeleted])
+  @@index([routingNumber, isDeleted])
+  @@index([createdAt, isDeleted])
+}
+
+model Ledger {
+  id            String  @id @default(cuid())
+  walletId      String
+  transactionId String  @unique
+  debit         Decimal @default(0) @db.Decimal(10, 2)
+  credit        Decimal @default(0) @db.Decimal(10, 2)
+  balanceBefore Decimal @default(0) @db.Decimal(10, 2)
+  balanceAfter  Decimal @default(0) @db.Decimal(10, 2)
+  description   String?
+
+  isDeleted Boolean  @default(false)
+  updatedAt DateTime @updatedAt
+  createdAt DateTime @default(now())
+
+  // Relations
+  Wallet      Wallet      @relation(fields: [walletId], references: [id], onDelete: Cascade)
+  Transaction Transaction @relation(fields: [transactionId], references: [id], onDelete: Cascade)
+
+  // Optimized indexes for ledger queries (transactionId already have unique indexes)
+  @@index([transactionId, isDeleted])
+  @@index([walletId, isDeleted, createdAt])
+  @@index([walletId, createdAt, isDeleted])
+}

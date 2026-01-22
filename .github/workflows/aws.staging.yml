@@ -1,0 +1,59 @@
+name: Deploy to EKS
+
+on:
+  push:
+    branches: ['staging']
+
+env:
+  AWS_REGION: ${{ vars.AWS_DEFAULT_REGION }}
+  ECR_REPOSITORY: ${{ vars.ECR_STAGING_REPOSITORY }}
+  ECR_API_SERVICE_IMAGE: ${{ secrets.AWS_ACCOUNT_ID }}.dkr.ecr.${{ vars.AWS_DEFAULT_REGION }}.amazonaws.com/${{ vars.ECR_STAGING_REPOSITORY }}:backend-service
+
+permissions:
+  contents: read
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+    steps:
+      # 1️⃣ Checkout repo
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      # 2️⃣ Configure AWS credentials
+      - name: Configure AWS credentials
+        uses: aws-actions/configure-aws-credentials@v1
+        with:
+          aws-access-key-id: ${{ secrets.AWS_ACCESS_KEY_ID }}
+          aws-secret-access-key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
+          aws-region: ${{ env.AWS_REGION }}
+
+      # 3️⃣ Login to ECR
+      - name: Login to Amazon ECR
+        uses: aws-actions/amazon-ecr-login@v1
+
+      # 4️⃣ Build & push API service image
+      - name: Build & Push API Service Image
+        run: |
+          docker build -f ./prod.Dockerfile -t $ECR_API_SERVICE_IMAGE ./
+          docker push $ECR_API_SERVICE_IMAGE
+
+      # 5️⃣ Build & push Recommendation service image
+      # - name: Build & Push Recommendation Service Image
+      #   run: |
+      #     docker build -f ./recommendation_service/prod.Dockerfile -t $ECR_RECOMMENDATION_SERVICE_IMAGE ./recommendation_service
+      #     docker push $ECR_RECOMMENDATION_SERVICE_IMAGE
+
+      # 6️⃣ Lightsail Deployment
+      - name: 🚀 Deploy to Lightsail
+        uses: appleboy/ssh-action@v1.2.0
+        with:
+          host: ${{ secrets.LIGHTSAIL_STAGING_HOST }}
+          key: ${{ secrets.LIGHTSAIL_SSH_STAGING_KEY }}
+          username: ${{ secrets.LIGHTSAIL_SSH_USER }}
+          script: |
+            export AWS_ACCESS_KEY_ID=${{ secrets.AWS_ACCESS_KEY_ID }}
+            export AWS_SECRET_ACCESS_KEY=${{ secrets.AWS_SECRET_ACCESS_KEY }}
+            export AWS_REGION=${{ env.AWS_REGION }}
+            cd /home/ubuntu
+            bash deploy.sh

@@ -1,0 +1,27 @@
+version: '3.8'
+
+services:
+  # Redis Service
+  redis:
+    image: redis:7.2-alpine # smaller, faster image
+    container_name: redis_cluster
+    restart: always
+    ports:
+      - '6379:6379'
+    command: >
+      redis-server
+      --appendonly yes
+      --requirepass ${REDIS_PASSWORD:-your_redis_password}
+    volumes:
+      - redis_data:/data
+    env_file:
+      - .env # (no need for './')
+    networks:
+      - redis_network
+
+volumes:
+  redis_data: # renamed to match service
+
+networks:
+  redis_network:
+    driver: bridge
