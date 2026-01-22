@@ -1,9 +1,9 @@
 import { Inject, Injectable } from '@nestjs/common';
 import { Resend } from 'resend';
 import { ConfigType } from '@nestjs/config';
-import emailConfig from '../config/email.config';
+import emailConfig from '../configs/email.config';
 import { TemplateParserService } from '../template-parser/template-parser.service';
-import { TemplateModel } from './postmark.types';
+import { EmailTypes, TemplateModel } from '../email.types';
 import { AppError } from '@Blithe/common/utils/error-handler.util';
 import { maskEmail } from '@Blithe/common/utils/funcs.util';
 
@@ -27,15 +27,18 @@ export class ResendService extends Resend {
    * @param data - Data required to send a welcome email
    * @returns The response from Postmark after attempting to send the email
    */
-  async send<T = any>(data: TemplateModel<T>, eventType: any) {
+  async send<T = any>(
+    data: TemplateModel<T>,
+    type: EmailTypes,
+  ): Promise<string> {
     let html: string;
     let subject: string;
 
     // parse the date variable for the layout variable in the templates.
     data['date'] = new Date().getFullYear().toString();
 
-    switch (eventType) {
-      case 'userCreated':
+    switch (type) {
+      case EmailTypes.welcome:
         html = await this.templateEngineSvc.render(
           this._emailConfig.resendTemplates.welcome.path,
           data,
@@ -43,7 +46,7 @@ export class ResendService extends Resend {
         subject = this._emailConfig.resendTemplates.welcome.subject;
         break;
 
-      case 'userFollowUp':
+      case EmailTypes.userInactive:
         html = await this.templateEngineSvc.render(
           this._emailConfig.resendTemplates.followUp.path,
           data,
@@ -52,17 +55,7 @@ export class ResendService extends Resend {
         break;
 
       //  All verification emails to use the verificatiom template.
-      case 'deviceVerification':
-        // update the sender signature to security sender signature:
-        // The signature is <sometext@domain.com>, our goal is to have sometext replaced with <security@domain.com>
-        // while keeping the domain part same as in the original sender signature.
-        // NOTE: This replacement is done here to avoid changing it globally for other email types and the < and > must be replace or preserved accordingly.
-        this._emailConfig.senderSignature =
-          this._emailConfig.senderSignature.replace(
-            '<notifications',
-            '<security',
-          );
-
+      case EmailTypes.verification:
         html = await this.templateEngineSvc.render(
           this._emailConfig.resendTemplates.verification.path,
           data,
@@ -70,7 +63,7 @@ export class ResendService extends Resend {
         subject = this._emailConfig.resendTemplates.verification.subject;
         break;
 
-      case 'creditAlert':
+      case EmailTypes.creditAlert:
         html = await this.templateEngineSvc.render(
           this._emailConfig.resendTemplates.creditAlert.path,
           data,
@@ -78,12 +71,12 @@ export class ResendService extends Resend {
         subject = this._emailConfig.resendTemplates.creditAlert.subject;
         break;
       default:
-        throw new AppError(`Unsupported event type: ${eventType}`);
+        throw new AppError(`Unsupported email type. Received: ${type}`);
     }
 
     if (!html || !subject) {
       throw new AppError(
-        `Email template ID for event ${eventType} is not configured`,
+        `Email template ID for email ${type} is not configured`,
       );
     }
 

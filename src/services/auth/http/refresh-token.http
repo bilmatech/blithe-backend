@@ -1,0 +1,5 @@
+POST {{ baseUrl }}/api/v1/auth/refresh
+Content-Type: application/json
+{
+    "token": "{{ refreshToken }}"
+}

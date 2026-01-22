@@ -1,6 +1,6 @@
 import { registerAs } from '@nestjs/config';
 
-export default registerAs('emailConfig', () => ({
+export default registerAs('emailTemplates', () => ({
   // Sender signature
   senderSignature: `${process.env.MAIL_SENDER} <${process.env.MAIL_FROM}>`,
   // Postmark API key

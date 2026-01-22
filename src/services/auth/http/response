@@ -1,0 +1,10 @@
+{
+  "status": true,
+  "message": "Tokens refreshed successfully.",
+  "data": {
+    "userId": "cmin52etr00003btsn6p0magx",
+    "accessToken": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiJjbWluNTJldHIwMDAwM2J0c242cDBtYWd4IiwiaWF0IjoxNzY0NzAxNjY1LCJleHAiOjE3NjQ3MDI1NjV9._IA1Ytn0GFGZd-JYIBfCNM2Qad0Hf6EB1_rWHiZSEv4",
+    "refreshToken": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiJjbWluNTJldHIwMDAwM2J0c242cDBtYWd4IiwiaWF0IjoxNzY0NzAxNjY1LCJleHAiOjE3NjUzMDY0NjV9.fSCOT2eAeA8Vqi9oKbR0XiUjvnvF26LegqNEE-b6vX0",
+    "expiresAt": "2025-12-02T19:09:25.726Z"
+  }
+}

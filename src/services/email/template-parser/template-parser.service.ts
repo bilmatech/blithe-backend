@@ -1,10 +1,13 @@
 import { Injectable } from '@nestjs/common';
-import { TemplateLoader } from '@sabiflow/common/utils/template-loader.util';
+import { TemplateLoader } from '@Wontum/common/utils/template-loader.util';
 import * as path from 'path';
 
 @Injectable()
 export class TemplateParserService {
-  private TEMPLATE_ROOT = path.resolve(process.cwd(), 'src/email/templates');
+  private TEMPLATE_ROOT = path.resolve(
+    process.cwd(),
+    'src/modules/email/templates',
+  );
 
   async render(
     templatePath: string,

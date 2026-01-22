@@ -105,7 +105,7 @@ model User {
   lastName      String
   profileImage  String?
   email         String        @unique
-  userType      UserType
+  type          UserType
   phoneNumber   String?
   accountStatus AccountStatus @default(active)
   verifiedAt    DateTime?
@@ -126,7 +126,7 @@ model User {
   wallet                          Wallet?
 
   @@index([email, isDeleted])
-  @@index([userType, accountStatus, isDeleted])
+  @@index([type, accountStatus, isDeleted])
   @@index([accountStatus, isDeleted])
   @@index([verifiedAt, isDeleted])
   @@index([createdAt, isDeleted])
