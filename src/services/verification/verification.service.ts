@@ -58,7 +58,7 @@ export class VerificationService {
     await this.notificationEnqueuer.enqueueNotificationJob(
       QueueNames.EMAIL_QUEUE,
       {
-        type,
+        type: notification,
         payload: {
           to: email,
           code,

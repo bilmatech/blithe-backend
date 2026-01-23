@@ -89,10 +89,10 @@ async function bootstrap() {
 
   app.use(
     '/queues',
-    basicAuth({
-      users: { [username]: password }, // username:password
-      challenge: true,
-    }),
+    // basicAuth({
+    //   users: { [username]: password }, // username:password
+    //   challenge: true,
+    // }),
     serverAdapter.getRouter(),
   );
 

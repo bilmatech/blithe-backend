@@ -26,6 +26,14 @@ export class AccountService {
    */
   async create(createAccountDto: CreateAccountDto, type: UserType) {
     try {
+      const userExist = await this.prisma.user.findUnique({
+        where: { email: createAccountDto.email },
+      });
+
+      if (userExist) {
+        throw new AppError('An account with this email already exists.');
+      }
+
       const name = createAccountDto.fullName.split(' ');
       const firstName = name[0];
       const lastName = name.slice(1).join(' ');

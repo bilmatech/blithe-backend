@@ -1,0 +1,5 @@
+POST {{ baseUrl }}/api/v1/auth/resend_verification_code
+Content-Type: application/json
+{
+    "email": "pascalobi83@gmail.com"
+}

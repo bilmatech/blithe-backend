@@ -6,7 +6,7 @@ import * as path from 'path';
 export class TemplateParserService {
   private TEMPLATE_ROOT = path.resolve(
     process.cwd(),
-    'src/modules/email/templates',
+    'src/services/email/templates',
   );
 
   async render(
