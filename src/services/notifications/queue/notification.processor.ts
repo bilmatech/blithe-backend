@@ -37,12 +37,9 @@ export class NotificationProcessor extends WorkerHost {
     try {
       switch (data.type) {
         case NotificationType.AccountVerification: {
-          const response = await this.emailService.sendAccountVerificationEmail(
+          await this.emailService.sendAccountVerificationEmail(
             data.payload.to,
             data.payload.code,
-          );
-          AppLogger.log(
-            `Account verification email sent to ${data.payload.to}: ${response}`,
           );
 
           break;

@@ -1,6 +1,5 @@
 import {
   BadRequestException,
-  Inject,
   Injectable,
   InternalServerErrorException,
   UnauthorizedException,
@@ -12,7 +11,6 @@ import { UserType, VerificationType } from '@DB/Client';
 import { AuthChallengeType } from './auth.type';
 import * as Sentry from '@sentry/nestjs';
 import { VerificationService } from '@Blithe/services/verification/verification.service';
-import appConfig from '@Blithe/common/config/app.config';
 import { AccountService } from '../account/account.service';
 import { CredentialsService } from '../account/credentials.service';
 import { ForgotPasswordDto } from './dto/forgot-password.dto';
@@ -26,7 +24,6 @@ import { ResetPasswordDto } from '../account/dto/reset-password.dto';
 @Injectable()
 export class AuthService {
   constructor(
-    @Inject(appConfig.KEY)
     private readonly tokenService: TokenService,
     private readonly accountService: AccountService,
     private readonly credentialsService: CredentialsService,
@@ -168,9 +165,7 @@ export class AuthService {
         NotificationType.ForgotPassword,
       );
 
-      return {
-        message: `A reset code has been sent to ${maskEmail(account.email)}`,
-      };
+      return `A reset code has been sent to ${maskEmail(account.email)}`;
     } catch (error) {
       if (error instanceof AppError) {
         throw new BadRequestException(error.message, { cause: error });
@@ -207,9 +202,7 @@ export class AuthService {
         NotificationType.ForgotPassword,
       );
 
-      return {
-        message: `A new reset code has been sent to ${maskEmail(account.email)}`,
-      };
+      return `A new reset code has been sent to ${maskEmail(account.email)}`;
     } catch (error) {
       if (error instanceof AppError) {
         throw new BadRequestException(error.message, { cause: error });
@@ -291,7 +284,7 @@ export class AuthService {
       // Update user password
       await this.credentialsService.setPassword(userId, newPassword);
 
-      return { message: 'Password has been reset successfully.' };
+      return 'Password has been reset successfully.';
     } catch (error) {
       if (error instanceof AppError) {
         throw new BadRequestException(error.message, { cause: error });
