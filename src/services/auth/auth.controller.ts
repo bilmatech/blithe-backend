@@ -17,6 +17,8 @@ import { CreateAuthUserDto } from './dto/create-auth-user.dto';
 import { UserType } from '@DB/Client';
 import { ResendCodeDto } from './dto/resend-code.dto';
 import { VerificationCodeDto } from '../account/dto/verificaiton-code.dto';
+import { ForgotPasswordDto } from './dto/forgot-password.dto';
+import { ResetPasswordDto } from '../account/dto/reset-password.dto';
 
 @ApiTags('Authentication')
 @Controller('auth')
@@ -106,6 +108,70 @@ export class AuthController {
   verifyAccount(@Body() body: VerificationCodeDto) {
     return this.authService.verifyAccount(body);
   }
+
+  // =============================== [ FORGOT PASSWORD FLOW ] ===============================
+
+  // ---------------------------------------------------------
+  @ApiOperation({ summary: 'Request password reset code.' })
+  @ApiBody({ type: ForgotPasswordDto })
+  @ApiOkResponse({
+    type: String,
+    description: 'Password reset code sent successfully',
+  })
+  // ---------------------------------------------------------
+  @ResponseMessage('Password reset code sent successfully.')
+  // ---------------------------------------------------------
+  @Post('forgot_password')
+  forgotPassword(@Body() body: ForgotPasswordDto) {
+    return this.authService.forgotPassword(body);
+  }
+
+  // ---------------------------------------------------------
+  @ApiOperation({ summary: 'Resend forgot password verification code.' })
+  @ApiBody({ type: VerificationCodeDto })
+  @ApiOkResponse({
+    type: String,
+    description: 'Password reset code resent successfully',
+  })
+  // ---------------------------------------------------------
+  @ResponseMessage('Password reset code resent successfully.')
+  // ---------------------------------------------------------
+  @Post('resend_forgot_password_code')
+  resendForgotPasswordCode(@Body() body: ResendCodeDto) {
+    return this.authService.resendPasswordResetCode(body);
+  }
+
+  // ---------------------------------------------------------
+  @ApiOperation({ summary: 'Verify forgot password code' })
+  @ApiBody({ type: VerificationCodeDto })
+  @ApiOkResponse({
+    type: String,
+    description: 'Password reset verification successfully',
+  })
+  // ---------------------------------------------------------
+  @ResponseMessage('Password reset verification successfully.')
+  // ---------------------------------------------------------
+  @Post('verify_forgot_password_code')
+  verifyForgotPasswordCode(@Body() body: VerificationCodeDto) {
+    return this.authService.verifyPasswordResetCode(body);
+  }
+
+  // ---------------------------------------------------------
+  @ApiOperation({ summary: 'Reset user password' })
+  @ApiBody({ type: ResetPasswordDto })
+  @ApiOkResponse({
+    type: String,
+    description: 'Password reset successfully',
+  })
+  // ---------------------------------------------------------
+  @ResponseMessage('Password reset successfully.')
+  // ---------------------------------------------------------
+  @Post('reset_password')
+  resetPassword(@Body() body: ResetPasswordDto) {
+    return this.authService.resetPassword(body);
+  }
+
+  // =============================== [ END ] ===============================
 
   // ---------------------------------------------------------
   @ApiOperation({ summary: 'Refresh access and refresh tokens' })
