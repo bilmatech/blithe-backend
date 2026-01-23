@@ -37,9 +37,3 @@ jobs:
         run: |
           docker build -f ./prod.Dockerfile -t $ECR_API_SERVICE_IMAGE ./
           docker push $ECR_API_SERVICE_IMAGE
-
-      # 5️⃣ Build & push Recommendation service image
-      # - name: Build & Push Recommendation Service Image
-      #   run: |
-      #     docker build -f ./recommendation_service/prod.Dockerfile -t $ECR_RECOMMENDATION_SERVICE_IMAGE ./recommendation_service
-      #     docker push $ECR_RECOMMENDATION_SERVICE_IMAGE

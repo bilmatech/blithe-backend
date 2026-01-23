@@ -17,4 +17,4 @@ RUN npm install
 
 # start the application
 EXPOSE 3000
-CMD ["yarn", "start:dev"]
+CMD ["npm", "run", "start"]
