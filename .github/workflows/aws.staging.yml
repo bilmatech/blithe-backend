@@ -43,17 +43,3 @@ jobs:
       #   run: |
       #     docker build -f ./recommendation_service/prod.Dockerfile -t $ECR_RECOMMENDATION_SERVICE_IMAGE ./recommendation_service
       #     docker push $ECR_RECOMMENDATION_SERVICE_IMAGE
-
-      # 6️⃣ Lightsail Deployment
-      - name: 🚀 Deploy to Lightsail
-        uses: appleboy/ssh-action@v1.2.0
-        with:
-          host: ${{ secrets.LIGHTSAIL_STAGING_HOST }}
-          key: ${{ secrets.LIGHTSAIL_SSH_STAGING_KEY }}
-          username: ${{ secrets.LIGHTSAIL_SSH_USER }}
-          script: |
-            export AWS_ACCESS_KEY_ID=${{ secrets.AWS_ACCESS_KEY_ID }}
-            export AWS_SECRET_ACCESS_KEY=${{ secrets.AWS_SECRET_ACCESS_KEY }}
-            export AWS_REGION=${{ env.AWS_REGION }}
-            cd /home/ubuntu
-            bash deploy.sh
