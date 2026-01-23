@@ -95,4 +95,15 @@ export class CredentialsService {
       });
     }
   }
+
+  async verifyPassword(userId: string, password: string) {
+    const credential = await this.prisma.credential.findUnique({
+      where: { userId },
+    });
+    if (!credential || !credential.password) {
+      throw new AppError('Password not set for this user');
+    }
+
+    return await bcrypt.compare(password, String(credential.password));
+  }
 }

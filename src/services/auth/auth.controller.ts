@@ -19,11 +19,27 @@ import { ResendCodeDto } from './dto/resend-code.dto';
 import { VerificationCodeDto } from '../account/dto/verificaiton-code.dto';
 import { ForgotPasswordDto } from './dto/forgot-password.dto';
 import { ResetPasswordDto } from '../account/dto/reset-password.dto';
+import { AuthorizeUserDto } from './dto/authorize-user.dto';
 
 @ApiTags('Authentication')
 @Controller('auth')
 export class AuthController {
   constructor(private readonly authService: AuthService) {}
+
+  // ---------------------------------------------------------
+  @ApiOperation({ summary: 'Authorize user and update login timestamp' })
+  @ApiBody({ type: AuthorizeUserDto })
+  @ApiOkResponse({
+    type: AuthCredentialsResponse,
+    description: 'User authorized successfully',
+  })
+  // ---------------------------------------------------------
+  @ResponseMessage('User authorized successfully.')
+  // ---------------------------------------------------------
+  @Post('authorize')
+  authorize(@Body() authorizeUserDto: AuthorizeUserDto) {
+    return this.authService.authorize(authorizeUserDto);
+  }
 
   // ---------------------------------------------------------
   @ApiOperation({ summary: 'Create new guardian account' })

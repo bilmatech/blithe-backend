@@ -20,6 +20,7 @@ import { ResendCodeDto } from './dto/resend-code.dto';
 import { maskEmail } from '@Blithe/common/utils/funcs.util';
 import { EncryptionService } from '../encryption/encryption.service';
 import { ResetPasswordDto } from '../account/dto/reset-password.dto';
+import { AuthorizeUserDto } from './dto/authorize-user.dto';
 
 @Injectable()
 export class AuthService {
@@ -394,6 +395,44 @@ export class AuthService {
     } catch (error) {
       Sentry.captureException(error);
       return false;
+    }
+  }
+
+  async authorize(authorizedUserDto: AuthorizeUserDto) {
+    try {
+      // Find the user by email
+      const user = await this.accountService.findByEmail(
+        authorizedUserDto.email,
+      );
+      if (!user) {
+        throw new AppError('Invalid email or password.');
+      }
+
+      // Verify the user's password
+      const isPasswordValid = await this.credentialsService.verifyPassword(
+        user.id,
+        authorizedUserDto.password,
+      );
+      if (!isPasswordValid) {
+        throw new AppError('Invalid email or password.');
+      }
+
+      // update user last login timestamp
+      await this.accountService.updateLoginTimestamp(user.id);
+
+      // Generate new user tokens
+      const tokenInfo = await this.tokenService.issueTokens(user.id);
+
+      return { tokens: tokenInfo, user };
+    } catch (error) {
+      if (error instanceof AppError) {
+        throw new BadRequestException(error.message, { cause: error });
+      }
+
+      throw new InternalServerErrorException(
+        "We couldn't process your request at the moment. Please try again later.",
+        { cause: error },
+      );
     }
   }
 

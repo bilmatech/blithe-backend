@@ -207,4 +207,11 @@ export class AccountService {
       );
     }
   }
+
+  updateLoginTimestamp(id: string) {
+    return this.prisma.user.update({
+      where: { id },
+      data: { lastSeenAt: new Date() },
+    });
+  }
 }
