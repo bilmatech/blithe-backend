@@ -1,5 +1,5 @@
+import { TemplateLoader } from '@Blithe/common/utils/template-loader.util';
 import { Injectable } from '@nestjs/common';
-import { TemplateLoader } from '@Wontum/common/utils/template-loader.util';
 import * as path from 'path';
 
 @Injectable()

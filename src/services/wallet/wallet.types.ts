@@ -1,5 +1,3 @@
-import { TransactionDto } from '@Blithe/transaction/dto/transaction.dto';
-
 export interface WebhookPayload {
   event: WebhookEvent;
   data: WebhookData;
@@ -7,7 +5,7 @@ export interface WebhookPayload {
 
 export interface CreditWalletPayload {
   walletAddress: string;
-  transaction: TransactionDto;
+  transaction: any;
 }
 
 export interface WebhookData {

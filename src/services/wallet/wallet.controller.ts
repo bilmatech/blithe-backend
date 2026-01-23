@@ -1,11 +1,11 @@
 import { Controller, Get, UseGuards } from '@nestjs/common';
 import { WalletService } from './wallet.service';
 import { ApiBearerAuth, ApiOperation, ApiTags } from '@nestjs/swagger';
-import { AuthorizedUser } from '@Blithe/auth/decorators/authorized-user.decorator';
-import { AuthUser } from '@Blithe/auth/auth.type';
-import { JwtAuthGuard } from '@Blithe/auth/guards/auth.guard';
 import { ResponseMessage } from '@Blithe/common/decorators/response-message.decorator';
 import { Prisma } from '@DB/Client';
+import { JwtAuthGuard } from '../auth/guards/auth.guard';
+import { AuthorizedUser } from '../auth/decorators/authorized-user.decorator';
+import { AuthUser } from '../auth/auth.type';
 
 @ApiTags('Wallet')
 @ApiBearerAuth()

@@ -5,33 +5,27 @@ import {
   Injectable,
   InternalServerErrorException,
 } from '@nestjs/common';
-import { PaystackService } from '@Blithe/third-party/paystack/paystack.service';
+import { PaystackService } from '@Blithe/services/third-party/paystack/paystack.service';
 import { CreateWalletDto } from './dto/create-wallet.dto';
 import { AppError } from '@Blithe/common/utils/error-handler.util';
-import { AccountService } from '@Blithe/account/account.service';
+import { AccountService } from '@Blithe/services/account/account.service';
 import {
   Prisma,
   TransactionFlow,
-  TransactionRelatedTo,
   TransactionStatus,
   TransactionType,
   Wallet,
   WalletStatus,
 } from '@DB/Client';
-import { TransactionDto } from '@Blithe/transaction/dto/transaction.dto';
 import { WebhookPayload } from './wallet.types';
 import * as Sentry from '@sentry/nestjs';
 import { computeCharges } from '@Blithe/common/utils/compute-charges.util';
-import { TransactionService } from '@Blithe/transaction/transaction.service';
-import { BankingService } from '@Blithe/banking/banking.service';
-import { CreateSenderDto } from '@Blithe/banking/dtos/create-sender.dto';
 import { generateTransactionReference } from '@Blithe/common/utils/string.util';
 import {
   PrismaService,
   PrismaTransaction,
-} from '@Blithe/database/prisma.service';
-import { EncryptionService } from '@Blithe/encryption/encryption.service';
-import { CreateLedgerEntryDto } from '../common/dto/create-ledger-entry.dto';
+} from '@Blithe/services/database/prisma.service';
+import { EncryptionService } from '@Blithe/services/encryption/encryption.service';
 import { BaseLedgerService } from '@Blithe/common/services/base-ledger.service';
 import {
   formatAmountForStorage,
@@ -42,12 +36,8 @@ import {
 export class WalletService extends BaseLedgerService {
   constructor(
     private readonly prisma: PrismaService,
-    @Inject(forwardRef(() => TransactionService))
-    private readonly transactionService: TransactionService,
     private readonly paystackService: PaystackService,
     private readonly accountService: AccountService,
-    @Inject(forwardRef(() => BankingService))
-    private readonly bankingService: BankingService,
     private readonly encryptionService: EncryptionService,
   ) {
     super('ledger');
@@ -74,8 +64,8 @@ export class WalletService extends BaseLedgerService {
     // Create a new wallet in Paystack
     const paystackWallet = await this.paystackService.generateWalletAddress({
       email: user.email,
-      firstName: user.firstName as string,
-      lastName: !user.lastName ? (user.firstName as string) : user.lastName,
+      firstName: user.firstName,
+      lastName: user.lastName,
       phone: user.phone as string,
     });
 
@@ -138,71 +128,6 @@ export class WalletService extends BaseLedgerService {
       if (!user) {
         throw new AppError('User not found for the wallet');
       }
-
-      // Find related transaction to ensure idempotency
-      const relatedTransaction =
-        await this.transactionService.findRelatedTransaction(
-          webhookData.reference,
-          wallet.id,
-        );
-
-      if (relatedTransaction) {
-        // Transaction already processed
-        return { transaction: relatedTransaction, user }; // return true so queue doesn't fail the job and requeue it for retries.
-      }
-
-      // Gather sender information
-      const senderInfo: CreateSenderDto = {
-        walletId: wallet.id,
-        senderName:
-          webhookData.authorization.sender_name ||
-          (webhookData.authorization.sender_bank as string),
-        senderBank: webhookData.authorization.sender_bank as string,
-        senderAccountNumber:
-          webhookData.authorization.sender_bank_account_number,
-        senderCountry: webhookData.authorization.sender_country,
-      };
-      const sender = await this.bankingService.createSender(senderInfo);
-
-      // compute SabiFlow fee
-      const platformFees = normalizeAmount(
-        computeCharges(webhookData.amount / 100),
-      ); // convert to Naira from Kobo
-      // get the fees that payment processor charge this transaction
-      const processorFees = normalizeAmount(webhookData.fees / 100); // convert to Naira from Kobo
-      const charges = normalizeAmount(platformFees + processorFees);
-      const tranxAmount = normalizeAmount(webhookData.amount / 100);
-
-      // amount to credit user
-      const amountToCredit = normalizeAmount(tranxAmount - charges);
-
-      // Create transaction dto
-      const transactionDto: TransactionDto = {
-        amount: new Prisma.Decimal(tranxAmount),
-        netAmount: new Prisma.Decimal(amountToCredit),
-        reference: webhookData.reference, // this will be overridden in createWithSession method
-        type: TransactionType.Deposit,
-        status: TransactionStatus.Successful,
-        platformCharges: new Prisma.Decimal(platformFees),
-        processorCharges: new Prisma.Decimal(processorFees),
-        totalCharges: new Prisma.Decimal(charges),
-        narration: `Funding|Paystack|Reference|${webhookData.reference}`,
-        walletId: wallet.id,
-        relatedTransactionId: webhookData.reference,
-        senderId: sender.id,
-        flow: TransactionFlow.Inflow,
-        remark: 'Wallet funding was successful',
-      };
-
-      const credited = await this.credit(address, transactionDto);
-      if (!credited) {
-        throw new AppError('Failed to credit wallet');
-      }
-
-      return {
-        transaction: credited,
-        user,
-      };
     } catch (error) {
       Sentry.captureException(error);
       throw error;
@@ -231,31 +156,6 @@ export class WalletService extends BaseLedgerService {
 
       // Create transaction dto
       const normalizedDebit = new Prisma.Decimal(debitAmount);
-
-      const transactionDto: TransactionDto = {
-        amount: normalizedDebit,
-        netAmount: normalizedDebit,
-        reference: reference, // this will be overridden in createWithSession method
-        type: TransactionType.Withdrawal,
-        status: TransactionStatus.Successful,
-        platformCharges: new Prisma.Decimal(0),
-        processorCharges: new Prisma.Decimal(0),
-        totalCharges: new Prisma.Decimal(0),
-        narration: `Funding|FunnelPool|Reference|${reference}`,
-        walletId: wallet.id,
-        relatedTransactionId: relatedTranxId,
-        flow: TransactionFlow.Outflow,
-        remark: 'Funnels distribution.',
-        desc: "Funding from wallet to funnels' pool",
-        relatedTo: TransactionRelatedTo.Funnels,
-      };
-
-      const updatedWallet = await this.debit(wallet.address, transactionDto);
-      if (!updatedWallet) {
-        throw new AppError('Failed to debit wallet');
-      }
-
-      return updatedWallet;
     } catch (error) {
       Sentry.captureException(error);
       throw error;
@@ -270,7 +170,7 @@ export class WalletService extends BaseLedgerService {
    * @param address Wallet address
    * @param transactionDto Transaction details
    */
-  credit(address: string, transactionDto: TransactionDto) {
+  credit(address: string, transactionDto: any) {
     return this.updateBalance(address, TransactionFlow.Inflow, transactionDto);
   }
 
@@ -282,7 +182,7 @@ export class WalletService extends BaseLedgerService {
    * @param address Wallet address
    * @param amount Amount to debit
    */
-  debit(address: string, transactionDto: TransactionDto) {
+  debit(address: string, transactionDto: any) {
     return this.updateBalance(address, TransactionFlow.Outflow, transactionDto);
   }
 
@@ -308,136 +208,118 @@ export class WalletService extends BaseLedgerService {
   private async updateBalance(
     id_or_address: string,
     flow: TransactionFlow,
-    transactionDto: TransactionDto,
+    transactionDto: any,
   ) {
-    let wallet = await this.findByAddress(id_or_address);
-    if (!wallet) {
-      wallet = await this.findOne(id_or_address);
-      if (!wallet) throw new AppError('Wallet not found');
-    }
-
-    const netAmount = new Prisma.Decimal(transactionDto.netAmount);
-    const normalizedTransaction: TransactionDto = {
-      ...transactionDto,
-      amount: new Prisma.Decimal(transactionDto.amount),
-      netAmount,
-      platformCharges: new Prisma.Decimal(transactionDto.platformCharges ?? 0),
-      processorCharges: new Prisma.Decimal(
-        transactionDto.processorCharges ?? 0,
-      ),
-      totalCharges: new Prisma.Decimal(transactionDto.totalCharges ?? 0),
-    };
-
-    return this.prisma.ext.$transaction(
-      async (tranx) => {
-        const lockedWallet: Wallet[] =
-          await tranx.$queryRaw`SELECT * FROM "Wallet" WHERE id = ${wallet.id} FOR UPDATE`;
-
-        if (!lockedWallet || lockedWallet.length === 0) {
-          throw new AppError('Wallet not found during locking');
-        }
-
-        const _wallet = lockedWallet[0];
-        if (!_wallet) {
-          throw new AppError('Wallet not found during balance update');
-        }
-
-        const decryptedBalance = this.encryptionService.decrypt(
-          _wallet.balance,
-        );
-        const currentBalance = new Prisma.Decimal(decryptedBalance);
-
-        const ledger = await this.validateLedgerConsistency(
-          tranx as PrismaTransaction,
-          currentBalance,
-          _wallet.id,
-        );
-
-        if (!ledger.valid) {
-          throw new AppError(
-            'Ledger inconsistency detected. Aborting transaction.',
-          );
-        }
-
-        const newTransaction =
-          await this.transactionService.createTransactionWithSession(
-            tranx as PrismaTransaction,
-            normalizedTransaction,
-          );
-
-        if (!newTransaction) {
-          throw new AppError('Failed to create transaction record');
-        }
-
-        let debit = new Prisma.Decimal(0);
-        let credit = new Prisma.Decimal(0);
-
-        switch (flow) {
-          case TransactionFlow.Inflow:
-            credit = await this.incrementBalance(
-              tranx as PrismaTransaction,
-              wallet.id,
-              netAmount,
-              currentBalance,
-            );
-            break;
-
-          case TransactionFlow.Outflow:
-            debit = await this.decrementBalance(
-              tranx as PrismaTransaction,
-              wallet.id,
-              netAmount,
-              currentBalance,
-            );
-            break;
-          default:
-            throw new AppError('Invalid transaction flow type');
-        }
-
-        const updatedBalance = await this.getBalance(
-          tranx as PrismaTransaction,
-          wallet.id,
-        );
-        if (!updatedBalance) {
-          throw new AppError('Failed to retrieve updated wallet balance');
-        }
-
-        const ledgerEntry: CreateLedgerEntryDto = {
-          walletId: wallet.id,
-          transactionId: newTransaction.id,
-          debit,
-          credit,
-          balanceBefore: currentBalance,
-          balanceAfter: new Prisma.Decimal(updatedBalance.balance),
-          description: newTransaction.reference,
-        };
-
-        const ledgerLog = await this.createLedgerEntry(
-          tranx as PrismaTransaction,
-          ledgerEntry,
-        );
-        if (!ledgerLog) {
-          throw new AppError('Failed to log ledger entry');
-        }
-
-        const postLedgerValidation = await this.validateLedgerConsistency(
-          tranx as PrismaTransaction,
-          new Prisma.Decimal(updatedBalance.balance),
-          _wallet.id,
-        );
-
-        if (!postLedgerValidation.valid) {
-          throw new AppError(
-            `'Ledger inconsistency detected after transaction. Aborting.': expected balance ${postLedgerValidation.expectedBalance.toNumber()}, actual balance ${postLedgerValidation.actualBalance.toNumber()}`,
-          );
-        }
-
-        return newTransaction;
-      },
-      {
-        timeout: 20000,
-      },
-    );
+    // let wallet = await this.findByAddress(id_or_address);
+    // if (!wallet) {
+    //   wallet = await this.findOne(id_or_address);
+    //   if (!wallet) throw new AppError('Wallet not found');
+    // }
+    // const netAmount = new Prisma.Decimal(transactionDto.netAmount);
+    // const normalizedTransaction: any = {
+    //   ...transactionDto,
+    //   amount: new Prisma.Decimal(transactionDto.amount),
+    //   netAmount,
+    //   platformCharges: new Prisma.Decimal(transactionDto.platformCharges ?? 0),
+    //   processorCharges: new Prisma.Decimal(
+    //     transactionDto.processorCharges ?? 0,
+    //   ),
+    //   totalCharges: new Prisma.Decimal(transactionDto.totalCharges ?? 0),
+    // };
+    // return this.prisma.ext.$transaction(
+    //   async (tranx) => {
+    //     const lockedWallet: Wallet[] =
+    //       await tranx.$queryRaw`SELECT * FROM "Wallet" WHERE id = ${wallet.id} FOR UPDATE`;
+    //     if (!lockedWallet || lockedWallet.length === 0) {
+    //       throw new AppError('Wallet not found during locking');
+    //     }
+    //     const _wallet = lockedWallet[0];
+    //     if (!_wallet) {
+    //       throw new AppError('Wallet not found during balance update');
+    //     }
+    //     const decryptedBalance = this.encryptionService.decrypt(
+    //       _wallet.balance,
+    //     );
+    //     const currentBalance = new Prisma.Decimal(decryptedBalance);
+    //     const ledger = await this.validateLedgerConsistency(
+    //       tranx as PrismaTransaction,
+    //       currentBalance,
+    //       _wallet.id,
+    //     );
+    //     if (!ledger.valid) {
+    //       throw new AppError(
+    //         'Ledger inconsistency detected. Aborting transaction.',
+    //       );
+    //     }
+    //     const newTransaction =
+    //       await this.transactionService.createTransactionWithSession(
+    //         tranx as PrismaTransaction,
+    //         normalizedTransaction,
+    //       );
+    //     if (!newTransaction) {
+    //       throw new AppError('Failed to create transaction record');
+    //     }
+    //     let debit = new Prisma.Decimal(0);
+    //     let credit = new Prisma.Decimal(0);
+    //     switch (flow) {
+    //       case TransactionFlow.Inflow:
+    //         credit = await this.incrementBalance(
+    //           tranx as PrismaTransaction,
+    //           wallet.id,
+    //           netAmount,
+    //           currentBalance,
+    //         );
+    //         break;
+    //       case TransactionFlow.Outflow:
+    //         debit = await this.decrementBalance(
+    //           tranx as PrismaTransaction,
+    //           wallet.id,
+    //           netAmount,
+    //           currentBalance,
+    //         );
+    //         break;
+    //       default:
+    //         throw new AppError('Invalid transaction flow type');
+    //     }
+    //     const updatedBalance = await this.getBalance(
+    //       tranx as PrismaTransaction,
+    //       wallet.id,
+    //     );
+    //     if (!updatedBalance) {
+    //       throw new AppError('Failed to retrieve updated wallet balance');
+    //     }
+    //     const ledgerEntry: CreateLedgerEntryDto = {
+    //       walletId: wallet.id,
+    //       transactionId: newTransaction.id,
+    //       debit,
+    //       credit,
+    //       balanceBefore: currentBalance,
+    //       balanceAfter: new Prisma.Decimal(updatedBalance.balance),
+    //       description: newTransaction.reference,
+    //     };
+    //     const ledgerLog = await this.createLedgerEntry(
+    //       tranx as PrismaTransaction,
+    //       ledgerEntry,
+    //     );
+    //     if (!ledgerLog) {
+    //       throw new AppError('Failed to log ledger entry');
+    //     }
+    //     const postLedgerValidation = await this.validateLedgerConsistency(
+    //       tranx as PrismaTransaction,
+    //       new Prisma.Decimal(updatedBalance.balance),
+    //       _wallet.id,
+    //     );
+    //     if (!postLedgerValidation.valid) {
+    //       throw new AppError(
+    //         `'Ledger inconsistency detected after transaction. Aborting.': expected balance ${postLedgerValidation.expectedBalance.toNumber()}, actual balance ${postLedgerValidation.actualBalance.toNumber()}`,
+    //       );
+    //     }
+    //     return newTransaction;
+    //   },
+    //   {
+    //     timeout: 20000,
+    //   },
+    // );
   }
 
   private getBalance(tranxSession: PrismaTransaction, id: string) {

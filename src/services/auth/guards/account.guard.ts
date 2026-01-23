@@ -14,7 +14,7 @@ export class AccountGuard implements CanActivate {
     if (!requiredAccTypes) return true;
 
     const { user } = context.switchToHttp().getRequest<{ user: AuthUser }>();
-    return requiredAccTypes.includes(user.accountType as string);
+    return requiredAccTypes.includes(user.type as string);
   }
 }
 
@@ -29,6 +29,6 @@ export class RoleGuard implements CanActivate {
     if (!requiredRoles) return true;
 
     const { user } = context.switchToHttp().getRequest<{ user: AuthUser }>();
-    return requiredRoles.includes(user.role as string);
+    return requiredRoles.includes(user.type as string);
   }
 }

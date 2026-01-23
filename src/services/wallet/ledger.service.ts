@@ -1,8 +1,8 @@
 import { Injectable } from '@nestjs/common';
-import { CreateLedgerEntryDto } from '../common/dto/create-ledger-entry.dto';
-import { PrismaTransaction } from '@Blithe/database/prisma.service';
+import { PrismaTransaction } from '../database/prisma.service';
 import { TransactionType } from '@DB/Client';
 import { BaseLedgerService } from '@Blithe/common/services/base-ledger.service';
+import { CreateLedgerEntryDto } from '@Blithe/common/dto/create-ledger-entry.dto';
 
 @Injectable()
 export class LedgerService extends BaseLedgerService {

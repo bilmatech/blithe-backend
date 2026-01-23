@@ -7,7 +7,7 @@ import {
 import { PassportStrategy } from '@nestjs/passport';
 import { ExtractJwt, Strategy } from 'passport-jwt';
 import { Request } from 'express';
-import { AccountService } from '@Blithe/account/account.service';
+import { AccountService } from '@Blithe/services/account/account.service';
 import authConfig from './configs/auth.config';
 import { ConfigType } from '@nestjs/config';
 import { AppError } from '@Blithe/common/utils/error-handler.util';

@@ -1,4 +1,3 @@
-import { TransactionDto } from '@Blithe/transaction/dto/transaction.dto';
 import { CreditWalletPayload, WebhookPayload } from '../wallet.types';
 
 export enum WalletEvents {

@@ -143,6 +143,11 @@ export type Wallet = $Result.DefaultSelection<Prisma.$WalletPayload>
  * 
  */
 export type Ledger = $Result.DefaultSelection<Prisma.$LedgerPayload>
+/**
+ * Model FirebaseToken
+ * 
+ */
+export type FirebaseToken = $Result.DefaultSelection<Prisma.$FirebaseTokenPayload>
 
 /**
  * Enums
@@ -275,6 +280,26 @@ export const VerificationType: {
 
 export type VerificationType = (typeof VerificationType)[keyof typeof VerificationType]
 
+
+export const TransactionType: {
+  Deposit: 'Deposit',
+  Withdrawal: 'Withdrawal',
+  Transfer: 'Transfer',
+  Refund: 'Refund',
+  Reversal: 'Reversal',
+  Distribution: 'Distribution'
+};
+
+export type TransactionType = (typeof TransactionType)[keyof typeof TransactionType]
+
+
+export const TransactionFlow: {
+  Inflow: 'Inflow',
+  Outflow: 'Outflow'
+};
+
+export type TransactionFlow = (typeof TransactionFlow)[keyof typeof TransactionFlow]
+
 }
 
 export type UserType = $Enums.UserType
@@ -332,6 +357,14 @@ export const WalletStatus: typeof $Enums.WalletStatus
 export type VerificationType = $Enums.VerificationType
 
 export const VerificationType: typeof $Enums.VerificationType
+
+export type TransactionType = $Enums.TransactionType
+
+export const TransactionType: typeof $Enums.TransactionType
+
+export type TransactionFlow = $Enums.TransactionFlow
+
+export const TransactionFlow: typeof $Enums.TransactionFlow
 
 /**
  * ##  Prisma Client ʲˢ
@@ -709,6 +742,16 @@ export class PrismaClient<
     * ```
     */
   get ledger(): Prisma.LedgerDelegate<ExtArgs, ClientOptions>;
+
+  /**
+   * `prisma.firebaseToken`: Exposes CRUD operations for the **FirebaseToken** model.
+    * Example usage:
+    * ```ts
+    * // Fetch zero or more FirebaseTokens
+    * const firebaseTokens = await prisma.firebaseToken.findMany()
+    * ```
+    */
+  get firebaseToken(): Prisma.FirebaseTokenDelegate<ExtArgs, ClientOptions>;
 }
 
 export namespace Prisma {
@@ -1168,7 +1211,8 @@ export namespace Prisma {
     Payout: 'Payout',
     Notification: 'Notification',
     Wallet: 'Wallet',
-    Ledger: 'Ledger'
+    Ledger: 'Ledger',
+    FirebaseToken: 'FirebaseToken'
   };
 
   export type ModelName = (typeof ModelName)[keyof typeof ModelName]
@@ -1184,7 +1228,7 @@ export namespace Prisma {
       omit: GlobalOmitOptions
     }
     meta: {
-      modelProps: "user" | "credential" | "refreshToken" | "administrator" | "guardian" | "verification" | "school" | "schoolDirectorVerification" | "schoolOwnershipVerification" | "schoolVerification" | "schoolPayoutDetail" | "schoolAndPlatformLegalAgreement" | "class" | "academicSession" | "term" | "fees" | "feeBreakdown" | "invoice" | "student" | "linkedStudentProfile" | "transaction" | "transactionFee" | "payout" | "notification" | "wallet" | "ledger"
+      modelProps: "user" | "credential" | "refreshToken" | "administrator" | "guardian" | "verification" | "school" | "schoolDirectorVerification" | "schoolOwnershipVerification" | "schoolVerification" | "schoolPayoutDetail" | "schoolAndPlatformLegalAgreement" | "class" | "academicSession" | "term" | "fees" | "feeBreakdown" | "invoice" | "student" | "linkedStudentProfile" | "transaction" | "transactionFee" | "payout" | "notification" | "wallet" | "ledger" | "firebaseToken"
       txIsolationLevel: Prisma.TransactionIsolationLevel
     }
     model: {
@@ -3112,6 +3156,80 @@ export namespace Prisma {
           }
         }
       }
+      FirebaseToken: {
+        payload: Prisma.$FirebaseTokenPayload<ExtArgs>
+        fields: Prisma.FirebaseTokenFieldRefs
+        operations: {
+          findUnique: {
+            args: Prisma.FirebaseTokenFindUniqueArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$FirebaseTokenPayload> | null
+          }
+          findUniqueOrThrow: {
+            args: Prisma.FirebaseTokenFindUniqueOrThrowArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$FirebaseTokenPayload>
+          }
+          findFirst: {
+            args: Prisma.FirebaseTokenFindFirstArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$FirebaseTokenPayload> | null
+          }
+          findFirstOrThrow: {
+            args: Prisma.FirebaseTokenFindFirstOrThrowArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$FirebaseTokenPayload>
+          }
+          findMany: {
+            args: Prisma.FirebaseTokenFindManyArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$FirebaseTokenPayload>[]
+          }
+          create: {
+            args: Prisma.FirebaseTokenCreateArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$FirebaseTokenPayload>
+          }
+          createMany: {
+            args: Prisma.FirebaseTokenCreateManyArgs<ExtArgs>
+            result: BatchPayload
+          }
+          createManyAndReturn: {
+            args: Prisma.FirebaseTokenCreateManyAndReturnArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$FirebaseTokenPayload>[]
+          }
+          delete: {
+            args: Prisma.FirebaseTokenDeleteArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$FirebaseTokenPayload>
+          }
+          update: {
+            args: Prisma.FirebaseTokenUpdateArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$FirebaseTokenPayload>
+          }
+          deleteMany: {
+            args: Prisma.FirebaseTokenDeleteManyArgs<ExtArgs>
+            result: BatchPayload
+          }
+          updateMany: {
+            args: Prisma.FirebaseTokenUpdateManyArgs<ExtArgs>
+            result: BatchPayload
+          }
+          updateManyAndReturn: {
+            args: Prisma.FirebaseTokenUpdateManyAndReturnArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$FirebaseTokenPayload>[]
+          }
+          upsert: {
+            args: Prisma.FirebaseTokenUpsertArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$FirebaseTokenPayload>
+          }
+          aggregate: {
+            args: Prisma.FirebaseTokenAggregateArgs<ExtArgs>
+            result: $Utils.Optional<AggregateFirebaseToken>
+          }
+          groupBy: {
+            args: Prisma.FirebaseTokenGroupByArgs<ExtArgs>
+            result: $Utils.Optional<FirebaseTokenGroupByOutputType>[]
+          }
+          count: {
+            args: Prisma.FirebaseTokenCountArgs<ExtArgs>
+            result: $Utils.Optional<FirebaseTokenCountAggregateOutputType> | number
+          }
+        }
+      }
     }
   } & {
     other: {
@@ -3246,6 +3364,7 @@ export namespace Prisma {
     notification?: NotificationOmit
     wallet?: WalletOmit
     ledger?: LedgerOmit
+    firebaseToken?: FirebaseTokenOmit
   }
 
   /* Types for Logging */
@@ -3967,6 +4086,7 @@ export namespace Prisma {
     credential?: boolean | User$credentialArgs<ExtArgs>
     wallet?: boolean | User$walletArgs<ExtArgs>
     refreshTokens?: boolean | User$refreshTokensArgs<ExtArgs>
+    firebaseToken?: boolean | User$firebaseTokenArgs<ExtArgs>
     _count?: boolean | UserCountOutputTypeDefaultArgs<ExtArgs>
   }, ExtArgs["result"]["user"]>
 
@@ -4029,6 +4149,7 @@ export namespace Prisma {
     credential?: boolean | User$credentialArgs<ExtArgs>
     wallet?: boolean | User$walletArgs<ExtArgs>
     refreshTokens?: boolean | User$refreshTokensArgs<ExtArgs>
+    firebaseToken?: boolean | User$firebaseTokenArgs<ExtArgs>
     _count?: boolean | UserCountOutputTypeDefaultArgs<ExtArgs>
   }
   export type UserIncludeCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {}
@@ -4046,6 +4167,7 @@ export namespace Prisma {
       credential: Prisma.$CredentialPayload<ExtArgs> | null
       wallet: Prisma.$WalletPayload<ExtArgs> | null
       refreshTokens: Prisma.$RefreshTokenPayload<ExtArgs>[]
+      firebaseToken: Prisma.$FirebaseTokenPayload<ExtArgs> | null
     }
     scalars: $Extensions.GetPayloadResult<{
       id: string
@@ -4464,6 +4586,7 @@ export namespace Prisma {
     credential<T extends User$credentialArgs<ExtArgs> = {}>(args?: Subset<T, User$credentialArgs<ExtArgs>>): Prisma__CredentialClient<$Result.GetResult<Prisma.$CredentialPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
     wallet<T extends User$walletArgs<ExtArgs> = {}>(args?: Subset<T, User$walletArgs<ExtArgs>>): Prisma__WalletClient<$Result.GetResult<Prisma.$WalletPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
     refreshTokens<T extends User$refreshTokensArgs<ExtArgs> = {}>(args?: Subset<T, User$refreshTokensArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$RefreshTokenPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
+    firebaseToken<T extends User$firebaseTokenArgs<ExtArgs> = {}>(args?: Subset<T, User$firebaseTokenArgs<ExtArgs>>): Prisma__FirebaseTokenClient<$Result.GetResult<Prisma.$FirebaseTokenPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
     /**
      * Attaches callbacks for the resolution and/or rejection of the Promise.
      * @param onfulfilled The callback to execute when the Promise is resolved.
@@ -5077,6 +5200,25 @@ export namespace Prisma {
     take?: number
     skip?: number
     distinct?: RefreshTokenScalarFieldEnum | RefreshTokenScalarFieldEnum[]
+  }
+
+  /**
+   * User.firebaseToken
+   */
+  export type User$firebaseTokenArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the FirebaseToken
+     */
+    select?: FirebaseTokenSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the FirebaseToken
+     */
+    omit?: FirebaseTokenOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: FirebaseTokenInclude<ExtArgs> | null
+    where?: FirebaseTokenWhereInput
   }
 
   /**
@@ -27200,6 +27342,8 @@ export namespace Prisma {
     amount: Decimal | null
     fees: Decimal | null
     status: $Enums.TransactionStatus | null
+    type: $Enums.TransactionType | null
+    flow: $Enums.TransactionFlow | null
     transactionAt: Date | null
     processedAt: Date | null
     description: string | null
@@ -27217,6 +27361,8 @@ export namespace Prisma {
     amount: Decimal | null
     fees: Decimal | null
     status: $Enums.TransactionStatus | null
+    type: $Enums.TransactionType | null
+    flow: $Enums.TransactionFlow | null
     transactionAt: Date | null
     processedAt: Date | null
     description: string | null
@@ -27234,6 +27380,8 @@ export namespace Prisma {
     amount: number
     fees: number
     status: number
+    type: number
+    flow: number
     transactionAt: number
     processedAt: number
     description: number
@@ -27263,6 +27411,8 @@ export namespace Prisma {
     amount?: true
     fees?: true
     status?: true
+    type?: true
+    flow?: true
     transactionAt?: true
     processedAt?: true
     description?: true
@@ -27280,6 +27430,8 @@ export namespace Prisma {
     amount?: true
     fees?: true
     status?: true
+    type?: true
+    flow?: true
     transactionAt?: true
     processedAt?: true
     description?: true
@@ -27297,6 +27449,8 @@ export namespace Prisma {
     amount?: true
     fees?: true
     status?: true
+    type?: true
+    flow?: true
     transactionAt?: true
     processedAt?: true
     description?: true
@@ -27401,6 +27555,8 @@ export namespace Prisma {
     amount: Decimal
     fees: Decimal
     status: $Enums.TransactionStatus
+    type: $Enums.TransactionType
+    flow: $Enums.TransactionFlow
     transactionAt: Date | null
     processedAt: Date | null
     description: string | null
@@ -27437,6 +27593,8 @@ export namespace Prisma {
     amount?: boolean
     fees?: boolean
     status?: boolean
+    type?: boolean
+    flow?: boolean
     transactionAt?: boolean
     processedAt?: boolean
     description?: boolean
@@ -27459,6 +27617,8 @@ export namespace Prisma {
     amount?: boolean
     fees?: boolean
     status?: boolean
+    type?: boolean
+    flow?: boolean
     transactionAt?: boolean
     processedAt?: boolean
     description?: boolean
@@ -27479,6 +27639,8 @@ export namespace Prisma {
     amount?: boolean
     fees?: boolean
     status?: boolean
+    type?: boolean
+    flow?: boolean
     transactionAt?: boolean
     processedAt?: boolean
     description?: boolean
@@ -27499,6 +27661,8 @@ export namespace Prisma {
     amount?: boolean
     fees?: boolean
     status?: boolean
+    type?: boolean
+    flow?: boolean
     transactionAt?: boolean
     processedAt?: boolean
     description?: boolean
@@ -27508,7 +27672,7 @@ export namespace Prisma {
     walletId?: boolean
   }
 
-  export type TransactionOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "guardianId" | "invoiceId" | "reference" | "amount" | "fees" | "status" | "transactionAt" | "processedAt" | "description" | "isDeleted" | "createdAt" | "updatedAt" | "walletId", ExtArgs["result"]["transaction"]>
+  export type TransactionOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "guardianId" | "invoiceId" | "reference" | "amount" | "fees" | "status" | "type" | "flow" | "transactionAt" | "processedAt" | "description" | "isDeleted" | "createdAt" | "updatedAt" | "walletId", ExtArgs["result"]["transaction"]>
   export type TransactionInclude<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     invoice?: boolean | InvoiceDefaultArgs<ExtArgs>
     guardian?: boolean | GuardianDefaultArgs<ExtArgs>
@@ -27544,6 +27708,8 @@ export namespace Prisma {
       amount: Prisma.Decimal
       fees: Prisma.Decimal
       status: $Enums.TransactionStatus
+      type: $Enums.TransactionType
+      flow: $Enums.TransactionFlow
       transactionAt: Date | null
       processedAt: Date | null
       description: string | null
@@ -27986,6 +28152,8 @@ export namespace Prisma {
     readonly amount: FieldRef<"Transaction", 'Decimal'>
     readonly fees: FieldRef<"Transaction", 'Decimal'>
     readonly status: FieldRef<"Transaction", 'TransactionStatus'>
+    readonly type: FieldRef<"Transaction", 'TransactionType'>
+    readonly flow: FieldRef<"Transaction", 'TransactionFlow'>
     readonly transactionAt: FieldRef<"Transaction", 'DateTime'>
     readonly processedAt: FieldRef<"Transaction", 'DateTime'>
     readonly description: FieldRef<"Transaction", 'String'>
@@ -34259,6 +34427,1077 @@ export namespace Prisma {
 
 
   /**
+   * Model FirebaseToken
+   */
+
+  export type AggregateFirebaseToken = {
+    _count: FirebaseTokenCountAggregateOutputType | null
+    _min: FirebaseTokenMinAggregateOutputType | null
+    _max: FirebaseTokenMaxAggregateOutputType | null
+  }
+
+  export type FirebaseTokenMinAggregateOutputType = {
+    id: string | null
+    userId: string | null
+    token: string | null
+    isDeleted: boolean | null
+    updatedAt: Date | null
+    createdAt: Date | null
+  }
+
+  export type FirebaseTokenMaxAggregateOutputType = {
+    id: string | null
+    userId: string | null
+    token: string | null
+    isDeleted: boolean | null
+    updatedAt: Date | null
+    createdAt: Date | null
+  }
+
+  export type FirebaseTokenCountAggregateOutputType = {
+    id: number
+    userId: number
+    token: number
+    isDeleted: number
+    updatedAt: number
+    createdAt: number
+    _all: number
+  }
+
+
+  export type FirebaseTokenMinAggregateInputType = {
+    id?: true
+    userId?: true
+    token?: true
+    isDeleted?: true
+    updatedAt?: true
+    createdAt?: true
+  }
+
+  export type FirebaseTokenMaxAggregateInputType = {
+    id?: true
+    userId?: true
+    token?: true
+    isDeleted?: true
+    updatedAt?: true
+    createdAt?: true
+  }
+
+  export type FirebaseTokenCountAggregateInputType = {
+    id?: true
+    userId?: true
+    token?: true
+    isDeleted?: true
+    updatedAt?: true
+    createdAt?: true
+    _all?: true
+  }
+
+  export type FirebaseTokenAggregateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Filter which FirebaseToken to aggregate.
+     */
+    where?: FirebaseTokenWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of FirebaseTokens to fetch.
+     */
+    orderBy?: FirebaseTokenOrderByWithRelationInput | FirebaseTokenOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the start position
+     */
+    cursor?: FirebaseTokenWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` FirebaseTokens from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` FirebaseTokens.
+     */
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Count returned FirebaseTokens
+    **/
+    _count?: true | FirebaseTokenCountAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to find the minimum value
+    **/
+    _min?: FirebaseTokenMinAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to find the maximum value
+    **/
+    _max?: FirebaseTokenMaxAggregateInputType
+  }
+
+  export type GetFirebaseTokenAggregateType<T extends FirebaseTokenAggregateArgs> = {
+        [P in keyof T & keyof AggregateFirebaseToken]: P extends '_count' | 'count'
+      ? T[P] extends true
+        ? number
+        : GetScalarType<T[P], AggregateFirebaseToken[P]>
+      : GetScalarType<T[P], AggregateFirebaseToken[P]>
+  }
+
+
+
+
+  export type FirebaseTokenGroupByArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    where?: FirebaseTokenWhereInput
+    orderBy?: FirebaseTokenOrderByWithAggregationInput | FirebaseTokenOrderByWithAggregationInput[]
+    by: FirebaseTokenScalarFieldEnum[] | FirebaseTokenScalarFieldEnum
+    having?: FirebaseTokenScalarWhereWithAggregatesInput
+    take?: number
+    skip?: number
+    _count?: FirebaseTokenCountAggregateInputType | true
+    _min?: FirebaseTokenMinAggregateInputType
+    _max?: FirebaseTokenMaxAggregateInputType
+  }
+
+  export type FirebaseTokenGroupByOutputType = {
+    id: string
+    userId: string
+    token: string | null
+    isDeleted: boolean
+    updatedAt: Date
+    createdAt: Date
+    _count: FirebaseTokenCountAggregateOutputType | null
+    _min: FirebaseTokenMinAggregateOutputType | null
+    _max: FirebaseTokenMaxAggregateOutputType | null
+  }
+
+  type GetFirebaseTokenGroupByPayload<T extends FirebaseTokenGroupByArgs> = Prisma.PrismaPromise<
+    Array<
+      PickEnumerable<FirebaseTokenGroupByOutputType, T['by']> &
+        {
+          [P in ((keyof T) & (keyof FirebaseTokenGroupByOutputType))]: P extends '_count'
+            ? T[P] extends boolean
+              ? number
+              : GetScalarType<T[P], FirebaseTokenGroupByOutputType[P]>
+            : GetScalarType<T[P], FirebaseTokenGroupByOutputType[P]>
+        }
+      >
+    >
+
+
+  export type FirebaseTokenSelect<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
+    id?: boolean
+    userId?: boolean
+    token?: boolean
+    isDeleted?: boolean
+    updatedAt?: boolean
+    createdAt?: boolean
+    user?: boolean | UserDefaultArgs<ExtArgs>
+  }, ExtArgs["result"]["firebaseToken"]>
+
+  export type FirebaseTokenSelectCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
+    id?: boolean
+    userId?: boolean
+    token?: boolean
+    isDeleted?: boolean
+    updatedAt?: boolean
+    createdAt?: boolean
+    user?: boolean | UserDefaultArgs<ExtArgs>
+  }, ExtArgs["result"]["firebaseToken"]>
+
+  export type FirebaseTokenSelectUpdateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
+    id?: boolean
+    userId?: boolean
+    token?: boolean
+    isDeleted?: boolean
+    updatedAt?: boolean
+    createdAt?: boolean
+    user?: boolean | UserDefaultArgs<ExtArgs>
+  }, ExtArgs["result"]["firebaseToken"]>
+
+  export type FirebaseTokenSelectScalar = {
+    id?: boolean
+    userId?: boolean
+    token?: boolean
+    isDeleted?: boolean
+    updatedAt?: boolean
+    createdAt?: boolean
+  }
+
+  export type FirebaseTokenOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "userId" | "token" | "isDeleted" | "updatedAt" | "createdAt", ExtArgs["result"]["firebaseToken"]>
+  export type FirebaseTokenInclude<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    user?: boolean | UserDefaultArgs<ExtArgs>
+  }
+  export type FirebaseTokenIncludeCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    user?: boolean | UserDefaultArgs<ExtArgs>
+  }
+  export type FirebaseTokenIncludeUpdateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    user?: boolean | UserDefaultArgs<ExtArgs>
+  }
+
+  export type $FirebaseTokenPayload<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    name: "FirebaseToken"
+    objects: {
+      user: Prisma.$UserPayload<ExtArgs>
+    }
+    scalars: $Extensions.GetPayloadResult<{
+      id: string
+      userId: string
+      token: string | null
+      isDeleted: boolean
+      updatedAt: Date
+      createdAt: Date
+    }, ExtArgs["result"]["firebaseToken"]>
+    composites: {}
+  }
+
+  type FirebaseTokenGetPayload<S extends boolean | null | undefined | FirebaseTokenDefaultArgs> = $Result.GetResult<Prisma.$FirebaseTokenPayload, S>
+
+  type FirebaseTokenCountArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> =
+    Omit<FirebaseTokenFindManyArgs, 'select' | 'include' | 'distinct' | 'omit'> & {
+      select?: FirebaseTokenCountAggregateInputType | true
+    }
+
+  export interface FirebaseTokenDelegate<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs, GlobalOmitOptions = {}> {
+    [K: symbol]: { types: Prisma.TypeMap<ExtArgs>['model']['FirebaseToken'], meta: { name: 'FirebaseToken' } }
+    /**
+     * Find zero or one FirebaseToken that matches the filter.
+     * @param {FirebaseTokenFindUniqueArgs} args - Arguments to find a FirebaseToken
+     * @example
+     * // Get one FirebaseToken
+     * const firebaseToken = await prisma.firebaseToken.findUnique({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findUnique<T extends FirebaseTokenFindUniqueArgs>(args: SelectSubset<T, FirebaseTokenFindUniqueArgs<ExtArgs>>): Prisma__FirebaseTokenClient<$Result.GetResult<Prisma.$FirebaseTokenPayload<ExtArgs>, T, "findUnique", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find one FirebaseToken that matches the filter or throw an error with `error.code='P2025'`
+     * if no matches were found.
+     * @param {FirebaseTokenFindUniqueOrThrowArgs} args - Arguments to find a FirebaseToken
+     * @example
+     * // Get one FirebaseToken
+     * const firebaseToken = await prisma.firebaseToken.findUniqueOrThrow({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findUniqueOrThrow<T extends FirebaseTokenFindUniqueOrThrowArgs>(args: SelectSubset<T, FirebaseTokenFindUniqueOrThrowArgs<ExtArgs>>): Prisma__FirebaseTokenClient<$Result.GetResult<Prisma.$FirebaseTokenPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find the first FirebaseToken that matches the filter.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {FirebaseTokenFindFirstArgs} args - Arguments to find a FirebaseToken
+     * @example
+     * // Get one FirebaseToken
+     * const firebaseToken = await prisma.firebaseToken.findFirst({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findFirst<T extends FirebaseTokenFindFirstArgs>(args?: SelectSubset<T, FirebaseTokenFindFirstArgs<ExtArgs>>): Prisma__FirebaseTokenClient<$Result.GetResult<Prisma.$FirebaseTokenPayload<ExtArgs>, T, "findFirst", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find the first FirebaseToken that matches the filter or
+     * throw `PrismaKnownClientError` with `P2025` code if no matches were found.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {FirebaseTokenFindFirstOrThrowArgs} args - Arguments to find a FirebaseToken
+     * @example
+     * // Get one FirebaseToken
+     * const firebaseToken = await prisma.firebaseToken.findFirstOrThrow({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findFirstOrThrow<T extends FirebaseTokenFindFirstOrThrowArgs>(args?: SelectSubset<T, FirebaseTokenFindFirstOrThrowArgs<ExtArgs>>): Prisma__FirebaseTokenClient<$Result.GetResult<Prisma.$FirebaseTokenPayload<ExtArgs>, T, "findFirstOrThrow", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find zero or more FirebaseTokens that matches the filter.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {FirebaseTokenFindManyArgs} args - Arguments to filter and select certain fields only.
+     * @example
+     * // Get all FirebaseTokens
+     * const firebaseTokens = await prisma.firebaseToken.findMany()
+     * 
+     * // Get first 10 FirebaseTokens
+     * const firebaseTokens = await prisma.firebaseToken.findMany({ take: 10 })
+     * 
+     * // Only select the `id`
+     * const firebaseTokenWithIdOnly = await prisma.firebaseToken.findMany({ select: { id: true } })
+     * 
+     */
+    findMany<T extends FirebaseTokenFindManyArgs>(args?: SelectSubset<T, FirebaseTokenFindManyArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$FirebaseTokenPayload<ExtArgs>, T, "findMany", GlobalOmitOptions>>
+
+    /**
+     * Create a FirebaseToken.
+     * @param {FirebaseTokenCreateArgs} args - Arguments to create a FirebaseToken.
+     * @example
+     * // Create one FirebaseToken
+     * const FirebaseToken = await prisma.firebaseToken.create({
+     *   data: {
+     *     // ... data to create a FirebaseToken
+     *   }
+     * })
+     * 
+     */
+    create<T extends FirebaseTokenCreateArgs>(args: SelectSubset<T, FirebaseTokenCreateArgs<ExtArgs>>): Prisma__FirebaseTokenClient<$Result.GetResult<Prisma.$FirebaseTokenPayload<ExtArgs>, T, "create", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Create many FirebaseTokens.
+     * @param {FirebaseTokenCreateManyArgs} args - Arguments to create many FirebaseTokens.
+     * @example
+     * // Create many FirebaseTokens
+     * const firebaseToken = await prisma.firebaseToken.createMany({
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     *     
+     */
+    createMany<T extends FirebaseTokenCreateManyArgs>(args?: SelectSubset<T, FirebaseTokenCreateManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
+
+    /**
+     * Create many FirebaseTokens and returns the data saved in the database.
+     * @param {FirebaseTokenCreateManyAndReturnArgs} args - Arguments to create many FirebaseTokens.
+     * @example
+     * // Create many FirebaseTokens
+     * const firebaseToken = await prisma.firebaseToken.createManyAndReturn({
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     * 
+     * // Create many FirebaseTokens and only return the `id`
+     * const firebaseTokenWithIdOnly = await prisma.firebaseToken.createManyAndReturn({
+     *   select: { id: true },
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * 
+     */
+    createManyAndReturn<T extends FirebaseTokenCreateManyAndReturnArgs>(args?: SelectSubset<T, FirebaseTokenCreateManyAndReturnArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$FirebaseTokenPayload<ExtArgs>, T, "createManyAndReturn", GlobalOmitOptions>>
+
+    /**
+     * Delete a FirebaseToken.
+     * @param {FirebaseTokenDeleteArgs} args - Arguments to delete one FirebaseToken.
+     * @example
+     * // Delete one FirebaseToken
+     * const FirebaseToken = await prisma.firebaseToken.delete({
+     *   where: {
+     *     // ... filter to delete one FirebaseToken
+     *   }
+     * })
+     * 
+     */
+    delete<T extends FirebaseTokenDeleteArgs>(args: SelectSubset<T, FirebaseTokenDeleteArgs<ExtArgs>>): Prisma__FirebaseTokenClient<$Result.GetResult<Prisma.$FirebaseTokenPayload<ExtArgs>, T, "delete", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Update one FirebaseToken.
+     * @param {FirebaseTokenUpdateArgs} args - Arguments to update one FirebaseToken.
+     * @example
+     * // Update one FirebaseToken
+     * const firebaseToken = await prisma.firebaseToken.update({
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: {
+     *     // ... provide data here
+     *   }
+     * })
+     * 
+     */
+    update<T extends FirebaseTokenUpdateArgs>(args: SelectSubset<T, FirebaseTokenUpdateArgs<ExtArgs>>): Prisma__FirebaseTokenClient<$Result.GetResult<Prisma.$FirebaseTokenPayload<ExtArgs>, T, "update", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Delete zero or more FirebaseTokens.
+     * @param {FirebaseTokenDeleteManyArgs} args - Arguments to filter FirebaseTokens to delete.
+     * @example
+     * // Delete a few FirebaseTokens
+     * const { count } = await prisma.firebaseToken.deleteMany({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     * 
+     */
+    deleteMany<T extends FirebaseTokenDeleteManyArgs>(args?: SelectSubset<T, FirebaseTokenDeleteManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
+
+    /**
+     * Update zero or more FirebaseTokens.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {FirebaseTokenUpdateManyArgs} args - Arguments to update one or more rows.
+     * @example
+     * // Update many FirebaseTokens
+     * const firebaseToken = await prisma.firebaseToken.updateMany({
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: {
+     *     // ... provide data here
+     *   }
+     * })
+     * 
+     */
+    updateMany<T extends FirebaseTokenUpdateManyArgs>(args: SelectSubset<T, FirebaseTokenUpdateManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
+
+    /**
+     * Update zero or more FirebaseTokens and returns the data updated in the database.
+     * @param {FirebaseTokenUpdateManyAndReturnArgs} args - Arguments to update many FirebaseTokens.
+     * @example
+     * // Update many FirebaseTokens
+     * const firebaseToken = await prisma.firebaseToken.updateManyAndReturn({
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     * 
+     * // Update zero or more FirebaseTokens and only return the `id`
+     * const firebaseTokenWithIdOnly = await prisma.firebaseToken.updateManyAndReturn({
+     *   select: { id: true },
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * 
+     */
+    updateManyAndReturn<T extends FirebaseTokenUpdateManyAndReturnArgs>(args: SelectSubset<T, FirebaseTokenUpdateManyAndReturnArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$FirebaseTokenPayload<ExtArgs>, T, "updateManyAndReturn", GlobalOmitOptions>>
+
+    /**
+     * Create or update one FirebaseToken.
+     * @param {FirebaseTokenUpsertArgs} args - Arguments to update or create a FirebaseToken.
+     * @example
+     * // Update or create a FirebaseToken
+     * const firebaseToken = await prisma.firebaseToken.upsert({
+     *   create: {
+     *     // ... data to create a FirebaseToken
+     *   },
+     *   update: {
+     *     // ... in case it already exists, update
+     *   },
+     *   where: {
+     *     // ... the filter for the FirebaseToken we want to update
+     *   }
+     * })
+     */
+    upsert<T extends FirebaseTokenUpsertArgs>(args: SelectSubset<T, FirebaseTokenUpsertArgs<ExtArgs>>): Prisma__FirebaseTokenClient<$Result.GetResult<Prisma.$FirebaseTokenPayload<ExtArgs>, T, "upsert", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+
+    /**
+     * Count the number of FirebaseTokens.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {FirebaseTokenCountArgs} args - Arguments to filter FirebaseTokens to count.
+     * @example
+     * // Count the number of FirebaseTokens
+     * const count = await prisma.firebaseToken.count({
+     *   where: {
+     *     // ... the filter for the FirebaseTokens we want to count
+     *   }
+     * })
+    **/
+    count<T extends FirebaseTokenCountArgs>(
+      args?: Subset<T, FirebaseTokenCountArgs>,
+    ): Prisma.PrismaPromise<
+      T extends $Utils.Record<'select', any>
+        ? T['select'] extends true
+          ? number
+          : GetScalarType<T['select'], FirebaseTokenCountAggregateOutputType>
+        : number
+    >
+
+    /**
+     * Allows you to perform aggregations operations on a FirebaseToken.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {FirebaseTokenAggregateArgs} args - Select which aggregations you would like to apply and on what fields.
+     * @example
+     * // Ordered by age ascending
+     * // Where email contains prisma.io
+     * // Limited to the 10 users
+     * const aggregations = await prisma.user.aggregate({
+     *   _avg: {
+     *     age: true,
+     *   },
+     *   where: {
+     *     email: {
+     *       contains: "prisma.io",
+     *     },
+     *   },
+     *   orderBy: {
+     *     age: "asc",
+     *   },
+     *   take: 10,
+     * })
+    **/
+    aggregate<T extends FirebaseTokenAggregateArgs>(args: Subset<T, FirebaseTokenAggregateArgs>): Prisma.PrismaPromise<GetFirebaseTokenAggregateType<T>>
+
+    /**
+     * Group by FirebaseToken.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {FirebaseTokenGroupByArgs} args - Group by arguments.
+     * @example
+     * // Group by city, order by createdAt, get count
+     * const result = await prisma.user.groupBy({
+     *   by: ['city', 'createdAt'],
+     *   orderBy: {
+     *     createdAt: true
+     *   },
+     *   _count: {
+     *     _all: true
+     *   },
+     * })
+     * 
+    **/
+    groupBy<
+      T extends FirebaseTokenGroupByArgs,
+      HasSelectOrTake extends Or<
+        Extends<'skip', Keys<T>>,
+        Extends<'take', Keys<T>>
+      >,
+      OrderByArg extends True extends HasSelectOrTake
+        ? { orderBy: FirebaseTokenGroupByArgs['orderBy'] }
+        : { orderBy?: FirebaseTokenGroupByArgs['orderBy'] },
+      OrderFields extends ExcludeUnderscoreKeys<Keys<MaybeTupleToUnion<T['orderBy']>>>,
+      ByFields extends MaybeTupleToUnion<T['by']>,
+      ByValid extends Has<ByFields, OrderFields>,
+      HavingFields extends GetHavingFields<T['having']>,
+      HavingValid extends Has<ByFields, HavingFields>,
+      ByEmpty extends T['by'] extends never[] ? True : False,
+      InputErrors extends ByEmpty extends True
+      ? `Error: "by" must not be empty.`
+      : HavingValid extends False
+      ? {
+          [P in HavingFields]: P extends ByFields
+            ? never
+            : P extends string
+            ? `Error: Field "${P}" used in "having" needs to be provided in "by".`
+            : [
+                Error,
+                'Field ',
+                P,
+                ` in "having" needs to be provided in "by"`,
+              ]
+        }[HavingFields]
+      : 'take' extends Keys<T>
+      ? 'orderBy' extends Keys<T>
+        ? ByValid extends True
+          ? {}
+          : {
+              [P in OrderFields]: P extends ByFields
+                ? never
+                : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
+            }[OrderFields]
+        : 'Error: If you provide "take", you also need to provide "orderBy"'
+      : 'skip' extends Keys<T>
+      ? 'orderBy' extends Keys<T>
+        ? ByValid extends True
+          ? {}
+          : {
+              [P in OrderFields]: P extends ByFields
+                ? never
+                : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
+            }[OrderFields]
+        : 'Error: If you provide "skip", you also need to provide "orderBy"'
+      : ByValid extends True
+      ? {}
+      : {
+          [P in OrderFields]: P extends ByFields
+            ? never
+            : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
+        }[OrderFields]
+    >(args: SubsetIntersection<T, FirebaseTokenGroupByArgs, OrderByArg> & InputErrors): {} extends InputErrors ? GetFirebaseTokenGroupByPayload<T> : Prisma.PrismaPromise<InputErrors>
+  /**
+   * Fields of the FirebaseToken model
+   */
+  readonly fields: FirebaseTokenFieldRefs;
+  }
+
+  /**
+   * The delegate class that acts as a "Promise-like" for FirebaseToken.
+   * Why is this prefixed with `Prisma__`?
+   * Because we want to prevent naming conflicts as mentioned in
+   * https://github.com/prisma/prisma-client-js/issues/707
+   */
+  export interface Prisma__FirebaseTokenClient<T, Null = never, ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs, GlobalOmitOptions = {}> extends Prisma.PrismaPromise<T> {
+    readonly [Symbol.toStringTag]: "PrismaPromise"
+    user<T extends UserDefaultArgs<ExtArgs> = {}>(args?: Subset<T, UserDefaultArgs<ExtArgs>>): Prisma__UserClient<$Result.GetResult<Prisma.$UserPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | Null, Null, ExtArgs, GlobalOmitOptions>
+    /**
+     * Attaches callbacks for the resolution and/or rejection of the Promise.
+     * @param onfulfilled The callback to execute when the Promise is resolved.
+     * @param onrejected The callback to execute when the Promise is rejected.
+     * @returns A Promise for the completion of which ever callback is executed.
+     */
+    then<TResult1 = T, TResult2 = never>(onfulfilled?: ((value: T) => TResult1 | PromiseLike<TResult1>) | undefined | null, onrejected?: ((reason: any) => TResult2 | PromiseLike<TResult2>) | undefined | null): $Utils.JsPromise<TResult1 | TResult2>
+    /**
+     * Attaches a callback for only the rejection of the Promise.
+     * @param onrejected The callback to execute when the Promise is rejected.
+     * @returns A Promise for the completion of the callback.
+     */
+    catch<TResult = never>(onrejected?: ((reason: any) => TResult | PromiseLike<TResult>) | undefined | null): $Utils.JsPromise<T | TResult>
+    /**
+     * Attaches a callback that is invoked when the Promise is settled (fulfilled or rejected). The
+     * resolved value cannot be modified from the callback.
+     * @param onfinally The callback to execute when the Promise is settled (fulfilled or rejected).
+     * @returns A Promise for the completion of the callback.
+     */
+    finally(onfinally?: (() => void) | undefined | null): $Utils.JsPromise<T>
+  }
+
+
+
+
+  /**
+   * Fields of the FirebaseToken model
+   */
+  interface FirebaseTokenFieldRefs {
+    readonly id: FieldRef<"FirebaseToken", 'String'>
+    readonly userId: FieldRef<"FirebaseToken", 'String'>
+    readonly token: FieldRef<"FirebaseToken", 'String'>
+    readonly isDeleted: FieldRef<"FirebaseToken", 'Boolean'>
+    readonly updatedAt: FieldRef<"FirebaseToken", 'DateTime'>
+    readonly createdAt: FieldRef<"FirebaseToken", 'DateTime'>
+  }
+    
+
+  // Custom InputTypes
+  /**
+   * FirebaseToken findUnique
+   */
+  export type FirebaseTokenFindUniqueArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the FirebaseToken
+     */
+    select?: FirebaseTokenSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the FirebaseToken
+     */
+    omit?: FirebaseTokenOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: FirebaseTokenInclude<ExtArgs> | null
+    /**
+     * Filter, which FirebaseToken to fetch.
+     */
+    where: FirebaseTokenWhereUniqueInput
+  }
+
+  /**
+   * FirebaseToken findUniqueOrThrow
+   */
+  export type FirebaseTokenFindUniqueOrThrowArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the FirebaseToken
+     */
+    select?: FirebaseTokenSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the FirebaseToken
+     */
+    omit?: FirebaseTokenOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: FirebaseTokenInclude<ExtArgs> | null
+    /**
+     * Filter, which FirebaseToken to fetch.
+     */
+    where: FirebaseTokenWhereUniqueInput
+  }
+
+  /**
+   * FirebaseToken findFirst
+   */
+  export type FirebaseTokenFindFirstArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the FirebaseToken
+     */
+    select?: FirebaseTokenSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the FirebaseToken
+     */
+    omit?: FirebaseTokenOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: FirebaseTokenInclude<ExtArgs> | null
+    /**
+     * Filter, which FirebaseToken to fetch.
+     */
+    where?: FirebaseTokenWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of FirebaseTokens to fetch.
+     */
+    orderBy?: FirebaseTokenOrderByWithRelationInput | FirebaseTokenOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the position for searching for FirebaseTokens.
+     */
+    cursor?: FirebaseTokenWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` FirebaseTokens from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` FirebaseTokens.
+     */
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/distinct Distinct Docs}
+     * 
+     * Filter by unique combinations of FirebaseTokens.
+     */
+    distinct?: FirebaseTokenScalarFieldEnum | FirebaseTokenScalarFieldEnum[]
+  }
+
+  /**
+   * FirebaseToken findFirstOrThrow
+   */
+  export type FirebaseTokenFindFirstOrThrowArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the FirebaseToken
+     */
+    select?: FirebaseTokenSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the FirebaseToken
+     */
+    omit?: FirebaseTokenOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: FirebaseTokenInclude<ExtArgs> | null
+    /**
+     * Filter, which FirebaseToken to fetch.
+     */
+    where?: FirebaseTokenWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of FirebaseTokens to fetch.
+     */
+    orderBy?: FirebaseTokenOrderByWithRelationInput | FirebaseTokenOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the position for searching for FirebaseTokens.
+     */
+    cursor?: FirebaseTokenWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` FirebaseTokens from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` FirebaseTokens.
+     */
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/distinct Distinct Docs}
+     * 
+     * Filter by unique combinations of FirebaseTokens.
+     */
+    distinct?: FirebaseTokenScalarFieldEnum | FirebaseTokenScalarFieldEnum[]
+  }
+
+  /**
+   * FirebaseToken findMany
+   */
+  export type FirebaseTokenFindManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the FirebaseToken
+     */
+    select?: FirebaseTokenSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the FirebaseToken
+     */
+    omit?: FirebaseTokenOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: FirebaseTokenInclude<ExtArgs> | null
+    /**
+     * Filter, which FirebaseTokens to fetch.
+     */
+    where?: FirebaseTokenWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of FirebaseTokens to fetch.
+     */
+    orderBy?: FirebaseTokenOrderByWithRelationInput | FirebaseTokenOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the position for listing FirebaseTokens.
+     */
+    cursor?: FirebaseTokenWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` FirebaseTokens from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` FirebaseTokens.
+     */
+    skip?: number
+    distinct?: FirebaseTokenScalarFieldEnum | FirebaseTokenScalarFieldEnum[]
+  }
+
+  /**
+   * FirebaseToken create
+   */
+  export type FirebaseTokenCreateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the FirebaseToken
+     */
+    select?: FirebaseTokenSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the FirebaseToken
+     */
+    omit?: FirebaseTokenOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: FirebaseTokenInclude<ExtArgs> | null
+    /**
+     * The data needed to create a FirebaseToken.
+     */
+    data: XOR<FirebaseTokenCreateInput, FirebaseTokenUncheckedCreateInput>
+  }
+
+  /**
+   * FirebaseToken createMany
+   */
+  export type FirebaseTokenCreateManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * The data used to create many FirebaseTokens.
+     */
+    data: FirebaseTokenCreateManyInput | FirebaseTokenCreateManyInput[]
+    skipDuplicates?: boolean
+  }
+
+  /**
+   * FirebaseToken createManyAndReturn
+   */
+  export type FirebaseTokenCreateManyAndReturnArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the FirebaseToken
+     */
+    select?: FirebaseTokenSelectCreateManyAndReturn<ExtArgs> | null
+    /**
+     * Omit specific fields from the FirebaseToken
+     */
+    omit?: FirebaseTokenOmit<ExtArgs> | null
+    /**
+     * The data used to create many FirebaseTokens.
+     */
+    data: FirebaseTokenCreateManyInput | FirebaseTokenCreateManyInput[]
+    skipDuplicates?: boolean
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: FirebaseTokenIncludeCreateManyAndReturn<ExtArgs> | null
+  }
+
+  /**
+   * FirebaseToken update
+   */
+  export type FirebaseTokenUpdateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the FirebaseToken
+     */
+    select?: FirebaseTokenSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the FirebaseToken
+     */
+    omit?: FirebaseTokenOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: FirebaseTokenInclude<ExtArgs> | null
+    /**
+     * The data needed to update a FirebaseToken.
+     */
+    data: XOR<FirebaseTokenUpdateInput, FirebaseTokenUncheckedUpdateInput>
+    /**
+     * Choose, which FirebaseToken to update.
+     */
+    where: FirebaseTokenWhereUniqueInput
+  }
+
+  /**
+   * FirebaseToken updateMany
+   */
+  export type FirebaseTokenUpdateManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * The data used to update FirebaseTokens.
+     */
+    data: XOR<FirebaseTokenUpdateManyMutationInput, FirebaseTokenUncheckedUpdateManyInput>
+    /**
+     * Filter which FirebaseTokens to update
+     */
+    where?: FirebaseTokenWhereInput
+    /**
+     * Limit how many FirebaseTokens to update.
+     */
+    limit?: number
+  }
+
+  /**
+   * FirebaseToken updateManyAndReturn
+   */
+  export type FirebaseTokenUpdateManyAndReturnArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the FirebaseToken
+     */
+    select?: FirebaseTokenSelectUpdateManyAndReturn<ExtArgs> | null
+    /**
+     * Omit specific fields from the FirebaseToken
+     */
+    omit?: FirebaseTokenOmit<ExtArgs> | null
+    /**
+     * The data used to update FirebaseTokens.
+     */
+    data: XOR<FirebaseTokenUpdateManyMutationInput, FirebaseTokenUncheckedUpdateManyInput>
+    /**
+     * Filter which FirebaseTokens to update
+     */
+    where?: FirebaseTokenWhereInput
+    /**
+     * Limit how many FirebaseTokens to update.
+     */
+    limit?: number
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: FirebaseTokenIncludeUpdateManyAndReturn<ExtArgs> | null
+  }
+
+  /**
+   * FirebaseToken upsert
+   */
+  export type FirebaseTokenUpsertArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the FirebaseToken
+     */
+    select?: FirebaseTokenSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the FirebaseToken
+     */
+    omit?: FirebaseTokenOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: FirebaseTokenInclude<ExtArgs> | null
+    /**
+     * The filter to search for the FirebaseToken to update in case it exists.
+     */
+    where: FirebaseTokenWhereUniqueInput
+    /**
+     * In case the FirebaseToken found by the `where` argument doesn't exist, create a new FirebaseToken with this data.
+     */
+    create: XOR<FirebaseTokenCreateInput, FirebaseTokenUncheckedCreateInput>
+    /**
+     * In case the FirebaseToken was found with the provided `where` argument, update it with this data.
+     */
+    update: XOR<FirebaseTokenUpdateInput, FirebaseTokenUncheckedUpdateInput>
+  }
+
+  /**
+   * FirebaseToken delete
+   */
+  export type FirebaseTokenDeleteArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the FirebaseToken
+     */
+    select?: FirebaseTokenSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the FirebaseToken
+     */
+    omit?: FirebaseTokenOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: FirebaseTokenInclude<ExtArgs> | null
+    /**
+     * Filter which FirebaseToken to delete.
+     */
+    where: FirebaseTokenWhereUniqueInput
+  }
+
+  /**
+   * FirebaseToken deleteMany
+   */
+  export type FirebaseTokenDeleteManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Filter which FirebaseTokens to delete
+     */
+    where?: FirebaseTokenWhereInput
+    /**
+     * Limit how many FirebaseTokens to delete.
+     */
+    limit?: number
+  }
+
+  /**
+   * FirebaseToken without action
+   */
+  export type FirebaseTokenDefaultArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the FirebaseToken
+     */
+    select?: FirebaseTokenSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the FirebaseToken
+     */
+    omit?: FirebaseTokenOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: FirebaseTokenInclude<ExtArgs> | null
+  }
+
+
+  /**
    * Enums
    */
 
@@ -34589,6 +35828,8 @@ export namespace Prisma {
     amount: 'amount',
     fees: 'fees',
     status: 'status',
+    type: 'type',
+    flow: 'flow',
     transactionAt: 'transactionAt',
     processedAt: 'processedAt',
     description: 'description',
@@ -34678,6 +35919,18 @@ export namespace Prisma {
   };
 
   export type LedgerScalarFieldEnum = (typeof LedgerScalarFieldEnum)[keyof typeof LedgerScalarFieldEnum]
+
+
+  export const FirebaseTokenScalarFieldEnum: {
+    id: 'id',
+    userId: 'userId',
+    token: 'token',
+    isDeleted: 'isDeleted',
+    updatedAt: 'updatedAt',
+    createdAt: 'createdAt'
+  };
+
+  export type FirebaseTokenScalarFieldEnum = (typeof FirebaseTokenScalarFieldEnum)[keyof typeof FirebaseTokenScalarFieldEnum]
 
 
   export const SortOrder: {
@@ -34927,6 +36180,34 @@ export namespace Prisma {
 
 
   /**
+   * Reference to a field of type 'TransactionType'
+   */
+  export type EnumTransactionTypeFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'TransactionType'>
+    
+
+
+  /**
+   * Reference to a field of type 'TransactionType[]'
+   */
+  export type ListEnumTransactionTypeFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'TransactionType[]'>
+    
+
+
+  /**
+   * Reference to a field of type 'TransactionFlow'
+   */
+  export type EnumTransactionFlowFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'TransactionFlow'>
+    
+
+
+  /**
+   * Reference to a field of type 'TransactionFlow[]'
+   */
+  export type ListEnumTransactionFlowFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'TransactionFlow[]'>
+    
+
+
+  /**
    * Reference to a field of type 'PayoutStatus'
    */
   export type EnumPayoutStatusFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'PayoutStatus'>
@@ -35011,6 +36292,7 @@ export namespace Prisma {
     credential?: XOR<CredentialNullableScalarRelationFilter, CredentialWhereInput> | null
     wallet?: XOR<WalletNullableScalarRelationFilter, WalletWhereInput> | null
     refreshTokens?: RefreshTokenListRelationFilter
+    firebaseToken?: XOR<FirebaseTokenNullableScalarRelationFilter, FirebaseTokenWhereInput> | null
   }
 
   export type UserOrderByWithRelationInput = {
@@ -35036,6 +36318,7 @@ export namespace Prisma {
     credential?: CredentialOrderByWithRelationInput
     wallet?: WalletOrderByWithRelationInput
     refreshTokens?: RefreshTokenOrderByRelationAggregateInput
+    firebaseToken?: FirebaseTokenOrderByWithRelationInput
   }
 
   export type UserWhereUniqueInput = Prisma.AtLeast<{
@@ -35064,6 +36347,7 @@ export namespace Prisma {
     credential?: XOR<CredentialNullableScalarRelationFilter, CredentialWhereInput> | null
     wallet?: XOR<WalletNullableScalarRelationFilter, WalletWhereInput> | null
     refreshTokens?: RefreshTokenListRelationFilter
+    firebaseToken?: XOR<FirebaseTokenNullableScalarRelationFilter, FirebaseTokenWhereInput> | null
   }, "id" | "email">
 
   export type UserOrderByWithAggregationInput = {
@@ -36674,6 +37958,8 @@ export namespace Prisma {
     amount?: DecimalFilter<"Transaction"> | Decimal | DecimalJsLike | number | string
     fees?: DecimalFilter<"Transaction"> | Decimal | DecimalJsLike | number | string
     status?: EnumTransactionStatusFilter<"Transaction"> | $Enums.TransactionStatus
+    type?: EnumTransactionTypeFilter<"Transaction"> | $Enums.TransactionType
+    flow?: EnumTransactionFlowFilter<"Transaction"> | $Enums.TransactionFlow
     transactionAt?: DateTimeNullableFilter<"Transaction"> | Date | string | null
     processedAt?: DateTimeNullableFilter<"Transaction"> | Date | string | null
     description?: StringNullableFilter<"Transaction"> | string | null
@@ -36696,6 +37982,8 @@ export namespace Prisma {
     amount?: SortOrder
     fees?: SortOrder
     status?: SortOrder
+    type?: SortOrder
+    flow?: SortOrder
     transactionAt?: SortOrderInput | SortOrder
     processedAt?: SortOrderInput | SortOrder
     description?: SortOrderInput | SortOrder
@@ -36721,6 +38009,8 @@ export namespace Prisma {
     amount?: DecimalFilter<"Transaction"> | Decimal | DecimalJsLike | number | string
     fees?: DecimalFilter<"Transaction"> | Decimal | DecimalJsLike | number | string
     status?: EnumTransactionStatusFilter<"Transaction"> | $Enums.TransactionStatus
+    type?: EnumTransactionTypeFilter<"Transaction"> | $Enums.TransactionType
+    flow?: EnumTransactionFlowFilter<"Transaction"> | $Enums.TransactionFlow
     transactionAt?: DateTimeNullableFilter<"Transaction"> | Date | string | null
     processedAt?: DateTimeNullableFilter<"Transaction"> | Date | string | null
     description?: StringNullableFilter<"Transaction"> | string | null
@@ -36743,6 +38033,8 @@ export namespace Prisma {
     amount?: SortOrder
     fees?: SortOrder
     status?: SortOrder
+    type?: SortOrder
+    flow?: SortOrder
     transactionAt?: SortOrderInput | SortOrder
     processedAt?: SortOrderInput | SortOrder
     description?: SortOrderInput | SortOrder
@@ -36768,6 +38060,8 @@ export namespace Prisma {
     amount?: DecimalWithAggregatesFilter<"Transaction"> | Decimal | DecimalJsLike | number | string
     fees?: DecimalWithAggregatesFilter<"Transaction"> | Decimal | DecimalJsLike | number | string
     status?: EnumTransactionStatusWithAggregatesFilter<"Transaction"> | $Enums.TransactionStatus
+    type?: EnumTransactionTypeWithAggregatesFilter<"Transaction"> | $Enums.TransactionType
+    flow?: EnumTransactionFlowWithAggregatesFilter<"Transaction"> | $Enums.TransactionFlow
     transactionAt?: DateTimeNullableWithAggregatesFilter<"Transaction"> | Date | string | null
     processedAt?: DateTimeNullableWithAggregatesFilter<"Transaction"> | Date | string | null
     description?: StringNullableWithAggregatesFilter<"Transaction"> | string | null
@@ -37187,6 +38481,66 @@ export namespace Prisma {
     createdAt?: DateTimeWithAggregatesFilter<"Ledger"> | Date | string
   }
 
+  export type FirebaseTokenWhereInput = {
+    AND?: FirebaseTokenWhereInput | FirebaseTokenWhereInput[]
+    OR?: FirebaseTokenWhereInput[]
+    NOT?: FirebaseTokenWhereInput | FirebaseTokenWhereInput[]
+    id?: StringFilter<"FirebaseToken"> | string
+    userId?: StringFilter<"FirebaseToken"> | string
+    token?: StringNullableFilter<"FirebaseToken"> | string | null
+    isDeleted?: BoolFilter<"FirebaseToken"> | boolean
+    updatedAt?: DateTimeFilter<"FirebaseToken"> | Date | string
+    createdAt?: DateTimeFilter<"FirebaseToken"> | Date | string
+    user?: XOR<UserScalarRelationFilter, UserWhereInput>
+  }
+
+  export type FirebaseTokenOrderByWithRelationInput = {
+    id?: SortOrder
+    userId?: SortOrder
+    token?: SortOrderInput | SortOrder
+    isDeleted?: SortOrder
+    updatedAt?: SortOrder
+    createdAt?: SortOrder
+    user?: UserOrderByWithRelationInput
+  }
+
+  export type FirebaseTokenWhereUniqueInput = Prisma.AtLeast<{
+    id?: string
+    userId?: string
+    AND?: FirebaseTokenWhereInput | FirebaseTokenWhereInput[]
+    OR?: FirebaseTokenWhereInput[]
+    NOT?: FirebaseTokenWhereInput | FirebaseTokenWhereInput[]
+    token?: StringNullableFilter<"FirebaseToken"> | string | null
+    isDeleted?: BoolFilter<"FirebaseToken"> | boolean
+    updatedAt?: DateTimeFilter<"FirebaseToken"> | Date | string
+    createdAt?: DateTimeFilter<"FirebaseToken"> | Date | string
+    user?: XOR<UserScalarRelationFilter, UserWhereInput>
+  }, "id" | "userId">
+
+  export type FirebaseTokenOrderByWithAggregationInput = {
+    id?: SortOrder
+    userId?: SortOrder
+    token?: SortOrderInput | SortOrder
+    isDeleted?: SortOrder
+    updatedAt?: SortOrder
+    createdAt?: SortOrder
+    _count?: FirebaseTokenCountOrderByAggregateInput
+    _max?: FirebaseTokenMaxOrderByAggregateInput
+    _min?: FirebaseTokenMinOrderByAggregateInput
+  }
+
+  export type FirebaseTokenScalarWhereWithAggregatesInput = {
+    AND?: FirebaseTokenScalarWhereWithAggregatesInput | FirebaseTokenScalarWhereWithAggregatesInput[]
+    OR?: FirebaseTokenScalarWhereWithAggregatesInput[]
+    NOT?: FirebaseTokenScalarWhereWithAggregatesInput | FirebaseTokenScalarWhereWithAggregatesInput[]
+    id?: StringWithAggregatesFilter<"FirebaseToken"> | string
+    userId?: StringWithAggregatesFilter<"FirebaseToken"> | string
+    token?: StringNullableWithAggregatesFilter<"FirebaseToken"> | string | null
+    isDeleted?: BoolWithAggregatesFilter<"FirebaseToken"> | boolean
+    updatedAt?: DateTimeWithAggregatesFilter<"FirebaseToken"> | Date | string
+    createdAt?: DateTimeWithAggregatesFilter<"FirebaseToken"> | Date | string
+  }
+
   export type UserCreateInput = {
     id?: string
     firstName: string
@@ -37210,6 +38564,7 @@ export namespace Prisma {
     credential?: CredentialCreateNestedOneWithoutUserInput
     wallet?: WalletCreateNestedOneWithoutUserInput
     refreshTokens?: RefreshTokenCreateNestedManyWithoutUserInput
+    firebaseToken?: FirebaseTokenCreateNestedOneWithoutUserInput
   }
 
   export type UserUncheckedCreateInput = {
@@ -37235,6 +38590,7 @@ export namespace Prisma {
     credential?: CredentialUncheckedCreateNestedOneWithoutUserInput
     wallet?: WalletUncheckedCreateNestedOneWithoutUserInput
     refreshTokens?: RefreshTokenUncheckedCreateNestedManyWithoutUserInput
+    firebaseToken?: FirebaseTokenUncheckedCreateNestedOneWithoutUserInput
   }
 
   export type UserUpdateInput = {
@@ -37260,6 +38616,7 @@ export namespace Prisma {
     credential?: CredentialUpdateOneWithoutUserNestedInput
     wallet?: WalletUpdateOneWithoutUserNestedInput
     refreshTokens?: RefreshTokenUpdateManyWithoutUserNestedInput
+    firebaseToken?: FirebaseTokenUpdateOneWithoutUserNestedInput
   }
 
   export type UserUncheckedUpdateInput = {
@@ -37285,6 +38642,7 @@ export namespace Prisma {
     credential?: CredentialUncheckedUpdateOneWithoutUserNestedInput
     wallet?: WalletUncheckedUpdateOneWithoutUserNestedInput
     refreshTokens?: RefreshTokenUncheckedUpdateManyWithoutUserNestedInput
+    firebaseToken?: FirebaseTokenUncheckedUpdateOneWithoutUserNestedInput
   }
 
   export type UserCreateManyInput = {
@@ -39040,6 +40398,8 @@ export namespace Prisma {
     amount?: Decimal | DecimalJsLike | number | string
     fees?: Decimal | DecimalJsLike | number | string
     status?: $Enums.TransactionStatus
+    type?: $Enums.TransactionType
+    flow?: $Enums.TransactionFlow
     transactionAt?: Date | string | null
     processedAt?: Date | string | null
     description?: string | null
@@ -39061,6 +40421,8 @@ export namespace Prisma {
     amount?: Decimal | DecimalJsLike | number | string
     fees?: Decimal | DecimalJsLike | number | string
     status?: $Enums.TransactionStatus
+    type?: $Enums.TransactionType
+    flow?: $Enums.TransactionFlow
     transactionAt?: Date | string | null
     processedAt?: Date | string | null
     description?: string | null
@@ -39078,6 +40440,8 @@ export namespace Prisma {
     amount?: DecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string
     fees?: DecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string
     status?: EnumTransactionStatusFieldUpdateOperationsInput | $Enums.TransactionStatus
+    type?: EnumTransactionTypeFieldUpdateOperationsInput | $Enums.TransactionType
+    flow?: EnumTransactionFlowFieldUpdateOperationsInput | $Enums.TransactionFlow
     transactionAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     processedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     description?: NullableStringFieldUpdateOperationsInput | string | null
@@ -39099,6 +40463,8 @@ export namespace Prisma {
     amount?: DecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string
     fees?: DecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string
     status?: EnumTransactionStatusFieldUpdateOperationsInput | $Enums.TransactionStatus
+    type?: EnumTransactionTypeFieldUpdateOperationsInput | $Enums.TransactionType
+    flow?: EnumTransactionFlowFieldUpdateOperationsInput | $Enums.TransactionFlow
     transactionAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     processedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     description?: NullableStringFieldUpdateOperationsInput | string | null
@@ -39118,6 +40484,8 @@ export namespace Prisma {
     amount?: Decimal | DecimalJsLike | number | string
     fees?: Decimal | DecimalJsLike | number | string
     status?: $Enums.TransactionStatus
+    type?: $Enums.TransactionType
+    flow?: $Enums.TransactionFlow
     transactionAt?: Date | string | null
     processedAt?: Date | string | null
     description?: string | null
@@ -39133,6 +40501,8 @@ export namespace Prisma {
     amount?: DecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string
     fees?: DecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string
     status?: EnumTransactionStatusFieldUpdateOperationsInput | $Enums.TransactionStatus
+    type?: EnumTransactionTypeFieldUpdateOperationsInput | $Enums.TransactionType
+    flow?: EnumTransactionFlowFieldUpdateOperationsInput | $Enums.TransactionFlow
     transactionAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     processedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     description?: NullableStringFieldUpdateOperationsInput | string | null
@@ -39149,6 +40519,8 @@ export namespace Prisma {
     amount?: DecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string
     fees?: DecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string
     status?: EnumTransactionStatusFieldUpdateOperationsInput | $Enums.TransactionStatus
+    type?: EnumTransactionTypeFieldUpdateOperationsInput | $Enums.TransactionType
+    flow?: EnumTransactionFlowFieldUpdateOperationsInput | $Enums.TransactionFlow
     transactionAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     processedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     description?: NullableStringFieldUpdateOperationsInput | string | null
@@ -39608,6 +40980,68 @@ export namespace Prisma {
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
   }
 
+  export type FirebaseTokenCreateInput = {
+    id?: string
+    token?: string | null
+    isDeleted?: boolean
+    updatedAt?: Date | string
+    createdAt?: Date | string
+    user: UserCreateNestedOneWithoutFirebaseTokenInput
+  }
+
+  export type FirebaseTokenUncheckedCreateInput = {
+    id?: string
+    userId: string
+    token?: string | null
+    isDeleted?: boolean
+    updatedAt?: Date | string
+    createdAt?: Date | string
+  }
+
+  export type FirebaseTokenUpdateInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    token?: NullableStringFieldUpdateOperationsInput | string | null
+    isDeleted?: BoolFieldUpdateOperationsInput | boolean
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    user?: UserUpdateOneRequiredWithoutFirebaseTokenNestedInput
+  }
+
+  export type FirebaseTokenUncheckedUpdateInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    userId?: StringFieldUpdateOperationsInput | string
+    token?: NullableStringFieldUpdateOperationsInput | string | null
+    isDeleted?: BoolFieldUpdateOperationsInput | boolean
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type FirebaseTokenCreateManyInput = {
+    id?: string
+    userId: string
+    token?: string | null
+    isDeleted?: boolean
+    updatedAt?: Date | string
+    createdAt?: Date | string
+  }
+
+  export type FirebaseTokenUpdateManyMutationInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    token?: NullableStringFieldUpdateOperationsInput | string | null
+    isDeleted?: BoolFieldUpdateOperationsInput | boolean
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type FirebaseTokenUncheckedUpdateManyInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    userId?: StringFieldUpdateOperationsInput | string
+    token?: NullableStringFieldUpdateOperationsInput | string | null
+    isDeleted?: BoolFieldUpdateOperationsInput | boolean
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
   export type StringFilter<$PrismaModel = never> = {
     equals?: string | StringFieldRefInput<$PrismaModel>
     in?: string[] | ListStringFieldRefInput<$PrismaModel>
@@ -39725,6 +41159,11 @@ export namespace Prisma {
     every?: RefreshTokenWhereInput
     some?: RefreshTokenWhereInput
     none?: RefreshTokenWhereInput
+  }
+
+  export type FirebaseTokenNullableScalarRelationFilter = {
+    is?: FirebaseTokenWhereInput | null
+    isNot?: FirebaseTokenWhereInput | null
   }
 
   export type SortOrderInput = {
@@ -41012,6 +42451,20 @@ export namespace Prisma {
     not?: NestedEnumTransactionStatusFilter<$PrismaModel> | $Enums.TransactionStatus
   }
 
+  export type EnumTransactionTypeFilter<$PrismaModel = never> = {
+    equals?: $Enums.TransactionType | EnumTransactionTypeFieldRefInput<$PrismaModel>
+    in?: $Enums.TransactionType[] | ListEnumTransactionTypeFieldRefInput<$PrismaModel>
+    notIn?: $Enums.TransactionType[] | ListEnumTransactionTypeFieldRefInput<$PrismaModel>
+    not?: NestedEnumTransactionTypeFilter<$PrismaModel> | $Enums.TransactionType
+  }
+
+  export type EnumTransactionFlowFilter<$PrismaModel = never> = {
+    equals?: $Enums.TransactionFlow | EnumTransactionFlowFieldRefInput<$PrismaModel>
+    in?: $Enums.TransactionFlow[] | ListEnumTransactionFlowFieldRefInput<$PrismaModel>
+    notIn?: $Enums.TransactionFlow[] | ListEnumTransactionFlowFieldRefInput<$PrismaModel>
+    not?: NestedEnumTransactionFlowFilter<$PrismaModel> | $Enums.TransactionFlow
+  }
+
   export type InvoiceScalarRelationFilter = {
     is?: InvoiceWhereInput
     isNot?: InvoiceWhereInput
@@ -41035,6 +42488,8 @@ export namespace Prisma {
     amount?: SortOrder
     fees?: SortOrder
     status?: SortOrder
+    type?: SortOrder
+    flow?: SortOrder
     transactionAt?: SortOrder
     processedAt?: SortOrder
     description?: SortOrder
@@ -41057,6 +42512,8 @@ export namespace Prisma {
     amount?: SortOrder
     fees?: SortOrder
     status?: SortOrder
+    type?: SortOrder
+    flow?: SortOrder
     transactionAt?: SortOrder
     processedAt?: SortOrder
     description?: SortOrder
@@ -41074,6 +42531,8 @@ export namespace Prisma {
     amount?: SortOrder
     fees?: SortOrder
     status?: SortOrder
+    type?: SortOrder
+    flow?: SortOrder
     transactionAt?: SortOrder
     processedAt?: SortOrder
     description?: SortOrder
@@ -41096,6 +42555,26 @@ export namespace Prisma {
     _count?: NestedIntFilter<$PrismaModel>
     _min?: NestedEnumTransactionStatusFilter<$PrismaModel>
     _max?: NestedEnumTransactionStatusFilter<$PrismaModel>
+  }
+
+  export type EnumTransactionTypeWithAggregatesFilter<$PrismaModel = never> = {
+    equals?: $Enums.TransactionType | EnumTransactionTypeFieldRefInput<$PrismaModel>
+    in?: $Enums.TransactionType[] | ListEnumTransactionTypeFieldRefInput<$PrismaModel>
+    notIn?: $Enums.TransactionType[] | ListEnumTransactionTypeFieldRefInput<$PrismaModel>
+    not?: NestedEnumTransactionTypeWithAggregatesFilter<$PrismaModel> | $Enums.TransactionType
+    _count?: NestedIntFilter<$PrismaModel>
+    _min?: NestedEnumTransactionTypeFilter<$PrismaModel>
+    _max?: NestedEnumTransactionTypeFilter<$PrismaModel>
+  }
+
+  export type EnumTransactionFlowWithAggregatesFilter<$PrismaModel = never> = {
+    equals?: $Enums.TransactionFlow | EnumTransactionFlowFieldRefInput<$PrismaModel>
+    in?: $Enums.TransactionFlow[] | ListEnumTransactionFlowFieldRefInput<$PrismaModel>
+    notIn?: $Enums.TransactionFlow[] | ListEnumTransactionFlowFieldRefInput<$PrismaModel>
+    not?: NestedEnumTransactionFlowWithAggregatesFilter<$PrismaModel> | $Enums.TransactionFlow
+    _count?: NestedIntFilter<$PrismaModel>
+    _min?: NestedEnumTransactionFlowFilter<$PrismaModel>
+    _max?: NestedEnumTransactionFlowFilter<$PrismaModel>
   }
 
   export type TransactionScalarRelationFilter = {
@@ -41397,6 +42876,33 @@ export namespace Prisma {
     balanceAfter?: SortOrder
   }
 
+  export type FirebaseTokenCountOrderByAggregateInput = {
+    id?: SortOrder
+    userId?: SortOrder
+    token?: SortOrder
+    isDeleted?: SortOrder
+    updatedAt?: SortOrder
+    createdAt?: SortOrder
+  }
+
+  export type FirebaseTokenMaxOrderByAggregateInput = {
+    id?: SortOrder
+    userId?: SortOrder
+    token?: SortOrder
+    isDeleted?: SortOrder
+    updatedAt?: SortOrder
+    createdAt?: SortOrder
+  }
+
+  export type FirebaseTokenMinOrderByAggregateInput = {
+    id?: SortOrder
+    userId?: SortOrder
+    token?: SortOrder
+    isDeleted?: SortOrder
+    updatedAt?: SortOrder
+    createdAt?: SortOrder
+  }
+
   export type AdministratorCreateNestedOneWithoutUserInput = {
     create?: XOR<AdministratorCreateWithoutUserInput, AdministratorUncheckedCreateWithoutUserInput>
     connectOrCreate?: AdministratorCreateOrConnectWithoutUserInput
@@ -41454,6 +42960,12 @@ export namespace Prisma {
     connect?: RefreshTokenWhereUniqueInput | RefreshTokenWhereUniqueInput[]
   }
 
+  export type FirebaseTokenCreateNestedOneWithoutUserInput = {
+    create?: XOR<FirebaseTokenCreateWithoutUserInput, FirebaseTokenUncheckedCreateWithoutUserInput>
+    connectOrCreate?: FirebaseTokenCreateOrConnectWithoutUserInput
+    connect?: FirebaseTokenWhereUniqueInput
+  }
+
   export type AdministratorUncheckedCreateNestedOneWithoutUserInput = {
     create?: XOR<AdministratorCreateWithoutUserInput, AdministratorUncheckedCreateWithoutUserInput>
     connectOrCreate?: AdministratorCreateOrConnectWithoutUserInput
@@ -41509,6 +43021,12 @@ export namespace Prisma {
     connectOrCreate?: RefreshTokenCreateOrConnectWithoutUserInput | RefreshTokenCreateOrConnectWithoutUserInput[]
     createMany?: RefreshTokenCreateManyUserInputEnvelope
     connect?: RefreshTokenWhereUniqueInput | RefreshTokenWhereUniqueInput[]
+  }
+
+  export type FirebaseTokenUncheckedCreateNestedOneWithoutUserInput = {
+    create?: XOR<FirebaseTokenCreateWithoutUserInput, FirebaseTokenUncheckedCreateWithoutUserInput>
+    connectOrCreate?: FirebaseTokenCreateOrConnectWithoutUserInput
+    connect?: FirebaseTokenWhereUniqueInput
   }
 
   export type StringFieldUpdateOperationsInput = {
@@ -41641,6 +43159,16 @@ export namespace Prisma {
     deleteMany?: RefreshTokenScalarWhereInput | RefreshTokenScalarWhereInput[]
   }
 
+  export type FirebaseTokenUpdateOneWithoutUserNestedInput = {
+    create?: XOR<FirebaseTokenCreateWithoutUserInput, FirebaseTokenUncheckedCreateWithoutUserInput>
+    connectOrCreate?: FirebaseTokenCreateOrConnectWithoutUserInput
+    upsert?: FirebaseTokenUpsertWithoutUserInput
+    disconnect?: FirebaseTokenWhereInput | boolean
+    delete?: FirebaseTokenWhereInput | boolean
+    connect?: FirebaseTokenWhereUniqueInput
+    update?: XOR<XOR<FirebaseTokenUpdateToOneWithWhereWithoutUserInput, FirebaseTokenUpdateWithoutUserInput>, FirebaseTokenUncheckedUpdateWithoutUserInput>
+  }
+
   export type AdministratorUncheckedUpdateOneWithoutUserNestedInput = {
     create?: XOR<AdministratorCreateWithoutUserInput, AdministratorUncheckedCreateWithoutUserInput>
     connectOrCreate?: AdministratorCreateOrConnectWithoutUserInput
@@ -41741,6 +43269,16 @@ export namespace Prisma {
     update?: RefreshTokenUpdateWithWhereUniqueWithoutUserInput | RefreshTokenUpdateWithWhereUniqueWithoutUserInput[]
     updateMany?: RefreshTokenUpdateManyWithWhereWithoutUserInput | RefreshTokenUpdateManyWithWhereWithoutUserInput[]
     deleteMany?: RefreshTokenScalarWhereInput | RefreshTokenScalarWhereInput[]
+  }
+
+  export type FirebaseTokenUncheckedUpdateOneWithoutUserNestedInput = {
+    create?: XOR<FirebaseTokenCreateWithoutUserInput, FirebaseTokenUncheckedCreateWithoutUserInput>
+    connectOrCreate?: FirebaseTokenCreateOrConnectWithoutUserInput
+    upsert?: FirebaseTokenUpsertWithoutUserInput
+    disconnect?: FirebaseTokenWhereInput | boolean
+    delete?: FirebaseTokenWhereInput | boolean
+    connect?: FirebaseTokenWhereUniqueInput
+    update?: XOR<XOR<FirebaseTokenUpdateToOneWithWhereWithoutUserInput, FirebaseTokenUpdateWithoutUserInput>, FirebaseTokenUncheckedUpdateWithoutUserInput>
   }
 
   export type UserCreateNestedOneWithoutCredentialInput = {
@@ -43187,6 +44725,14 @@ export namespace Prisma {
     set?: $Enums.TransactionStatus
   }
 
+  export type EnumTransactionTypeFieldUpdateOperationsInput = {
+    set?: $Enums.TransactionType
+  }
+
+  export type EnumTransactionFlowFieldUpdateOperationsInput = {
+    set?: $Enums.TransactionFlow
+  }
+
   export type InvoiceUpdateOneRequiredWithoutTransactionsNestedInput = {
     create?: XOR<InvoiceCreateWithoutTransactionsInput, InvoiceUncheckedCreateWithoutTransactionsInput>
     connectOrCreate?: InvoiceCreateOrConnectWithoutTransactionsInput
@@ -43431,6 +44977,20 @@ export namespace Prisma {
     upsert?: TransactionUpsertWithoutLedgerInput
     connect?: TransactionWhereUniqueInput
     update?: XOR<XOR<TransactionUpdateToOneWithWhereWithoutLedgerInput, TransactionUpdateWithoutLedgerInput>, TransactionUncheckedUpdateWithoutLedgerInput>
+  }
+
+  export type UserCreateNestedOneWithoutFirebaseTokenInput = {
+    create?: XOR<UserCreateWithoutFirebaseTokenInput, UserUncheckedCreateWithoutFirebaseTokenInput>
+    connectOrCreate?: UserCreateOrConnectWithoutFirebaseTokenInput
+    connect?: UserWhereUniqueInput
+  }
+
+  export type UserUpdateOneRequiredWithoutFirebaseTokenNestedInput = {
+    create?: XOR<UserCreateWithoutFirebaseTokenInput, UserUncheckedCreateWithoutFirebaseTokenInput>
+    connectOrCreate?: UserCreateOrConnectWithoutFirebaseTokenInput
+    upsert?: UserUpsertWithoutFirebaseTokenInput
+    connect?: UserWhereUniqueInput
+    update?: XOR<XOR<UserUpdateToOneWithWhereWithoutFirebaseTokenInput, UserUpdateWithoutFirebaseTokenInput>, UserUncheckedUpdateWithoutFirebaseTokenInput>
   }
 
   export type NestedStringFilter<$PrismaModel = never> = {
@@ -43838,6 +45398,20 @@ export namespace Prisma {
     not?: NestedEnumTransactionStatusFilter<$PrismaModel> | $Enums.TransactionStatus
   }
 
+  export type NestedEnumTransactionTypeFilter<$PrismaModel = never> = {
+    equals?: $Enums.TransactionType | EnumTransactionTypeFieldRefInput<$PrismaModel>
+    in?: $Enums.TransactionType[] | ListEnumTransactionTypeFieldRefInput<$PrismaModel>
+    notIn?: $Enums.TransactionType[] | ListEnumTransactionTypeFieldRefInput<$PrismaModel>
+    not?: NestedEnumTransactionTypeFilter<$PrismaModel> | $Enums.TransactionType
+  }
+
+  export type NestedEnumTransactionFlowFilter<$PrismaModel = never> = {
+    equals?: $Enums.TransactionFlow | EnumTransactionFlowFieldRefInput<$PrismaModel>
+    in?: $Enums.TransactionFlow[] | ListEnumTransactionFlowFieldRefInput<$PrismaModel>
+    notIn?: $Enums.TransactionFlow[] | ListEnumTransactionFlowFieldRefInput<$PrismaModel>
+    not?: NestedEnumTransactionFlowFilter<$PrismaModel> | $Enums.TransactionFlow
+  }
+
   export type NestedEnumTransactionStatusWithAggregatesFilter<$PrismaModel = never> = {
     equals?: $Enums.TransactionStatus | EnumTransactionStatusFieldRefInput<$PrismaModel>
     in?: $Enums.TransactionStatus[] | ListEnumTransactionStatusFieldRefInput<$PrismaModel>
@@ -43846,6 +45420,26 @@ export namespace Prisma {
     _count?: NestedIntFilter<$PrismaModel>
     _min?: NestedEnumTransactionStatusFilter<$PrismaModel>
     _max?: NestedEnumTransactionStatusFilter<$PrismaModel>
+  }
+
+  export type NestedEnumTransactionTypeWithAggregatesFilter<$PrismaModel = never> = {
+    equals?: $Enums.TransactionType | EnumTransactionTypeFieldRefInput<$PrismaModel>
+    in?: $Enums.TransactionType[] | ListEnumTransactionTypeFieldRefInput<$PrismaModel>
+    notIn?: $Enums.TransactionType[] | ListEnumTransactionTypeFieldRefInput<$PrismaModel>
+    not?: NestedEnumTransactionTypeWithAggregatesFilter<$PrismaModel> | $Enums.TransactionType
+    _count?: NestedIntFilter<$PrismaModel>
+    _min?: NestedEnumTransactionTypeFilter<$PrismaModel>
+    _max?: NestedEnumTransactionTypeFilter<$PrismaModel>
+  }
+
+  export type NestedEnumTransactionFlowWithAggregatesFilter<$PrismaModel = never> = {
+    equals?: $Enums.TransactionFlow | EnumTransactionFlowFieldRefInput<$PrismaModel>
+    in?: $Enums.TransactionFlow[] | ListEnumTransactionFlowFieldRefInput<$PrismaModel>
+    notIn?: $Enums.TransactionFlow[] | ListEnumTransactionFlowFieldRefInput<$PrismaModel>
+    not?: NestedEnumTransactionFlowWithAggregatesFilter<$PrismaModel> | $Enums.TransactionFlow
+    _count?: NestedIntFilter<$PrismaModel>
+    _min?: NestedEnumTransactionFlowFilter<$PrismaModel>
+    _max?: NestedEnumTransactionFlowFilter<$PrismaModel>
   }
 
   export type NestedEnumPayoutStatusFilter<$PrismaModel = never> = {
@@ -44211,6 +45805,27 @@ export namespace Prisma {
     skipDuplicates?: boolean
   }
 
+  export type FirebaseTokenCreateWithoutUserInput = {
+    id?: string
+    token?: string | null
+    isDeleted?: boolean
+    updatedAt?: Date | string
+    createdAt?: Date | string
+  }
+
+  export type FirebaseTokenUncheckedCreateWithoutUserInput = {
+    id?: string
+    token?: string | null
+    isDeleted?: boolean
+    updatedAt?: Date | string
+    createdAt?: Date | string
+  }
+
+  export type FirebaseTokenCreateOrConnectWithoutUserInput = {
+    where: FirebaseTokenWhereUniqueInput
+    create: XOR<FirebaseTokenCreateWithoutUserInput, FirebaseTokenUncheckedCreateWithoutUserInput>
+  }
+
   export type AdministratorUpsertWithoutUserInput = {
     update: XOR<AdministratorUpdateWithoutUserInput, AdministratorUncheckedUpdateWithoutUserInput>
     create: XOR<AdministratorCreateWithoutUserInput, AdministratorUncheckedCreateWithoutUserInput>
@@ -44556,6 +46171,33 @@ export namespace Prisma {
     createdAt?: DateTimeFilter<"RefreshToken"> | Date | string
   }
 
+  export type FirebaseTokenUpsertWithoutUserInput = {
+    update: XOR<FirebaseTokenUpdateWithoutUserInput, FirebaseTokenUncheckedUpdateWithoutUserInput>
+    create: XOR<FirebaseTokenCreateWithoutUserInput, FirebaseTokenUncheckedCreateWithoutUserInput>
+    where?: FirebaseTokenWhereInput
+  }
+
+  export type FirebaseTokenUpdateToOneWithWhereWithoutUserInput = {
+    where?: FirebaseTokenWhereInput
+    data: XOR<FirebaseTokenUpdateWithoutUserInput, FirebaseTokenUncheckedUpdateWithoutUserInput>
+  }
+
+  export type FirebaseTokenUpdateWithoutUserInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    token?: NullableStringFieldUpdateOperationsInput | string | null
+    isDeleted?: BoolFieldUpdateOperationsInput | boolean
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type FirebaseTokenUncheckedUpdateWithoutUserInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    token?: NullableStringFieldUpdateOperationsInput | string | null
+    isDeleted?: BoolFieldUpdateOperationsInput | boolean
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
   export type UserCreateWithoutCredentialInput = {
     id?: string
     firstName: string
@@ -44578,6 +46220,7 @@ export namespace Prisma {
     notifications?: NotificationCreateNestedManyWithoutUserInput
     wallet?: WalletCreateNestedOneWithoutUserInput
     refreshTokens?: RefreshTokenCreateNestedManyWithoutUserInput
+    firebaseToken?: FirebaseTokenCreateNestedOneWithoutUserInput
   }
 
   export type UserUncheckedCreateWithoutCredentialInput = {
@@ -44602,6 +46245,7 @@ export namespace Prisma {
     notifications?: NotificationUncheckedCreateNestedManyWithoutUserInput
     wallet?: WalletUncheckedCreateNestedOneWithoutUserInput
     refreshTokens?: RefreshTokenUncheckedCreateNestedManyWithoutUserInput
+    firebaseToken?: FirebaseTokenUncheckedCreateNestedOneWithoutUserInput
   }
 
   export type UserCreateOrConnectWithoutCredentialInput = {
@@ -44642,6 +46286,7 @@ export namespace Prisma {
     notifications?: NotificationUpdateManyWithoutUserNestedInput
     wallet?: WalletUpdateOneWithoutUserNestedInput
     refreshTokens?: RefreshTokenUpdateManyWithoutUserNestedInput
+    firebaseToken?: FirebaseTokenUpdateOneWithoutUserNestedInput
   }
 
   export type UserUncheckedUpdateWithoutCredentialInput = {
@@ -44666,6 +46311,7 @@ export namespace Prisma {
     notifications?: NotificationUncheckedUpdateManyWithoutUserNestedInput
     wallet?: WalletUncheckedUpdateOneWithoutUserNestedInput
     refreshTokens?: RefreshTokenUncheckedUpdateManyWithoutUserNestedInput
+    firebaseToken?: FirebaseTokenUncheckedUpdateOneWithoutUserNestedInput
   }
 
   export type UserCreateWithoutRefreshTokensInput = {
@@ -44690,6 +46336,7 @@ export namespace Prisma {
     notifications?: NotificationCreateNestedManyWithoutUserInput
     credential?: CredentialCreateNestedOneWithoutUserInput
     wallet?: WalletCreateNestedOneWithoutUserInput
+    firebaseToken?: FirebaseTokenCreateNestedOneWithoutUserInput
   }
 
   export type UserUncheckedCreateWithoutRefreshTokensInput = {
@@ -44714,6 +46361,7 @@ export namespace Prisma {
     notifications?: NotificationUncheckedCreateNestedManyWithoutUserInput
     credential?: CredentialUncheckedCreateNestedOneWithoutUserInput
     wallet?: WalletUncheckedCreateNestedOneWithoutUserInput
+    firebaseToken?: FirebaseTokenUncheckedCreateNestedOneWithoutUserInput
   }
 
   export type UserCreateOrConnectWithoutRefreshTokensInput = {
@@ -44754,6 +46402,7 @@ export namespace Prisma {
     notifications?: NotificationUpdateManyWithoutUserNestedInput
     credential?: CredentialUpdateOneWithoutUserNestedInput
     wallet?: WalletUpdateOneWithoutUserNestedInput
+    firebaseToken?: FirebaseTokenUpdateOneWithoutUserNestedInput
   }
 
   export type UserUncheckedUpdateWithoutRefreshTokensInput = {
@@ -44778,6 +46427,7 @@ export namespace Prisma {
     notifications?: NotificationUncheckedUpdateManyWithoutUserNestedInput
     credential?: CredentialUncheckedUpdateOneWithoutUserNestedInput
     wallet?: WalletUncheckedUpdateOneWithoutUserNestedInput
+    firebaseToken?: FirebaseTokenUncheckedUpdateOneWithoutUserNestedInput
   }
 
   export type UserCreateWithoutAdministratorInput = {
@@ -44802,6 +46452,7 @@ export namespace Prisma {
     credential?: CredentialCreateNestedOneWithoutUserInput
     wallet?: WalletCreateNestedOneWithoutUserInput
     refreshTokens?: RefreshTokenCreateNestedManyWithoutUserInput
+    firebaseToken?: FirebaseTokenCreateNestedOneWithoutUserInput
   }
 
   export type UserUncheckedCreateWithoutAdministratorInput = {
@@ -44826,6 +46477,7 @@ export namespace Prisma {
     credential?: CredentialUncheckedCreateNestedOneWithoutUserInput
     wallet?: WalletUncheckedCreateNestedOneWithoutUserInput
     refreshTokens?: RefreshTokenUncheckedCreateNestedManyWithoutUserInput
+    firebaseToken?: FirebaseTokenUncheckedCreateNestedOneWithoutUserInput
   }
 
   export type UserCreateOrConnectWithoutAdministratorInput = {
@@ -44866,6 +46518,7 @@ export namespace Prisma {
     credential?: CredentialUpdateOneWithoutUserNestedInput
     wallet?: WalletUpdateOneWithoutUserNestedInput
     refreshTokens?: RefreshTokenUpdateManyWithoutUserNestedInput
+    firebaseToken?: FirebaseTokenUpdateOneWithoutUserNestedInput
   }
 
   export type UserUncheckedUpdateWithoutAdministratorInput = {
@@ -44890,6 +46543,7 @@ export namespace Prisma {
     credential?: CredentialUncheckedUpdateOneWithoutUserNestedInput
     wallet?: WalletUncheckedUpdateOneWithoutUserNestedInput
     refreshTokens?: RefreshTokenUncheckedUpdateManyWithoutUserNestedInput
+    firebaseToken?: FirebaseTokenUncheckedUpdateOneWithoutUserNestedInput
   }
 
   export type UserCreateWithoutGuardianInput = {
@@ -44914,6 +46568,7 @@ export namespace Prisma {
     credential?: CredentialCreateNestedOneWithoutUserInput
     wallet?: WalletCreateNestedOneWithoutUserInput
     refreshTokens?: RefreshTokenCreateNestedManyWithoutUserInput
+    firebaseToken?: FirebaseTokenCreateNestedOneWithoutUserInput
   }
 
   export type UserUncheckedCreateWithoutGuardianInput = {
@@ -44938,6 +46593,7 @@ export namespace Prisma {
     credential?: CredentialUncheckedCreateNestedOneWithoutUserInput
     wallet?: WalletUncheckedCreateNestedOneWithoutUserInput
     refreshTokens?: RefreshTokenUncheckedCreateNestedManyWithoutUserInput
+    firebaseToken?: FirebaseTokenUncheckedCreateNestedOneWithoutUserInput
   }
 
   export type UserCreateOrConnectWithoutGuardianInput = {
@@ -45061,6 +46717,8 @@ export namespace Prisma {
     amount?: Decimal | DecimalJsLike | number | string
     fees?: Decimal | DecimalJsLike | number | string
     status?: $Enums.TransactionStatus
+    type?: $Enums.TransactionType
+    flow?: $Enums.TransactionFlow
     transactionAt?: Date | string | null
     processedAt?: Date | string | null
     description?: string | null
@@ -45080,6 +46738,8 @@ export namespace Prisma {
     amount?: Decimal | DecimalJsLike | number | string
     fees?: Decimal | DecimalJsLike | number | string
     status?: $Enums.TransactionStatus
+    type?: $Enums.TransactionType
+    flow?: $Enums.TransactionFlow
     transactionAt?: Date | string | null
     processedAt?: Date | string | null
     description?: string | null
@@ -45134,6 +46794,7 @@ export namespace Prisma {
     credential?: CredentialUpdateOneWithoutUserNestedInput
     wallet?: WalletUpdateOneWithoutUserNestedInput
     refreshTokens?: RefreshTokenUpdateManyWithoutUserNestedInput
+    firebaseToken?: FirebaseTokenUpdateOneWithoutUserNestedInput
   }
 
   export type UserUncheckedUpdateWithoutGuardianInput = {
@@ -45158,6 +46819,7 @@ export namespace Prisma {
     credential?: CredentialUncheckedUpdateOneWithoutUserNestedInput
     wallet?: WalletUncheckedUpdateOneWithoutUserNestedInput
     refreshTokens?: RefreshTokenUncheckedUpdateManyWithoutUserNestedInput
+    firebaseToken?: FirebaseTokenUncheckedUpdateOneWithoutUserNestedInput
   }
 
   export type InvoiceUpsertWithWhereUniqueWithoutGuardianInput = {
@@ -45285,6 +46947,8 @@ export namespace Prisma {
     amount?: DecimalFilter<"Transaction"> | Decimal | DecimalJsLike | number | string
     fees?: DecimalFilter<"Transaction"> | Decimal | DecimalJsLike | number | string
     status?: EnumTransactionStatusFilter<"Transaction"> | $Enums.TransactionStatus
+    type?: EnumTransactionTypeFilter<"Transaction"> | $Enums.TransactionType
+    flow?: EnumTransactionFlowFilter<"Transaction"> | $Enums.TransactionFlow
     transactionAt?: DateTimeNullableFilter<"Transaction"> | Date | string | null
     processedAt?: DateTimeNullableFilter<"Transaction"> | Date | string | null
     description?: StringNullableFilter<"Transaction"> | string | null
@@ -45316,6 +46980,7 @@ export namespace Prisma {
     credential?: CredentialCreateNestedOneWithoutUserInput
     wallet?: WalletCreateNestedOneWithoutUserInput
     refreshTokens?: RefreshTokenCreateNestedManyWithoutUserInput
+    firebaseToken?: FirebaseTokenCreateNestedOneWithoutUserInput
   }
 
   export type UserUncheckedCreateWithoutVerificationsInput = {
@@ -45340,6 +47005,7 @@ export namespace Prisma {
     credential?: CredentialUncheckedCreateNestedOneWithoutUserInput
     wallet?: WalletUncheckedCreateNestedOneWithoutUserInput
     refreshTokens?: RefreshTokenUncheckedCreateNestedManyWithoutUserInput
+    firebaseToken?: FirebaseTokenUncheckedCreateNestedOneWithoutUserInput
   }
 
   export type UserCreateOrConnectWithoutVerificationsInput = {
@@ -45380,6 +47046,7 @@ export namespace Prisma {
     credential?: CredentialUpdateOneWithoutUserNestedInput
     wallet?: WalletUpdateOneWithoutUserNestedInput
     refreshTokens?: RefreshTokenUpdateManyWithoutUserNestedInput
+    firebaseToken?: FirebaseTokenUpdateOneWithoutUserNestedInput
   }
 
   export type UserUncheckedUpdateWithoutVerificationsInput = {
@@ -45404,6 +47071,7 @@ export namespace Prisma {
     credential?: CredentialUncheckedUpdateOneWithoutUserNestedInput
     wallet?: WalletUncheckedUpdateOneWithoutUserNestedInput
     refreshTokens?: RefreshTokenUncheckedUpdateManyWithoutUserNestedInput
+    firebaseToken?: FirebaseTokenUncheckedUpdateOneWithoutUserNestedInput
   }
 
   export type UserCreateWithoutSchoolInput = {
@@ -45428,6 +47096,7 @@ export namespace Prisma {
     credential?: CredentialCreateNestedOneWithoutUserInput
     wallet?: WalletCreateNestedOneWithoutUserInput
     refreshTokens?: RefreshTokenCreateNestedManyWithoutUserInput
+    firebaseToken?: FirebaseTokenCreateNestedOneWithoutUserInput
   }
 
   export type UserUncheckedCreateWithoutSchoolInput = {
@@ -45452,6 +47121,7 @@ export namespace Prisma {
     credential?: CredentialUncheckedCreateNestedOneWithoutUserInput
     wallet?: WalletUncheckedCreateNestedOneWithoutUserInput
     refreshTokens?: RefreshTokenUncheckedCreateNestedManyWithoutUserInput
+    firebaseToken?: FirebaseTokenUncheckedCreateNestedOneWithoutUserInput
   }
 
   export type UserCreateOrConnectWithoutSchoolInput = {
@@ -45793,6 +47463,7 @@ export namespace Prisma {
     credential?: CredentialUpdateOneWithoutUserNestedInput
     wallet?: WalletUpdateOneWithoutUserNestedInput
     refreshTokens?: RefreshTokenUpdateManyWithoutUserNestedInput
+    firebaseToken?: FirebaseTokenUpdateOneWithoutUserNestedInput
   }
 
   export type UserUncheckedUpdateWithoutSchoolInput = {
@@ -45817,6 +47488,7 @@ export namespace Prisma {
     credential?: CredentialUncheckedUpdateOneWithoutUserNestedInput
     wallet?: WalletUncheckedUpdateOneWithoutUserNestedInput
     refreshTokens?: RefreshTokenUncheckedUpdateManyWithoutUserNestedInput
+    firebaseToken?: FirebaseTokenUncheckedUpdateOneWithoutUserNestedInput
   }
 
   export type SchoolDirectorVerificationUpsertWithoutSchoolInput = {
@@ -46803,6 +48475,7 @@ export namespace Prisma {
     credential?: CredentialCreateNestedOneWithoutUserInput
     wallet?: WalletCreateNestedOneWithoutUserInput
     refreshTokens?: RefreshTokenCreateNestedManyWithoutUserInput
+    firebaseToken?: FirebaseTokenCreateNestedOneWithoutUserInput
   }
 
   export type UserUncheckedCreateWithoutSchoolAndPlatformLegalAgreementInput = {
@@ -46827,6 +48500,7 @@ export namespace Prisma {
     credential?: CredentialUncheckedCreateNestedOneWithoutUserInput
     wallet?: WalletUncheckedCreateNestedOneWithoutUserInput
     refreshTokens?: RefreshTokenUncheckedCreateNestedManyWithoutUserInput
+    firebaseToken?: FirebaseTokenUncheckedCreateNestedOneWithoutUserInput
   }
 
   export type UserCreateOrConnectWithoutSchoolAndPlatformLegalAgreementInput = {
@@ -46942,6 +48616,7 @@ export namespace Prisma {
     credential?: CredentialUpdateOneWithoutUserNestedInput
     wallet?: WalletUpdateOneWithoutUserNestedInput
     refreshTokens?: RefreshTokenUpdateManyWithoutUserNestedInput
+    firebaseToken?: FirebaseTokenUpdateOneWithoutUserNestedInput
   }
 
   export type UserUncheckedUpdateWithoutSchoolAndPlatformLegalAgreementInput = {
@@ -46966,6 +48641,7 @@ export namespace Prisma {
     credential?: CredentialUncheckedUpdateOneWithoutUserNestedInput
     wallet?: WalletUncheckedUpdateOneWithoutUserNestedInput
     refreshTokens?: RefreshTokenUncheckedUpdateManyWithoutUserNestedInput
+    firebaseToken?: FirebaseTokenUncheckedUpdateOneWithoutUserNestedInput
   }
 
   export type SchoolCreateWithoutClassesInput = {
@@ -48351,6 +50027,8 @@ export namespace Prisma {
     amount?: Decimal | DecimalJsLike | number | string
     fees?: Decimal | DecimalJsLike | number | string
     status?: $Enums.TransactionStatus
+    type?: $Enums.TransactionType
+    flow?: $Enums.TransactionFlow
     transactionAt?: Date | string | null
     processedAt?: Date | string | null
     description?: string | null
@@ -48370,6 +50048,8 @@ export namespace Prisma {
     amount?: Decimal | DecimalJsLike | number | string
     fees?: Decimal | DecimalJsLike | number | string
     status?: $Enums.TransactionStatus
+    type?: $Enums.TransactionType
+    flow?: $Enums.TransactionFlow
     transactionAt?: Date | string | null
     processedAt?: Date | string | null
     description?: string | null
@@ -49259,6 +50939,8 @@ export namespace Prisma {
     amount?: Decimal | DecimalJsLike | number | string
     fees?: Decimal | DecimalJsLike | number | string
     status?: $Enums.TransactionStatus
+    type?: $Enums.TransactionType
+    flow?: $Enums.TransactionFlow
     transactionAt?: Date | string | null
     processedAt?: Date | string | null
     description?: string | null
@@ -49279,6 +50961,8 @@ export namespace Prisma {
     amount?: Decimal | DecimalJsLike | number | string
     fees?: Decimal | DecimalJsLike | number | string
     status?: $Enums.TransactionStatus
+    type?: $Enums.TransactionType
+    flow?: $Enums.TransactionFlow
     transactionAt?: Date | string | null
     processedAt?: Date | string | null
     description?: string | null
@@ -49311,6 +50995,8 @@ export namespace Prisma {
     amount?: DecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string
     fees?: DecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string
     status?: EnumTransactionStatusFieldUpdateOperationsInput | $Enums.TransactionStatus
+    type?: EnumTransactionTypeFieldUpdateOperationsInput | $Enums.TransactionType
+    flow?: EnumTransactionFlowFieldUpdateOperationsInput | $Enums.TransactionFlow
     transactionAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     processedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     description?: NullableStringFieldUpdateOperationsInput | string | null
@@ -49331,6 +51017,8 @@ export namespace Prisma {
     amount?: DecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string
     fees?: DecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string
     status?: EnumTransactionStatusFieldUpdateOperationsInput | $Enums.TransactionStatus
+    type?: EnumTransactionTypeFieldUpdateOperationsInput | $Enums.TransactionType
+    flow?: EnumTransactionFlowFieldUpdateOperationsInput | $Enums.TransactionFlow
     transactionAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     processedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     description?: NullableStringFieldUpdateOperationsInput | string | null
@@ -49507,6 +51195,7 @@ export namespace Prisma {
     credential?: CredentialCreateNestedOneWithoutUserInput
     wallet?: WalletCreateNestedOneWithoutUserInput
     refreshTokens?: RefreshTokenCreateNestedManyWithoutUserInput
+    firebaseToken?: FirebaseTokenCreateNestedOneWithoutUserInput
   }
 
   export type UserUncheckedCreateWithoutNotificationsInput = {
@@ -49531,6 +51220,7 @@ export namespace Prisma {
     credential?: CredentialUncheckedCreateNestedOneWithoutUserInput
     wallet?: WalletUncheckedCreateNestedOneWithoutUserInput
     refreshTokens?: RefreshTokenUncheckedCreateNestedManyWithoutUserInput
+    firebaseToken?: FirebaseTokenUncheckedCreateNestedOneWithoutUserInput
   }
 
   export type UserCreateOrConnectWithoutNotificationsInput = {
@@ -49571,6 +51261,7 @@ export namespace Prisma {
     credential?: CredentialUpdateOneWithoutUserNestedInput
     wallet?: WalletUpdateOneWithoutUserNestedInput
     refreshTokens?: RefreshTokenUpdateManyWithoutUserNestedInput
+    firebaseToken?: FirebaseTokenUpdateOneWithoutUserNestedInput
   }
 
   export type UserUncheckedUpdateWithoutNotificationsInput = {
@@ -49595,6 +51286,7 @@ export namespace Prisma {
     credential?: CredentialUncheckedUpdateOneWithoutUserNestedInput
     wallet?: WalletUncheckedUpdateOneWithoutUserNestedInput
     refreshTokens?: RefreshTokenUncheckedUpdateManyWithoutUserNestedInput
+    firebaseToken?: FirebaseTokenUncheckedUpdateOneWithoutUserNestedInput
   }
 
   export type UserCreateWithoutWalletInput = {
@@ -49619,6 +51311,7 @@ export namespace Prisma {
     notifications?: NotificationCreateNestedManyWithoutUserInput
     credential?: CredentialCreateNestedOneWithoutUserInput
     refreshTokens?: RefreshTokenCreateNestedManyWithoutUserInput
+    firebaseToken?: FirebaseTokenCreateNestedOneWithoutUserInput
   }
 
   export type UserUncheckedCreateWithoutWalletInput = {
@@ -49643,6 +51336,7 @@ export namespace Prisma {
     notifications?: NotificationUncheckedCreateNestedManyWithoutUserInput
     credential?: CredentialUncheckedCreateNestedOneWithoutUserInput
     refreshTokens?: RefreshTokenUncheckedCreateNestedManyWithoutUserInput
+    firebaseToken?: FirebaseTokenUncheckedCreateNestedOneWithoutUserInput
   }
 
   export type UserCreateOrConnectWithoutWalletInput = {
@@ -49692,6 +51386,8 @@ export namespace Prisma {
     amount?: Decimal | DecimalJsLike | number | string
     fees?: Decimal | DecimalJsLike | number | string
     status?: $Enums.TransactionStatus
+    type?: $Enums.TransactionType
+    flow?: $Enums.TransactionFlow
     transactionAt?: Date | string | null
     processedAt?: Date | string | null
     description?: string | null
@@ -49712,6 +51408,8 @@ export namespace Prisma {
     amount?: Decimal | DecimalJsLike | number | string
     fees?: Decimal | DecimalJsLike | number | string
     status?: $Enums.TransactionStatus
+    type?: $Enums.TransactionType
+    flow?: $Enums.TransactionFlow
     transactionAt?: Date | string | null
     processedAt?: Date | string | null
     description?: string | null
@@ -49765,6 +51463,7 @@ export namespace Prisma {
     notifications?: NotificationUpdateManyWithoutUserNestedInput
     credential?: CredentialUpdateOneWithoutUserNestedInput
     refreshTokens?: RefreshTokenUpdateManyWithoutUserNestedInput
+    firebaseToken?: FirebaseTokenUpdateOneWithoutUserNestedInput
   }
 
   export type UserUncheckedUpdateWithoutWalletInput = {
@@ -49789,6 +51488,7 @@ export namespace Prisma {
     notifications?: NotificationUncheckedUpdateManyWithoutUserNestedInput
     credential?: CredentialUncheckedUpdateOneWithoutUserNestedInput
     refreshTokens?: RefreshTokenUncheckedUpdateManyWithoutUserNestedInput
+    firebaseToken?: FirebaseTokenUncheckedUpdateOneWithoutUserNestedInput
   }
 
   export type LedgerUpsertWithWhereUniqueWithoutWalletInput = {
@@ -49881,6 +51581,8 @@ export namespace Prisma {
     amount?: Decimal | DecimalJsLike | number | string
     fees?: Decimal | DecimalJsLike | number | string
     status?: $Enums.TransactionStatus
+    type?: $Enums.TransactionType
+    flow?: $Enums.TransactionFlow
     transactionAt?: Date | string | null
     processedAt?: Date | string | null
     description?: string | null
@@ -49901,6 +51603,8 @@ export namespace Prisma {
     amount?: Decimal | DecimalJsLike | number | string
     fees?: Decimal | DecimalJsLike | number | string
     status?: $Enums.TransactionStatus
+    type?: $Enums.TransactionType
+    flow?: $Enums.TransactionFlow
     transactionAt?: Date | string | null
     processedAt?: Date | string | null
     description?: string | null
@@ -49974,6 +51678,8 @@ export namespace Prisma {
     amount?: DecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string
     fees?: DecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string
     status?: EnumTransactionStatusFieldUpdateOperationsInput | $Enums.TransactionStatus
+    type?: EnumTransactionTypeFieldUpdateOperationsInput | $Enums.TransactionType
+    flow?: EnumTransactionFlowFieldUpdateOperationsInput | $Enums.TransactionFlow
     transactionAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     processedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     description?: NullableStringFieldUpdateOperationsInput | string | null
@@ -49994,6 +51700,8 @@ export namespace Prisma {
     amount?: DecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string
     fees?: DecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string
     status?: EnumTransactionStatusFieldUpdateOperationsInput | $Enums.TransactionStatus
+    type?: EnumTransactionTypeFieldUpdateOperationsInput | $Enums.TransactionType
+    flow?: EnumTransactionFlowFieldUpdateOperationsInput | $Enums.TransactionFlow
     transactionAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     processedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     description?: NullableStringFieldUpdateOperationsInput | string | null
@@ -50002,6 +51710,122 @@ export namespace Prisma {
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     walletId?: NullableStringFieldUpdateOperationsInput | string | null
     transactionFee?: TransactionFeeUncheckedUpdateOneWithoutTransactionNestedInput
+  }
+
+  export type UserCreateWithoutFirebaseTokenInput = {
+    id?: string
+    firstName: string
+    lastName: string
+    profileImage?: string | null
+    email: string
+    type: $Enums.UserType
+    phone?: string | null
+    accountStatus?: $Enums.AccountStatus
+    verifiedAt?: Date | string | null
+    lastSeenAt?: Date | string | null
+    isDeleted?: boolean
+    createdAt?: Date | string
+    updatedAt?: Date | string
+    administrator?: AdministratorCreateNestedOneWithoutUserInput
+    guardian?: GuardianCreateNestedOneWithoutUserInput
+    verifications?: VerificationCreateNestedManyWithoutUserInput
+    school?: SchoolCreateNestedOneWithoutOwnerInput
+    schoolAndPlatformLegalAgreement?: SchoolAndPlatformLegalAgreementCreateNestedOneWithoutSignedByInput
+    notifications?: NotificationCreateNestedManyWithoutUserInput
+    credential?: CredentialCreateNestedOneWithoutUserInput
+    wallet?: WalletCreateNestedOneWithoutUserInput
+    refreshTokens?: RefreshTokenCreateNestedManyWithoutUserInput
+  }
+
+  export type UserUncheckedCreateWithoutFirebaseTokenInput = {
+    id?: string
+    firstName: string
+    lastName: string
+    profileImage?: string | null
+    email: string
+    type: $Enums.UserType
+    phone?: string | null
+    accountStatus?: $Enums.AccountStatus
+    verifiedAt?: Date | string | null
+    lastSeenAt?: Date | string | null
+    isDeleted?: boolean
+    createdAt?: Date | string
+    updatedAt?: Date | string
+    administrator?: AdministratorUncheckedCreateNestedOneWithoutUserInput
+    guardian?: GuardianUncheckedCreateNestedOneWithoutUserInput
+    verifications?: VerificationUncheckedCreateNestedManyWithoutUserInput
+    school?: SchoolUncheckedCreateNestedOneWithoutOwnerInput
+    schoolAndPlatformLegalAgreement?: SchoolAndPlatformLegalAgreementUncheckedCreateNestedOneWithoutSignedByInput
+    notifications?: NotificationUncheckedCreateNestedManyWithoutUserInput
+    credential?: CredentialUncheckedCreateNestedOneWithoutUserInput
+    wallet?: WalletUncheckedCreateNestedOneWithoutUserInput
+    refreshTokens?: RefreshTokenUncheckedCreateNestedManyWithoutUserInput
+  }
+
+  export type UserCreateOrConnectWithoutFirebaseTokenInput = {
+    where: UserWhereUniqueInput
+    create: XOR<UserCreateWithoutFirebaseTokenInput, UserUncheckedCreateWithoutFirebaseTokenInput>
+  }
+
+  export type UserUpsertWithoutFirebaseTokenInput = {
+    update: XOR<UserUpdateWithoutFirebaseTokenInput, UserUncheckedUpdateWithoutFirebaseTokenInput>
+    create: XOR<UserCreateWithoutFirebaseTokenInput, UserUncheckedCreateWithoutFirebaseTokenInput>
+    where?: UserWhereInput
+  }
+
+  export type UserUpdateToOneWithWhereWithoutFirebaseTokenInput = {
+    where?: UserWhereInput
+    data: XOR<UserUpdateWithoutFirebaseTokenInput, UserUncheckedUpdateWithoutFirebaseTokenInput>
+  }
+
+  export type UserUpdateWithoutFirebaseTokenInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    firstName?: StringFieldUpdateOperationsInput | string
+    lastName?: StringFieldUpdateOperationsInput | string
+    profileImage?: NullableStringFieldUpdateOperationsInput | string | null
+    email?: StringFieldUpdateOperationsInput | string
+    type?: EnumUserTypeFieldUpdateOperationsInput | $Enums.UserType
+    phone?: NullableStringFieldUpdateOperationsInput | string | null
+    accountStatus?: EnumAccountStatusFieldUpdateOperationsInput | $Enums.AccountStatus
+    verifiedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    lastSeenAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    isDeleted?: BoolFieldUpdateOperationsInput | boolean
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    administrator?: AdministratorUpdateOneWithoutUserNestedInput
+    guardian?: GuardianUpdateOneWithoutUserNestedInput
+    verifications?: VerificationUpdateManyWithoutUserNestedInput
+    school?: SchoolUpdateOneWithoutOwnerNestedInput
+    schoolAndPlatformLegalAgreement?: SchoolAndPlatformLegalAgreementUpdateOneWithoutSignedByNestedInput
+    notifications?: NotificationUpdateManyWithoutUserNestedInput
+    credential?: CredentialUpdateOneWithoutUserNestedInput
+    wallet?: WalletUpdateOneWithoutUserNestedInput
+    refreshTokens?: RefreshTokenUpdateManyWithoutUserNestedInput
+  }
+
+  export type UserUncheckedUpdateWithoutFirebaseTokenInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    firstName?: StringFieldUpdateOperationsInput | string
+    lastName?: StringFieldUpdateOperationsInput | string
+    profileImage?: NullableStringFieldUpdateOperationsInput | string | null
+    email?: StringFieldUpdateOperationsInput | string
+    type?: EnumUserTypeFieldUpdateOperationsInput | $Enums.UserType
+    phone?: NullableStringFieldUpdateOperationsInput | string | null
+    accountStatus?: EnumAccountStatusFieldUpdateOperationsInput | $Enums.AccountStatus
+    verifiedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    lastSeenAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    isDeleted?: BoolFieldUpdateOperationsInput | boolean
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    administrator?: AdministratorUncheckedUpdateOneWithoutUserNestedInput
+    guardian?: GuardianUncheckedUpdateOneWithoutUserNestedInput
+    verifications?: VerificationUncheckedUpdateManyWithoutUserNestedInput
+    school?: SchoolUncheckedUpdateOneWithoutOwnerNestedInput
+    schoolAndPlatformLegalAgreement?: SchoolAndPlatformLegalAgreementUncheckedUpdateOneWithoutSignedByNestedInput
+    notifications?: NotificationUncheckedUpdateManyWithoutUserNestedInput
+    credential?: CredentialUncheckedUpdateOneWithoutUserNestedInput
+    wallet?: WalletUncheckedUpdateOneWithoutUserNestedInput
+    refreshTokens?: RefreshTokenUncheckedUpdateManyWithoutUserNestedInput
   }
 
   export type VerificationCreateManyUserInput = {
@@ -50181,6 +52005,8 @@ export namespace Prisma {
     amount?: Decimal | DecimalJsLike | number | string
     fees?: Decimal | DecimalJsLike | number | string
     status?: $Enums.TransactionStatus
+    type?: $Enums.TransactionType
+    flow?: $Enums.TransactionFlow
     transactionAt?: Date | string | null
     processedAt?: Date | string | null
     description?: string | null
@@ -50314,6 +52140,8 @@ export namespace Prisma {
     amount?: DecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string
     fees?: DecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string
     status?: EnumTransactionStatusFieldUpdateOperationsInput | $Enums.TransactionStatus
+    type?: EnumTransactionTypeFieldUpdateOperationsInput | $Enums.TransactionType
+    flow?: EnumTransactionFlowFieldUpdateOperationsInput | $Enums.TransactionFlow
     transactionAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     processedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     description?: NullableStringFieldUpdateOperationsInput | string | null
@@ -50333,6 +52161,8 @@ export namespace Prisma {
     amount?: DecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string
     fees?: DecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string
     status?: EnumTransactionStatusFieldUpdateOperationsInput | $Enums.TransactionStatus
+    type?: EnumTransactionTypeFieldUpdateOperationsInput | $Enums.TransactionType
+    flow?: EnumTransactionFlowFieldUpdateOperationsInput | $Enums.TransactionFlow
     transactionAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     processedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     description?: NullableStringFieldUpdateOperationsInput | string | null
@@ -50351,6 +52181,8 @@ export namespace Prisma {
     amount?: DecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string
     fees?: DecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string
     status?: EnumTransactionStatusFieldUpdateOperationsInput | $Enums.TransactionStatus
+    type?: EnumTransactionTypeFieldUpdateOperationsInput | $Enums.TransactionType
+    flow?: EnumTransactionFlowFieldUpdateOperationsInput | $Enums.TransactionFlow
     transactionAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     processedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     description?: NullableStringFieldUpdateOperationsInput | string | null
@@ -51013,6 +52845,8 @@ export namespace Prisma {
     amount?: Decimal | DecimalJsLike | number | string
     fees?: Decimal | DecimalJsLike | number | string
     status?: $Enums.TransactionStatus
+    type?: $Enums.TransactionType
+    flow?: $Enums.TransactionFlow
     transactionAt?: Date | string | null
     processedAt?: Date | string | null
     description?: string | null
@@ -51028,6 +52862,8 @@ export namespace Prisma {
     amount?: DecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string
     fees?: DecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string
     status?: EnumTransactionStatusFieldUpdateOperationsInput | $Enums.TransactionStatus
+    type?: EnumTransactionTypeFieldUpdateOperationsInput | $Enums.TransactionType
+    flow?: EnumTransactionFlowFieldUpdateOperationsInput | $Enums.TransactionFlow
     transactionAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     processedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     description?: NullableStringFieldUpdateOperationsInput | string | null
@@ -51047,6 +52883,8 @@ export namespace Prisma {
     amount?: DecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string
     fees?: DecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string
     status?: EnumTransactionStatusFieldUpdateOperationsInput | $Enums.TransactionStatus
+    type?: EnumTransactionTypeFieldUpdateOperationsInput | $Enums.TransactionType
+    flow?: EnumTransactionFlowFieldUpdateOperationsInput | $Enums.TransactionFlow
     transactionAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     processedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     description?: NullableStringFieldUpdateOperationsInput | string | null
@@ -51065,6 +52903,8 @@ export namespace Prisma {
     amount?: DecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string
     fees?: DecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string
     status?: EnumTransactionStatusFieldUpdateOperationsInput | $Enums.TransactionStatus
+    type?: EnumTransactionTypeFieldUpdateOperationsInput | $Enums.TransactionType
+    flow?: EnumTransactionFlowFieldUpdateOperationsInput | $Enums.TransactionFlow
     transactionAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     processedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     description?: NullableStringFieldUpdateOperationsInput | string | null
@@ -51095,6 +52935,8 @@ export namespace Prisma {
     amount?: Decimal | DecimalJsLike | number | string
     fees?: Decimal | DecimalJsLike | number | string
     status?: $Enums.TransactionStatus
+    type?: $Enums.TransactionType
+    flow?: $Enums.TransactionFlow
     transactionAt?: Date | string | null
     processedAt?: Date | string | null
     description?: string | null
@@ -51148,6 +52990,8 @@ export namespace Prisma {
     amount?: DecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string
     fees?: DecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string
     status?: EnumTransactionStatusFieldUpdateOperationsInput | $Enums.TransactionStatus
+    type?: EnumTransactionTypeFieldUpdateOperationsInput | $Enums.TransactionType
+    flow?: EnumTransactionFlowFieldUpdateOperationsInput | $Enums.TransactionFlow
     transactionAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     processedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     description?: NullableStringFieldUpdateOperationsInput | string | null
@@ -51168,6 +53012,8 @@ export namespace Prisma {
     amount?: DecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string
     fees?: DecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string
     status?: EnumTransactionStatusFieldUpdateOperationsInput | $Enums.TransactionStatus
+    type?: EnumTransactionTypeFieldUpdateOperationsInput | $Enums.TransactionType
+    flow?: EnumTransactionFlowFieldUpdateOperationsInput | $Enums.TransactionFlow
     transactionAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     processedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     description?: NullableStringFieldUpdateOperationsInput | string | null
@@ -51186,6 +53032,8 @@ export namespace Prisma {
     amount?: DecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string
     fees?: DecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string
     status?: EnumTransactionStatusFieldUpdateOperationsInput | $Enums.TransactionStatus
+    type?: EnumTransactionTypeFieldUpdateOperationsInput | $Enums.TransactionType
+    flow?: EnumTransactionFlowFieldUpdateOperationsInput | $Enums.TransactionFlow
     transactionAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     processedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     description?: NullableStringFieldUpdateOperationsInput | string | null

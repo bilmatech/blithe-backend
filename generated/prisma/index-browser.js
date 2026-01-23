@@ -377,6 +377,8 @@ exports.Prisma.TransactionScalarFieldEnum = {
   amount: 'amount',
   fees: 'fees',
   status: 'status',
+  type: 'type',
+  flow: 'flow',
   transactionAt: 'transactionAt',
   processedAt: 'processedAt',
   description: 'description',
@@ -445,6 +447,15 @@ exports.Prisma.LedgerScalarFieldEnum = {
   balanceBefore: 'balanceBefore',
   balanceAfter: 'balanceAfter',
   description: 'description',
+  isDeleted: 'isDeleted',
+  updatedAt: 'updatedAt',
+  createdAt: 'createdAt'
+};
+
+exports.Prisma.FirebaseTokenScalarFieldEnum = {
+  id: 'id',
+  userId: 'userId',
+  token: 'token',
   isDeleted: 'isDeleted',
   updatedAt: 'updatedAt',
   createdAt: 'createdAt'
@@ -530,6 +541,20 @@ exports.TransactionStatus = exports.$Enums.TransactionStatus = {
   success: 'success'
 };
 
+exports.TransactionType = exports.$Enums.TransactionType = {
+  Deposit: 'Deposit',
+  Withdrawal: 'Withdrawal',
+  Transfer: 'Transfer',
+  Refund: 'Refund',
+  Reversal: 'Reversal',
+  Distribution: 'Distribution'
+};
+
+exports.TransactionFlow = exports.$Enums.TransactionFlow = {
+  Inflow: 'Inflow',
+  Outflow: 'Outflow'
+};
+
 exports.PayoutStatus = exports.$Enums.PayoutStatus = {
   pending: 'pending',
   sent: 'sent',
@@ -576,7 +601,8 @@ exports.Prisma.ModelName = {
   Payout: 'Payout',
   Notification: 'Notification',
   Wallet: 'Wallet',
-  Ledger: 'Ledger'
+  Ledger: 'Ledger',
+  FirebaseToken: 'FirebaseToken'
 };
 
 /**

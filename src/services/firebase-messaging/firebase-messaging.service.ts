@@ -1,15 +1,15 @@
 import { Injectable } from '@nestjs/common';
-import { FirebaseService } from '@Blithe/common/firebase/firebase.service';
-import { PrismaService } from '@Blithe/database/prisma.service';
 import { PushMessageDto } from './dto/push-message.dto';
 import { AppError } from '@Blithe/common/utils/error-handler.util';
 import * as Sentry from '@sentry/nestjs';
+import { PrismaService } from '../database/prisma.service';
+import { FirebaseAdminService } from '@Blithe/common/firebase/firebase-admin.service';
 
 @Injectable()
 export class FirebaseMessagingService {
   constructor(
     private readonly prisma: PrismaService,
-    private readonly firebaseService: FirebaseService,
+    private readonly firebaseService: FirebaseAdminService,
   ) {}
 
   /**

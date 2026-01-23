@@ -11,8 +11,6 @@ import { AppError } from '@Blithe/common/utils/error-handler.util';
 import { UserType, VerificationType } from '@DB/Client';
 import { AuthChallengeType } from './auth.type';
 import * as Sentry from '@sentry/nestjs';
-import authConfig from './configs/auth.config';
-import { ConfigType } from '@nestjs/config';
 import { VerificationService } from '@Blithe/services/verification/verification.service';
 import appConfig from '@Blithe/common/config/app.config';
 import { AccountService } from '../account/account.service';
@@ -28,8 +26,6 @@ import { ResetPasswordDto } from '../account/dto/reset-password.dto';
 @Injectable()
 export class AuthService {
   constructor(
-    @Inject(authConfig.KEY)
-    private readonly config: ConfigType<typeof authConfig>,
     @Inject(appConfig.KEY)
     private readonly tokenService: TokenService,
     private readonly accountService: AccountService,

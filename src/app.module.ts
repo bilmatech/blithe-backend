@@ -11,9 +11,11 @@ import { WalletModule } from './services/wallet/wallet.module';
 import { VerificationModule } from './services/verification/verification.module';
 import { FirebaseMessagingModule } from './services/firebase-messaging/firebase-messaging.module';
 import { FirebaseAdminModule } from './common/firebase/firebase-admin.module';
+import { DatabaseModule } from './services/database/database.module';
 
 @Module({
   imports: [
+    DatabaseModule,
     ConfigModule.forRoot({ isGlobal: true }),
     BullModule.forRoot({
       connection: {

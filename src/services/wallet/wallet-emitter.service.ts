@@ -4,19 +4,12 @@ import { Queue } from 'bullmq';
 import { WalletQueue } from './queue/wallet.queue';
 import { WalletEvents, WalletJobPayload } from './queue/wallet-queue.types';
 import { WebhookEvent, WebhookPayload } from './wallet.types';
-import {
-  TransferEvents,
-  TransferQueue,
-} from '@Blithe/transfer/queue/transfer.queue';
-import { TransactionDto } from '@Blithe/transaction/dto/transaction.dto';
 
 @Injectable()
 export class WalletEmitterService {
   constructor(
     @InjectQueue(WalletQueue)
     private readonly queue: Queue<WalletJobPayload>,
-    @InjectQueue(TransferQueue)
-    private readonly transferQueue: Queue<WebhookPayload['data']>,
   ) {}
 
   emitCreateWalletJob(userId: string) {
@@ -32,24 +25,15 @@ export class WalletEmitterService {
         break;
 
       case WebhookEvent.TRANSFER_SUCCESS:
-        await this.transferQueue.add(
-          TransferEvents.TRANSFER_SUCCESS,
-          webhookPayload.data,
-        );
+        //  Handle transfer success event
         break;
 
       case WebhookEvent.TRANSFER_FAILED:
-        await this.transferQueue.add(
-          TransferEvents.TRANSFER_FAILED,
-          webhookPayload.data,
-        );
+        // Handle transfer failed event
         break;
 
       case WebhookEvent.TRANSFER_REVERSED:
-        await this.transferQueue.add(
-          TransferEvents.TRANSFER_REVERSED,
-          webhookPayload.data,
-        );
+        // Handle transfer reversed event
         break;
 
       default:
@@ -57,7 +41,7 @@ export class WalletEmitterService {
     }
   }
 
-  emitCreditWalletJob(walletAddress: string, transaction: TransactionDto) {
+  emitCreditWalletJob(walletAddress: string, transaction: any) {
     return this.queue.add(WalletEvents.CREDIT_WALLET, {
       payload: { walletAddress, transaction },
     });

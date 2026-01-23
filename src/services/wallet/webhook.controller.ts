@@ -1,6 +1,6 @@
 import { Body, Controller, Post, UseGuards } from '@nestjs/common';
 import { WalletEmitterService } from './wallet-emitter.service';
-import { PaystackGuard } from '@Blithe/third-party/paystack/guards/paystack.guard';
+import { PaystackGuard } from '@Blithe/services/third-party/paystack/guards/paystack.guard';
 import { WebhookPayload } from './wallet.types';
 
 @Controller('webhook')

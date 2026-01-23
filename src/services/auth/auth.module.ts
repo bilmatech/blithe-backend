@@ -9,10 +9,13 @@ import { TokenService } from './token.service';
 import { NotificationModule } from '../notifications/notification.module';
 import { AccountModule } from '../account/account.module';
 import { EncryptionModule } from '../encryption/encryption.module';
+import appConfig from '@Blithe/common/config/app.config';
+import { VerificationModule } from '../verification/verification.module';
 
 @Module({
   imports: [
     ConfigModule.forFeature(authConfig),
+    ConfigModule.forFeature(appConfig),
     // Configure the JWT module with the secret and expiration time
     JwtModule.registerAsync({
       imports: [ConfigModule.forFeature(authConfig)],
@@ -25,6 +28,7 @@ import { EncryptionModule } from '../encryption/encryption.module';
     NotificationModule,
     AccountModule,
     EncryptionModule,
+    VerificationModule,
   ],
   controllers: [AuthController],
   providers: [AuthService, JwtStrategy, TokenService],

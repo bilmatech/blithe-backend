@@ -155,6 +155,6 @@ export class AuthController {
     @Body() body: CreateApppinDto,
     @AuthorizedUser() authUser: AuthUser,
   ) {
-    return this.authService.verifyAppPin(authUser.id, body.pin.toString());
+    return this.authService.verifyPin(authUser.id, body.pin.toString());
   }
 }

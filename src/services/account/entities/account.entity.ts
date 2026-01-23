@@ -1,7 +1,6 @@
 import { ResponseBody } from '@Blithe/common/entity/response-body.entity';
 import { AccountStatus, UserType } from '@DB/Client';
 import { ApiProperty } from '@nestjs/swagger';
-import { UserProfile } from './user-profile.entity';
 import { Credential } from './credentials.entity';
 import { BaseEntity } from '@Blithe/common/entity/base.entity';
 
@@ -57,12 +56,6 @@ export class Account extends BaseEntity {
   lastSeen: Date | null;
 
   verifiedAt: Date | null;
-
-  @ApiProperty({
-    type: () => UserProfile,
-    description: 'Profile associated with the user',
-  })
-  profile: UserProfile;
 
   @ApiProperty({
     type: () => Credential,
