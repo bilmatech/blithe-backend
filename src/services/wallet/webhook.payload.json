@@ -1,0 +1,79 @@
+{
+  "event": "charge.success",
+  "data": {
+    "id": 5472184026,
+    "domain": "test",
+    "status": "success",
+    "reference": "17615807573521nkcl255mh9bp7jc",
+    "amount": 1000000,
+    "message": null,
+    "gateway_response": "Approved",
+    "paid_at": "2025-10-27T15:59:17.000Z",
+    "created_at": "2025-10-27T15:59:17.000Z",
+    "channel": "dedicated_nuban",
+    "currency": "NGN",
+    "ip_address": null,
+    "metadata": {
+      "receiver_account_number": "1238213012",
+      "receiver_bank": "Test Bank",
+      "receiver_account_type": null,
+      "custom_fields": [
+        {
+          "display_name": "Receiver Account",
+          "variable_name": "receiver_account_number",
+          "value": "1238213012"
+        },
+        {
+          "display_name": "Receiver Bank",
+          "variable_name": "receiver_bank",
+          "value": "Test Bank"
+        }
+      ]
+    },
+    "fees_breakdown": null,
+    "log": null,
+    "fees": 10000,
+    "fees_split": null,
+    "authorization": {
+      "authorization_code": "AUTH_z96l7jvm6c",
+      "bin": "008XXX",
+      "last4": "X553",
+      "exp_month": "09",
+      "exp_year": "2025",
+      "channel": "dedicated_nuban",
+      "card_type": "transfer",
+      "bank": null,
+      "country_code": "NG",
+      "brand": "Managed Account",
+      "reusable": false,
+      "signature": null,
+      "account_name": null,
+      "sender_country": "NG",
+      "sender_bank": null,
+      "sender_bank_account_number": "XXXXXX4553",
+      "receiver_bank_account_number": "1238213012",
+      "receiver_bank": "Test Bank"
+    },
+    "customer": {
+      "id": 93667433,
+      "first_name": "Bilma",
+      "last_name": "Pay",
+      "email": "my.bilmapay@gmail.com",
+      "customer_code": "CUS_ae6lmnrql73wbca",
+      "phone": "09125256272",
+      "metadata": {
+        "ACCOUNT_TYPE": "personal"
+      },
+      "risk_action": "default",
+      "international_format_phone": null
+    },
+    "plan": {},
+    "subaccount": {},
+    "split": {},
+    "order_id": null,
+    "paidAt": "2025-10-27T15:59:17.000Z",
+    "requested_amount": 1000000,
+    "pos_transaction_data": null,
+    "source": null
+  }
+}

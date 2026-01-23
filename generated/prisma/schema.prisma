@@ -16,7 +16,7 @@ datasource db {
 // ======================== [ ENUMS] ==================== // 
 enum UserType {
   administrator
-  gaurdiant
+  guardian
   school
 }
 
@@ -24,6 +24,7 @@ enum AccountStatus {
   active
   suspended
   blocked
+  deleted
 }
 
 enum SchoolStatus {
@@ -97,6 +98,27 @@ enum WalletStatus {
   Deleted
 }
 
+enum VerificationType {
+  account_activation
+  password_reset
+  pin_code_reset
+}
+
+// Transaction Types
+enum TransactionType {
+  Deposit
+  Withdrawal
+  Transfer
+  Refund
+  Reversal
+  Distribution
+}
+
+enum TransactionFlow {
+  Inflow
+  Outflow
+}
+
 // ======================== [ MODELS ] ==================== //
 
 model User {
@@ -106,7 +128,7 @@ model User {
   profileImage  String?
   email         String        @unique
   type          UserType
-  phoneNumber   String?
+  phone         String?
   accountStatus AccountStatus @default(active)
   verifiedAt    DateTime?
   lastSeenAt    DateTime?
@@ -124,6 +146,8 @@ model User {
   notifications                   Notification[]
   credential                      Credential?
   wallet                          Wallet?
+  refreshTokens                   RefreshToken[]
+  firebaseToken                   FirebaseToken?
 
   @@index([email, isDeleted])
   @@index([type, accountStatus, isDeleted])
@@ -133,10 +157,12 @@ model User {
 }
 
 model Credential {
-  id       String @id @default(cuid())
-  userId   String @unique
-  password String
-  pinCode  String
+  id          String    @id @default(cuid())
+  userId      String    @unique
+  password    String?
+  pinCode     String?
+  lastResetAt DateTime?
+  lastUsedAt  DateTime?
 
   isDeleted Boolean  @default(false)
   createdAt DateTime @default(now())
@@ -146,6 +172,27 @@ model Credential {
   user User @relation(fields: [userId], references: [id], onDelete: Cascade)
 
   @@index([userId, isDeleted])
+}
+
+model RefreshToken {
+  id        String   @id @default(cuid())
+  userId    String
+  token     String
+  expiresAt DateTime
+  revoked   Boolean  @default(false)
+
+  isDeleted Boolean  @default(false)
+  updatedAt DateTime @updatedAt
+  createdAt DateTime @default(now())
+
+  // Relations
+  user User @relation(fields: [userId], references: [id], onDelete: Cascade)
+
+  // Optimized indexes for credential management
+  @@index([userId, isDeleted, revoked])
+  @@index([expiresAt, isDeleted])
+  @@index([token, isDeleted])
+  @@index([revoked, expiresAt, isDeleted])
 }
 
 model Administrator {
@@ -188,11 +235,13 @@ model Guardian {
 }
 
 model Verification {
-  id          String   @id @default(cuid())
+  id          String           @id @default(cuid())
   userId      String
-  code        String   @unique
+  type        VerificationType
+  code        String           @unique
   expiresAt   DateTime
-  resendCount Int      @default(0)
+  resendCount Int              @default(0)
+  used        Boolean          @default(false)
 
   isDeleted Boolean  @default(false)
   createdAt DateTime @default(now())
@@ -202,6 +251,7 @@ model Verification {
   user User @relation(fields: [userId], references: [id], onDelete: Cascade)
 
   @@index([userId, isDeleted])
+  @@index([userId, type, isDeleted])
   @@index([code, expiresAt, isDeleted])
   @@index([expiresAt, isDeleted])
   @@index([userId, createdAt, isDeleted])
@@ -558,6 +608,8 @@ model Transaction {
   amount        Decimal           @default(0.00) @db.Decimal(10, 2)
   fees          Decimal           @default(0.00) @db.Decimal(10, 2)
   status        TransactionStatus @default(pending)
+  type          TransactionType   @default(Deposit)
+  flow          TransactionFlow   @default(Inflow)
   transactionAt DateTime?
   processedAt   DateTime?
   description   String?
@@ -708,4 +760,22 @@ model Ledger {
   @@index([transactionId, isDeleted])
   @@index([walletId, isDeleted, createdAt])
   @@index([walletId, createdAt, isDeleted])
+}
+
+model FirebaseToken {
+  id     String  @id @default(cuid())
+  userId String  @unique // One token per user
+  // Push notification fields (since it's 1:1 with user)
+  token  String? // FCM/APNS token (nullable for web users)
+
+  isDeleted Boolean  @default(false)
+  updatedAt DateTime @updatedAt
+  createdAt DateTime @default(now())
+
+  // Relations
+  user User @relation(fields: [userId], references: [id], onDelete: Cascade)
+
+  // Optimized indexes for firebase token management
+  @@index([token, isDeleted])
+  @@index([userId, isDeleted])
 }

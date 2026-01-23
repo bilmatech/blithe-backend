@@ -7,11 +7,11 @@ import {
 import { PassportStrategy } from '@nestjs/passport';
 import { ExtractJwt, Strategy } from 'passport-jwt';
 import { Request } from 'express';
-import { AccountService } from '@sabiflow/account/account.service';
+import { AccountService } from '@Blithe/services/account/account.service';
 import authConfig from './configs/auth.config';
 import { ConfigType } from '@nestjs/config';
-import { AppError } from '@sabiflow/common/utils/error-handler.util';
-import appConfig from '@sabiflow/common/config/app.config';
+import { AppError } from '@Blithe/common/utils/error-handler.util';
+import appConfig from '@Blithe/common/config/app.config';
 
 @Injectable()
 export class JwtStrategy extends PassportStrategy(Strategy) {

@@ -1,12 +1,12 @@
+import { TemplateLoader } from '@Blithe/common/utils/template-loader.util';
 import { Injectable } from '@nestjs/common';
-import { TemplateLoader } from '@Wontum/common/utils/template-loader.util';
 import * as path from 'path';
 
 @Injectable()
 export class TemplateParserService {
   private TEMPLATE_ROOT = path.resolve(
     process.cwd(),
-    'src/modules/email/templates',
+    'src/services/email/templates',
   );
 
   async render(

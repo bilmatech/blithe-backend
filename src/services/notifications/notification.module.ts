@@ -4,9 +4,16 @@ import { InAppNotificationService } from './in-app-notification.service';
 import { EmailModule } from '../email/email.module';
 import { NotificationEnqueueService } from './notification-enqueue.service';
 import { NotificationProcessor } from './queue/notification.processor';
+import { BullModule } from '@nestjs/bullmq';
+import { NotificationQueue } from './queue/notification.queue';
 
 @Module({
-  imports: [EmailModule],
+  imports: [
+    EmailModule,
+    BullModule.registerQueue({
+      name: NotificationQueue,
+    }),
+  ],
   providers: [
     PushNotificationService,
     InAppNotificationService,

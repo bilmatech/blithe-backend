@@ -1,0 +1,8 @@
+POST {{ baseUrl }}/api/v1/auth/create_guardian_account
+Content-Type: application/json
+{
+    "email": "pascalobi83@gmail.com",
+    "fullName": "Pascal OBI",
+    "password": "StrongP@ssw0rd!",
+    "phone": "+2348131234567"
+}

@@ -10,6 +10,7 @@ import { createBullBoard } from '@bull-board/api';
 import { BullMQAdapter } from '@bull-board/api/bullMQAdapter';
 import * as basicAuth from 'express-basic-auth';
 import { DocumentBuilder, SwaggerModule } from '@nestjs/swagger';
+import { NotificationQueue } from './services/notifications/queue/notification.queue';
 
 async function bootstrap() {
   const app = await NestFactory.create(AppModule);
@@ -72,15 +73,13 @@ async function bootstrap() {
   serverAdapter.setBasePath('/queues');
 
   // Register BullMQ Queues
-  // const notificationQueue = app.get<Queue>(`BullQueue_${NotificationQueue}`); // queue name prefixed
+  const notificationQueue = app.get<Queue>(`BullQueue_${NotificationQueue}`); // queue name prefixed
 
   createBullBoard({
     options: {
       // Configure Bull Board compilerOptions
     },
-    queues: [
-      // new BullMQAdapter(notificationQueue),
-    ],
+    queues: [new BullMQAdapter(notificationQueue)],
     serverAdapter,
   });
 
@@ -90,10 +89,10 @@ async function bootstrap() {
 
   app.use(
     '/queues',
-    basicAuth({
-      users: { [username]: password }, // username:password
-      challenge: true,
-    }),
+    // basicAuth({
+    //   users: { [username]: password }, // username:password
+    //   challenge: true,
+    // }),
     serverAdapter.getRouter(),
   );
 

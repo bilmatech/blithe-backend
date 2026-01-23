@@ -8,7 +8,7 @@ import firebase from 'firebase-admin';
 
 @Injectable()
 export class FirebaseAdminService {
-  public app: firebase.app.App;
+  public firebaseApp: firebase.app.App;
 
   constructor(protected readonly configService: ConfigService) {
     if (!firebase.apps.length) {
@@ -19,11 +19,11 @@ export class FirebaseAdminService {
         ).toString('utf8'),
       );
 
-      this.app = firebase.initializeApp({
+      this.firebaseApp = firebase.initializeApp({
         credential: firebase.credential.cert(serviceAccount),
       });
     } else {
-      this.app = firebase.app();
+      this.firebaseApp = firebase.app();
     }
   }
 }

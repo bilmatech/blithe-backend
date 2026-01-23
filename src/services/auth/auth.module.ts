@@ -1,4 +1,4 @@
-import { forwardRef, Module } from '@nestjs/common';
+import { Module } from '@nestjs/common';
 import { AuthService } from './auth.service';
 import { AuthController } from './auth.controller';
 import { ConfigModule, ConfigType } from '@nestjs/config';
@@ -6,38 +6,32 @@ import authConfig from './configs/auth.config';
 import { JwtStrategy } from './jwt.strategy';
 import { JwtModule } from '@nestjs/jwt';
 import { TokenService } from './token.service';
-import { NotificationsModule } from '@sabiflow/notifications/notifications.module';
-import { SecurityModule } from '@sabiflow/security/security.module';
-import { VerificationModule } from '@sabiflow/verification/verification.module';
-import { WalletModule } from '@sabiflow/wallet/wallet.module';
-import appConfig from '@sabiflow/common/config/app.config';
-import { PinChallengeGuard } from './guards/pin-challenge.guard';
-import { FirebaseModule } from '@sabiflow/common/firebase/firebase.module';
-import { FirebaseMessagingModule } from '@sabiflow/firebase-messaging/firebase-messaging.module';
+import { NotificationModule } from '../notifications/notification.module';
+import { AccountModule } from '../account/account.module';
+import { EncryptionModule } from '../encryption/encryption.module';
+import appConfig from '@Blithe/common/config/app.config';
+import { VerificationModule } from '../verification/verification.module';
 
 @Module({
   imports: [
     ConfigModule.forFeature(authConfig),
     ConfigModule.forFeature(appConfig),
-    AccountModule,
     // Configure the JWT module with the secret and expiration time
     JwtModule.registerAsync({
       imports: [ConfigModule.forFeature(authConfig)],
       useFactory: (config: ConfigType<typeof authConfig>) => ({
-        secret: config.jwtSecret,
+        secret: config.jwtSecret as string,
         signOptions: { expiresIn: config.jwtExpiration },
       }),
       inject: [authConfig.KEY],
     }),
-    NotificationsModule,
-    forwardRef(() => SecurityModule),
+    NotificationModule,
+    AccountModule,
+    EncryptionModule,
     VerificationModule,
-    WalletModule,
-    FirebaseModule,
-    FirebaseMessagingModule,
   ],
   controllers: [AuthController],
-  providers: [AuthService, JwtStrategy, TokenService, PinChallengeGuard],
-  exports: [JwtModule, AuthService, TokenService, PinChallengeGuard],
+  providers: [AuthService, JwtStrategy, TokenService],
+  exports: [JwtModule, AuthService, TokenService],
 })
 export class AuthModule {}

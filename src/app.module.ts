@@ -5,10 +5,20 @@ import { ConfigModule } from '@nestjs/config';
 import { NotificationModule } from './services/notifications/notification.module';
 import { EmailModule } from './services/email/email.module';
 import { BullModule } from '@nestjs/bullmq';
+import { AccountModule } from './services/account/account.module';
+import { AuthModule } from './services/auth/auth.module';
+import { WalletModule } from './services/wallet/wallet.module';
+import { VerificationModule } from './services/verification/verification.module';
+import { FirebaseMessagingModule } from './services/firebase-messaging/firebase-messaging.module';
+import { FirebaseAdminModule } from './common/firebase/firebase-admin.module';
+import { DatabaseModule } from './services/database/database.module';
+import { SentryModule } from '@sentry/nestjs/setup';
 
 @Module({
   imports: [
+    DatabaseModule,
     ConfigModule.forRoot({ isGlobal: true }),
+    SentryModule.forRoot(),
     BullModule.forRoot({
       connection: {
         host: process.env.REDIS_HOST || 'localhost',
@@ -35,6 +45,12 @@ import { BullModule } from '@nestjs/bullmq';
     }),
     EmailModule,
     NotificationModule,
+    AccountModule,
+    AuthModule,
+    WalletModule,
+    VerificationModule,
+    FirebaseMessagingModule,
+    FirebaseAdminModule,
   ],
   controllers: [AppController],
   providers: [AppService],

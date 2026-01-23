@@ -1,0 +1,10 @@
+POST {{ baseUrl }}/api/v1/account/onboard
+Authorization: Bearer {{ accessToken}}
+Content-Type: application/json
+{
+    "employmentStatus": "Employed",
+    "occupation": "Software Engineer",
+    "monthlyIncome": 5000000,
+    "incomeSource": "Salary",
+    "usesAppFor": "Personal Finance Management"
+}

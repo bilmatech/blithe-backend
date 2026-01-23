@@ -1,7 +1,7 @@
 import { Inject, Injectable } from '@nestjs/common';
 import { ConfigType } from '@nestjs/config';
 import encryptionConfig from './encryption.config';
-import { decryptText, encryptText } from '@sabiflow/common/utils/encrypter';
+import { decryptText, encryptText } from '@Blithe/common/utils/encrypter';
 
 @Injectable()
 export class EncryptionService {
