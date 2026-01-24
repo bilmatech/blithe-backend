@@ -26,6 +26,25 @@ import { SentryModule } from '@sentry/nestjs/setup';
           ? parseInt(process.env.REDIS_PORT, 10)
           : 6379,
         password: process.env.REDIS_PASSWORD || undefined, // Optional password for Redis
+
+        // Critical timeout settings for ElastiCache
+        connectTimeout: 10000, // 10 seconds to connect
+        commandTimeout: 30000, // 30 seconds for commands
+        lazyConnect: true, // Don't connect immediately
+
+        // Connection pool settings
+        maxRetriesPerRequest: 3,
+        retryDelayOnFailover: 100,
+        enableReadyCheck: false,
+
+        // Keep connections alive
+        keepAlive: 30000,
+
+        // Family 4 forces IPv4 (sometimes helps with DNS)
+        family: 4,
+
+        // Disable offline queue to fail fast
+        enableOfflineQueue: false,
       },
       defaultJobOptions: {
         backoff: {
