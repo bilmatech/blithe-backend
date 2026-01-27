@@ -26,6 +26,7 @@ import { SentryModule } from '@sentry/nestjs/setup';
           ? parseInt(process.env.REDIS_PORT, 10)
           : 6379,
         password: process.env.REDIS_PASSWORD || undefined, // Optional password for Redis
+        tls: {},
 
         // Keep connections alive
         keepAlive: 30000,
