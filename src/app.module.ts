@@ -21,21 +21,10 @@ import { SentryModule } from '@sentry/nestjs/setup';
     SentryModule.forRoot(),
     BullModule.forRoot({
       connection: {
-        username: process.env.REDIS_USERNAME || undefined, // Optional username for Redis
+        username: process.env.REDIS_USERNAME, // Optional username for Redis
         host: process.env.REDIS_HOST || 'localhost',
-        port: process.env.REDIS_PORT
-          ? parseInt(process.env.REDIS_PORT, 10)
-          : 6379,
-        password: process.env.REDIS_PASSWORD || undefined, // Optional password for Redis
-        /**
-         * NOTE: ThIS IS VERY IMPORTANT REQUIRED PROPERTY FOR CONNECTION WITH REDIS ON AWS ELASTICACHE
-         * IF YOU DON'T ADD THIS YOUR APP WILL CONNECT TO ELASTICACHE REDIS INSTANCE BUT QUEUES WILL NOT BE PROCESSED
-         * BECAUSE ELASTICACHE USES TLS FOR CONNECTIONS
-         */
-        // tls: {},
-
-        // Keep connections alive
-        keepAlive: 30000,
+        port: Number(process.env.REDIS_PORT) || 6379,
+        password: process.env.REDIS_PASSWORD, // Optional password for Redis
       },
       defaultJobOptions: {
         backoff: {
