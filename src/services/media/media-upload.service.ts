@@ -5,8 +5,8 @@ import {
 } from '@nestjs/common';
 import { AwsS3Service } from './aws-s3.service';
 import { ConfigService } from '@nestjs/config';
-import { AppError } from '@FynndFit/common/utils/error-handler.util';
 import { SignedUrlDto } from './dtos/signed-url.dto';
+import { AppError } from '@Blithe/common/utils/error-handler.util';
 
 @Injectable()
 export class MediaUploadService {

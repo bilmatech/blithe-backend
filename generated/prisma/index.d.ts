@@ -3870,6 +3870,8 @@ export namespace Prisma {
     accountStatus: $Enums.AccountStatus | null
     verifiedAt: Date | null
     lastSeenAt: Date | null
+    isTermsAccepted: boolean | null
+    isPrivacyAccepted: boolean | null
     isDeleted: boolean | null
     createdAt: Date | null
     updatedAt: Date | null
@@ -3886,6 +3888,8 @@ export namespace Prisma {
     accountStatus: $Enums.AccountStatus | null
     verifiedAt: Date | null
     lastSeenAt: Date | null
+    isTermsAccepted: boolean | null
+    isPrivacyAccepted: boolean | null
     isDeleted: boolean | null
     createdAt: Date | null
     updatedAt: Date | null
@@ -3902,6 +3906,8 @@ export namespace Prisma {
     accountStatus: number
     verifiedAt: number
     lastSeenAt: number
+    isTermsAccepted: number
+    isPrivacyAccepted: number
     isDeleted: number
     createdAt: number
     updatedAt: number
@@ -3920,6 +3926,8 @@ export namespace Prisma {
     accountStatus?: true
     verifiedAt?: true
     lastSeenAt?: true
+    isTermsAccepted?: true
+    isPrivacyAccepted?: true
     isDeleted?: true
     createdAt?: true
     updatedAt?: true
@@ -3936,6 +3944,8 @@ export namespace Prisma {
     accountStatus?: true
     verifiedAt?: true
     lastSeenAt?: true
+    isTermsAccepted?: true
+    isPrivacyAccepted?: true
     isDeleted?: true
     createdAt?: true
     updatedAt?: true
@@ -3952,6 +3962,8 @@ export namespace Prisma {
     accountStatus?: true
     verifiedAt?: true
     lastSeenAt?: true
+    isTermsAccepted?: true
+    isPrivacyAccepted?: true
     isDeleted?: true
     createdAt?: true
     updatedAt?: true
@@ -4041,6 +4053,8 @@ export namespace Prisma {
     accountStatus: $Enums.AccountStatus
     verifiedAt: Date | null
     lastSeenAt: Date | null
+    isTermsAccepted: boolean
+    isPrivacyAccepted: boolean
     isDeleted: boolean
     createdAt: Date
     updatedAt: Date
@@ -4074,6 +4088,8 @@ export namespace Prisma {
     accountStatus?: boolean
     verifiedAt?: boolean
     lastSeenAt?: boolean
+    isTermsAccepted?: boolean
+    isPrivacyAccepted?: boolean
     isDeleted?: boolean
     createdAt?: boolean
     updatedAt?: boolean
@@ -4101,6 +4117,8 @@ export namespace Prisma {
     accountStatus?: boolean
     verifiedAt?: boolean
     lastSeenAt?: boolean
+    isTermsAccepted?: boolean
+    isPrivacyAccepted?: boolean
     isDeleted?: boolean
     createdAt?: boolean
     updatedAt?: boolean
@@ -4117,6 +4135,8 @@ export namespace Prisma {
     accountStatus?: boolean
     verifiedAt?: boolean
     lastSeenAt?: boolean
+    isTermsAccepted?: boolean
+    isPrivacyAccepted?: boolean
     isDeleted?: boolean
     createdAt?: boolean
     updatedAt?: boolean
@@ -4133,12 +4153,14 @@ export namespace Prisma {
     accountStatus?: boolean
     verifiedAt?: boolean
     lastSeenAt?: boolean
+    isTermsAccepted?: boolean
+    isPrivacyAccepted?: boolean
     isDeleted?: boolean
     createdAt?: boolean
     updatedAt?: boolean
   }
 
-  export type UserOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "firstName" | "lastName" | "profileImage" | "email" | "type" | "phone" | "accountStatus" | "verifiedAt" | "lastSeenAt" | "isDeleted" | "createdAt" | "updatedAt", ExtArgs["result"]["user"]>
+  export type UserOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "firstName" | "lastName" | "profileImage" | "email" | "type" | "phone" | "accountStatus" | "verifiedAt" | "lastSeenAt" | "isTermsAccepted" | "isPrivacyAccepted" | "isDeleted" | "createdAt" | "updatedAt", ExtArgs["result"]["user"]>
   export type UserInclude<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     administrator?: boolean | User$administratorArgs<ExtArgs>
     guardian?: boolean | User$guardianArgs<ExtArgs>
@@ -4180,6 +4202,8 @@ export namespace Prisma {
       accountStatus: $Enums.AccountStatus
       verifiedAt: Date | null
       lastSeenAt: Date | null
+      isTermsAccepted: boolean
+      isPrivacyAccepted: boolean
       isDeleted: boolean
       createdAt: Date
       updatedAt: Date
@@ -4626,6 +4650,8 @@ export namespace Prisma {
     readonly accountStatus: FieldRef<"User", 'AccountStatus'>
     readonly verifiedAt: FieldRef<"User", 'DateTime'>
     readonly lastSeenAt: FieldRef<"User", 'DateTime'>
+    readonly isTermsAccepted: FieldRef<"User", 'Boolean'>
+    readonly isPrivacyAccepted: FieldRef<"User", 'Boolean'>
     readonly isDeleted: FieldRef<"User", 'Boolean'>
     readonly createdAt: FieldRef<"User", 'DateTime'>
     readonly updatedAt: FieldRef<"User", 'DateTime'>
@@ -35522,6 +35548,8 @@ export namespace Prisma {
     accountStatus: 'accountStatus',
     verifiedAt: 'verifiedAt',
     lastSeenAt: 'lastSeenAt',
+    isTermsAccepted: 'isTermsAccepted',
+    isPrivacyAccepted: 'isPrivacyAccepted',
     isDeleted: 'isDeleted',
     createdAt: 'createdAt',
     updatedAt: 'updatedAt'
@@ -36280,6 +36308,8 @@ export namespace Prisma {
     accountStatus?: EnumAccountStatusFilter<"User"> | $Enums.AccountStatus
     verifiedAt?: DateTimeNullableFilter<"User"> | Date | string | null
     lastSeenAt?: DateTimeNullableFilter<"User"> | Date | string | null
+    isTermsAccepted?: BoolFilter<"User"> | boolean
+    isPrivacyAccepted?: BoolFilter<"User"> | boolean
     isDeleted?: BoolFilter<"User"> | boolean
     createdAt?: DateTimeFilter<"User"> | Date | string
     updatedAt?: DateTimeFilter<"User"> | Date | string
@@ -36306,6 +36336,8 @@ export namespace Prisma {
     accountStatus?: SortOrder
     verifiedAt?: SortOrderInput | SortOrder
     lastSeenAt?: SortOrderInput | SortOrder
+    isTermsAccepted?: SortOrder
+    isPrivacyAccepted?: SortOrder
     isDeleted?: SortOrder
     createdAt?: SortOrder
     updatedAt?: SortOrder
@@ -36335,6 +36367,8 @@ export namespace Prisma {
     accountStatus?: EnumAccountStatusFilter<"User"> | $Enums.AccountStatus
     verifiedAt?: DateTimeNullableFilter<"User"> | Date | string | null
     lastSeenAt?: DateTimeNullableFilter<"User"> | Date | string | null
+    isTermsAccepted?: BoolFilter<"User"> | boolean
+    isPrivacyAccepted?: BoolFilter<"User"> | boolean
     isDeleted?: BoolFilter<"User"> | boolean
     createdAt?: DateTimeFilter<"User"> | Date | string
     updatedAt?: DateTimeFilter<"User"> | Date | string
@@ -36361,6 +36395,8 @@ export namespace Prisma {
     accountStatus?: SortOrder
     verifiedAt?: SortOrderInput | SortOrder
     lastSeenAt?: SortOrderInput | SortOrder
+    isTermsAccepted?: SortOrder
+    isPrivacyAccepted?: SortOrder
     isDeleted?: SortOrder
     createdAt?: SortOrder
     updatedAt?: SortOrder
@@ -36383,6 +36419,8 @@ export namespace Prisma {
     accountStatus?: EnumAccountStatusWithAggregatesFilter<"User"> | $Enums.AccountStatus
     verifiedAt?: DateTimeNullableWithAggregatesFilter<"User"> | Date | string | null
     lastSeenAt?: DateTimeNullableWithAggregatesFilter<"User"> | Date | string | null
+    isTermsAccepted?: BoolWithAggregatesFilter<"User"> | boolean
+    isPrivacyAccepted?: BoolWithAggregatesFilter<"User"> | boolean
     isDeleted?: BoolWithAggregatesFilter<"User"> | boolean
     createdAt?: DateTimeWithAggregatesFilter<"User"> | Date | string
     updatedAt?: DateTimeWithAggregatesFilter<"User"> | Date | string
@@ -38552,6 +38590,8 @@ export namespace Prisma {
     accountStatus?: $Enums.AccountStatus
     verifiedAt?: Date | string | null
     lastSeenAt?: Date | string | null
+    isTermsAccepted?: boolean
+    isPrivacyAccepted?: boolean
     isDeleted?: boolean
     createdAt?: Date | string
     updatedAt?: Date | string
@@ -38578,6 +38618,8 @@ export namespace Prisma {
     accountStatus?: $Enums.AccountStatus
     verifiedAt?: Date | string | null
     lastSeenAt?: Date | string | null
+    isTermsAccepted?: boolean
+    isPrivacyAccepted?: boolean
     isDeleted?: boolean
     createdAt?: Date | string
     updatedAt?: Date | string
@@ -38604,6 +38646,8 @@ export namespace Prisma {
     accountStatus?: EnumAccountStatusFieldUpdateOperationsInput | $Enums.AccountStatus
     verifiedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     lastSeenAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    isTermsAccepted?: BoolFieldUpdateOperationsInput | boolean
+    isPrivacyAccepted?: BoolFieldUpdateOperationsInput | boolean
     isDeleted?: BoolFieldUpdateOperationsInput | boolean
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
@@ -38630,6 +38674,8 @@ export namespace Prisma {
     accountStatus?: EnumAccountStatusFieldUpdateOperationsInput | $Enums.AccountStatus
     verifiedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     lastSeenAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    isTermsAccepted?: BoolFieldUpdateOperationsInput | boolean
+    isPrivacyAccepted?: BoolFieldUpdateOperationsInput | boolean
     isDeleted?: BoolFieldUpdateOperationsInput | boolean
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
@@ -38656,6 +38702,8 @@ export namespace Prisma {
     accountStatus?: $Enums.AccountStatus
     verifiedAt?: Date | string | null
     lastSeenAt?: Date | string | null
+    isTermsAccepted?: boolean
+    isPrivacyAccepted?: boolean
     isDeleted?: boolean
     createdAt?: Date | string
     updatedAt?: Date | string
@@ -38672,6 +38720,8 @@ export namespace Prisma {
     accountStatus?: EnumAccountStatusFieldUpdateOperationsInput | $Enums.AccountStatus
     verifiedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     lastSeenAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    isTermsAccepted?: BoolFieldUpdateOperationsInput | boolean
+    isPrivacyAccepted?: BoolFieldUpdateOperationsInput | boolean
     isDeleted?: BoolFieldUpdateOperationsInput | boolean
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
@@ -38688,6 +38738,8 @@ export namespace Prisma {
     accountStatus?: EnumAccountStatusFieldUpdateOperationsInput | $Enums.AccountStatus
     verifiedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     lastSeenAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    isTermsAccepted?: BoolFieldUpdateOperationsInput | boolean
+    isPrivacyAccepted?: BoolFieldUpdateOperationsInput | boolean
     isDeleted?: BoolFieldUpdateOperationsInput | boolean
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
@@ -41194,6 +41246,8 @@ export namespace Prisma {
     accountStatus?: SortOrder
     verifiedAt?: SortOrder
     lastSeenAt?: SortOrder
+    isTermsAccepted?: SortOrder
+    isPrivacyAccepted?: SortOrder
     isDeleted?: SortOrder
     createdAt?: SortOrder
     updatedAt?: SortOrder
@@ -41210,6 +41264,8 @@ export namespace Prisma {
     accountStatus?: SortOrder
     verifiedAt?: SortOrder
     lastSeenAt?: SortOrder
+    isTermsAccepted?: SortOrder
+    isPrivacyAccepted?: SortOrder
     isDeleted?: SortOrder
     createdAt?: SortOrder
     updatedAt?: SortOrder
@@ -41226,6 +41282,8 @@ export namespace Prisma {
     accountStatus?: SortOrder
     verifiedAt?: SortOrder
     lastSeenAt?: SortOrder
+    isTermsAccepted?: SortOrder
+    isPrivacyAccepted?: SortOrder
     isDeleted?: SortOrder
     createdAt?: SortOrder
     updatedAt?: SortOrder
@@ -46209,6 +46267,8 @@ export namespace Prisma {
     accountStatus?: $Enums.AccountStatus
     verifiedAt?: Date | string | null
     lastSeenAt?: Date | string | null
+    isTermsAccepted?: boolean
+    isPrivacyAccepted?: boolean
     isDeleted?: boolean
     createdAt?: Date | string
     updatedAt?: Date | string
@@ -46234,6 +46294,8 @@ export namespace Prisma {
     accountStatus?: $Enums.AccountStatus
     verifiedAt?: Date | string | null
     lastSeenAt?: Date | string | null
+    isTermsAccepted?: boolean
+    isPrivacyAccepted?: boolean
     isDeleted?: boolean
     createdAt?: Date | string
     updatedAt?: Date | string
@@ -46275,6 +46337,8 @@ export namespace Prisma {
     accountStatus?: EnumAccountStatusFieldUpdateOperationsInput | $Enums.AccountStatus
     verifiedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     lastSeenAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    isTermsAccepted?: BoolFieldUpdateOperationsInput | boolean
+    isPrivacyAccepted?: BoolFieldUpdateOperationsInput | boolean
     isDeleted?: BoolFieldUpdateOperationsInput | boolean
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
@@ -46300,6 +46364,8 @@ export namespace Prisma {
     accountStatus?: EnumAccountStatusFieldUpdateOperationsInput | $Enums.AccountStatus
     verifiedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     lastSeenAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    isTermsAccepted?: BoolFieldUpdateOperationsInput | boolean
+    isPrivacyAccepted?: BoolFieldUpdateOperationsInput | boolean
     isDeleted?: BoolFieldUpdateOperationsInput | boolean
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
@@ -46325,6 +46391,8 @@ export namespace Prisma {
     accountStatus?: $Enums.AccountStatus
     verifiedAt?: Date | string | null
     lastSeenAt?: Date | string | null
+    isTermsAccepted?: boolean
+    isPrivacyAccepted?: boolean
     isDeleted?: boolean
     createdAt?: Date | string
     updatedAt?: Date | string
@@ -46350,6 +46418,8 @@ export namespace Prisma {
     accountStatus?: $Enums.AccountStatus
     verifiedAt?: Date | string | null
     lastSeenAt?: Date | string | null
+    isTermsAccepted?: boolean
+    isPrivacyAccepted?: boolean
     isDeleted?: boolean
     createdAt?: Date | string
     updatedAt?: Date | string
@@ -46391,6 +46461,8 @@ export namespace Prisma {
     accountStatus?: EnumAccountStatusFieldUpdateOperationsInput | $Enums.AccountStatus
     verifiedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     lastSeenAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    isTermsAccepted?: BoolFieldUpdateOperationsInput | boolean
+    isPrivacyAccepted?: BoolFieldUpdateOperationsInput | boolean
     isDeleted?: BoolFieldUpdateOperationsInput | boolean
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
@@ -46416,6 +46488,8 @@ export namespace Prisma {
     accountStatus?: EnumAccountStatusFieldUpdateOperationsInput | $Enums.AccountStatus
     verifiedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     lastSeenAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    isTermsAccepted?: BoolFieldUpdateOperationsInput | boolean
+    isPrivacyAccepted?: BoolFieldUpdateOperationsInput | boolean
     isDeleted?: BoolFieldUpdateOperationsInput | boolean
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
@@ -46441,6 +46515,8 @@ export namespace Prisma {
     accountStatus?: $Enums.AccountStatus
     verifiedAt?: Date | string | null
     lastSeenAt?: Date | string | null
+    isTermsAccepted?: boolean
+    isPrivacyAccepted?: boolean
     isDeleted?: boolean
     createdAt?: Date | string
     updatedAt?: Date | string
@@ -46466,6 +46542,8 @@ export namespace Prisma {
     accountStatus?: $Enums.AccountStatus
     verifiedAt?: Date | string | null
     lastSeenAt?: Date | string | null
+    isTermsAccepted?: boolean
+    isPrivacyAccepted?: boolean
     isDeleted?: boolean
     createdAt?: Date | string
     updatedAt?: Date | string
@@ -46507,6 +46585,8 @@ export namespace Prisma {
     accountStatus?: EnumAccountStatusFieldUpdateOperationsInput | $Enums.AccountStatus
     verifiedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     lastSeenAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    isTermsAccepted?: BoolFieldUpdateOperationsInput | boolean
+    isPrivacyAccepted?: BoolFieldUpdateOperationsInput | boolean
     isDeleted?: BoolFieldUpdateOperationsInput | boolean
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
@@ -46532,6 +46612,8 @@ export namespace Prisma {
     accountStatus?: EnumAccountStatusFieldUpdateOperationsInput | $Enums.AccountStatus
     verifiedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     lastSeenAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    isTermsAccepted?: BoolFieldUpdateOperationsInput | boolean
+    isPrivacyAccepted?: BoolFieldUpdateOperationsInput | boolean
     isDeleted?: BoolFieldUpdateOperationsInput | boolean
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
@@ -46557,6 +46639,8 @@ export namespace Prisma {
     accountStatus?: $Enums.AccountStatus
     verifiedAt?: Date | string | null
     lastSeenAt?: Date | string | null
+    isTermsAccepted?: boolean
+    isPrivacyAccepted?: boolean
     isDeleted?: boolean
     createdAt?: Date | string
     updatedAt?: Date | string
@@ -46582,6 +46666,8 @@ export namespace Prisma {
     accountStatus?: $Enums.AccountStatus
     verifiedAt?: Date | string | null
     lastSeenAt?: Date | string | null
+    isTermsAccepted?: boolean
+    isPrivacyAccepted?: boolean
     isDeleted?: boolean
     createdAt?: Date | string
     updatedAt?: Date | string
@@ -46783,6 +46869,8 @@ export namespace Prisma {
     accountStatus?: EnumAccountStatusFieldUpdateOperationsInput | $Enums.AccountStatus
     verifiedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     lastSeenAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    isTermsAccepted?: BoolFieldUpdateOperationsInput | boolean
+    isPrivacyAccepted?: BoolFieldUpdateOperationsInput | boolean
     isDeleted?: BoolFieldUpdateOperationsInput | boolean
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
@@ -46808,6 +46896,8 @@ export namespace Prisma {
     accountStatus?: EnumAccountStatusFieldUpdateOperationsInput | $Enums.AccountStatus
     verifiedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     lastSeenAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    isTermsAccepted?: BoolFieldUpdateOperationsInput | boolean
+    isPrivacyAccepted?: BoolFieldUpdateOperationsInput | boolean
     isDeleted?: BoolFieldUpdateOperationsInput | boolean
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
@@ -46969,6 +47059,8 @@ export namespace Prisma {
     accountStatus?: $Enums.AccountStatus
     verifiedAt?: Date | string | null
     lastSeenAt?: Date | string | null
+    isTermsAccepted?: boolean
+    isPrivacyAccepted?: boolean
     isDeleted?: boolean
     createdAt?: Date | string
     updatedAt?: Date | string
@@ -46994,6 +47086,8 @@ export namespace Prisma {
     accountStatus?: $Enums.AccountStatus
     verifiedAt?: Date | string | null
     lastSeenAt?: Date | string | null
+    isTermsAccepted?: boolean
+    isPrivacyAccepted?: boolean
     isDeleted?: boolean
     createdAt?: Date | string
     updatedAt?: Date | string
@@ -47035,6 +47129,8 @@ export namespace Prisma {
     accountStatus?: EnumAccountStatusFieldUpdateOperationsInput | $Enums.AccountStatus
     verifiedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     lastSeenAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    isTermsAccepted?: BoolFieldUpdateOperationsInput | boolean
+    isPrivacyAccepted?: BoolFieldUpdateOperationsInput | boolean
     isDeleted?: BoolFieldUpdateOperationsInput | boolean
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
@@ -47060,6 +47156,8 @@ export namespace Prisma {
     accountStatus?: EnumAccountStatusFieldUpdateOperationsInput | $Enums.AccountStatus
     verifiedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     lastSeenAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    isTermsAccepted?: BoolFieldUpdateOperationsInput | boolean
+    isPrivacyAccepted?: BoolFieldUpdateOperationsInput | boolean
     isDeleted?: BoolFieldUpdateOperationsInput | boolean
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
@@ -47085,6 +47183,8 @@ export namespace Prisma {
     accountStatus?: $Enums.AccountStatus
     verifiedAt?: Date | string | null
     lastSeenAt?: Date | string | null
+    isTermsAccepted?: boolean
+    isPrivacyAccepted?: boolean
     isDeleted?: boolean
     createdAt?: Date | string
     updatedAt?: Date | string
@@ -47110,6 +47210,8 @@ export namespace Prisma {
     accountStatus?: $Enums.AccountStatus
     verifiedAt?: Date | string | null
     lastSeenAt?: Date | string | null
+    isTermsAccepted?: boolean
+    isPrivacyAccepted?: boolean
     isDeleted?: boolean
     createdAt?: Date | string
     updatedAt?: Date | string
@@ -47452,6 +47554,8 @@ export namespace Prisma {
     accountStatus?: EnumAccountStatusFieldUpdateOperationsInput | $Enums.AccountStatus
     verifiedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     lastSeenAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    isTermsAccepted?: BoolFieldUpdateOperationsInput | boolean
+    isPrivacyAccepted?: BoolFieldUpdateOperationsInput | boolean
     isDeleted?: BoolFieldUpdateOperationsInput | boolean
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
@@ -47477,6 +47581,8 @@ export namespace Prisma {
     accountStatus?: EnumAccountStatusFieldUpdateOperationsInput | $Enums.AccountStatus
     verifiedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     lastSeenAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    isTermsAccepted?: BoolFieldUpdateOperationsInput | boolean
+    isPrivacyAccepted?: BoolFieldUpdateOperationsInput | boolean
     isDeleted?: BoolFieldUpdateOperationsInput | boolean
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
@@ -48464,6 +48570,8 @@ export namespace Prisma {
     accountStatus?: $Enums.AccountStatus
     verifiedAt?: Date | string | null
     lastSeenAt?: Date | string | null
+    isTermsAccepted?: boolean
+    isPrivacyAccepted?: boolean
     isDeleted?: boolean
     createdAt?: Date | string
     updatedAt?: Date | string
@@ -48489,6 +48597,8 @@ export namespace Prisma {
     accountStatus?: $Enums.AccountStatus
     verifiedAt?: Date | string | null
     lastSeenAt?: Date | string | null
+    isTermsAccepted?: boolean
+    isPrivacyAccepted?: boolean
     isDeleted?: boolean
     createdAt?: Date | string
     updatedAt?: Date | string
@@ -48605,6 +48715,8 @@ export namespace Prisma {
     accountStatus?: EnumAccountStatusFieldUpdateOperationsInput | $Enums.AccountStatus
     verifiedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     lastSeenAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    isTermsAccepted?: BoolFieldUpdateOperationsInput | boolean
+    isPrivacyAccepted?: BoolFieldUpdateOperationsInput | boolean
     isDeleted?: BoolFieldUpdateOperationsInput | boolean
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
@@ -48630,6 +48742,8 @@ export namespace Prisma {
     accountStatus?: EnumAccountStatusFieldUpdateOperationsInput | $Enums.AccountStatus
     verifiedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     lastSeenAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    isTermsAccepted?: BoolFieldUpdateOperationsInput | boolean
+    isPrivacyAccepted?: BoolFieldUpdateOperationsInput | boolean
     isDeleted?: BoolFieldUpdateOperationsInput | boolean
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
@@ -51184,6 +51298,8 @@ export namespace Prisma {
     accountStatus?: $Enums.AccountStatus
     verifiedAt?: Date | string | null
     lastSeenAt?: Date | string | null
+    isTermsAccepted?: boolean
+    isPrivacyAccepted?: boolean
     isDeleted?: boolean
     createdAt?: Date | string
     updatedAt?: Date | string
@@ -51209,6 +51325,8 @@ export namespace Prisma {
     accountStatus?: $Enums.AccountStatus
     verifiedAt?: Date | string | null
     lastSeenAt?: Date | string | null
+    isTermsAccepted?: boolean
+    isPrivacyAccepted?: boolean
     isDeleted?: boolean
     createdAt?: Date | string
     updatedAt?: Date | string
@@ -51250,6 +51368,8 @@ export namespace Prisma {
     accountStatus?: EnumAccountStatusFieldUpdateOperationsInput | $Enums.AccountStatus
     verifiedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     lastSeenAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    isTermsAccepted?: BoolFieldUpdateOperationsInput | boolean
+    isPrivacyAccepted?: BoolFieldUpdateOperationsInput | boolean
     isDeleted?: BoolFieldUpdateOperationsInput | boolean
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
@@ -51275,6 +51395,8 @@ export namespace Prisma {
     accountStatus?: EnumAccountStatusFieldUpdateOperationsInput | $Enums.AccountStatus
     verifiedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     lastSeenAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    isTermsAccepted?: BoolFieldUpdateOperationsInput | boolean
+    isPrivacyAccepted?: BoolFieldUpdateOperationsInput | boolean
     isDeleted?: BoolFieldUpdateOperationsInput | boolean
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
@@ -51300,6 +51422,8 @@ export namespace Prisma {
     accountStatus?: $Enums.AccountStatus
     verifiedAt?: Date | string | null
     lastSeenAt?: Date | string | null
+    isTermsAccepted?: boolean
+    isPrivacyAccepted?: boolean
     isDeleted?: boolean
     createdAt?: Date | string
     updatedAt?: Date | string
@@ -51325,6 +51449,8 @@ export namespace Prisma {
     accountStatus?: $Enums.AccountStatus
     verifiedAt?: Date | string | null
     lastSeenAt?: Date | string | null
+    isTermsAccepted?: boolean
+    isPrivacyAccepted?: boolean
     isDeleted?: boolean
     createdAt?: Date | string
     updatedAt?: Date | string
@@ -51452,6 +51578,8 @@ export namespace Prisma {
     accountStatus?: EnumAccountStatusFieldUpdateOperationsInput | $Enums.AccountStatus
     verifiedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     lastSeenAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    isTermsAccepted?: BoolFieldUpdateOperationsInput | boolean
+    isPrivacyAccepted?: BoolFieldUpdateOperationsInput | boolean
     isDeleted?: BoolFieldUpdateOperationsInput | boolean
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
@@ -51477,6 +51605,8 @@ export namespace Prisma {
     accountStatus?: EnumAccountStatusFieldUpdateOperationsInput | $Enums.AccountStatus
     verifiedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     lastSeenAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    isTermsAccepted?: BoolFieldUpdateOperationsInput | boolean
+    isPrivacyAccepted?: BoolFieldUpdateOperationsInput | boolean
     isDeleted?: BoolFieldUpdateOperationsInput | boolean
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
@@ -51723,6 +51853,8 @@ export namespace Prisma {
     accountStatus?: $Enums.AccountStatus
     verifiedAt?: Date | string | null
     lastSeenAt?: Date | string | null
+    isTermsAccepted?: boolean
+    isPrivacyAccepted?: boolean
     isDeleted?: boolean
     createdAt?: Date | string
     updatedAt?: Date | string
@@ -51748,6 +51880,8 @@ export namespace Prisma {
     accountStatus?: $Enums.AccountStatus
     verifiedAt?: Date | string | null
     lastSeenAt?: Date | string | null
+    isTermsAccepted?: boolean
+    isPrivacyAccepted?: boolean
     isDeleted?: boolean
     createdAt?: Date | string
     updatedAt?: Date | string
@@ -51789,6 +51923,8 @@ export namespace Prisma {
     accountStatus?: EnumAccountStatusFieldUpdateOperationsInput | $Enums.AccountStatus
     verifiedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     lastSeenAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    isTermsAccepted?: BoolFieldUpdateOperationsInput | boolean
+    isPrivacyAccepted?: BoolFieldUpdateOperationsInput | boolean
     isDeleted?: BoolFieldUpdateOperationsInput | boolean
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
@@ -51814,6 +51950,8 @@ export namespace Prisma {
     accountStatus?: EnumAccountStatusFieldUpdateOperationsInput | $Enums.AccountStatus
     verifiedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     lastSeenAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    isTermsAccepted?: BoolFieldUpdateOperationsInput | boolean
+    isPrivacyAccepted?: BoolFieldUpdateOperationsInput | boolean
     isDeleted?: BoolFieldUpdateOperationsInput | boolean
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string

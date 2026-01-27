@@ -34,6 +34,13 @@ export class AccountService {
         throw new AppError('An account with this email already exists.');
       }
 
+      // Validation: Let's make sure the terms and privacy are accepted
+      if (!createAccountDto.isTermsAndPrivacyAccepted) {
+        throw new AppError(
+          'You must accept the terms and conditions and privacy policy to create an account.',
+        );
+      }
+
       const name = createAccountDto.fullName.split(' ');
       const firstName = name[0];
       const lastName = name.slice(1).join(' ');
@@ -47,6 +54,8 @@ export class AccountService {
           phone: createAccountDto.phone,
           accountStatus: AccountStatus.active,
           type,
+          isTermsAccepted: true,
+          isPrivacyAccepted: true,
         },
       });
     } catch (error) {

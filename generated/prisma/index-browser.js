@@ -131,6 +131,8 @@ exports.Prisma.UserScalarFieldEnum = {
   accountStatus: 'accountStatus',
   verifiedAt: 'verifiedAt',
   lastSeenAt: 'lastSeenAt',
+  isTermsAccepted: 'isTermsAccepted',
+  isPrivacyAccepted: 'isPrivacyAccepted',
   isDeleted: 'isDeleted',
   createdAt: 'createdAt',
   updatedAt: 'updatedAt'

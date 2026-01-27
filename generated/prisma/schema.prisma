@@ -122,16 +122,18 @@ enum TransactionFlow {
 // ======================== [ MODELS ] ==================== //
 
 model User {
-  id            String        @id @default(cuid())
-  firstName     String
-  lastName      String
-  profileImage  String?
-  email         String        @unique
-  type          UserType
-  phone         String?
-  accountStatus AccountStatus @default(active)
-  verifiedAt    DateTime?
-  lastSeenAt    DateTime?
+  id                String        @id @default(cuid())
+  firstName         String
+  lastName          String
+  profileImage      String?
+  email             String        @unique
+  type              UserType
+  phone             String?
+  accountStatus     AccountStatus @default(active)
+  verifiedAt        DateTime?
+  lastSeenAt        DateTime?
+  isTermsAccepted   Boolean       @default(false)
+  isPrivacyAccepted Boolean       @default(false)
 
   isDeleted Boolean  @default(false)
   createdAt DateTime @default(now())

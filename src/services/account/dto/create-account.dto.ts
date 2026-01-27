@@ -1,7 +1,7 @@
 import { ApiProperty } from '@nestjs/swagger';
 import { Type } from 'class-transformer';
 import {
-  IsDate,
+  IsBoolean,
   IsEmail,
   IsNotEmpty,
   IsOptional,
@@ -12,6 +12,7 @@ export class CreateAccountDto {
   @ApiProperty({
     description: 'First name of the user',
     example: 'John',
+    required: true,
   })
   @IsString()
   @IsNotEmpty({ message: 'Full name is required' })
@@ -21,6 +22,7 @@ export class CreateAccountDto {
   @ApiProperty({
     description: 'Email address of the user',
     example: 'john.doe@example.com',
+    required: true,
   })
   @IsNotEmpty({ message: 'Email is required' })
   @IsEmail()
@@ -30,6 +32,7 @@ export class CreateAccountDto {
   @ApiProperty({
     description: 'Profile picture URL of the user',
     example: 'https://example.com/profile.jpg',
+    required: false,
   })
   @IsString()
   @IsOptional()
@@ -39,6 +42,7 @@ export class CreateAccountDto {
   @ApiProperty({
     description: 'Phone number of the user',
     example: '+1234567890',
+    required: false,
   })
   @IsString()
   @IsOptional()
@@ -46,11 +50,13 @@ export class CreateAccountDto {
   phone?: string;
 
   @ApiProperty({
-    description: 'Last seen timestamp of the user',
-    example: '2023-10-05T14:48:00.000Z',
+    description: 'Accept terms and conditions and privacy policy',
+    required: true,
   })
-  @IsDate()
-  @IsOptional()
-  @Type(() => Date)
-  lastSeen?: Date;
+  @IsNotEmpty({
+    message: 'You must accept the terms and conditions and privacy policy',
+  })
+  @IsBoolean({ message: 'isTermsAndPrivacyAccepted must be a boolean value' })
+  @Type(() => Boolean)
+  isTermsAndPrivacyAccepted: boolean;
 }

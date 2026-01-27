@@ -1,4 +1,4 @@
-import { IsFile } from '@FynndFit/common/validators/is-file.validator';
+import { IsFile } from '@Blithe/common/validators/is-file.validator';
 import { IsNotEmpty } from 'class-validator';
 
 export class ImageUploadDto {

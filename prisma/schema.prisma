@@ -135,6 +135,8 @@ model User {
   accountStatus AccountStatus @default(active)
   verifiedAt    DateTime?
   lastSeenAt    DateTime?
+  isTermsAccepted Boolean  @default(false)
+  isPrivacyAccepted Boolean @default(false)
 
   isDeleted Boolean  @default(false)
   createdAt DateTime @default(now())

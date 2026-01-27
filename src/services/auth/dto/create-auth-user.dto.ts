@@ -8,6 +8,7 @@ export class CreateAuthUserDto extends CreateAccountDto {
   @ApiProperty({
     description: 'Password for the user account',
     example: 'StrongP@ssw0rd!',
+    required: true,
   })
   @IsString()
   @IsNotEmpty({ message: 'Password is required' })
@@ -22,6 +23,7 @@ export class CreateAuthUserDto extends CreateAccountDto {
     description: 'Firebase Cloud Messaging token for push notifications',
     example:
       'eXampleFCMToken1234567890abcdefghijklmnopqrstuvwxyzABCD_EFGHIJKLMN-OPQRSTUVWX',
+    required: false,
   })
   @IsString({ message: 'FCM token must be a string' })
   @IsOptional()
