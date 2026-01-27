@@ -3,7 +3,7 @@ version: '3.8'
 services:
   # Redis Service
   redis:
-    image: redis:7.2-alpine # smaller, faster image
+    image: redis:7-alpine # smaller, faster image
     container_name: redis_cluster
     restart: always
     ports:
