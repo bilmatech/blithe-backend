@@ -1,0 +1,6 @@
+POST {{ baseUrl }}/api/v1/media/signed-upload-url
+{
+    "fileName": "file.png",
+    "mimeType": "image/png",
+    "folder": "fruits"
+}

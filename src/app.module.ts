@@ -13,6 +13,7 @@ import { FirebaseMessagingModule } from './services/firebase-messaging/firebase-
 import { FirebaseAdminModule } from './common/firebase/firebase-admin.module';
 import { DatabaseModule } from './services/database/database.module';
 import { SentryModule } from '@sentry/nestjs/setup';
+import { MediaModule } from './services/media/media.module';
 
 @Module({
   imports: [
@@ -50,6 +51,7 @@ import { SentryModule } from '@sentry/nestjs/setup';
     VerificationModule,
     FirebaseMessagingModule,
     FirebaseAdminModule,
+    MediaModule,
   ],
   controllers: [AppController],
   providers: [AppService],

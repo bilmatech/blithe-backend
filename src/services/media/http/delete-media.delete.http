@@ -1,0 +1,1 @@
+DELETE {{ baseUrl }}/api/v1/media?fileUrl=https://fyyndfit-asset.s3.us-west-2.amazonaws.com/dev-assets/89845cb8-7875-40ed-afcc-2b03e1325986.jpg
