@@ -225,7 +225,6 @@ exports.Prisma.SchoolDirectorVerificationScalarFieldEnum = {
   directorIDType: 'directorIDType',
   directorIDNumber: 'directorIDNumber',
   document: 'document',
-  status: 'status',
   isDeleted: 'isDeleted',
   createdAt: 'createdAt',
   updatedAt: 'updatedAt'
@@ -236,7 +235,6 @@ exports.Prisma.SchoolOwnershipVerificationScalarFieldEnum = {
   schoolId: 'schoolId',
   cacform7: 'cacform7',
   cacShareAllotmentForm: 'cacShareAllotmentForm',
-  status: 'status',
   isDeleted: 'isDeleted',
   createdAt: 'createdAt',
   updatedAt: 'updatedAt'
@@ -249,7 +247,6 @@ exports.Prisma.SchoolVerificationScalarFieldEnum = {
   accreditationDocument: 'accreditationDocument',
   taxIdentificationNumber: 'taxIdentificationNumber',
   licenseDocument: 'licenseDocument',
-  status: 'status',
   isDeleted: 'isDeleted',
   createdAt: 'createdAt',
   updatedAt: 'updatedAt'
@@ -274,6 +271,15 @@ exports.Prisma.SchoolAndPlatformLegalAgreementScalarFieldEnum = {
   signature: 'signature',
   signedAt: 'signedAt',
   legalDocumentRef: 'legalDocumentRef',
+  isDeleted: 'isDeleted',
+  createdAt: 'createdAt',
+  updatedAt: 'updatedAt'
+};
+
+exports.Prisma.KYCVerificationScalarFieldEnum = {
+  id: 'id',
+  userId: 'userId',
+  schoolId: 'schoolId',
   status: 'status',
   isDeleted: 'isDeleted',
   createdAt: 'createdAt',
@@ -590,6 +596,7 @@ exports.Prisma.ModelName = {
   SchoolVerification: 'SchoolVerification',
   SchoolPayoutDetail: 'SchoolPayoutDetail',
   SchoolAndPlatformLegalAgreement: 'SchoolAndPlatformLegalAgreement',
+  KYCVerification: 'KYCVerification',
   Class: 'Class',
   AcademicSession: 'AcademicSession',
   Term: 'Term',

@@ -74,6 +74,11 @@ export type SchoolPayoutDetail = $Result.DefaultSelection<Prisma.$SchoolPayoutDe
  */
 export type SchoolAndPlatformLegalAgreement = $Result.DefaultSelection<Prisma.$SchoolAndPlatformLegalAgreementPayload>
 /**
+ * Model KYCVerification
+ * 
+ */
+export type KYCVerification = $Result.DefaultSelection<Prisma.$KYCVerificationPayload>
+/**
  * Model Class
  * 
  */
@@ -602,6 +607,16 @@ export class PrismaClient<
     * ```
     */
   get schoolAndPlatformLegalAgreement(): Prisma.SchoolAndPlatformLegalAgreementDelegate<ExtArgs, ClientOptions>;
+
+  /**
+   * `prisma.kYCVerification`: Exposes CRUD operations for the **KYCVerification** model.
+    * Example usage:
+    * ```ts
+    * // Fetch zero or more KYCVerifications
+    * const kYCVerifications = await prisma.kYCVerification.findMany()
+    * ```
+    */
+  get kYCVerification(): Prisma.KYCVerificationDelegate<ExtArgs, ClientOptions>;
 
   /**
    * `prisma.class`: Exposes CRUD operations for the **Class** model.
@@ -1198,6 +1213,7 @@ export namespace Prisma {
     SchoolVerification: 'SchoolVerification',
     SchoolPayoutDetail: 'SchoolPayoutDetail',
     SchoolAndPlatformLegalAgreement: 'SchoolAndPlatformLegalAgreement',
+    KYCVerification: 'KYCVerification',
     Class: 'Class',
     AcademicSession: 'AcademicSession',
     Term: 'Term',
@@ -1228,7 +1244,7 @@ export namespace Prisma {
       omit: GlobalOmitOptions
     }
     meta: {
-      modelProps: "user" | "credential" | "refreshToken" | "administrator" | "guardian" | "verification" | "school" | "schoolDirectorVerification" | "schoolOwnershipVerification" | "schoolVerification" | "schoolPayoutDetail" | "schoolAndPlatformLegalAgreement" | "class" | "academicSession" | "term" | "fees" | "feeBreakdown" | "invoice" | "student" | "linkedStudentProfile" | "transaction" | "transactionFee" | "payout" | "notification" | "wallet" | "ledger" | "firebaseToken"
+      modelProps: "user" | "credential" | "refreshToken" | "administrator" | "guardian" | "verification" | "school" | "schoolDirectorVerification" | "schoolOwnershipVerification" | "schoolVerification" | "schoolPayoutDetail" | "schoolAndPlatformLegalAgreement" | "kYCVerification" | "class" | "academicSession" | "term" | "fees" | "feeBreakdown" | "invoice" | "student" | "linkedStudentProfile" | "transaction" | "transactionFee" | "payout" | "notification" | "wallet" | "ledger" | "firebaseToken"
       txIsolationLevel: Prisma.TransactionIsolationLevel
     }
     model: {
@@ -2117,6 +2133,80 @@ export namespace Prisma {
           count: {
             args: Prisma.SchoolAndPlatformLegalAgreementCountArgs<ExtArgs>
             result: $Utils.Optional<SchoolAndPlatformLegalAgreementCountAggregateOutputType> | number
+          }
+        }
+      }
+      KYCVerification: {
+        payload: Prisma.$KYCVerificationPayload<ExtArgs>
+        fields: Prisma.KYCVerificationFieldRefs
+        operations: {
+          findUnique: {
+            args: Prisma.KYCVerificationFindUniqueArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$KYCVerificationPayload> | null
+          }
+          findUniqueOrThrow: {
+            args: Prisma.KYCVerificationFindUniqueOrThrowArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$KYCVerificationPayload>
+          }
+          findFirst: {
+            args: Prisma.KYCVerificationFindFirstArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$KYCVerificationPayload> | null
+          }
+          findFirstOrThrow: {
+            args: Prisma.KYCVerificationFindFirstOrThrowArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$KYCVerificationPayload>
+          }
+          findMany: {
+            args: Prisma.KYCVerificationFindManyArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$KYCVerificationPayload>[]
+          }
+          create: {
+            args: Prisma.KYCVerificationCreateArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$KYCVerificationPayload>
+          }
+          createMany: {
+            args: Prisma.KYCVerificationCreateManyArgs<ExtArgs>
+            result: BatchPayload
+          }
+          createManyAndReturn: {
+            args: Prisma.KYCVerificationCreateManyAndReturnArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$KYCVerificationPayload>[]
+          }
+          delete: {
+            args: Prisma.KYCVerificationDeleteArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$KYCVerificationPayload>
+          }
+          update: {
+            args: Prisma.KYCVerificationUpdateArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$KYCVerificationPayload>
+          }
+          deleteMany: {
+            args: Prisma.KYCVerificationDeleteManyArgs<ExtArgs>
+            result: BatchPayload
+          }
+          updateMany: {
+            args: Prisma.KYCVerificationUpdateManyArgs<ExtArgs>
+            result: BatchPayload
+          }
+          updateManyAndReturn: {
+            args: Prisma.KYCVerificationUpdateManyAndReturnArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$KYCVerificationPayload>[]
+          }
+          upsert: {
+            args: Prisma.KYCVerificationUpsertArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$KYCVerificationPayload>
+          }
+          aggregate: {
+            args: Prisma.KYCVerificationAggregateArgs<ExtArgs>
+            result: $Utils.Optional<AggregateKYCVerification>
+          }
+          groupBy: {
+            args: Prisma.KYCVerificationGroupByArgs<ExtArgs>
+            result: $Utils.Optional<KYCVerificationGroupByOutputType>[]
+          }
+          count: {
+            args: Prisma.KYCVerificationCountArgs<ExtArgs>
+            result: $Utils.Optional<KYCVerificationCountAggregateOutputType> | number
           }
         }
       }
@@ -3350,6 +3440,7 @@ export namespace Prisma {
     schoolVerification?: SchoolVerificationOmit
     schoolPayoutDetail?: SchoolPayoutDetailOmit
     schoolAndPlatformLegalAgreement?: SchoolAndPlatformLegalAgreementOmit
+    kYCVerification?: KYCVerificationOmit
     class?: ClassOmit
     academicSession?: AcademicSessionOmit
     term?: TermOmit
@@ -4103,6 +4194,7 @@ export namespace Prisma {
     wallet?: boolean | User$walletArgs<ExtArgs>
     refreshTokens?: boolean | User$refreshTokensArgs<ExtArgs>
     firebaseToken?: boolean | User$firebaseTokenArgs<ExtArgs>
+    kycverification?: boolean | User$kycverificationArgs<ExtArgs>
     _count?: boolean | UserCountOutputTypeDefaultArgs<ExtArgs>
   }, ExtArgs["result"]["user"]>
 
@@ -4172,6 +4264,7 @@ export namespace Prisma {
     wallet?: boolean | User$walletArgs<ExtArgs>
     refreshTokens?: boolean | User$refreshTokensArgs<ExtArgs>
     firebaseToken?: boolean | User$firebaseTokenArgs<ExtArgs>
+    kycverification?: boolean | User$kycverificationArgs<ExtArgs>
     _count?: boolean | UserCountOutputTypeDefaultArgs<ExtArgs>
   }
   export type UserIncludeCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {}
@@ -4190,6 +4283,7 @@ export namespace Prisma {
       wallet: Prisma.$WalletPayload<ExtArgs> | null
       refreshTokens: Prisma.$RefreshTokenPayload<ExtArgs>[]
       firebaseToken: Prisma.$FirebaseTokenPayload<ExtArgs> | null
+      kycverification: Prisma.$KYCVerificationPayload<ExtArgs> | null
     }
     scalars: $Extensions.GetPayloadResult<{
       id: string
@@ -4611,6 +4705,7 @@ export namespace Prisma {
     wallet<T extends User$walletArgs<ExtArgs> = {}>(args?: Subset<T, User$walletArgs<ExtArgs>>): Prisma__WalletClient<$Result.GetResult<Prisma.$WalletPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
     refreshTokens<T extends User$refreshTokensArgs<ExtArgs> = {}>(args?: Subset<T, User$refreshTokensArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$RefreshTokenPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
     firebaseToken<T extends User$firebaseTokenArgs<ExtArgs> = {}>(args?: Subset<T, User$firebaseTokenArgs<ExtArgs>>): Prisma__FirebaseTokenClient<$Result.GetResult<Prisma.$FirebaseTokenPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
+    kycverification<T extends User$kycverificationArgs<ExtArgs> = {}>(args?: Subset<T, User$kycverificationArgs<ExtArgs>>): Prisma__KYCVerificationClient<$Result.GetResult<Prisma.$KYCVerificationPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
     /**
      * Attaches callbacks for the resolution and/or rejection of the Promise.
      * @param onfulfilled The callback to execute when the Promise is resolved.
@@ -5245,6 +5340,25 @@ export namespace Prisma {
      */
     include?: FirebaseTokenInclude<ExtArgs> | null
     where?: FirebaseTokenWhereInput
+  }
+
+  /**
+   * User.kycverification
+   */
+  export type User$kycverificationArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the KYCVerification
+     */
+    select?: KYCVerificationSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the KYCVerification
+     */
+    omit?: KYCVerificationOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: KYCVerificationInclude<ExtArgs> | null
+    where?: KYCVerificationWhereInput
   }
 
   /**
@@ -11254,6 +11368,7 @@ export namespace Prisma {
     terms?: boolean | School$termsArgs<ExtArgs>
     fees?: boolean | School$feesArgs<ExtArgs>
     payouts?: boolean | School$payoutsArgs<ExtArgs>
+    kycverification?: boolean | School$kycverificationArgs<ExtArgs>
     _count?: boolean | SchoolCountOutputTypeDefaultArgs<ExtArgs>
   }, ExtArgs["result"]["school"]>
 
@@ -11341,6 +11456,7 @@ export namespace Prisma {
     terms?: boolean | School$termsArgs<ExtArgs>
     fees?: boolean | School$feesArgs<ExtArgs>
     payouts?: boolean | School$payoutsArgs<ExtArgs>
+    kycverification?: boolean | School$kycverificationArgs<ExtArgs>
     _count?: boolean | SchoolCountOutputTypeDefaultArgs<ExtArgs>
   }
   export type SchoolIncludeCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
@@ -11364,6 +11480,7 @@ export namespace Prisma {
       terms: Prisma.$TermPayload<ExtArgs>[]
       fees: Prisma.$FeesPayload<ExtArgs>[]
       payouts: Prisma.$PayoutPayload<ExtArgs>[]
+      kycverification: Prisma.$KYCVerificationPayload<ExtArgs> | null
     }
     scalars: $Extensions.GetPayloadResult<{
       id: string
@@ -11791,6 +11908,7 @@ export namespace Prisma {
     terms<T extends School$termsArgs<ExtArgs> = {}>(args?: Subset<T, School$termsArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$TermPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
     fees<T extends School$feesArgs<ExtArgs> = {}>(args?: Subset<T, School$feesArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$FeesPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
     payouts<T extends School$payoutsArgs<ExtArgs> = {}>(args?: Subset<T, School$payoutsArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$PayoutPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
+    kycverification<T extends School$kycverificationArgs<ExtArgs> = {}>(args?: Subset<T, School$kycverificationArgs<ExtArgs>>): Prisma__KYCVerificationClient<$Result.GetResult<Prisma.$KYCVerificationPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
     /**
      * Attaches callbacks for the resolution and/or rejection of the Promise.
      * @param onfulfilled The callback to execute when the Promise is resolved.
@@ -12451,6 +12569,25 @@ export namespace Prisma {
   }
 
   /**
+   * School.kycverification
+   */
+  export type School$kycverificationArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the KYCVerification
+     */
+    select?: KYCVerificationSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the KYCVerification
+     */
+    omit?: KYCVerificationOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: KYCVerificationInclude<ExtArgs> | null
+    where?: KYCVerificationWhereInput
+  }
+
+  /**
    * School without action
    */
   export type SchoolDefaultArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
@@ -12486,7 +12623,6 @@ export namespace Prisma {
     directorIDType: $Enums.DirectorIDType | null
     directorIDNumber: string | null
     document: string | null
-    status: $Enums.KYCVerificationStatus | null
     isDeleted: boolean | null
     createdAt: Date | null
     updatedAt: Date | null
@@ -12499,7 +12635,6 @@ export namespace Prisma {
     directorIDType: $Enums.DirectorIDType | null
     directorIDNumber: string | null
     document: string | null
-    status: $Enums.KYCVerificationStatus | null
     isDeleted: boolean | null
     createdAt: Date | null
     updatedAt: Date | null
@@ -12512,7 +12647,6 @@ export namespace Prisma {
     directorIDType: number
     directorIDNumber: number
     document: number
-    status: number
     isDeleted: number
     createdAt: number
     updatedAt: number
@@ -12527,7 +12661,6 @@ export namespace Prisma {
     directorIDType?: true
     directorIDNumber?: true
     document?: true
-    status?: true
     isDeleted?: true
     createdAt?: true
     updatedAt?: true
@@ -12540,7 +12673,6 @@ export namespace Prisma {
     directorIDType?: true
     directorIDNumber?: true
     document?: true
-    status?: true
     isDeleted?: true
     createdAt?: true
     updatedAt?: true
@@ -12553,7 +12685,6 @@ export namespace Prisma {
     directorIDType?: true
     directorIDNumber?: true
     document?: true
-    status?: true
     isDeleted?: true
     createdAt?: true
     updatedAt?: true
@@ -12639,7 +12770,6 @@ export namespace Prisma {
     directorIDType: $Enums.DirectorIDType
     directorIDNumber: string
     document: string
-    status: $Enums.KYCVerificationStatus
     isDeleted: boolean
     createdAt: Date
     updatedAt: Date
@@ -12669,7 +12799,6 @@ export namespace Prisma {
     directorIDType?: boolean
     directorIDNumber?: boolean
     document?: boolean
-    status?: boolean
     isDeleted?: boolean
     createdAt?: boolean
     updatedAt?: boolean
@@ -12683,7 +12812,6 @@ export namespace Prisma {
     directorIDType?: boolean
     directorIDNumber?: boolean
     document?: boolean
-    status?: boolean
     isDeleted?: boolean
     createdAt?: boolean
     updatedAt?: boolean
@@ -12697,7 +12825,6 @@ export namespace Prisma {
     directorIDType?: boolean
     directorIDNumber?: boolean
     document?: boolean
-    status?: boolean
     isDeleted?: boolean
     createdAt?: boolean
     updatedAt?: boolean
@@ -12711,13 +12838,12 @@ export namespace Prisma {
     directorIDType?: boolean
     directorIDNumber?: boolean
     document?: boolean
-    status?: boolean
     isDeleted?: boolean
     createdAt?: boolean
     updatedAt?: boolean
   }
 
-  export type SchoolDirectorVerificationOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "schoolId" | "directorFullName" | "directorIDType" | "directorIDNumber" | "document" | "status" | "isDeleted" | "createdAt" | "updatedAt", ExtArgs["result"]["schoolDirectorVerification"]>
+  export type SchoolDirectorVerificationOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "schoolId" | "directorFullName" | "directorIDType" | "directorIDNumber" | "document" | "isDeleted" | "createdAt" | "updatedAt", ExtArgs["result"]["schoolDirectorVerification"]>
   export type SchoolDirectorVerificationInclude<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     school?: boolean | SchoolDefaultArgs<ExtArgs>
   }
@@ -12740,7 +12866,6 @@ export namespace Prisma {
       directorIDType: $Enums.DirectorIDType
       directorIDNumber: string
       document: string
-      status: $Enums.KYCVerificationStatus
       isDeleted: boolean
       createdAt: Date
       updatedAt: Date
@@ -13174,7 +13299,6 @@ export namespace Prisma {
     readonly directorIDType: FieldRef<"SchoolDirectorVerification", 'DirectorIDType'>
     readonly directorIDNumber: FieldRef<"SchoolDirectorVerification", 'String'>
     readonly document: FieldRef<"SchoolDirectorVerification", 'String'>
-    readonly status: FieldRef<"SchoolDirectorVerification", 'KYCVerificationStatus'>
     readonly isDeleted: FieldRef<"SchoolDirectorVerification", 'Boolean'>
     readonly createdAt: FieldRef<"SchoolDirectorVerification", 'DateTime'>
     readonly updatedAt: FieldRef<"SchoolDirectorVerification", 'DateTime'>
@@ -13607,7 +13731,6 @@ export namespace Prisma {
     schoolId: string | null
     cacform7: string | null
     cacShareAllotmentForm: string | null
-    status: $Enums.KYCVerificationStatus | null
     isDeleted: boolean | null
     createdAt: Date | null
     updatedAt: Date | null
@@ -13618,7 +13741,6 @@ export namespace Prisma {
     schoolId: string | null
     cacform7: string | null
     cacShareAllotmentForm: string | null
-    status: $Enums.KYCVerificationStatus | null
     isDeleted: boolean | null
     createdAt: Date | null
     updatedAt: Date | null
@@ -13629,7 +13751,6 @@ export namespace Prisma {
     schoolId: number
     cacform7: number
     cacShareAllotmentForm: number
-    status: number
     isDeleted: number
     createdAt: number
     updatedAt: number
@@ -13642,7 +13763,6 @@ export namespace Prisma {
     schoolId?: true
     cacform7?: true
     cacShareAllotmentForm?: true
-    status?: true
     isDeleted?: true
     createdAt?: true
     updatedAt?: true
@@ -13653,7 +13773,6 @@ export namespace Prisma {
     schoolId?: true
     cacform7?: true
     cacShareAllotmentForm?: true
-    status?: true
     isDeleted?: true
     createdAt?: true
     updatedAt?: true
@@ -13664,7 +13783,6 @@ export namespace Prisma {
     schoolId?: true
     cacform7?: true
     cacShareAllotmentForm?: true
-    status?: true
     isDeleted?: true
     createdAt?: true
     updatedAt?: true
@@ -13748,7 +13866,6 @@ export namespace Prisma {
     schoolId: string
     cacform7: string
     cacShareAllotmentForm: string
-    status: $Enums.KYCVerificationStatus
     isDeleted: boolean
     createdAt: Date
     updatedAt: Date
@@ -13776,7 +13893,6 @@ export namespace Prisma {
     schoolId?: boolean
     cacform7?: boolean
     cacShareAllotmentForm?: boolean
-    status?: boolean
     isDeleted?: boolean
     createdAt?: boolean
     updatedAt?: boolean
@@ -13788,7 +13904,6 @@ export namespace Prisma {
     schoolId?: boolean
     cacform7?: boolean
     cacShareAllotmentForm?: boolean
-    status?: boolean
     isDeleted?: boolean
     createdAt?: boolean
     updatedAt?: boolean
@@ -13800,7 +13915,6 @@ export namespace Prisma {
     schoolId?: boolean
     cacform7?: boolean
     cacShareAllotmentForm?: boolean
-    status?: boolean
     isDeleted?: boolean
     createdAt?: boolean
     updatedAt?: boolean
@@ -13812,13 +13926,12 @@ export namespace Prisma {
     schoolId?: boolean
     cacform7?: boolean
     cacShareAllotmentForm?: boolean
-    status?: boolean
     isDeleted?: boolean
     createdAt?: boolean
     updatedAt?: boolean
   }
 
-  export type SchoolOwnershipVerificationOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "schoolId" | "cacform7" | "cacShareAllotmentForm" | "status" | "isDeleted" | "createdAt" | "updatedAt", ExtArgs["result"]["schoolOwnershipVerification"]>
+  export type SchoolOwnershipVerificationOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "schoolId" | "cacform7" | "cacShareAllotmentForm" | "isDeleted" | "createdAt" | "updatedAt", ExtArgs["result"]["schoolOwnershipVerification"]>
   export type SchoolOwnershipVerificationInclude<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     school?: boolean | SchoolDefaultArgs<ExtArgs>
   }
@@ -13839,7 +13952,6 @@ export namespace Prisma {
       schoolId: string
       cacform7: string
       cacShareAllotmentForm: string
-      status: $Enums.KYCVerificationStatus
       isDeleted: boolean
       createdAt: Date
       updatedAt: Date
@@ -14271,7 +14383,6 @@ export namespace Prisma {
     readonly schoolId: FieldRef<"SchoolOwnershipVerification", 'String'>
     readonly cacform7: FieldRef<"SchoolOwnershipVerification", 'String'>
     readonly cacShareAllotmentForm: FieldRef<"SchoolOwnershipVerification", 'String'>
-    readonly status: FieldRef<"SchoolOwnershipVerification", 'KYCVerificationStatus'>
     readonly isDeleted: FieldRef<"SchoolOwnershipVerification", 'Boolean'>
     readonly createdAt: FieldRef<"SchoolOwnershipVerification", 'DateTime'>
     readonly updatedAt: FieldRef<"SchoolOwnershipVerification", 'DateTime'>
@@ -14706,7 +14817,6 @@ export namespace Prisma {
     accreditationDocument: string | null
     taxIdentificationNumber: string | null
     licenseDocument: string | null
-    status: $Enums.KYCVerificationStatus | null
     isDeleted: boolean | null
     createdAt: Date | null
     updatedAt: Date | null
@@ -14719,7 +14829,6 @@ export namespace Prisma {
     accreditationDocument: string | null
     taxIdentificationNumber: string | null
     licenseDocument: string | null
-    status: $Enums.KYCVerificationStatus | null
     isDeleted: boolean | null
     createdAt: Date | null
     updatedAt: Date | null
@@ -14732,7 +14841,6 @@ export namespace Prisma {
     accreditationDocument: number
     taxIdentificationNumber: number
     licenseDocument: number
-    status: number
     isDeleted: number
     createdAt: number
     updatedAt: number
@@ -14747,7 +14855,6 @@ export namespace Prisma {
     accreditationDocument?: true
     taxIdentificationNumber?: true
     licenseDocument?: true
-    status?: true
     isDeleted?: true
     createdAt?: true
     updatedAt?: true
@@ -14760,7 +14867,6 @@ export namespace Prisma {
     accreditationDocument?: true
     taxIdentificationNumber?: true
     licenseDocument?: true
-    status?: true
     isDeleted?: true
     createdAt?: true
     updatedAt?: true
@@ -14773,7 +14879,6 @@ export namespace Prisma {
     accreditationDocument?: true
     taxIdentificationNumber?: true
     licenseDocument?: true
-    status?: true
     isDeleted?: true
     createdAt?: true
     updatedAt?: true
@@ -14859,7 +14964,6 @@ export namespace Prisma {
     accreditationDocument: string
     taxIdentificationNumber: string
     licenseDocument: string
-    status: $Enums.KYCVerificationStatus
     isDeleted: boolean
     createdAt: Date
     updatedAt: Date
@@ -14889,7 +14993,6 @@ export namespace Prisma {
     accreditationDocument?: boolean
     taxIdentificationNumber?: boolean
     licenseDocument?: boolean
-    status?: boolean
     isDeleted?: boolean
     createdAt?: boolean
     updatedAt?: boolean
@@ -14903,7 +15006,6 @@ export namespace Prisma {
     accreditationDocument?: boolean
     taxIdentificationNumber?: boolean
     licenseDocument?: boolean
-    status?: boolean
     isDeleted?: boolean
     createdAt?: boolean
     updatedAt?: boolean
@@ -14917,7 +15019,6 @@ export namespace Prisma {
     accreditationDocument?: boolean
     taxIdentificationNumber?: boolean
     licenseDocument?: boolean
-    status?: boolean
     isDeleted?: boolean
     createdAt?: boolean
     updatedAt?: boolean
@@ -14931,13 +15032,12 @@ export namespace Prisma {
     accreditationDocument?: boolean
     taxIdentificationNumber?: boolean
     licenseDocument?: boolean
-    status?: boolean
     isDeleted?: boolean
     createdAt?: boolean
     updatedAt?: boolean
   }
 
-  export type SchoolVerificationOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "schoolId" | "cacCertificate" | "accreditationDocument" | "taxIdentificationNumber" | "licenseDocument" | "status" | "isDeleted" | "createdAt" | "updatedAt", ExtArgs["result"]["schoolVerification"]>
+  export type SchoolVerificationOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "schoolId" | "cacCertificate" | "accreditationDocument" | "taxIdentificationNumber" | "licenseDocument" | "isDeleted" | "createdAt" | "updatedAt", ExtArgs["result"]["schoolVerification"]>
   export type SchoolVerificationInclude<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     school?: boolean | SchoolDefaultArgs<ExtArgs>
   }
@@ -14960,7 +15060,6 @@ export namespace Prisma {
       accreditationDocument: string
       taxIdentificationNumber: string
       licenseDocument: string
-      status: $Enums.KYCVerificationStatus
       isDeleted: boolean
       createdAt: Date
       updatedAt: Date
@@ -15394,7 +15493,6 @@ export namespace Prisma {
     readonly accreditationDocument: FieldRef<"SchoolVerification", 'String'>
     readonly taxIdentificationNumber: FieldRef<"SchoolVerification", 'String'>
     readonly licenseDocument: FieldRef<"SchoolVerification", 'String'>
-    readonly status: FieldRef<"SchoolVerification", 'KYCVerificationStatus'>
     readonly isDeleted: FieldRef<"SchoolVerification", 'Boolean'>
     readonly createdAt: FieldRef<"SchoolVerification", 'DateTime'>
     readonly updatedAt: FieldRef<"SchoolVerification", 'DateTime'>
@@ -16939,7 +17037,6 @@ export namespace Prisma {
     signature: string | null
     signedAt: Date | null
     legalDocumentRef: string | null
-    status: $Enums.KYCVerificationStatus | null
     isDeleted: boolean | null
     createdAt: Date | null
     updatedAt: Date | null
@@ -16952,7 +17049,6 @@ export namespace Prisma {
     signature: string | null
     signedAt: Date | null
     legalDocumentRef: string | null
-    status: $Enums.KYCVerificationStatus | null
     isDeleted: boolean | null
     createdAt: Date | null
     updatedAt: Date | null
@@ -16965,7 +17061,6 @@ export namespace Prisma {
     signature: number
     signedAt: number
     legalDocumentRef: number
-    status: number
     isDeleted: number
     createdAt: number
     updatedAt: number
@@ -16980,7 +17075,6 @@ export namespace Prisma {
     signature?: true
     signedAt?: true
     legalDocumentRef?: true
-    status?: true
     isDeleted?: true
     createdAt?: true
     updatedAt?: true
@@ -16993,7 +17087,6 @@ export namespace Prisma {
     signature?: true
     signedAt?: true
     legalDocumentRef?: true
-    status?: true
     isDeleted?: true
     createdAt?: true
     updatedAt?: true
@@ -17006,7 +17099,6 @@ export namespace Prisma {
     signature?: true
     signedAt?: true
     legalDocumentRef?: true
-    status?: true
     isDeleted?: true
     createdAt?: true
     updatedAt?: true
@@ -17092,7 +17184,6 @@ export namespace Prisma {
     signature: string
     signedAt: Date
     legalDocumentRef: string
-    status: $Enums.KYCVerificationStatus
     isDeleted: boolean
     createdAt: Date
     updatedAt: Date
@@ -17122,7 +17213,6 @@ export namespace Prisma {
     signature?: boolean
     signedAt?: boolean
     legalDocumentRef?: boolean
-    status?: boolean
     isDeleted?: boolean
     createdAt?: boolean
     updatedAt?: boolean
@@ -17137,7 +17227,6 @@ export namespace Prisma {
     signature?: boolean
     signedAt?: boolean
     legalDocumentRef?: boolean
-    status?: boolean
     isDeleted?: boolean
     createdAt?: boolean
     updatedAt?: boolean
@@ -17152,7 +17241,6 @@ export namespace Prisma {
     signature?: boolean
     signedAt?: boolean
     legalDocumentRef?: boolean
-    status?: boolean
     isDeleted?: boolean
     createdAt?: boolean
     updatedAt?: boolean
@@ -17167,13 +17255,12 @@ export namespace Prisma {
     signature?: boolean
     signedAt?: boolean
     legalDocumentRef?: boolean
-    status?: boolean
     isDeleted?: boolean
     createdAt?: boolean
     updatedAt?: boolean
   }
 
-  export type SchoolAndPlatformLegalAgreementOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "schoolId" | "signedById" | "signature" | "signedAt" | "legalDocumentRef" | "status" | "isDeleted" | "createdAt" | "updatedAt", ExtArgs["result"]["schoolAndPlatformLegalAgreement"]>
+  export type SchoolAndPlatformLegalAgreementOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "schoolId" | "signedById" | "signature" | "signedAt" | "legalDocumentRef" | "isDeleted" | "createdAt" | "updatedAt", ExtArgs["result"]["schoolAndPlatformLegalAgreement"]>
   export type SchoolAndPlatformLegalAgreementInclude<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     school?: boolean | SchoolDefaultArgs<ExtArgs>
     signedBy?: boolean | UserDefaultArgs<ExtArgs>
@@ -17200,7 +17287,6 @@ export namespace Prisma {
       signature: string
       signedAt: Date
       legalDocumentRef: string
-      status: $Enums.KYCVerificationStatus
       isDeleted: boolean
       createdAt: Date
       updatedAt: Date
@@ -17635,7 +17721,6 @@ export namespace Prisma {
     readonly signature: FieldRef<"SchoolAndPlatformLegalAgreement", 'String'>
     readonly signedAt: FieldRef<"SchoolAndPlatformLegalAgreement", 'DateTime'>
     readonly legalDocumentRef: FieldRef<"SchoolAndPlatformLegalAgreement", 'String'>
-    readonly status: FieldRef<"SchoolAndPlatformLegalAgreement", 'KYCVerificationStatus'>
     readonly isDeleted: FieldRef<"SchoolAndPlatformLegalAgreement", 'Boolean'>
     readonly createdAt: FieldRef<"SchoolAndPlatformLegalAgreement", 'DateTime'>
     readonly updatedAt: FieldRef<"SchoolAndPlatformLegalAgreement", 'DateTime'>
@@ -18050,6 +18135,1098 @@ export namespace Prisma {
      * Choose, which related nodes to fetch as well
      */
     include?: SchoolAndPlatformLegalAgreementInclude<ExtArgs> | null
+  }
+
+
+  /**
+   * Model KYCVerification
+   */
+
+  export type AggregateKYCVerification = {
+    _count: KYCVerificationCountAggregateOutputType | null
+    _min: KYCVerificationMinAggregateOutputType | null
+    _max: KYCVerificationMaxAggregateOutputType | null
+  }
+
+  export type KYCVerificationMinAggregateOutputType = {
+    id: string | null
+    userId: string | null
+    schoolId: string | null
+    status: $Enums.KYCVerificationStatus | null
+    isDeleted: boolean | null
+    createdAt: Date | null
+    updatedAt: Date | null
+  }
+
+  export type KYCVerificationMaxAggregateOutputType = {
+    id: string | null
+    userId: string | null
+    schoolId: string | null
+    status: $Enums.KYCVerificationStatus | null
+    isDeleted: boolean | null
+    createdAt: Date | null
+    updatedAt: Date | null
+  }
+
+  export type KYCVerificationCountAggregateOutputType = {
+    id: number
+    userId: number
+    schoolId: number
+    status: number
+    isDeleted: number
+    createdAt: number
+    updatedAt: number
+    _all: number
+  }
+
+
+  export type KYCVerificationMinAggregateInputType = {
+    id?: true
+    userId?: true
+    schoolId?: true
+    status?: true
+    isDeleted?: true
+    createdAt?: true
+    updatedAt?: true
+  }
+
+  export type KYCVerificationMaxAggregateInputType = {
+    id?: true
+    userId?: true
+    schoolId?: true
+    status?: true
+    isDeleted?: true
+    createdAt?: true
+    updatedAt?: true
+  }
+
+  export type KYCVerificationCountAggregateInputType = {
+    id?: true
+    userId?: true
+    schoolId?: true
+    status?: true
+    isDeleted?: true
+    createdAt?: true
+    updatedAt?: true
+    _all?: true
+  }
+
+  export type KYCVerificationAggregateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Filter which KYCVerification to aggregate.
+     */
+    where?: KYCVerificationWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of KYCVerifications to fetch.
+     */
+    orderBy?: KYCVerificationOrderByWithRelationInput | KYCVerificationOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the start position
+     */
+    cursor?: KYCVerificationWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` KYCVerifications from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` KYCVerifications.
+     */
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Count returned KYCVerifications
+    **/
+    _count?: true | KYCVerificationCountAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to find the minimum value
+    **/
+    _min?: KYCVerificationMinAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to find the maximum value
+    **/
+    _max?: KYCVerificationMaxAggregateInputType
+  }
+
+  export type GetKYCVerificationAggregateType<T extends KYCVerificationAggregateArgs> = {
+        [P in keyof T & keyof AggregateKYCVerification]: P extends '_count' | 'count'
+      ? T[P] extends true
+        ? number
+        : GetScalarType<T[P], AggregateKYCVerification[P]>
+      : GetScalarType<T[P], AggregateKYCVerification[P]>
+  }
+
+
+
+
+  export type KYCVerificationGroupByArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    where?: KYCVerificationWhereInput
+    orderBy?: KYCVerificationOrderByWithAggregationInput | KYCVerificationOrderByWithAggregationInput[]
+    by: KYCVerificationScalarFieldEnum[] | KYCVerificationScalarFieldEnum
+    having?: KYCVerificationScalarWhereWithAggregatesInput
+    take?: number
+    skip?: number
+    _count?: KYCVerificationCountAggregateInputType | true
+    _min?: KYCVerificationMinAggregateInputType
+    _max?: KYCVerificationMaxAggregateInputType
+  }
+
+  export type KYCVerificationGroupByOutputType = {
+    id: string
+    userId: string
+    schoolId: string
+    status: $Enums.KYCVerificationStatus
+    isDeleted: boolean
+    createdAt: Date
+    updatedAt: Date
+    _count: KYCVerificationCountAggregateOutputType | null
+    _min: KYCVerificationMinAggregateOutputType | null
+    _max: KYCVerificationMaxAggregateOutputType | null
+  }
+
+  type GetKYCVerificationGroupByPayload<T extends KYCVerificationGroupByArgs> = Prisma.PrismaPromise<
+    Array<
+      PickEnumerable<KYCVerificationGroupByOutputType, T['by']> &
+        {
+          [P in ((keyof T) & (keyof KYCVerificationGroupByOutputType))]: P extends '_count'
+            ? T[P] extends boolean
+              ? number
+              : GetScalarType<T[P], KYCVerificationGroupByOutputType[P]>
+            : GetScalarType<T[P], KYCVerificationGroupByOutputType[P]>
+        }
+      >
+    >
+
+
+  export type KYCVerificationSelect<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
+    id?: boolean
+    userId?: boolean
+    schoolId?: boolean
+    status?: boolean
+    isDeleted?: boolean
+    createdAt?: boolean
+    updatedAt?: boolean
+    user?: boolean | UserDefaultArgs<ExtArgs>
+    school?: boolean | SchoolDefaultArgs<ExtArgs>
+  }, ExtArgs["result"]["kYCVerification"]>
+
+  export type KYCVerificationSelectCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
+    id?: boolean
+    userId?: boolean
+    schoolId?: boolean
+    status?: boolean
+    isDeleted?: boolean
+    createdAt?: boolean
+    updatedAt?: boolean
+    user?: boolean | UserDefaultArgs<ExtArgs>
+    school?: boolean | SchoolDefaultArgs<ExtArgs>
+  }, ExtArgs["result"]["kYCVerification"]>
+
+  export type KYCVerificationSelectUpdateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
+    id?: boolean
+    userId?: boolean
+    schoolId?: boolean
+    status?: boolean
+    isDeleted?: boolean
+    createdAt?: boolean
+    updatedAt?: boolean
+    user?: boolean | UserDefaultArgs<ExtArgs>
+    school?: boolean | SchoolDefaultArgs<ExtArgs>
+  }, ExtArgs["result"]["kYCVerification"]>
+
+  export type KYCVerificationSelectScalar = {
+    id?: boolean
+    userId?: boolean
+    schoolId?: boolean
+    status?: boolean
+    isDeleted?: boolean
+    createdAt?: boolean
+    updatedAt?: boolean
+  }
+
+  export type KYCVerificationOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "userId" | "schoolId" | "status" | "isDeleted" | "createdAt" | "updatedAt", ExtArgs["result"]["kYCVerification"]>
+  export type KYCVerificationInclude<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    user?: boolean | UserDefaultArgs<ExtArgs>
+    school?: boolean | SchoolDefaultArgs<ExtArgs>
+  }
+  export type KYCVerificationIncludeCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    user?: boolean | UserDefaultArgs<ExtArgs>
+    school?: boolean | SchoolDefaultArgs<ExtArgs>
+  }
+  export type KYCVerificationIncludeUpdateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    user?: boolean | UserDefaultArgs<ExtArgs>
+    school?: boolean | SchoolDefaultArgs<ExtArgs>
+  }
+
+  export type $KYCVerificationPayload<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    name: "KYCVerification"
+    objects: {
+      user: Prisma.$UserPayload<ExtArgs>
+      school: Prisma.$SchoolPayload<ExtArgs>
+    }
+    scalars: $Extensions.GetPayloadResult<{
+      id: string
+      userId: string
+      schoolId: string
+      status: $Enums.KYCVerificationStatus
+      isDeleted: boolean
+      createdAt: Date
+      updatedAt: Date
+    }, ExtArgs["result"]["kYCVerification"]>
+    composites: {}
+  }
+
+  type KYCVerificationGetPayload<S extends boolean | null | undefined | KYCVerificationDefaultArgs> = $Result.GetResult<Prisma.$KYCVerificationPayload, S>
+
+  type KYCVerificationCountArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> =
+    Omit<KYCVerificationFindManyArgs, 'select' | 'include' | 'distinct' | 'omit'> & {
+      select?: KYCVerificationCountAggregateInputType | true
+    }
+
+  export interface KYCVerificationDelegate<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs, GlobalOmitOptions = {}> {
+    [K: symbol]: { types: Prisma.TypeMap<ExtArgs>['model']['KYCVerification'], meta: { name: 'KYCVerification' } }
+    /**
+     * Find zero or one KYCVerification that matches the filter.
+     * @param {KYCVerificationFindUniqueArgs} args - Arguments to find a KYCVerification
+     * @example
+     * // Get one KYCVerification
+     * const kYCVerification = await prisma.kYCVerification.findUnique({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findUnique<T extends KYCVerificationFindUniqueArgs>(args: SelectSubset<T, KYCVerificationFindUniqueArgs<ExtArgs>>): Prisma__KYCVerificationClient<$Result.GetResult<Prisma.$KYCVerificationPayload<ExtArgs>, T, "findUnique", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find one KYCVerification that matches the filter or throw an error with `error.code='P2025'`
+     * if no matches were found.
+     * @param {KYCVerificationFindUniqueOrThrowArgs} args - Arguments to find a KYCVerification
+     * @example
+     * // Get one KYCVerification
+     * const kYCVerification = await prisma.kYCVerification.findUniqueOrThrow({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findUniqueOrThrow<T extends KYCVerificationFindUniqueOrThrowArgs>(args: SelectSubset<T, KYCVerificationFindUniqueOrThrowArgs<ExtArgs>>): Prisma__KYCVerificationClient<$Result.GetResult<Prisma.$KYCVerificationPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find the first KYCVerification that matches the filter.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {KYCVerificationFindFirstArgs} args - Arguments to find a KYCVerification
+     * @example
+     * // Get one KYCVerification
+     * const kYCVerification = await prisma.kYCVerification.findFirst({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findFirst<T extends KYCVerificationFindFirstArgs>(args?: SelectSubset<T, KYCVerificationFindFirstArgs<ExtArgs>>): Prisma__KYCVerificationClient<$Result.GetResult<Prisma.$KYCVerificationPayload<ExtArgs>, T, "findFirst", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find the first KYCVerification that matches the filter or
+     * throw `PrismaKnownClientError` with `P2025` code if no matches were found.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {KYCVerificationFindFirstOrThrowArgs} args - Arguments to find a KYCVerification
+     * @example
+     * // Get one KYCVerification
+     * const kYCVerification = await prisma.kYCVerification.findFirstOrThrow({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findFirstOrThrow<T extends KYCVerificationFindFirstOrThrowArgs>(args?: SelectSubset<T, KYCVerificationFindFirstOrThrowArgs<ExtArgs>>): Prisma__KYCVerificationClient<$Result.GetResult<Prisma.$KYCVerificationPayload<ExtArgs>, T, "findFirstOrThrow", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find zero or more KYCVerifications that matches the filter.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {KYCVerificationFindManyArgs} args - Arguments to filter and select certain fields only.
+     * @example
+     * // Get all KYCVerifications
+     * const kYCVerifications = await prisma.kYCVerification.findMany()
+     * 
+     * // Get first 10 KYCVerifications
+     * const kYCVerifications = await prisma.kYCVerification.findMany({ take: 10 })
+     * 
+     * // Only select the `id`
+     * const kYCVerificationWithIdOnly = await prisma.kYCVerification.findMany({ select: { id: true } })
+     * 
+     */
+    findMany<T extends KYCVerificationFindManyArgs>(args?: SelectSubset<T, KYCVerificationFindManyArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$KYCVerificationPayload<ExtArgs>, T, "findMany", GlobalOmitOptions>>
+
+    /**
+     * Create a KYCVerification.
+     * @param {KYCVerificationCreateArgs} args - Arguments to create a KYCVerification.
+     * @example
+     * // Create one KYCVerification
+     * const KYCVerification = await prisma.kYCVerification.create({
+     *   data: {
+     *     // ... data to create a KYCVerification
+     *   }
+     * })
+     * 
+     */
+    create<T extends KYCVerificationCreateArgs>(args: SelectSubset<T, KYCVerificationCreateArgs<ExtArgs>>): Prisma__KYCVerificationClient<$Result.GetResult<Prisma.$KYCVerificationPayload<ExtArgs>, T, "create", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Create many KYCVerifications.
+     * @param {KYCVerificationCreateManyArgs} args - Arguments to create many KYCVerifications.
+     * @example
+     * // Create many KYCVerifications
+     * const kYCVerification = await prisma.kYCVerification.createMany({
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     *     
+     */
+    createMany<T extends KYCVerificationCreateManyArgs>(args?: SelectSubset<T, KYCVerificationCreateManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
+
+    /**
+     * Create many KYCVerifications and returns the data saved in the database.
+     * @param {KYCVerificationCreateManyAndReturnArgs} args - Arguments to create many KYCVerifications.
+     * @example
+     * // Create many KYCVerifications
+     * const kYCVerification = await prisma.kYCVerification.createManyAndReturn({
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     * 
+     * // Create many KYCVerifications and only return the `id`
+     * const kYCVerificationWithIdOnly = await prisma.kYCVerification.createManyAndReturn({
+     *   select: { id: true },
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * 
+     */
+    createManyAndReturn<T extends KYCVerificationCreateManyAndReturnArgs>(args?: SelectSubset<T, KYCVerificationCreateManyAndReturnArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$KYCVerificationPayload<ExtArgs>, T, "createManyAndReturn", GlobalOmitOptions>>
+
+    /**
+     * Delete a KYCVerification.
+     * @param {KYCVerificationDeleteArgs} args - Arguments to delete one KYCVerification.
+     * @example
+     * // Delete one KYCVerification
+     * const KYCVerification = await prisma.kYCVerification.delete({
+     *   where: {
+     *     // ... filter to delete one KYCVerification
+     *   }
+     * })
+     * 
+     */
+    delete<T extends KYCVerificationDeleteArgs>(args: SelectSubset<T, KYCVerificationDeleteArgs<ExtArgs>>): Prisma__KYCVerificationClient<$Result.GetResult<Prisma.$KYCVerificationPayload<ExtArgs>, T, "delete", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Update one KYCVerification.
+     * @param {KYCVerificationUpdateArgs} args - Arguments to update one KYCVerification.
+     * @example
+     * // Update one KYCVerification
+     * const kYCVerification = await prisma.kYCVerification.update({
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: {
+     *     // ... provide data here
+     *   }
+     * })
+     * 
+     */
+    update<T extends KYCVerificationUpdateArgs>(args: SelectSubset<T, KYCVerificationUpdateArgs<ExtArgs>>): Prisma__KYCVerificationClient<$Result.GetResult<Prisma.$KYCVerificationPayload<ExtArgs>, T, "update", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Delete zero or more KYCVerifications.
+     * @param {KYCVerificationDeleteManyArgs} args - Arguments to filter KYCVerifications to delete.
+     * @example
+     * // Delete a few KYCVerifications
+     * const { count } = await prisma.kYCVerification.deleteMany({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     * 
+     */
+    deleteMany<T extends KYCVerificationDeleteManyArgs>(args?: SelectSubset<T, KYCVerificationDeleteManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
+
+    /**
+     * Update zero or more KYCVerifications.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {KYCVerificationUpdateManyArgs} args - Arguments to update one or more rows.
+     * @example
+     * // Update many KYCVerifications
+     * const kYCVerification = await prisma.kYCVerification.updateMany({
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: {
+     *     // ... provide data here
+     *   }
+     * })
+     * 
+     */
+    updateMany<T extends KYCVerificationUpdateManyArgs>(args: SelectSubset<T, KYCVerificationUpdateManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
+
+    /**
+     * Update zero or more KYCVerifications and returns the data updated in the database.
+     * @param {KYCVerificationUpdateManyAndReturnArgs} args - Arguments to update many KYCVerifications.
+     * @example
+     * // Update many KYCVerifications
+     * const kYCVerification = await prisma.kYCVerification.updateManyAndReturn({
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     * 
+     * // Update zero or more KYCVerifications and only return the `id`
+     * const kYCVerificationWithIdOnly = await prisma.kYCVerification.updateManyAndReturn({
+     *   select: { id: true },
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * 
+     */
+    updateManyAndReturn<T extends KYCVerificationUpdateManyAndReturnArgs>(args: SelectSubset<T, KYCVerificationUpdateManyAndReturnArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$KYCVerificationPayload<ExtArgs>, T, "updateManyAndReturn", GlobalOmitOptions>>
+
+    /**
+     * Create or update one KYCVerification.
+     * @param {KYCVerificationUpsertArgs} args - Arguments to update or create a KYCVerification.
+     * @example
+     * // Update or create a KYCVerification
+     * const kYCVerification = await prisma.kYCVerification.upsert({
+     *   create: {
+     *     // ... data to create a KYCVerification
+     *   },
+     *   update: {
+     *     // ... in case it already exists, update
+     *   },
+     *   where: {
+     *     // ... the filter for the KYCVerification we want to update
+     *   }
+     * })
+     */
+    upsert<T extends KYCVerificationUpsertArgs>(args: SelectSubset<T, KYCVerificationUpsertArgs<ExtArgs>>): Prisma__KYCVerificationClient<$Result.GetResult<Prisma.$KYCVerificationPayload<ExtArgs>, T, "upsert", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+
+    /**
+     * Count the number of KYCVerifications.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {KYCVerificationCountArgs} args - Arguments to filter KYCVerifications to count.
+     * @example
+     * // Count the number of KYCVerifications
+     * const count = await prisma.kYCVerification.count({
+     *   where: {
+     *     // ... the filter for the KYCVerifications we want to count
+     *   }
+     * })
+    **/
+    count<T extends KYCVerificationCountArgs>(
+      args?: Subset<T, KYCVerificationCountArgs>,
+    ): Prisma.PrismaPromise<
+      T extends $Utils.Record<'select', any>
+        ? T['select'] extends true
+          ? number
+          : GetScalarType<T['select'], KYCVerificationCountAggregateOutputType>
+        : number
+    >
+
+    /**
+     * Allows you to perform aggregations operations on a KYCVerification.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {KYCVerificationAggregateArgs} args - Select which aggregations you would like to apply and on what fields.
+     * @example
+     * // Ordered by age ascending
+     * // Where email contains prisma.io
+     * // Limited to the 10 users
+     * const aggregations = await prisma.user.aggregate({
+     *   _avg: {
+     *     age: true,
+     *   },
+     *   where: {
+     *     email: {
+     *       contains: "prisma.io",
+     *     },
+     *   },
+     *   orderBy: {
+     *     age: "asc",
+     *   },
+     *   take: 10,
+     * })
+    **/
+    aggregate<T extends KYCVerificationAggregateArgs>(args: Subset<T, KYCVerificationAggregateArgs>): Prisma.PrismaPromise<GetKYCVerificationAggregateType<T>>
+
+    /**
+     * Group by KYCVerification.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {KYCVerificationGroupByArgs} args - Group by arguments.
+     * @example
+     * // Group by city, order by createdAt, get count
+     * const result = await prisma.user.groupBy({
+     *   by: ['city', 'createdAt'],
+     *   orderBy: {
+     *     createdAt: true
+     *   },
+     *   _count: {
+     *     _all: true
+     *   },
+     * })
+     * 
+    **/
+    groupBy<
+      T extends KYCVerificationGroupByArgs,
+      HasSelectOrTake extends Or<
+        Extends<'skip', Keys<T>>,
+        Extends<'take', Keys<T>>
+      >,
+      OrderByArg extends True extends HasSelectOrTake
+        ? { orderBy: KYCVerificationGroupByArgs['orderBy'] }
+        : { orderBy?: KYCVerificationGroupByArgs['orderBy'] },
+      OrderFields extends ExcludeUnderscoreKeys<Keys<MaybeTupleToUnion<T['orderBy']>>>,
+      ByFields extends MaybeTupleToUnion<T['by']>,
+      ByValid extends Has<ByFields, OrderFields>,
+      HavingFields extends GetHavingFields<T['having']>,
+      HavingValid extends Has<ByFields, HavingFields>,
+      ByEmpty extends T['by'] extends never[] ? True : False,
+      InputErrors extends ByEmpty extends True
+      ? `Error: "by" must not be empty.`
+      : HavingValid extends False
+      ? {
+          [P in HavingFields]: P extends ByFields
+            ? never
+            : P extends string
+            ? `Error: Field "${P}" used in "having" needs to be provided in "by".`
+            : [
+                Error,
+                'Field ',
+                P,
+                ` in "having" needs to be provided in "by"`,
+              ]
+        }[HavingFields]
+      : 'take' extends Keys<T>
+      ? 'orderBy' extends Keys<T>
+        ? ByValid extends True
+          ? {}
+          : {
+              [P in OrderFields]: P extends ByFields
+                ? never
+                : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
+            }[OrderFields]
+        : 'Error: If you provide "take", you also need to provide "orderBy"'
+      : 'skip' extends Keys<T>
+      ? 'orderBy' extends Keys<T>
+        ? ByValid extends True
+          ? {}
+          : {
+              [P in OrderFields]: P extends ByFields
+                ? never
+                : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
+            }[OrderFields]
+        : 'Error: If you provide "skip", you also need to provide "orderBy"'
+      : ByValid extends True
+      ? {}
+      : {
+          [P in OrderFields]: P extends ByFields
+            ? never
+            : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
+        }[OrderFields]
+    >(args: SubsetIntersection<T, KYCVerificationGroupByArgs, OrderByArg> & InputErrors): {} extends InputErrors ? GetKYCVerificationGroupByPayload<T> : Prisma.PrismaPromise<InputErrors>
+  /**
+   * Fields of the KYCVerification model
+   */
+  readonly fields: KYCVerificationFieldRefs;
+  }
+
+  /**
+   * The delegate class that acts as a "Promise-like" for KYCVerification.
+   * Why is this prefixed with `Prisma__`?
+   * Because we want to prevent naming conflicts as mentioned in
+   * https://github.com/prisma/prisma-client-js/issues/707
+   */
+  export interface Prisma__KYCVerificationClient<T, Null = never, ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs, GlobalOmitOptions = {}> extends Prisma.PrismaPromise<T> {
+    readonly [Symbol.toStringTag]: "PrismaPromise"
+    user<T extends UserDefaultArgs<ExtArgs> = {}>(args?: Subset<T, UserDefaultArgs<ExtArgs>>): Prisma__UserClient<$Result.GetResult<Prisma.$UserPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | Null, Null, ExtArgs, GlobalOmitOptions>
+    school<T extends SchoolDefaultArgs<ExtArgs> = {}>(args?: Subset<T, SchoolDefaultArgs<ExtArgs>>): Prisma__SchoolClient<$Result.GetResult<Prisma.$SchoolPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | Null, Null, ExtArgs, GlobalOmitOptions>
+    /**
+     * Attaches callbacks for the resolution and/or rejection of the Promise.
+     * @param onfulfilled The callback to execute when the Promise is resolved.
+     * @param onrejected The callback to execute when the Promise is rejected.
+     * @returns A Promise for the completion of which ever callback is executed.
+     */
+    then<TResult1 = T, TResult2 = never>(onfulfilled?: ((value: T) => TResult1 | PromiseLike<TResult1>) | undefined | null, onrejected?: ((reason: any) => TResult2 | PromiseLike<TResult2>) | undefined | null): $Utils.JsPromise<TResult1 | TResult2>
+    /**
+     * Attaches a callback for only the rejection of the Promise.
+     * @param onrejected The callback to execute when the Promise is rejected.
+     * @returns A Promise for the completion of the callback.
+     */
+    catch<TResult = never>(onrejected?: ((reason: any) => TResult | PromiseLike<TResult>) | undefined | null): $Utils.JsPromise<T | TResult>
+    /**
+     * Attaches a callback that is invoked when the Promise is settled (fulfilled or rejected). The
+     * resolved value cannot be modified from the callback.
+     * @param onfinally The callback to execute when the Promise is settled (fulfilled or rejected).
+     * @returns A Promise for the completion of the callback.
+     */
+    finally(onfinally?: (() => void) | undefined | null): $Utils.JsPromise<T>
+  }
+
+
+
+
+  /**
+   * Fields of the KYCVerification model
+   */
+  interface KYCVerificationFieldRefs {
+    readonly id: FieldRef<"KYCVerification", 'String'>
+    readonly userId: FieldRef<"KYCVerification", 'String'>
+    readonly schoolId: FieldRef<"KYCVerification", 'String'>
+    readonly status: FieldRef<"KYCVerification", 'KYCVerificationStatus'>
+    readonly isDeleted: FieldRef<"KYCVerification", 'Boolean'>
+    readonly createdAt: FieldRef<"KYCVerification", 'DateTime'>
+    readonly updatedAt: FieldRef<"KYCVerification", 'DateTime'>
+  }
+    
+
+  // Custom InputTypes
+  /**
+   * KYCVerification findUnique
+   */
+  export type KYCVerificationFindUniqueArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the KYCVerification
+     */
+    select?: KYCVerificationSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the KYCVerification
+     */
+    omit?: KYCVerificationOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: KYCVerificationInclude<ExtArgs> | null
+    /**
+     * Filter, which KYCVerification to fetch.
+     */
+    where: KYCVerificationWhereUniqueInput
+  }
+
+  /**
+   * KYCVerification findUniqueOrThrow
+   */
+  export type KYCVerificationFindUniqueOrThrowArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the KYCVerification
+     */
+    select?: KYCVerificationSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the KYCVerification
+     */
+    omit?: KYCVerificationOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: KYCVerificationInclude<ExtArgs> | null
+    /**
+     * Filter, which KYCVerification to fetch.
+     */
+    where: KYCVerificationWhereUniqueInput
+  }
+
+  /**
+   * KYCVerification findFirst
+   */
+  export type KYCVerificationFindFirstArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the KYCVerification
+     */
+    select?: KYCVerificationSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the KYCVerification
+     */
+    omit?: KYCVerificationOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: KYCVerificationInclude<ExtArgs> | null
+    /**
+     * Filter, which KYCVerification to fetch.
+     */
+    where?: KYCVerificationWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of KYCVerifications to fetch.
+     */
+    orderBy?: KYCVerificationOrderByWithRelationInput | KYCVerificationOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the position for searching for KYCVerifications.
+     */
+    cursor?: KYCVerificationWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` KYCVerifications from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` KYCVerifications.
+     */
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/distinct Distinct Docs}
+     * 
+     * Filter by unique combinations of KYCVerifications.
+     */
+    distinct?: KYCVerificationScalarFieldEnum | KYCVerificationScalarFieldEnum[]
+  }
+
+  /**
+   * KYCVerification findFirstOrThrow
+   */
+  export type KYCVerificationFindFirstOrThrowArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the KYCVerification
+     */
+    select?: KYCVerificationSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the KYCVerification
+     */
+    omit?: KYCVerificationOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: KYCVerificationInclude<ExtArgs> | null
+    /**
+     * Filter, which KYCVerification to fetch.
+     */
+    where?: KYCVerificationWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of KYCVerifications to fetch.
+     */
+    orderBy?: KYCVerificationOrderByWithRelationInput | KYCVerificationOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the position for searching for KYCVerifications.
+     */
+    cursor?: KYCVerificationWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` KYCVerifications from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` KYCVerifications.
+     */
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/distinct Distinct Docs}
+     * 
+     * Filter by unique combinations of KYCVerifications.
+     */
+    distinct?: KYCVerificationScalarFieldEnum | KYCVerificationScalarFieldEnum[]
+  }
+
+  /**
+   * KYCVerification findMany
+   */
+  export type KYCVerificationFindManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the KYCVerification
+     */
+    select?: KYCVerificationSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the KYCVerification
+     */
+    omit?: KYCVerificationOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: KYCVerificationInclude<ExtArgs> | null
+    /**
+     * Filter, which KYCVerifications to fetch.
+     */
+    where?: KYCVerificationWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of KYCVerifications to fetch.
+     */
+    orderBy?: KYCVerificationOrderByWithRelationInput | KYCVerificationOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the position for listing KYCVerifications.
+     */
+    cursor?: KYCVerificationWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` KYCVerifications from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` KYCVerifications.
+     */
+    skip?: number
+    distinct?: KYCVerificationScalarFieldEnum | KYCVerificationScalarFieldEnum[]
+  }
+
+  /**
+   * KYCVerification create
+   */
+  export type KYCVerificationCreateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the KYCVerification
+     */
+    select?: KYCVerificationSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the KYCVerification
+     */
+    omit?: KYCVerificationOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: KYCVerificationInclude<ExtArgs> | null
+    /**
+     * The data needed to create a KYCVerification.
+     */
+    data: XOR<KYCVerificationCreateInput, KYCVerificationUncheckedCreateInput>
+  }
+
+  /**
+   * KYCVerification createMany
+   */
+  export type KYCVerificationCreateManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * The data used to create many KYCVerifications.
+     */
+    data: KYCVerificationCreateManyInput | KYCVerificationCreateManyInput[]
+    skipDuplicates?: boolean
+  }
+
+  /**
+   * KYCVerification createManyAndReturn
+   */
+  export type KYCVerificationCreateManyAndReturnArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the KYCVerification
+     */
+    select?: KYCVerificationSelectCreateManyAndReturn<ExtArgs> | null
+    /**
+     * Omit specific fields from the KYCVerification
+     */
+    omit?: KYCVerificationOmit<ExtArgs> | null
+    /**
+     * The data used to create many KYCVerifications.
+     */
+    data: KYCVerificationCreateManyInput | KYCVerificationCreateManyInput[]
+    skipDuplicates?: boolean
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: KYCVerificationIncludeCreateManyAndReturn<ExtArgs> | null
+  }
+
+  /**
+   * KYCVerification update
+   */
+  export type KYCVerificationUpdateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the KYCVerification
+     */
+    select?: KYCVerificationSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the KYCVerification
+     */
+    omit?: KYCVerificationOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: KYCVerificationInclude<ExtArgs> | null
+    /**
+     * The data needed to update a KYCVerification.
+     */
+    data: XOR<KYCVerificationUpdateInput, KYCVerificationUncheckedUpdateInput>
+    /**
+     * Choose, which KYCVerification to update.
+     */
+    where: KYCVerificationWhereUniqueInput
+  }
+
+  /**
+   * KYCVerification updateMany
+   */
+  export type KYCVerificationUpdateManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * The data used to update KYCVerifications.
+     */
+    data: XOR<KYCVerificationUpdateManyMutationInput, KYCVerificationUncheckedUpdateManyInput>
+    /**
+     * Filter which KYCVerifications to update
+     */
+    where?: KYCVerificationWhereInput
+    /**
+     * Limit how many KYCVerifications to update.
+     */
+    limit?: number
+  }
+
+  /**
+   * KYCVerification updateManyAndReturn
+   */
+  export type KYCVerificationUpdateManyAndReturnArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the KYCVerification
+     */
+    select?: KYCVerificationSelectUpdateManyAndReturn<ExtArgs> | null
+    /**
+     * Omit specific fields from the KYCVerification
+     */
+    omit?: KYCVerificationOmit<ExtArgs> | null
+    /**
+     * The data used to update KYCVerifications.
+     */
+    data: XOR<KYCVerificationUpdateManyMutationInput, KYCVerificationUncheckedUpdateManyInput>
+    /**
+     * Filter which KYCVerifications to update
+     */
+    where?: KYCVerificationWhereInput
+    /**
+     * Limit how many KYCVerifications to update.
+     */
+    limit?: number
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: KYCVerificationIncludeUpdateManyAndReturn<ExtArgs> | null
+  }
+
+  /**
+   * KYCVerification upsert
+   */
+  export type KYCVerificationUpsertArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the KYCVerification
+     */
+    select?: KYCVerificationSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the KYCVerification
+     */
+    omit?: KYCVerificationOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: KYCVerificationInclude<ExtArgs> | null
+    /**
+     * The filter to search for the KYCVerification to update in case it exists.
+     */
+    where: KYCVerificationWhereUniqueInput
+    /**
+     * In case the KYCVerification found by the `where` argument doesn't exist, create a new KYCVerification with this data.
+     */
+    create: XOR<KYCVerificationCreateInput, KYCVerificationUncheckedCreateInput>
+    /**
+     * In case the KYCVerification was found with the provided `where` argument, update it with this data.
+     */
+    update: XOR<KYCVerificationUpdateInput, KYCVerificationUncheckedUpdateInput>
+  }
+
+  /**
+   * KYCVerification delete
+   */
+  export type KYCVerificationDeleteArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the KYCVerification
+     */
+    select?: KYCVerificationSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the KYCVerification
+     */
+    omit?: KYCVerificationOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: KYCVerificationInclude<ExtArgs> | null
+    /**
+     * Filter which KYCVerification to delete.
+     */
+    where: KYCVerificationWhereUniqueInput
+  }
+
+  /**
+   * KYCVerification deleteMany
+   */
+  export type KYCVerificationDeleteManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Filter which KYCVerifications to delete
+     */
+    where?: KYCVerificationWhereInput
+    /**
+     * Limit how many KYCVerifications to delete.
+     */
+    limit?: number
+  }
+
+  /**
+   * KYCVerification without action
+   */
+  export type KYCVerificationDefaultArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the KYCVerification
+     */
+    select?: KYCVerificationSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the KYCVerification
+     */
+    omit?: KYCVerificationOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: KYCVerificationInclude<ExtArgs> | null
   }
 
 
@@ -35663,7 +36840,6 @@ export namespace Prisma {
     directorIDType: 'directorIDType',
     directorIDNumber: 'directorIDNumber',
     document: 'document',
-    status: 'status',
     isDeleted: 'isDeleted',
     createdAt: 'createdAt',
     updatedAt: 'updatedAt'
@@ -35677,7 +36853,6 @@ export namespace Prisma {
     schoolId: 'schoolId',
     cacform7: 'cacform7',
     cacShareAllotmentForm: 'cacShareAllotmentForm',
-    status: 'status',
     isDeleted: 'isDeleted',
     createdAt: 'createdAt',
     updatedAt: 'updatedAt'
@@ -35693,7 +36868,6 @@ export namespace Prisma {
     accreditationDocument: 'accreditationDocument',
     taxIdentificationNumber: 'taxIdentificationNumber',
     licenseDocument: 'licenseDocument',
-    status: 'status',
     isDeleted: 'isDeleted',
     createdAt: 'createdAt',
     updatedAt: 'updatedAt'
@@ -35724,13 +36898,25 @@ export namespace Prisma {
     signature: 'signature',
     signedAt: 'signedAt',
     legalDocumentRef: 'legalDocumentRef',
-    status: 'status',
     isDeleted: 'isDeleted',
     createdAt: 'createdAt',
     updatedAt: 'updatedAt'
   };
 
   export type SchoolAndPlatformLegalAgreementScalarFieldEnum = (typeof SchoolAndPlatformLegalAgreementScalarFieldEnum)[keyof typeof SchoolAndPlatformLegalAgreementScalarFieldEnum]
+
+
+  export const KYCVerificationScalarFieldEnum: {
+    id: 'id',
+    userId: 'userId',
+    schoolId: 'schoolId',
+    status: 'status',
+    isDeleted: 'isDeleted',
+    createdAt: 'createdAt',
+    updatedAt: 'updatedAt'
+  };
+
+  export type KYCVerificationScalarFieldEnum = (typeof KYCVerificationScalarFieldEnum)[keyof typeof KYCVerificationScalarFieldEnum]
 
 
   export const ClassScalarFieldEnum: {
@@ -36323,6 +37509,7 @@ export namespace Prisma {
     wallet?: XOR<WalletNullableScalarRelationFilter, WalletWhereInput> | null
     refreshTokens?: RefreshTokenListRelationFilter
     firebaseToken?: XOR<FirebaseTokenNullableScalarRelationFilter, FirebaseTokenWhereInput> | null
+    kycverification?: XOR<KYCVerificationNullableScalarRelationFilter, KYCVerificationWhereInput> | null
   }
 
   export type UserOrderByWithRelationInput = {
@@ -36351,6 +37538,7 @@ export namespace Prisma {
     wallet?: WalletOrderByWithRelationInput
     refreshTokens?: RefreshTokenOrderByRelationAggregateInput
     firebaseToken?: FirebaseTokenOrderByWithRelationInput
+    kycverification?: KYCVerificationOrderByWithRelationInput
   }
 
   export type UserWhereUniqueInput = Prisma.AtLeast<{
@@ -36382,6 +37570,7 @@ export namespace Prisma {
     wallet?: XOR<WalletNullableScalarRelationFilter, WalletWhereInput> | null
     refreshTokens?: RefreshTokenListRelationFilter
     firebaseToken?: XOR<FirebaseTokenNullableScalarRelationFilter, FirebaseTokenWhereInput> | null
+    kycverification?: XOR<KYCVerificationNullableScalarRelationFilter, KYCVerificationWhereInput> | null
   }, "id" | "email">
 
   export type UserOrderByWithAggregationInput = {
@@ -36835,6 +38024,7 @@ export namespace Prisma {
     terms?: TermListRelationFilter
     fees?: FeesListRelationFilter
     payouts?: PayoutListRelationFilter
+    kycverification?: XOR<KYCVerificationNullableScalarRelationFilter, KYCVerificationWhereInput> | null
   }
 
   export type SchoolOrderByWithRelationInput = {
@@ -36869,6 +38059,7 @@ export namespace Prisma {
     terms?: TermOrderByRelationAggregateInput
     fees?: FeesOrderByRelationAggregateInput
     payouts?: PayoutOrderByRelationAggregateInput
+    kycverification?: KYCVerificationOrderByWithRelationInput
   }
 
   export type SchoolWhereUniqueInput = Prisma.AtLeast<{
@@ -36906,6 +38097,7 @@ export namespace Prisma {
     terms?: TermListRelationFilter
     fees?: FeesListRelationFilter
     payouts?: PayoutListRelationFilter
+    kycverification?: XOR<KYCVerificationNullableScalarRelationFilter, KYCVerificationWhereInput> | null
   }, "id" | "ownerId" | "email">
 
   export type SchoolOrderByWithAggregationInput = {
@@ -36972,7 +38164,6 @@ export namespace Prisma {
     directorIDType?: EnumDirectorIDTypeFilter<"SchoolDirectorVerification"> | $Enums.DirectorIDType
     directorIDNumber?: StringFilter<"SchoolDirectorVerification"> | string
     document?: StringFilter<"SchoolDirectorVerification"> | string
-    status?: EnumKYCVerificationStatusFilter<"SchoolDirectorVerification"> | $Enums.KYCVerificationStatus
     isDeleted?: BoolFilter<"SchoolDirectorVerification"> | boolean
     createdAt?: DateTimeFilter<"SchoolDirectorVerification"> | Date | string
     updatedAt?: DateTimeFilter<"SchoolDirectorVerification"> | Date | string
@@ -36986,7 +38177,6 @@ export namespace Prisma {
     directorIDType?: SortOrder
     directorIDNumber?: SortOrder
     document?: SortOrder
-    status?: SortOrder
     isDeleted?: SortOrder
     createdAt?: SortOrder
     updatedAt?: SortOrder
@@ -37003,7 +38193,6 @@ export namespace Prisma {
     directorIDType?: EnumDirectorIDTypeFilter<"SchoolDirectorVerification"> | $Enums.DirectorIDType
     directorIDNumber?: StringFilter<"SchoolDirectorVerification"> | string
     document?: StringFilter<"SchoolDirectorVerification"> | string
-    status?: EnumKYCVerificationStatusFilter<"SchoolDirectorVerification"> | $Enums.KYCVerificationStatus
     isDeleted?: BoolFilter<"SchoolDirectorVerification"> | boolean
     createdAt?: DateTimeFilter<"SchoolDirectorVerification"> | Date | string
     updatedAt?: DateTimeFilter<"SchoolDirectorVerification"> | Date | string
@@ -37017,7 +38206,6 @@ export namespace Prisma {
     directorIDType?: SortOrder
     directorIDNumber?: SortOrder
     document?: SortOrder
-    status?: SortOrder
     isDeleted?: SortOrder
     createdAt?: SortOrder
     updatedAt?: SortOrder
@@ -37036,7 +38224,6 @@ export namespace Prisma {
     directorIDType?: EnumDirectorIDTypeWithAggregatesFilter<"SchoolDirectorVerification"> | $Enums.DirectorIDType
     directorIDNumber?: StringWithAggregatesFilter<"SchoolDirectorVerification"> | string
     document?: StringWithAggregatesFilter<"SchoolDirectorVerification"> | string
-    status?: EnumKYCVerificationStatusWithAggregatesFilter<"SchoolDirectorVerification"> | $Enums.KYCVerificationStatus
     isDeleted?: BoolWithAggregatesFilter<"SchoolDirectorVerification"> | boolean
     createdAt?: DateTimeWithAggregatesFilter<"SchoolDirectorVerification"> | Date | string
     updatedAt?: DateTimeWithAggregatesFilter<"SchoolDirectorVerification"> | Date | string
@@ -37050,7 +38237,6 @@ export namespace Prisma {
     schoolId?: StringFilter<"SchoolOwnershipVerification"> | string
     cacform7?: StringFilter<"SchoolOwnershipVerification"> | string
     cacShareAllotmentForm?: StringFilter<"SchoolOwnershipVerification"> | string
-    status?: EnumKYCVerificationStatusFilter<"SchoolOwnershipVerification"> | $Enums.KYCVerificationStatus
     isDeleted?: BoolFilter<"SchoolOwnershipVerification"> | boolean
     createdAt?: DateTimeFilter<"SchoolOwnershipVerification"> | Date | string
     updatedAt?: DateTimeFilter<"SchoolOwnershipVerification"> | Date | string
@@ -37062,7 +38248,6 @@ export namespace Prisma {
     schoolId?: SortOrder
     cacform7?: SortOrder
     cacShareAllotmentForm?: SortOrder
-    status?: SortOrder
     isDeleted?: SortOrder
     createdAt?: SortOrder
     updatedAt?: SortOrder
@@ -37077,7 +38262,6 @@ export namespace Prisma {
     NOT?: SchoolOwnershipVerificationWhereInput | SchoolOwnershipVerificationWhereInput[]
     cacform7?: StringFilter<"SchoolOwnershipVerification"> | string
     cacShareAllotmentForm?: StringFilter<"SchoolOwnershipVerification"> | string
-    status?: EnumKYCVerificationStatusFilter<"SchoolOwnershipVerification"> | $Enums.KYCVerificationStatus
     isDeleted?: BoolFilter<"SchoolOwnershipVerification"> | boolean
     createdAt?: DateTimeFilter<"SchoolOwnershipVerification"> | Date | string
     updatedAt?: DateTimeFilter<"SchoolOwnershipVerification"> | Date | string
@@ -37089,7 +38273,6 @@ export namespace Prisma {
     schoolId?: SortOrder
     cacform7?: SortOrder
     cacShareAllotmentForm?: SortOrder
-    status?: SortOrder
     isDeleted?: SortOrder
     createdAt?: SortOrder
     updatedAt?: SortOrder
@@ -37106,7 +38289,6 @@ export namespace Prisma {
     schoolId?: StringWithAggregatesFilter<"SchoolOwnershipVerification"> | string
     cacform7?: StringWithAggregatesFilter<"SchoolOwnershipVerification"> | string
     cacShareAllotmentForm?: StringWithAggregatesFilter<"SchoolOwnershipVerification"> | string
-    status?: EnumKYCVerificationStatusWithAggregatesFilter<"SchoolOwnershipVerification"> | $Enums.KYCVerificationStatus
     isDeleted?: BoolWithAggregatesFilter<"SchoolOwnershipVerification"> | boolean
     createdAt?: DateTimeWithAggregatesFilter<"SchoolOwnershipVerification"> | Date | string
     updatedAt?: DateTimeWithAggregatesFilter<"SchoolOwnershipVerification"> | Date | string
@@ -37122,7 +38304,6 @@ export namespace Prisma {
     accreditationDocument?: StringFilter<"SchoolVerification"> | string
     taxIdentificationNumber?: StringFilter<"SchoolVerification"> | string
     licenseDocument?: StringFilter<"SchoolVerification"> | string
-    status?: EnumKYCVerificationStatusFilter<"SchoolVerification"> | $Enums.KYCVerificationStatus
     isDeleted?: BoolFilter<"SchoolVerification"> | boolean
     createdAt?: DateTimeFilter<"SchoolVerification"> | Date | string
     updatedAt?: DateTimeFilter<"SchoolVerification"> | Date | string
@@ -37136,7 +38317,6 @@ export namespace Prisma {
     accreditationDocument?: SortOrder
     taxIdentificationNumber?: SortOrder
     licenseDocument?: SortOrder
-    status?: SortOrder
     isDeleted?: SortOrder
     createdAt?: SortOrder
     updatedAt?: SortOrder
@@ -37153,7 +38333,6 @@ export namespace Prisma {
     accreditationDocument?: StringFilter<"SchoolVerification"> | string
     taxIdentificationNumber?: StringFilter<"SchoolVerification"> | string
     licenseDocument?: StringFilter<"SchoolVerification"> | string
-    status?: EnumKYCVerificationStatusFilter<"SchoolVerification"> | $Enums.KYCVerificationStatus
     isDeleted?: BoolFilter<"SchoolVerification"> | boolean
     createdAt?: DateTimeFilter<"SchoolVerification"> | Date | string
     updatedAt?: DateTimeFilter<"SchoolVerification"> | Date | string
@@ -37167,7 +38346,6 @@ export namespace Prisma {
     accreditationDocument?: SortOrder
     taxIdentificationNumber?: SortOrder
     licenseDocument?: SortOrder
-    status?: SortOrder
     isDeleted?: SortOrder
     createdAt?: SortOrder
     updatedAt?: SortOrder
@@ -37186,7 +38364,6 @@ export namespace Prisma {
     accreditationDocument?: StringWithAggregatesFilter<"SchoolVerification"> | string
     taxIdentificationNumber?: StringWithAggregatesFilter<"SchoolVerification"> | string
     licenseDocument?: StringWithAggregatesFilter<"SchoolVerification"> | string
-    status?: EnumKYCVerificationStatusWithAggregatesFilter<"SchoolVerification"> | $Enums.KYCVerificationStatus
     isDeleted?: BoolWithAggregatesFilter<"SchoolVerification"> | boolean
     createdAt?: DateTimeWithAggregatesFilter<"SchoolVerification"> | Date | string
     updatedAt?: DateTimeWithAggregatesFilter<"SchoolVerification"> | Date | string
@@ -37277,7 +38454,6 @@ export namespace Prisma {
     signature?: StringFilter<"SchoolAndPlatformLegalAgreement"> | string
     signedAt?: DateTimeFilter<"SchoolAndPlatformLegalAgreement"> | Date | string
     legalDocumentRef?: StringFilter<"SchoolAndPlatformLegalAgreement"> | string
-    status?: EnumKYCVerificationStatusFilter<"SchoolAndPlatformLegalAgreement"> | $Enums.KYCVerificationStatus
     isDeleted?: BoolFilter<"SchoolAndPlatformLegalAgreement"> | boolean
     createdAt?: DateTimeFilter<"SchoolAndPlatformLegalAgreement"> | Date | string
     updatedAt?: DateTimeFilter<"SchoolAndPlatformLegalAgreement"> | Date | string
@@ -37292,7 +38468,6 @@ export namespace Prisma {
     signature?: SortOrder
     signedAt?: SortOrder
     legalDocumentRef?: SortOrder
-    status?: SortOrder
     isDeleted?: SortOrder
     createdAt?: SortOrder
     updatedAt?: SortOrder
@@ -37310,7 +38485,6 @@ export namespace Prisma {
     signature?: StringFilter<"SchoolAndPlatformLegalAgreement"> | string
     signedAt?: DateTimeFilter<"SchoolAndPlatformLegalAgreement"> | Date | string
     legalDocumentRef?: StringFilter<"SchoolAndPlatformLegalAgreement"> | string
-    status?: EnumKYCVerificationStatusFilter<"SchoolAndPlatformLegalAgreement"> | $Enums.KYCVerificationStatus
     isDeleted?: BoolFilter<"SchoolAndPlatformLegalAgreement"> | boolean
     createdAt?: DateTimeFilter<"SchoolAndPlatformLegalAgreement"> | Date | string
     updatedAt?: DateTimeFilter<"SchoolAndPlatformLegalAgreement"> | Date | string
@@ -37325,7 +38499,6 @@ export namespace Prisma {
     signature?: SortOrder
     signedAt?: SortOrder
     legalDocumentRef?: SortOrder
-    status?: SortOrder
     isDeleted?: SortOrder
     createdAt?: SortOrder
     updatedAt?: SortOrder
@@ -37344,10 +38517,77 @@ export namespace Prisma {
     signature?: StringWithAggregatesFilter<"SchoolAndPlatformLegalAgreement"> | string
     signedAt?: DateTimeWithAggregatesFilter<"SchoolAndPlatformLegalAgreement"> | Date | string
     legalDocumentRef?: StringWithAggregatesFilter<"SchoolAndPlatformLegalAgreement"> | string
-    status?: EnumKYCVerificationStatusWithAggregatesFilter<"SchoolAndPlatformLegalAgreement"> | $Enums.KYCVerificationStatus
     isDeleted?: BoolWithAggregatesFilter<"SchoolAndPlatformLegalAgreement"> | boolean
     createdAt?: DateTimeWithAggregatesFilter<"SchoolAndPlatformLegalAgreement"> | Date | string
     updatedAt?: DateTimeWithAggregatesFilter<"SchoolAndPlatformLegalAgreement"> | Date | string
+  }
+
+  export type KYCVerificationWhereInput = {
+    AND?: KYCVerificationWhereInput | KYCVerificationWhereInput[]
+    OR?: KYCVerificationWhereInput[]
+    NOT?: KYCVerificationWhereInput | KYCVerificationWhereInput[]
+    id?: StringFilter<"KYCVerification"> | string
+    userId?: StringFilter<"KYCVerification"> | string
+    schoolId?: StringFilter<"KYCVerification"> | string
+    status?: EnumKYCVerificationStatusFilter<"KYCVerification"> | $Enums.KYCVerificationStatus
+    isDeleted?: BoolFilter<"KYCVerification"> | boolean
+    createdAt?: DateTimeFilter<"KYCVerification"> | Date | string
+    updatedAt?: DateTimeFilter<"KYCVerification"> | Date | string
+    user?: XOR<UserScalarRelationFilter, UserWhereInput>
+    school?: XOR<SchoolScalarRelationFilter, SchoolWhereInput>
+  }
+
+  export type KYCVerificationOrderByWithRelationInput = {
+    id?: SortOrder
+    userId?: SortOrder
+    schoolId?: SortOrder
+    status?: SortOrder
+    isDeleted?: SortOrder
+    createdAt?: SortOrder
+    updatedAt?: SortOrder
+    user?: UserOrderByWithRelationInput
+    school?: SchoolOrderByWithRelationInput
+  }
+
+  export type KYCVerificationWhereUniqueInput = Prisma.AtLeast<{
+    id?: string
+    userId?: string
+    schoolId?: string
+    AND?: KYCVerificationWhereInput | KYCVerificationWhereInput[]
+    OR?: KYCVerificationWhereInput[]
+    NOT?: KYCVerificationWhereInput | KYCVerificationWhereInput[]
+    status?: EnumKYCVerificationStatusFilter<"KYCVerification"> | $Enums.KYCVerificationStatus
+    isDeleted?: BoolFilter<"KYCVerification"> | boolean
+    createdAt?: DateTimeFilter<"KYCVerification"> | Date | string
+    updatedAt?: DateTimeFilter<"KYCVerification"> | Date | string
+    user?: XOR<UserScalarRelationFilter, UserWhereInput>
+    school?: XOR<SchoolScalarRelationFilter, SchoolWhereInput>
+  }, "id" | "userId" | "schoolId">
+
+  export type KYCVerificationOrderByWithAggregationInput = {
+    id?: SortOrder
+    userId?: SortOrder
+    schoolId?: SortOrder
+    status?: SortOrder
+    isDeleted?: SortOrder
+    createdAt?: SortOrder
+    updatedAt?: SortOrder
+    _count?: KYCVerificationCountOrderByAggregateInput
+    _max?: KYCVerificationMaxOrderByAggregateInput
+    _min?: KYCVerificationMinOrderByAggregateInput
+  }
+
+  export type KYCVerificationScalarWhereWithAggregatesInput = {
+    AND?: KYCVerificationScalarWhereWithAggregatesInput | KYCVerificationScalarWhereWithAggregatesInput[]
+    OR?: KYCVerificationScalarWhereWithAggregatesInput[]
+    NOT?: KYCVerificationScalarWhereWithAggregatesInput | KYCVerificationScalarWhereWithAggregatesInput[]
+    id?: StringWithAggregatesFilter<"KYCVerification"> | string
+    userId?: StringWithAggregatesFilter<"KYCVerification"> | string
+    schoolId?: StringWithAggregatesFilter<"KYCVerification"> | string
+    status?: EnumKYCVerificationStatusWithAggregatesFilter<"KYCVerification"> | $Enums.KYCVerificationStatus
+    isDeleted?: BoolWithAggregatesFilter<"KYCVerification"> | boolean
+    createdAt?: DateTimeWithAggregatesFilter<"KYCVerification"> | Date | string
+    updatedAt?: DateTimeWithAggregatesFilter<"KYCVerification"> | Date | string
   }
 
   export type ClassWhereInput = {
@@ -38605,6 +39845,7 @@ export namespace Prisma {
     wallet?: WalletCreateNestedOneWithoutUserInput
     refreshTokens?: RefreshTokenCreateNestedManyWithoutUserInput
     firebaseToken?: FirebaseTokenCreateNestedOneWithoutUserInput
+    kycverification?: KYCVerificationCreateNestedOneWithoutUserInput
   }
 
   export type UserUncheckedCreateInput = {
@@ -38633,6 +39874,7 @@ export namespace Prisma {
     wallet?: WalletUncheckedCreateNestedOneWithoutUserInput
     refreshTokens?: RefreshTokenUncheckedCreateNestedManyWithoutUserInput
     firebaseToken?: FirebaseTokenUncheckedCreateNestedOneWithoutUserInput
+    kycverification?: KYCVerificationUncheckedCreateNestedOneWithoutUserInput
   }
 
   export type UserUpdateInput = {
@@ -38661,6 +39903,7 @@ export namespace Prisma {
     wallet?: WalletUpdateOneWithoutUserNestedInput
     refreshTokens?: RefreshTokenUpdateManyWithoutUserNestedInput
     firebaseToken?: FirebaseTokenUpdateOneWithoutUserNestedInput
+    kycverification?: KYCVerificationUpdateOneWithoutUserNestedInput
   }
 
   export type UserUncheckedUpdateInput = {
@@ -38689,6 +39932,7 @@ export namespace Prisma {
     wallet?: WalletUncheckedUpdateOneWithoutUserNestedInput
     refreshTokens?: RefreshTokenUncheckedUpdateManyWithoutUserNestedInput
     firebaseToken?: FirebaseTokenUncheckedUpdateOneWithoutUserNestedInput
+    kycverification?: KYCVerificationUncheckedUpdateOneWithoutUserNestedInput
   }
 
   export type UserCreateManyInput = {
@@ -39186,6 +40430,7 @@ export namespace Prisma {
     terms?: TermCreateNestedManyWithoutSchoolInput
     fees?: FeesCreateNestedManyWithoutSchoolInput
     payouts?: PayoutCreateNestedManyWithoutSchoolInput
+    kycverification?: KYCVerificationCreateNestedOneWithoutSchoolInput
   }
 
   export type SchoolUncheckedCreateInput = {
@@ -39219,6 +40464,7 @@ export namespace Prisma {
     terms?: TermUncheckedCreateNestedManyWithoutSchoolInput
     fees?: FeesUncheckedCreateNestedManyWithoutSchoolInput
     payouts?: PayoutUncheckedCreateNestedManyWithoutSchoolInput
+    kycverification?: KYCVerificationUncheckedCreateNestedOneWithoutSchoolInput
   }
 
   export type SchoolUpdateInput = {
@@ -39252,6 +40498,7 @@ export namespace Prisma {
     terms?: TermUpdateManyWithoutSchoolNestedInput
     fees?: FeesUpdateManyWithoutSchoolNestedInput
     payouts?: PayoutUpdateManyWithoutSchoolNestedInput
+    kycverification?: KYCVerificationUpdateOneWithoutSchoolNestedInput
   }
 
   export type SchoolUncheckedUpdateInput = {
@@ -39285,6 +40532,7 @@ export namespace Prisma {
     terms?: TermUncheckedUpdateManyWithoutSchoolNestedInput
     fees?: FeesUncheckedUpdateManyWithoutSchoolNestedInput
     payouts?: PayoutUncheckedUpdateManyWithoutSchoolNestedInput
+    kycverification?: KYCVerificationUncheckedUpdateOneWithoutSchoolNestedInput
   }
 
   export type SchoolCreateManyInput = {
@@ -39361,7 +40609,6 @@ export namespace Prisma {
     directorIDType: $Enums.DirectorIDType
     directorIDNumber: string
     document: string
-    status?: $Enums.KYCVerificationStatus
     isDeleted?: boolean
     createdAt?: Date | string
     updatedAt?: Date | string
@@ -39375,7 +40622,6 @@ export namespace Prisma {
     directorIDType: $Enums.DirectorIDType
     directorIDNumber: string
     document: string
-    status?: $Enums.KYCVerificationStatus
     isDeleted?: boolean
     createdAt?: Date | string
     updatedAt?: Date | string
@@ -39387,7 +40633,6 @@ export namespace Prisma {
     directorIDType?: EnumDirectorIDTypeFieldUpdateOperationsInput | $Enums.DirectorIDType
     directorIDNumber?: StringFieldUpdateOperationsInput | string
     document?: StringFieldUpdateOperationsInput | string
-    status?: EnumKYCVerificationStatusFieldUpdateOperationsInput | $Enums.KYCVerificationStatus
     isDeleted?: BoolFieldUpdateOperationsInput | boolean
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
@@ -39401,7 +40646,6 @@ export namespace Prisma {
     directorIDType?: EnumDirectorIDTypeFieldUpdateOperationsInput | $Enums.DirectorIDType
     directorIDNumber?: StringFieldUpdateOperationsInput | string
     document?: StringFieldUpdateOperationsInput | string
-    status?: EnumKYCVerificationStatusFieldUpdateOperationsInput | $Enums.KYCVerificationStatus
     isDeleted?: BoolFieldUpdateOperationsInput | boolean
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
@@ -39414,7 +40658,6 @@ export namespace Prisma {
     directorIDType: $Enums.DirectorIDType
     directorIDNumber: string
     document: string
-    status?: $Enums.KYCVerificationStatus
     isDeleted?: boolean
     createdAt?: Date | string
     updatedAt?: Date | string
@@ -39426,7 +40669,6 @@ export namespace Prisma {
     directorIDType?: EnumDirectorIDTypeFieldUpdateOperationsInput | $Enums.DirectorIDType
     directorIDNumber?: StringFieldUpdateOperationsInput | string
     document?: StringFieldUpdateOperationsInput | string
-    status?: EnumKYCVerificationStatusFieldUpdateOperationsInput | $Enums.KYCVerificationStatus
     isDeleted?: BoolFieldUpdateOperationsInput | boolean
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
@@ -39439,7 +40681,6 @@ export namespace Prisma {
     directorIDType?: EnumDirectorIDTypeFieldUpdateOperationsInput | $Enums.DirectorIDType
     directorIDNumber?: StringFieldUpdateOperationsInput | string
     document?: StringFieldUpdateOperationsInput | string
-    status?: EnumKYCVerificationStatusFieldUpdateOperationsInput | $Enums.KYCVerificationStatus
     isDeleted?: BoolFieldUpdateOperationsInput | boolean
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
@@ -39449,7 +40690,6 @@ export namespace Prisma {
     id?: string
     cacform7: string
     cacShareAllotmentForm: string
-    status?: $Enums.KYCVerificationStatus
     isDeleted?: boolean
     createdAt?: Date | string
     updatedAt?: Date | string
@@ -39461,7 +40701,6 @@ export namespace Prisma {
     schoolId: string
     cacform7: string
     cacShareAllotmentForm: string
-    status?: $Enums.KYCVerificationStatus
     isDeleted?: boolean
     createdAt?: Date | string
     updatedAt?: Date | string
@@ -39471,7 +40710,6 @@ export namespace Prisma {
     id?: StringFieldUpdateOperationsInput | string
     cacform7?: StringFieldUpdateOperationsInput | string
     cacShareAllotmentForm?: StringFieldUpdateOperationsInput | string
-    status?: EnumKYCVerificationStatusFieldUpdateOperationsInput | $Enums.KYCVerificationStatus
     isDeleted?: BoolFieldUpdateOperationsInput | boolean
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
@@ -39483,7 +40721,6 @@ export namespace Prisma {
     schoolId?: StringFieldUpdateOperationsInput | string
     cacform7?: StringFieldUpdateOperationsInput | string
     cacShareAllotmentForm?: StringFieldUpdateOperationsInput | string
-    status?: EnumKYCVerificationStatusFieldUpdateOperationsInput | $Enums.KYCVerificationStatus
     isDeleted?: BoolFieldUpdateOperationsInput | boolean
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
@@ -39494,7 +40731,6 @@ export namespace Prisma {
     schoolId: string
     cacform7: string
     cacShareAllotmentForm: string
-    status?: $Enums.KYCVerificationStatus
     isDeleted?: boolean
     createdAt?: Date | string
     updatedAt?: Date | string
@@ -39504,7 +40740,6 @@ export namespace Prisma {
     id?: StringFieldUpdateOperationsInput | string
     cacform7?: StringFieldUpdateOperationsInput | string
     cacShareAllotmentForm?: StringFieldUpdateOperationsInput | string
-    status?: EnumKYCVerificationStatusFieldUpdateOperationsInput | $Enums.KYCVerificationStatus
     isDeleted?: BoolFieldUpdateOperationsInput | boolean
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
@@ -39515,7 +40750,6 @@ export namespace Prisma {
     schoolId?: StringFieldUpdateOperationsInput | string
     cacform7?: StringFieldUpdateOperationsInput | string
     cacShareAllotmentForm?: StringFieldUpdateOperationsInput | string
-    status?: EnumKYCVerificationStatusFieldUpdateOperationsInput | $Enums.KYCVerificationStatus
     isDeleted?: BoolFieldUpdateOperationsInput | boolean
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
@@ -39527,7 +40761,6 @@ export namespace Prisma {
     accreditationDocument: string
     taxIdentificationNumber: string
     licenseDocument: string
-    status?: $Enums.KYCVerificationStatus
     isDeleted?: boolean
     createdAt?: Date | string
     updatedAt?: Date | string
@@ -39541,7 +40774,6 @@ export namespace Prisma {
     accreditationDocument: string
     taxIdentificationNumber: string
     licenseDocument: string
-    status?: $Enums.KYCVerificationStatus
     isDeleted?: boolean
     createdAt?: Date | string
     updatedAt?: Date | string
@@ -39553,7 +40785,6 @@ export namespace Prisma {
     accreditationDocument?: StringFieldUpdateOperationsInput | string
     taxIdentificationNumber?: StringFieldUpdateOperationsInput | string
     licenseDocument?: StringFieldUpdateOperationsInput | string
-    status?: EnumKYCVerificationStatusFieldUpdateOperationsInput | $Enums.KYCVerificationStatus
     isDeleted?: BoolFieldUpdateOperationsInput | boolean
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
@@ -39567,7 +40798,6 @@ export namespace Prisma {
     accreditationDocument?: StringFieldUpdateOperationsInput | string
     taxIdentificationNumber?: StringFieldUpdateOperationsInput | string
     licenseDocument?: StringFieldUpdateOperationsInput | string
-    status?: EnumKYCVerificationStatusFieldUpdateOperationsInput | $Enums.KYCVerificationStatus
     isDeleted?: BoolFieldUpdateOperationsInput | boolean
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
@@ -39580,7 +40810,6 @@ export namespace Prisma {
     accreditationDocument: string
     taxIdentificationNumber: string
     licenseDocument: string
-    status?: $Enums.KYCVerificationStatus
     isDeleted?: boolean
     createdAt?: Date | string
     updatedAt?: Date | string
@@ -39592,7 +40821,6 @@ export namespace Prisma {
     accreditationDocument?: StringFieldUpdateOperationsInput | string
     taxIdentificationNumber?: StringFieldUpdateOperationsInput | string
     licenseDocument?: StringFieldUpdateOperationsInput | string
-    status?: EnumKYCVerificationStatusFieldUpdateOperationsInput | $Enums.KYCVerificationStatus
     isDeleted?: BoolFieldUpdateOperationsInput | boolean
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
@@ -39605,7 +40833,6 @@ export namespace Prisma {
     accreditationDocument?: StringFieldUpdateOperationsInput | string
     taxIdentificationNumber?: StringFieldUpdateOperationsInput | string
     licenseDocument?: StringFieldUpdateOperationsInput | string
-    status?: EnumKYCVerificationStatusFieldUpdateOperationsInput | $Enums.KYCVerificationStatus
     isDeleted?: BoolFieldUpdateOperationsInput | boolean
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
@@ -39699,7 +40926,6 @@ export namespace Prisma {
     signature: string
     signedAt: Date | string
     legalDocumentRef: string
-    status?: $Enums.KYCVerificationStatus
     isDeleted?: boolean
     createdAt?: Date | string
     updatedAt?: Date | string
@@ -39714,7 +40940,6 @@ export namespace Prisma {
     signature: string
     signedAt: Date | string
     legalDocumentRef: string
-    status?: $Enums.KYCVerificationStatus
     isDeleted?: boolean
     createdAt?: Date | string
     updatedAt?: Date | string
@@ -39725,7 +40950,6 @@ export namespace Prisma {
     signature?: StringFieldUpdateOperationsInput | string
     signedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     legalDocumentRef?: StringFieldUpdateOperationsInput | string
-    status?: EnumKYCVerificationStatusFieldUpdateOperationsInput | $Enums.KYCVerificationStatus
     isDeleted?: BoolFieldUpdateOperationsInput | boolean
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
@@ -39740,7 +40964,6 @@ export namespace Prisma {
     signature?: StringFieldUpdateOperationsInput | string
     signedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     legalDocumentRef?: StringFieldUpdateOperationsInput | string
-    status?: EnumKYCVerificationStatusFieldUpdateOperationsInput | $Enums.KYCVerificationStatus
     isDeleted?: BoolFieldUpdateOperationsInput | boolean
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
@@ -39753,7 +40976,6 @@ export namespace Prisma {
     signature: string
     signedAt: Date | string
     legalDocumentRef: string
-    status?: $Enums.KYCVerificationStatus
     isDeleted?: boolean
     createdAt?: Date | string
     updatedAt?: Date | string
@@ -39764,7 +40986,6 @@ export namespace Prisma {
     signature?: StringFieldUpdateOperationsInput | string
     signedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     legalDocumentRef?: StringFieldUpdateOperationsInput | string
-    status?: EnumKYCVerificationStatusFieldUpdateOperationsInput | $Enums.KYCVerificationStatus
     isDeleted?: BoolFieldUpdateOperationsInput | boolean
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
@@ -39777,6 +40998,73 @@ export namespace Prisma {
     signature?: StringFieldUpdateOperationsInput | string
     signedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     legalDocumentRef?: StringFieldUpdateOperationsInput | string
+    isDeleted?: BoolFieldUpdateOperationsInput | boolean
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type KYCVerificationCreateInput = {
+    id?: string
+    status?: $Enums.KYCVerificationStatus
+    isDeleted?: boolean
+    createdAt?: Date | string
+    updatedAt?: Date | string
+    user: UserCreateNestedOneWithoutKycverificationInput
+    school: SchoolCreateNestedOneWithoutKycverificationInput
+  }
+
+  export type KYCVerificationUncheckedCreateInput = {
+    id?: string
+    userId: string
+    schoolId: string
+    status?: $Enums.KYCVerificationStatus
+    isDeleted?: boolean
+    createdAt?: Date | string
+    updatedAt?: Date | string
+  }
+
+  export type KYCVerificationUpdateInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    status?: EnumKYCVerificationStatusFieldUpdateOperationsInput | $Enums.KYCVerificationStatus
+    isDeleted?: BoolFieldUpdateOperationsInput | boolean
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    user?: UserUpdateOneRequiredWithoutKycverificationNestedInput
+    school?: SchoolUpdateOneRequiredWithoutKycverificationNestedInput
+  }
+
+  export type KYCVerificationUncheckedUpdateInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    userId?: StringFieldUpdateOperationsInput | string
+    schoolId?: StringFieldUpdateOperationsInput | string
+    status?: EnumKYCVerificationStatusFieldUpdateOperationsInput | $Enums.KYCVerificationStatus
+    isDeleted?: BoolFieldUpdateOperationsInput | boolean
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type KYCVerificationCreateManyInput = {
+    id?: string
+    userId: string
+    schoolId: string
+    status?: $Enums.KYCVerificationStatus
+    isDeleted?: boolean
+    createdAt?: Date | string
+    updatedAt?: Date | string
+  }
+
+  export type KYCVerificationUpdateManyMutationInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    status?: EnumKYCVerificationStatusFieldUpdateOperationsInput | $Enums.KYCVerificationStatus
+    isDeleted?: BoolFieldUpdateOperationsInput | boolean
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type KYCVerificationUncheckedUpdateManyInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    userId?: StringFieldUpdateOperationsInput | string
+    schoolId?: StringFieldUpdateOperationsInput | string
     status?: EnumKYCVerificationStatusFieldUpdateOperationsInput | $Enums.KYCVerificationStatus
     isDeleted?: BoolFieldUpdateOperationsInput | boolean
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
@@ -41218,6 +42506,11 @@ export namespace Prisma {
     isNot?: FirebaseTokenWhereInput | null
   }
 
+  export type KYCVerificationNullableScalarRelationFilter = {
+    is?: KYCVerificationWhereInput | null
+    isNot?: KYCVerificationWhereInput | null
+  }
+
   export type SortOrderInput = {
     sort: SortOrder
     nulls?: NullsOrder
@@ -41881,13 +43174,6 @@ export namespace Prisma {
     not?: NestedEnumDirectorIDTypeFilter<$PrismaModel> | $Enums.DirectorIDType
   }
 
-  export type EnumKYCVerificationStatusFilter<$PrismaModel = never> = {
-    equals?: $Enums.KYCVerificationStatus | EnumKYCVerificationStatusFieldRefInput<$PrismaModel>
-    in?: $Enums.KYCVerificationStatus[] | ListEnumKYCVerificationStatusFieldRefInput<$PrismaModel>
-    notIn?: $Enums.KYCVerificationStatus[] | ListEnumKYCVerificationStatusFieldRefInput<$PrismaModel>
-    not?: NestedEnumKYCVerificationStatusFilter<$PrismaModel> | $Enums.KYCVerificationStatus
-  }
-
   export type SchoolScalarRelationFilter = {
     is?: SchoolWhereInput
     isNot?: SchoolWhereInput
@@ -41900,7 +43186,6 @@ export namespace Prisma {
     directorIDType?: SortOrder
     directorIDNumber?: SortOrder
     document?: SortOrder
-    status?: SortOrder
     isDeleted?: SortOrder
     createdAt?: SortOrder
     updatedAt?: SortOrder
@@ -41913,7 +43198,6 @@ export namespace Prisma {
     directorIDType?: SortOrder
     directorIDNumber?: SortOrder
     document?: SortOrder
-    status?: SortOrder
     isDeleted?: SortOrder
     createdAt?: SortOrder
     updatedAt?: SortOrder
@@ -41926,7 +43210,6 @@ export namespace Prisma {
     directorIDType?: SortOrder
     directorIDNumber?: SortOrder
     document?: SortOrder
-    status?: SortOrder
     isDeleted?: SortOrder
     createdAt?: SortOrder
     updatedAt?: SortOrder
@@ -41942,22 +43225,11 @@ export namespace Prisma {
     _max?: NestedEnumDirectorIDTypeFilter<$PrismaModel>
   }
 
-  export type EnumKYCVerificationStatusWithAggregatesFilter<$PrismaModel = never> = {
-    equals?: $Enums.KYCVerificationStatus | EnumKYCVerificationStatusFieldRefInput<$PrismaModel>
-    in?: $Enums.KYCVerificationStatus[] | ListEnumKYCVerificationStatusFieldRefInput<$PrismaModel>
-    notIn?: $Enums.KYCVerificationStatus[] | ListEnumKYCVerificationStatusFieldRefInput<$PrismaModel>
-    not?: NestedEnumKYCVerificationStatusWithAggregatesFilter<$PrismaModel> | $Enums.KYCVerificationStatus
-    _count?: NestedIntFilter<$PrismaModel>
-    _min?: NestedEnumKYCVerificationStatusFilter<$PrismaModel>
-    _max?: NestedEnumKYCVerificationStatusFilter<$PrismaModel>
-  }
-
   export type SchoolOwnershipVerificationCountOrderByAggregateInput = {
     id?: SortOrder
     schoolId?: SortOrder
     cacform7?: SortOrder
     cacShareAllotmentForm?: SortOrder
-    status?: SortOrder
     isDeleted?: SortOrder
     createdAt?: SortOrder
     updatedAt?: SortOrder
@@ -41968,7 +43240,6 @@ export namespace Prisma {
     schoolId?: SortOrder
     cacform7?: SortOrder
     cacShareAllotmentForm?: SortOrder
-    status?: SortOrder
     isDeleted?: SortOrder
     createdAt?: SortOrder
     updatedAt?: SortOrder
@@ -41979,7 +43250,6 @@ export namespace Prisma {
     schoolId?: SortOrder
     cacform7?: SortOrder
     cacShareAllotmentForm?: SortOrder
-    status?: SortOrder
     isDeleted?: SortOrder
     createdAt?: SortOrder
     updatedAt?: SortOrder
@@ -41992,7 +43262,6 @@ export namespace Prisma {
     accreditationDocument?: SortOrder
     taxIdentificationNumber?: SortOrder
     licenseDocument?: SortOrder
-    status?: SortOrder
     isDeleted?: SortOrder
     createdAt?: SortOrder
     updatedAt?: SortOrder
@@ -42005,7 +43274,6 @@ export namespace Prisma {
     accreditationDocument?: SortOrder
     taxIdentificationNumber?: SortOrder
     licenseDocument?: SortOrder
-    status?: SortOrder
     isDeleted?: SortOrder
     createdAt?: SortOrder
     updatedAt?: SortOrder
@@ -42018,7 +43286,6 @@ export namespace Prisma {
     accreditationDocument?: SortOrder
     taxIdentificationNumber?: SortOrder
     licenseDocument?: SortOrder
-    status?: SortOrder
     isDeleted?: SortOrder
     createdAt?: SortOrder
     updatedAt?: SortOrder
@@ -42067,7 +43334,6 @@ export namespace Prisma {
     signature?: SortOrder
     signedAt?: SortOrder
     legalDocumentRef?: SortOrder
-    status?: SortOrder
     isDeleted?: SortOrder
     createdAt?: SortOrder
     updatedAt?: SortOrder
@@ -42080,7 +43346,6 @@ export namespace Prisma {
     signature?: SortOrder
     signedAt?: SortOrder
     legalDocumentRef?: SortOrder
-    status?: SortOrder
     isDeleted?: SortOrder
     createdAt?: SortOrder
     updatedAt?: SortOrder
@@ -42093,10 +43358,56 @@ export namespace Prisma {
     signature?: SortOrder
     signedAt?: SortOrder
     legalDocumentRef?: SortOrder
+    isDeleted?: SortOrder
+    createdAt?: SortOrder
+    updatedAt?: SortOrder
+  }
+
+  export type EnumKYCVerificationStatusFilter<$PrismaModel = never> = {
+    equals?: $Enums.KYCVerificationStatus | EnumKYCVerificationStatusFieldRefInput<$PrismaModel>
+    in?: $Enums.KYCVerificationStatus[] | ListEnumKYCVerificationStatusFieldRefInput<$PrismaModel>
+    notIn?: $Enums.KYCVerificationStatus[] | ListEnumKYCVerificationStatusFieldRefInput<$PrismaModel>
+    not?: NestedEnumKYCVerificationStatusFilter<$PrismaModel> | $Enums.KYCVerificationStatus
+  }
+
+  export type KYCVerificationCountOrderByAggregateInput = {
+    id?: SortOrder
+    userId?: SortOrder
+    schoolId?: SortOrder
     status?: SortOrder
     isDeleted?: SortOrder
     createdAt?: SortOrder
     updatedAt?: SortOrder
+  }
+
+  export type KYCVerificationMaxOrderByAggregateInput = {
+    id?: SortOrder
+    userId?: SortOrder
+    schoolId?: SortOrder
+    status?: SortOrder
+    isDeleted?: SortOrder
+    createdAt?: SortOrder
+    updatedAt?: SortOrder
+  }
+
+  export type KYCVerificationMinOrderByAggregateInput = {
+    id?: SortOrder
+    userId?: SortOrder
+    schoolId?: SortOrder
+    status?: SortOrder
+    isDeleted?: SortOrder
+    createdAt?: SortOrder
+    updatedAt?: SortOrder
+  }
+
+  export type EnumKYCVerificationStatusWithAggregatesFilter<$PrismaModel = never> = {
+    equals?: $Enums.KYCVerificationStatus | EnumKYCVerificationStatusFieldRefInput<$PrismaModel>
+    in?: $Enums.KYCVerificationStatus[] | ListEnumKYCVerificationStatusFieldRefInput<$PrismaModel>
+    notIn?: $Enums.KYCVerificationStatus[] | ListEnumKYCVerificationStatusFieldRefInput<$PrismaModel>
+    not?: NestedEnumKYCVerificationStatusWithAggregatesFilter<$PrismaModel> | $Enums.KYCVerificationStatus
+    _count?: NestedIntFilter<$PrismaModel>
+    _min?: NestedEnumKYCVerificationStatusFilter<$PrismaModel>
+    _max?: NestedEnumKYCVerificationStatusFilter<$PrismaModel>
   }
 
   export type ClassCountOrderByAggregateInput = {
@@ -43024,6 +44335,12 @@ export namespace Prisma {
     connect?: FirebaseTokenWhereUniqueInput
   }
 
+  export type KYCVerificationCreateNestedOneWithoutUserInput = {
+    create?: XOR<KYCVerificationCreateWithoutUserInput, KYCVerificationUncheckedCreateWithoutUserInput>
+    connectOrCreate?: KYCVerificationCreateOrConnectWithoutUserInput
+    connect?: KYCVerificationWhereUniqueInput
+  }
+
   export type AdministratorUncheckedCreateNestedOneWithoutUserInput = {
     create?: XOR<AdministratorCreateWithoutUserInput, AdministratorUncheckedCreateWithoutUserInput>
     connectOrCreate?: AdministratorCreateOrConnectWithoutUserInput
@@ -43085,6 +44402,12 @@ export namespace Prisma {
     create?: XOR<FirebaseTokenCreateWithoutUserInput, FirebaseTokenUncheckedCreateWithoutUserInput>
     connectOrCreate?: FirebaseTokenCreateOrConnectWithoutUserInput
     connect?: FirebaseTokenWhereUniqueInput
+  }
+
+  export type KYCVerificationUncheckedCreateNestedOneWithoutUserInput = {
+    create?: XOR<KYCVerificationCreateWithoutUserInput, KYCVerificationUncheckedCreateWithoutUserInput>
+    connectOrCreate?: KYCVerificationCreateOrConnectWithoutUserInput
+    connect?: KYCVerificationWhereUniqueInput
   }
 
   export type StringFieldUpdateOperationsInput = {
@@ -43227,6 +44550,16 @@ export namespace Prisma {
     update?: XOR<XOR<FirebaseTokenUpdateToOneWithWhereWithoutUserInput, FirebaseTokenUpdateWithoutUserInput>, FirebaseTokenUncheckedUpdateWithoutUserInput>
   }
 
+  export type KYCVerificationUpdateOneWithoutUserNestedInput = {
+    create?: XOR<KYCVerificationCreateWithoutUserInput, KYCVerificationUncheckedCreateWithoutUserInput>
+    connectOrCreate?: KYCVerificationCreateOrConnectWithoutUserInput
+    upsert?: KYCVerificationUpsertWithoutUserInput
+    disconnect?: KYCVerificationWhereInput | boolean
+    delete?: KYCVerificationWhereInput | boolean
+    connect?: KYCVerificationWhereUniqueInput
+    update?: XOR<XOR<KYCVerificationUpdateToOneWithWhereWithoutUserInput, KYCVerificationUpdateWithoutUserInput>, KYCVerificationUncheckedUpdateWithoutUserInput>
+  }
+
   export type AdministratorUncheckedUpdateOneWithoutUserNestedInput = {
     create?: XOR<AdministratorCreateWithoutUserInput, AdministratorUncheckedCreateWithoutUserInput>
     connectOrCreate?: AdministratorCreateOrConnectWithoutUserInput
@@ -43337,6 +44670,16 @@ export namespace Prisma {
     delete?: FirebaseTokenWhereInput | boolean
     connect?: FirebaseTokenWhereUniqueInput
     update?: XOR<XOR<FirebaseTokenUpdateToOneWithWhereWithoutUserInput, FirebaseTokenUpdateWithoutUserInput>, FirebaseTokenUncheckedUpdateWithoutUserInput>
+  }
+
+  export type KYCVerificationUncheckedUpdateOneWithoutUserNestedInput = {
+    create?: XOR<KYCVerificationCreateWithoutUserInput, KYCVerificationUncheckedCreateWithoutUserInput>
+    connectOrCreate?: KYCVerificationCreateOrConnectWithoutUserInput
+    upsert?: KYCVerificationUpsertWithoutUserInput
+    disconnect?: KYCVerificationWhereInput | boolean
+    delete?: KYCVerificationWhereInput | boolean
+    connect?: KYCVerificationWhereUniqueInput
+    update?: XOR<XOR<KYCVerificationUpdateToOneWithWhereWithoutUserInput, KYCVerificationUpdateWithoutUserInput>, KYCVerificationUncheckedUpdateWithoutUserInput>
   }
 
   export type UserCreateNestedOneWithoutCredentialInput = {
@@ -43660,6 +45003,12 @@ export namespace Prisma {
     connect?: PayoutWhereUniqueInput | PayoutWhereUniqueInput[]
   }
 
+  export type KYCVerificationCreateNestedOneWithoutSchoolInput = {
+    create?: XOR<KYCVerificationCreateWithoutSchoolInput, KYCVerificationUncheckedCreateWithoutSchoolInput>
+    connectOrCreate?: KYCVerificationCreateOrConnectWithoutSchoolInput
+    connect?: KYCVerificationWhereUniqueInput
+  }
+
   export type SchoolDirectorVerificationUncheckedCreateNestedOneWithoutSchoolInput = {
     create?: XOR<SchoolDirectorVerificationCreateWithoutSchoolInput, SchoolDirectorVerificationUncheckedCreateWithoutSchoolInput>
     connectOrCreate?: SchoolDirectorVerificationCreateOrConnectWithoutSchoolInput
@@ -43723,6 +45072,12 @@ export namespace Prisma {
     connectOrCreate?: PayoutCreateOrConnectWithoutSchoolInput | PayoutCreateOrConnectWithoutSchoolInput[]
     createMany?: PayoutCreateManySchoolInputEnvelope
     connect?: PayoutWhereUniqueInput | PayoutWhereUniqueInput[]
+  }
+
+  export type KYCVerificationUncheckedCreateNestedOneWithoutSchoolInput = {
+    create?: XOR<KYCVerificationCreateWithoutSchoolInput, KYCVerificationUncheckedCreateWithoutSchoolInput>
+    connectOrCreate?: KYCVerificationCreateOrConnectWithoutSchoolInput
+    connect?: KYCVerificationWhereUniqueInput
   }
 
   export type NullableIntFieldUpdateOperationsInput = {
@@ -43873,6 +45228,16 @@ export namespace Prisma {
     deleteMany?: PayoutScalarWhereInput | PayoutScalarWhereInput[]
   }
 
+  export type KYCVerificationUpdateOneWithoutSchoolNestedInput = {
+    create?: XOR<KYCVerificationCreateWithoutSchoolInput, KYCVerificationUncheckedCreateWithoutSchoolInput>
+    connectOrCreate?: KYCVerificationCreateOrConnectWithoutSchoolInput
+    upsert?: KYCVerificationUpsertWithoutSchoolInput
+    disconnect?: KYCVerificationWhereInput | boolean
+    delete?: KYCVerificationWhereInput | boolean
+    connect?: KYCVerificationWhereUniqueInput
+    update?: XOR<XOR<KYCVerificationUpdateToOneWithWhereWithoutSchoolInput, KYCVerificationUpdateWithoutSchoolInput>, KYCVerificationUncheckedUpdateWithoutSchoolInput>
+  }
+
   export type SchoolDirectorVerificationUncheckedUpdateOneWithoutSchoolNestedInput = {
     create?: XOR<SchoolDirectorVerificationCreateWithoutSchoolInput, SchoolDirectorVerificationUncheckedCreateWithoutSchoolInput>
     connectOrCreate?: SchoolDirectorVerificationCreateOrConnectWithoutSchoolInput
@@ -43993,6 +45358,16 @@ export namespace Prisma {
     deleteMany?: PayoutScalarWhereInput | PayoutScalarWhereInput[]
   }
 
+  export type KYCVerificationUncheckedUpdateOneWithoutSchoolNestedInput = {
+    create?: XOR<KYCVerificationCreateWithoutSchoolInput, KYCVerificationUncheckedCreateWithoutSchoolInput>
+    connectOrCreate?: KYCVerificationCreateOrConnectWithoutSchoolInput
+    upsert?: KYCVerificationUpsertWithoutSchoolInput
+    disconnect?: KYCVerificationWhereInput | boolean
+    delete?: KYCVerificationWhereInput | boolean
+    connect?: KYCVerificationWhereUniqueInput
+    update?: XOR<XOR<KYCVerificationUpdateToOneWithWhereWithoutSchoolInput, KYCVerificationUpdateWithoutSchoolInput>, KYCVerificationUncheckedUpdateWithoutSchoolInput>
+  }
+
   export type SchoolCreateNestedOneWithoutSchoolDirectorVerificationInput = {
     create?: XOR<SchoolCreateWithoutSchoolDirectorVerificationInput, SchoolUncheckedCreateWithoutSchoolDirectorVerificationInput>
     connectOrCreate?: SchoolCreateOrConnectWithoutSchoolDirectorVerificationInput
@@ -44001,10 +45376,6 @@ export namespace Prisma {
 
   export type EnumDirectorIDTypeFieldUpdateOperationsInput = {
     set?: $Enums.DirectorIDType
-  }
-
-  export type EnumKYCVerificationStatusFieldUpdateOperationsInput = {
-    set?: $Enums.KYCVerificationStatus
   }
 
   export type SchoolUpdateOneRequiredWithoutSchoolDirectorVerificationNestedInput = {
@@ -44083,6 +45454,38 @@ export namespace Prisma {
     upsert?: UserUpsertWithoutSchoolAndPlatformLegalAgreementInput
     connect?: UserWhereUniqueInput
     update?: XOR<XOR<UserUpdateToOneWithWhereWithoutSchoolAndPlatformLegalAgreementInput, UserUpdateWithoutSchoolAndPlatformLegalAgreementInput>, UserUncheckedUpdateWithoutSchoolAndPlatformLegalAgreementInput>
+  }
+
+  export type UserCreateNestedOneWithoutKycverificationInput = {
+    create?: XOR<UserCreateWithoutKycverificationInput, UserUncheckedCreateWithoutKycverificationInput>
+    connectOrCreate?: UserCreateOrConnectWithoutKycverificationInput
+    connect?: UserWhereUniqueInput
+  }
+
+  export type SchoolCreateNestedOneWithoutKycverificationInput = {
+    create?: XOR<SchoolCreateWithoutKycverificationInput, SchoolUncheckedCreateWithoutKycverificationInput>
+    connectOrCreate?: SchoolCreateOrConnectWithoutKycverificationInput
+    connect?: SchoolWhereUniqueInput
+  }
+
+  export type EnumKYCVerificationStatusFieldUpdateOperationsInput = {
+    set?: $Enums.KYCVerificationStatus
+  }
+
+  export type UserUpdateOneRequiredWithoutKycverificationNestedInput = {
+    create?: XOR<UserCreateWithoutKycverificationInput, UserUncheckedCreateWithoutKycverificationInput>
+    connectOrCreate?: UserCreateOrConnectWithoutKycverificationInput
+    upsert?: UserUpsertWithoutKycverificationInput
+    connect?: UserWhereUniqueInput
+    update?: XOR<XOR<UserUpdateToOneWithWhereWithoutKycverificationInput, UserUpdateWithoutKycverificationInput>, UserUncheckedUpdateWithoutKycverificationInput>
+  }
+
+  export type SchoolUpdateOneRequiredWithoutKycverificationNestedInput = {
+    create?: XOR<SchoolCreateWithoutKycverificationInput, SchoolUncheckedCreateWithoutKycverificationInput>
+    connectOrCreate?: SchoolCreateOrConnectWithoutKycverificationInput
+    upsert?: SchoolUpsertWithoutKycverificationInput
+    connect?: SchoolWhereUniqueInput
+    update?: XOR<XOR<SchoolUpdateToOneWithWhereWithoutKycverificationInput, SchoolUpdateWithoutKycverificationInput>, SchoolUncheckedUpdateWithoutKycverificationInput>
   }
 
   export type SchoolCreateNestedOneWithoutClassesInput = {
@@ -45361,13 +46764,6 @@ export namespace Prisma {
     not?: NestedEnumDirectorIDTypeFilter<$PrismaModel> | $Enums.DirectorIDType
   }
 
-  export type NestedEnumKYCVerificationStatusFilter<$PrismaModel = never> = {
-    equals?: $Enums.KYCVerificationStatus | EnumKYCVerificationStatusFieldRefInput<$PrismaModel>
-    in?: $Enums.KYCVerificationStatus[] | ListEnumKYCVerificationStatusFieldRefInput<$PrismaModel>
-    notIn?: $Enums.KYCVerificationStatus[] | ListEnumKYCVerificationStatusFieldRefInput<$PrismaModel>
-    not?: NestedEnumKYCVerificationStatusFilter<$PrismaModel> | $Enums.KYCVerificationStatus
-  }
-
   export type NestedEnumDirectorIDTypeWithAggregatesFilter<$PrismaModel = never> = {
     equals?: $Enums.DirectorIDType | EnumDirectorIDTypeFieldRefInput<$PrismaModel>
     in?: $Enums.DirectorIDType[] | ListEnumDirectorIDTypeFieldRefInput<$PrismaModel>
@@ -45376,6 +46772,13 @@ export namespace Prisma {
     _count?: NestedIntFilter<$PrismaModel>
     _min?: NestedEnumDirectorIDTypeFilter<$PrismaModel>
     _max?: NestedEnumDirectorIDTypeFilter<$PrismaModel>
+  }
+
+  export type NestedEnumKYCVerificationStatusFilter<$PrismaModel = never> = {
+    equals?: $Enums.KYCVerificationStatus | EnumKYCVerificationStatusFieldRefInput<$PrismaModel>
+    in?: $Enums.KYCVerificationStatus[] | ListEnumKYCVerificationStatusFieldRefInput<$PrismaModel>
+    notIn?: $Enums.KYCVerificationStatus[] | ListEnumKYCVerificationStatusFieldRefInput<$PrismaModel>
+    not?: NestedEnumKYCVerificationStatusFilter<$PrismaModel> | $Enums.KYCVerificationStatus
   }
 
   export type NestedEnumKYCVerificationStatusWithAggregatesFilter<$PrismaModel = never> = {
@@ -45671,6 +47074,7 @@ export namespace Prisma {
     terms?: TermCreateNestedManyWithoutSchoolInput
     fees?: FeesCreateNestedManyWithoutSchoolInput
     payouts?: PayoutCreateNestedManyWithoutSchoolInput
+    kycverification?: KYCVerificationCreateNestedOneWithoutSchoolInput
   }
 
   export type SchoolUncheckedCreateWithoutOwnerInput = {
@@ -45703,6 +47107,7 @@ export namespace Prisma {
     terms?: TermUncheckedCreateNestedManyWithoutSchoolInput
     fees?: FeesUncheckedCreateNestedManyWithoutSchoolInput
     payouts?: PayoutUncheckedCreateNestedManyWithoutSchoolInput
+    kycverification?: KYCVerificationUncheckedCreateNestedOneWithoutSchoolInput
   }
 
   export type SchoolCreateOrConnectWithoutOwnerInput = {
@@ -45715,7 +47120,6 @@ export namespace Prisma {
     signature: string
     signedAt: Date | string
     legalDocumentRef: string
-    status?: $Enums.KYCVerificationStatus
     isDeleted?: boolean
     createdAt?: Date | string
     updatedAt?: Date | string
@@ -45728,7 +47132,6 @@ export namespace Prisma {
     signature: string
     signedAt: Date | string
     legalDocumentRef: string
-    status?: $Enums.KYCVerificationStatus
     isDeleted?: boolean
     createdAt?: Date | string
     updatedAt?: Date | string
@@ -45884,6 +47287,29 @@ export namespace Prisma {
     create: XOR<FirebaseTokenCreateWithoutUserInput, FirebaseTokenUncheckedCreateWithoutUserInput>
   }
 
+  export type KYCVerificationCreateWithoutUserInput = {
+    id?: string
+    status?: $Enums.KYCVerificationStatus
+    isDeleted?: boolean
+    createdAt?: Date | string
+    updatedAt?: Date | string
+    school: SchoolCreateNestedOneWithoutKycverificationInput
+  }
+
+  export type KYCVerificationUncheckedCreateWithoutUserInput = {
+    id?: string
+    schoolId: string
+    status?: $Enums.KYCVerificationStatus
+    isDeleted?: boolean
+    createdAt?: Date | string
+    updatedAt?: Date | string
+  }
+
+  export type KYCVerificationCreateOrConnectWithoutUserInput = {
+    where: KYCVerificationWhereUniqueInput
+    create: XOR<KYCVerificationCreateWithoutUserInput, KYCVerificationUncheckedCreateWithoutUserInput>
+  }
+
   export type AdministratorUpsertWithoutUserInput = {
     update: XOR<AdministratorUpdateWithoutUserInput, AdministratorUncheckedUpdateWithoutUserInput>
     create: XOR<AdministratorCreateWithoutUserInput, AdministratorUncheckedCreateWithoutUserInput>
@@ -46025,6 +47451,7 @@ export namespace Prisma {
     terms?: TermUpdateManyWithoutSchoolNestedInput
     fees?: FeesUpdateManyWithoutSchoolNestedInput
     payouts?: PayoutUpdateManyWithoutSchoolNestedInput
+    kycverification?: KYCVerificationUpdateOneWithoutSchoolNestedInput
   }
 
   export type SchoolUncheckedUpdateWithoutOwnerInput = {
@@ -46057,6 +47484,7 @@ export namespace Prisma {
     terms?: TermUncheckedUpdateManyWithoutSchoolNestedInput
     fees?: FeesUncheckedUpdateManyWithoutSchoolNestedInput
     payouts?: PayoutUncheckedUpdateManyWithoutSchoolNestedInput
+    kycverification?: KYCVerificationUncheckedUpdateOneWithoutSchoolNestedInput
   }
 
   export type SchoolAndPlatformLegalAgreementUpsertWithoutSignedByInput = {
@@ -46075,7 +47503,6 @@ export namespace Prisma {
     signature?: StringFieldUpdateOperationsInput | string
     signedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     legalDocumentRef?: StringFieldUpdateOperationsInput | string
-    status?: EnumKYCVerificationStatusFieldUpdateOperationsInput | $Enums.KYCVerificationStatus
     isDeleted?: BoolFieldUpdateOperationsInput | boolean
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
@@ -46088,7 +47515,6 @@ export namespace Prisma {
     signature?: StringFieldUpdateOperationsInput | string
     signedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     legalDocumentRef?: StringFieldUpdateOperationsInput | string
-    status?: EnumKYCVerificationStatusFieldUpdateOperationsInput | $Enums.KYCVerificationStatus
     isDeleted?: BoolFieldUpdateOperationsInput | boolean
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
@@ -46256,6 +47682,35 @@ export namespace Prisma {
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
   }
 
+  export type KYCVerificationUpsertWithoutUserInput = {
+    update: XOR<KYCVerificationUpdateWithoutUserInput, KYCVerificationUncheckedUpdateWithoutUserInput>
+    create: XOR<KYCVerificationCreateWithoutUserInput, KYCVerificationUncheckedCreateWithoutUserInput>
+    where?: KYCVerificationWhereInput
+  }
+
+  export type KYCVerificationUpdateToOneWithWhereWithoutUserInput = {
+    where?: KYCVerificationWhereInput
+    data: XOR<KYCVerificationUpdateWithoutUserInput, KYCVerificationUncheckedUpdateWithoutUserInput>
+  }
+
+  export type KYCVerificationUpdateWithoutUserInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    status?: EnumKYCVerificationStatusFieldUpdateOperationsInput | $Enums.KYCVerificationStatus
+    isDeleted?: BoolFieldUpdateOperationsInput | boolean
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    school?: SchoolUpdateOneRequiredWithoutKycverificationNestedInput
+  }
+
+  export type KYCVerificationUncheckedUpdateWithoutUserInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    schoolId?: StringFieldUpdateOperationsInput | string
+    status?: EnumKYCVerificationStatusFieldUpdateOperationsInput | $Enums.KYCVerificationStatus
+    isDeleted?: BoolFieldUpdateOperationsInput | boolean
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
   export type UserCreateWithoutCredentialInput = {
     id?: string
     firstName: string
@@ -46281,6 +47736,7 @@ export namespace Prisma {
     wallet?: WalletCreateNestedOneWithoutUserInput
     refreshTokens?: RefreshTokenCreateNestedManyWithoutUserInput
     firebaseToken?: FirebaseTokenCreateNestedOneWithoutUserInput
+    kycverification?: KYCVerificationCreateNestedOneWithoutUserInput
   }
 
   export type UserUncheckedCreateWithoutCredentialInput = {
@@ -46308,6 +47764,7 @@ export namespace Prisma {
     wallet?: WalletUncheckedCreateNestedOneWithoutUserInput
     refreshTokens?: RefreshTokenUncheckedCreateNestedManyWithoutUserInput
     firebaseToken?: FirebaseTokenUncheckedCreateNestedOneWithoutUserInput
+    kycverification?: KYCVerificationUncheckedCreateNestedOneWithoutUserInput
   }
 
   export type UserCreateOrConnectWithoutCredentialInput = {
@@ -46351,6 +47808,7 @@ export namespace Prisma {
     wallet?: WalletUpdateOneWithoutUserNestedInput
     refreshTokens?: RefreshTokenUpdateManyWithoutUserNestedInput
     firebaseToken?: FirebaseTokenUpdateOneWithoutUserNestedInput
+    kycverification?: KYCVerificationUpdateOneWithoutUserNestedInput
   }
 
   export type UserUncheckedUpdateWithoutCredentialInput = {
@@ -46378,6 +47836,7 @@ export namespace Prisma {
     wallet?: WalletUncheckedUpdateOneWithoutUserNestedInput
     refreshTokens?: RefreshTokenUncheckedUpdateManyWithoutUserNestedInput
     firebaseToken?: FirebaseTokenUncheckedUpdateOneWithoutUserNestedInput
+    kycverification?: KYCVerificationUncheckedUpdateOneWithoutUserNestedInput
   }
 
   export type UserCreateWithoutRefreshTokensInput = {
@@ -46405,6 +47864,7 @@ export namespace Prisma {
     credential?: CredentialCreateNestedOneWithoutUserInput
     wallet?: WalletCreateNestedOneWithoutUserInput
     firebaseToken?: FirebaseTokenCreateNestedOneWithoutUserInput
+    kycverification?: KYCVerificationCreateNestedOneWithoutUserInput
   }
 
   export type UserUncheckedCreateWithoutRefreshTokensInput = {
@@ -46432,6 +47892,7 @@ export namespace Prisma {
     credential?: CredentialUncheckedCreateNestedOneWithoutUserInput
     wallet?: WalletUncheckedCreateNestedOneWithoutUserInput
     firebaseToken?: FirebaseTokenUncheckedCreateNestedOneWithoutUserInput
+    kycverification?: KYCVerificationUncheckedCreateNestedOneWithoutUserInput
   }
 
   export type UserCreateOrConnectWithoutRefreshTokensInput = {
@@ -46475,6 +47936,7 @@ export namespace Prisma {
     credential?: CredentialUpdateOneWithoutUserNestedInput
     wallet?: WalletUpdateOneWithoutUserNestedInput
     firebaseToken?: FirebaseTokenUpdateOneWithoutUserNestedInput
+    kycverification?: KYCVerificationUpdateOneWithoutUserNestedInput
   }
 
   export type UserUncheckedUpdateWithoutRefreshTokensInput = {
@@ -46502,6 +47964,7 @@ export namespace Prisma {
     credential?: CredentialUncheckedUpdateOneWithoutUserNestedInput
     wallet?: WalletUncheckedUpdateOneWithoutUserNestedInput
     firebaseToken?: FirebaseTokenUncheckedUpdateOneWithoutUserNestedInput
+    kycverification?: KYCVerificationUncheckedUpdateOneWithoutUserNestedInput
   }
 
   export type UserCreateWithoutAdministratorInput = {
@@ -46529,6 +47992,7 @@ export namespace Prisma {
     wallet?: WalletCreateNestedOneWithoutUserInput
     refreshTokens?: RefreshTokenCreateNestedManyWithoutUserInput
     firebaseToken?: FirebaseTokenCreateNestedOneWithoutUserInput
+    kycverification?: KYCVerificationCreateNestedOneWithoutUserInput
   }
 
   export type UserUncheckedCreateWithoutAdministratorInput = {
@@ -46556,6 +48020,7 @@ export namespace Prisma {
     wallet?: WalletUncheckedCreateNestedOneWithoutUserInput
     refreshTokens?: RefreshTokenUncheckedCreateNestedManyWithoutUserInput
     firebaseToken?: FirebaseTokenUncheckedCreateNestedOneWithoutUserInput
+    kycverification?: KYCVerificationUncheckedCreateNestedOneWithoutUserInput
   }
 
   export type UserCreateOrConnectWithoutAdministratorInput = {
@@ -46599,6 +48064,7 @@ export namespace Prisma {
     wallet?: WalletUpdateOneWithoutUserNestedInput
     refreshTokens?: RefreshTokenUpdateManyWithoutUserNestedInput
     firebaseToken?: FirebaseTokenUpdateOneWithoutUserNestedInput
+    kycverification?: KYCVerificationUpdateOneWithoutUserNestedInput
   }
 
   export type UserUncheckedUpdateWithoutAdministratorInput = {
@@ -46626,6 +48092,7 @@ export namespace Prisma {
     wallet?: WalletUncheckedUpdateOneWithoutUserNestedInput
     refreshTokens?: RefreshTokenUncheckedUpdateManyWithoutUserNestedInput
     firebaseToken?: FirebaseTokenUncheckedUpdateOneWithoutUserNestedInput
+    kycverification?: KYCVerificationUncheckedUpdateOneWithoutUserNestedInput
   }
 
   export type UserCreateWithoutGuardianInput = {
@@ -46653,6 +48120,7 @@ export namespace Prisma {
     wallet?: WalletCreateNestedOneWithoutUserInput
     refreshTokens?: RefreshTokenCreateNestedManyWithoutUserInput
     firebaseToken?: FirebaseTokenCreateNestedOneWithoutUserInput
+    kycverification?: KYCVerificationCreateNestedOneWithoutUserInput
   }
 
   export type UserUncheckedCreateWithoutGuardianInput = {
@@ -46680,6 +48148,7 @@ export namespace Prisma {
     wallet?: WalletUncheckedCreateNestedOneWithoutUserInput
     refreshTokens?: RefreshTokenUncheckedCreateNestedManyWithoutUserInput
     firebaseToken?: FirebaseTokenUncheckedCreateNestedOneWithoutUserInput
+    kycverification?: KYCVerificationUncheckedCreateNestedOneWithoutUserInput
   }
 
   export type UserCreateOrConnectWithoutGuardianInput = {
@@ -46883,6 +48352,7 @@ export namespace Prisma {
     wallet?: WalletUpdateOneWithoutUserNestedInput
     refreshTokens?: RefreshTokenUpdateManyWithoutUserNestedInput
     firebaseToken?: FirebaseTokenUpdateOneWithoutUserNestedInput
+    kycverification?: KYCVerificationUpdateOneWithoutUserNestedInput
   }
 
   export type UserUncheckedUpdateWithoutGuardianInput = {
@@ -46910,6 +48380,7 @@ export namespace Prisma {
     wallet?: WalletUncheckedUpdateOneWithoutUserNestedInput
     refreshTokens?: RefreshTokenUncheckedUpdateManyWithoutUserNestedInput
     firebaseToken?: FirebaseTokenUncheckedUpdateOneWithoutUserNestedInput
+    kycverification?: KYCVerificationUncheckedUpdateOneWithoutUserNestedInput
   }
 
   export type InvoiceUpsertWithWhereUniqueWithoutGuardianInput = {
@@ -47073,6 +48544,7 @@ export namespace Prisma {
     wallet?: WalletCreateNestedOneWithoutUserInput
     refreshTokens?: RefreshTokenCreateNestedManyWithoutUserInput
     firebaseToken?: FirebaseTokenCreateNestedOneWithoutUserInput
+    kycverification?: KYCVerificationCreateNestedOneWithoutUserInput
   }
 
   export type UserUncheckedCreateWithoutVerificationsInput = {
@@ -47100,6 +48572,7 @@ export namespace Prisma {
     wallet?: WalletUncheckedCreateNestedOneWithoutUserInput
     refreshTokens?: RefreshTokenUncheckedCreateNestedManyWithoutUserInput
     firebaseToken?: FirebaseTokenUncheckedCreateNestedOneWithoutUserInput
+    kycverification?: KYCVerificationUncheckedCreateNestedOneWithoutUserInput
   }
 
   export type UserCreateOrConnectWithoutVerificationsInput = {
@@ -47143,6 +48616,7 @@ export namespace Prisma {
     wallet?: WalletUpdateOneWithoutUserNestedInput
     refreshTokens?: RefreshTokenUpdateManyWithoutUserNestedInput
     firebaseToken?: FirebaseTokenUpdateOneWithoutUserNestedInput
+    kycverification?: KYCVerificationUpdateOneWithoutUserNestedInput
   }
 
   export type UserUncheckedUpdateWithoutVerificationsInput = {
@@ -47170,6 +48644,7 @@ export namespace Prisma {
     wallet?: WalletUncheckedUpdateOneWithoutUserNestedInput
     refreshTokens?: RefreshTokenUncheckedUpdateManyWithoutUserNestedInput
     firebaseToken?: FirebaseTokenUncheckedUpdateOneWithoutUserNestedInput
+    kycverification?: KYCVerificationUncheckedUpdateOneWithoutUserNestedInput
   }
 
   export type UserCreateWithoutSchoolInput = {
@@ -47197,6 +48672,7 @@ export namespace Prisma {
     wallet?: WalletCreateNestedOneWithoutUserInput
     refreshTokens?: RefreshTokenCreateNestedManyWithoutUserInput
     firebaseToken?: FirebaseTokenCreateNestedOneWithoutUserInput
+    kycverification?: KYCVerificationCreateNestedOneWithoutUserInput
   }
 
   export type UserUncheckedCreateWithoutSchoolInput = {
@@ -47224,6 +48700,7 @@ export namespace Prisma {
     wallet?: WalletUncheckedCreateNestedOneWithoutUserInput
     refreshTokens?: RefreshTokenUncheckedCreateNestedManyWithoutUserInput
     firebaseToken?: FirebaseTokenUncheckedCreateNestedOneWithoutUserInput
+    kycverification?: KYCVerificationUncheckedCreateNestedOneWithoutUserInput
   }
 
   export type UserCreateOrConnectWithoutSchoolInput = {
@@ -47237,7 +48714,6 @@ export namespace Prisma {
     directorIDType: $Enums.DirectorIDType
     directorIDNumber: string
     document: string
-    status?: $Enums.KYCVerificationStatus
     isDeleted?: boolean
     createdAt?: Date | string
     updatedAt?: Date | string
@@ -47249,7 +48725,6 @@ export namespace Prisma {
     directorIDType: $Enums.DirectorIDType
     directorIDNumber: string
     document: string
-    status?: $Enums.KYCVerificationStatus
     isDeleted?: boolean
     createdAt?: Date | string
     updatedAt?: Date | string
@@ -47264,7 +48739,6 @@ export namespace Prisma {
     id?: string
     cacform7: string
     cacShareAllotmentForm: string
-    status?: $Enums.KYCVerificationStatus
     isDeleted?: boolean
     createdAt?: Date | string
     updatedAt?: Date | string
@@ -47274,7 +48748,6 @@ export namespace Prisma {
     id?: string
     cacform7: string
     cacShareAllotmentForm: string
-    status?: $Enums.KYCVerificationStatus
     isDeleted?: boolean
     createdAt?: Date | string
     updatedAt?: Date | string
@@ -47291,7 +48764,6 @@ export namespace Prisma {
     accreditationDocument: string
     taxIdentificationNumber: string
     licenseDocument: string
-    status?: $Enums.KYCVerificationStatus
     isDeleted?: boolean
     createdAt?: Date | string
     updatedAt?: Date | string
@@ -47303,7 +48775,6 @@ export namespace Prisma {
     accreditationDocument: string
     taxIdentificationNumber: string
     licenseDocument: string
-    status?: $Enums.KYCVerificationStatus
     isDeleted?: boolean
     createdAt?: Date | string
     updatedAt?: Date | string
@@ -47346,7 +48817,6 @@ export namespace Prisma {
     signature: string
     signedAt: Date | string
     legalDocumentRef: string
-    status?: $Enums.KYCVerificationStatus
     isDeleted?: boolean
     createdAt?: Date | string
     updatedAt?: Date | string
@@ -47359,7 +48829,6 @@ export namespace Prisma {
     signature: string
     signedAt: Date | string
     legalDocumentRef: string
-    status?: $Enums.KYCVerificationStatus
     isDeleted?: boolean
     createdAt?: Date | string
     updatedAt?: Date | string
@@ -47532,6 +49001,29 @@ export namespace Prisma {
     skipDuplicates?: boolean
   }
 
+  export type KYCVerificationCreateWithoutSchoolInput = {
+    id?: string
+    status?: $Enums.KYCVerificationStatus
+    isDeleted?: boolean
+    createdAt?: Date | string
+    updatedAt?: Date | string
+    user: UserCreateNestedOneWithoutKycverificationInput
+  }
+
+  export type KYCVerificationUncheckedCreateWithoutSchoolInput = {
+    id?: string
+    userId: string
+    status?: $Enums.KYCVerificationStatus
+    isDeleted?: boolean
+    createdAt?: Date | string
+    updatedAt?: Date | string
+  }
+
+  export type KYCVerificationCreateOrConnectWithoutSchoolInput = {
+    where: KYCVerificationWhereUniqueInput
+    create: XOR<KYCVerificationCreateWithoutSchoolInput, KYCVerificationUncheckedCreateWithoutSchoolInput>
+  }
+
   export type UserUpsertWithoutSchoolInput = {
     update: XOR<UserUpdateWithoutSchoolInput, UserUncheckedUpdateWithoutSchoolInput>
     create: XOR<UserCreateWithoutSchoolInput, UserUncheckedCreateWithoutSchoolInput>
@@ -47568,6 +49060,7 @@ export namespace Prisma {
     wallet?: WalletUpdateOneWithoutUserNestedInput
     refreshTokens?: RefreshTokenUpdateManyWithoutUserNestedInput
     firebaseToken?: FirebaseTokenUpdateOneWithoutUserNestedInput
+    kycverification?: KYCVerificationUpdateOneWithoutUserNestedInput
   }
 
   export type UserUncheckedUpdateWithoutSchoolInput = {
@@ -47595,6 +49088,7 @@ export namespace Prisma {
     wallet?: WalletUncheckedUpdateOneWithoutUserNestedInput
     refreshTokens?: RefreshTokenUncheckedUpdateManyWithoutUserNestedInput
     firebaseToken?: FirebaseTokenUncheckedUpdateOneWithoutUserNestedInput
+    kycverification?: KYCVerificationUncheckedUpdateOneWithoutUserNestedInput
   }
 
   export type SchoolDirectorVerificationUpsertWithoutSchoolInput = {
@@ -47614,7 +49108,6 @@ export namespace Prisma {
     directorIDType?: EnumDirectorIDTypeFieldUpdateOperationsInput | $Enums.DirectorIDType
     directorIDNumber?: StringFieldUpdateOperationsInput | string
     document?: StringFieldUpdateOperationsInput | string
-    status?: EnumKYCVerificationStatusFieldUpdateOperationsInput | $Enums.KYCVerificationStatus
     isDeleted?: BoolFieldUpdateOperationsInput | boolean
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
@@ -47626,7 +49119,6 @@ export namespace Prisma {
     directorIDType?: EnumDirectorIDTypeFieldUpdateOperationsInput | $Enums.DirectorIDType
     directorIDNumber?: StringFieldUpdateOperationsInput | string
     document?: StringFieldUpdateOperationsInput | string
-    status?: EnumKYCVerificationStatusFieldUpdateOperationsInput | $Enums.KYCVerificationStatus
     isDeleted?: BoolFieldUpdateOperationsInput | boolean
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
@@ -47647,7 +49139,6 @@ export namespace Prisma {
     id?: StringFieldUpdateOperationsInput | string
     cacform7?: StringFieldUpdateOperationsInput | string
     cacShareAllotmentForm?: StringFieldUpdateOperationsInput | string
-    status?: EnumKYCVerificationStatusFieldUpdateOperationsInput | $Enums.KYCVerificationStatus
     isDeleted?: BoolFieldUpdateOperationsInput | boolean
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
@@ -47657,7 +49148,6 @@ export namespace Prisma {
     id?: StringFieldUpdateOperationsInput | string
     cacform7?: StringFieldUpdateOperationsInput | string
     cacShareAllotmentForm?: StringFieldUpdateOperationsInput | string
-    status?: EnumKYCVerificationStatusFieldUpdateOperationsInput | $Enums.KYCVerificationStatus
     isDeleted?: BoolFieldUpdateOperationsInput | boolean
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
@@ -47680,7 +49170,6 @@ export namespace Prisma {
     accreditationDocument?: StringFieldUpdateOperationsInput | string
     taxIdentificationNumber?: StringFieldUpdateOperationsInput | string
     licenseDocument?: StringFieldUpdateOperationsInput | string
-    status?: EnumKYCVerificationStatusFieldUpdateOperationsInput | $Enums.KYCVerificationStatus
     isDeleted?: BoolFieldUpdateOperationsInput | boolean
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
@@ -47692,7 +49181,6 @@ export namespace Prisma {
     accreditationDocument?: StringFieldUpdateOperationsInput | string
     taxIdentificationNumber?: StringFieldUpdateOperationsInput | string
     licenseDocument?: StringFieldUpdateOperationsInput | string
-    status?: EnumKYCVerificationStatusFieldUpdateOperationsInput | $Enums.KYCVerificationStatus
     isDeleted?: BoolFieldUpdateOperationsInput | boolean
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
@@ -47747,7 +49235,6 @@ export namespace Prisma {
     signature?: StringFieldUpdateOperationsInput | string
     signedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     legalDocumentRef?: StringFieldUpdateOperationsInput | string
-    status?: EnumKYCVerificationStatusFieldUpdateOperationsInput | $Enums.KYCVerificationStatus
     isDeleted?: BoolFieldUpdateOperationsInput | boolean
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
@@ -47760,7 +49247,6 @@ export namespace Prisma {
     signature?: StringFieldUpdateOperationsInput | string
     signedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     legalDocumentRef?: StringFieldUpdateOperationsInput | string
-    status?: EnumKYCVerificationStatusFieldUpdateOperationsInput | $Enums.KYCVerificationStatus
     isDeleted?: BoolFieldUpdateOperationsInput | boolean
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
@@ -47914,6 +49400,35 @@ export namespace Prisma {
     updatedAt?: DateTimeFilter<"Payout"> | Date | string
   }
 
+  export type KYCVerificationUpsertWithoutSchoolInput = {
+    update: XOR<KYCVerificationUpdateWithoutSchoolInput, KYCVerificationUncheckedUpdateWithoutSchoolInput>
+    create: XOR<KYCVerificationCreateWithoutSchoolInput, KYCVerificationUncheckedCreateWithoutSchoolInput>
+    where?: KYCVerificationWhereInput
+  }
+
+  export type KYCVerificationUpdateToOneWithWhereWithoutSchoolInput = {
+    where?: KYCVerificationWhereInput
+    data: XOR<KYCVerificationUpdateWithoutSchoolInput, KYCVerificationUncheckedUpdateWithoutSchoolInput>
+  }
+
+  export type KYCVerificationUpdateWithoutSchoolInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    status?: EnumKYCVerificationStatusFieldUpdateOperationsInput | $Enums.KYCVerificationStatus
+    isDeleted?: BoolFieldUpdateOperationsInput | boolean
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    user?: UserUpdateOneRequiredWithoutKycverificationNestedInput
+  }
+
+  export type KYCVerificationUncheckedUpdateWithoutSchoolInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    userId?: StringFieldUpdateOperationsInput | string
+    status?: EnumKYCVerificationStatusFieldUpdateOperationsInput | $Enums.KYCVerificationStatus
+    isDeleted?: BoolFieldUpdateOperationsInput | boolean
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
   export type SchoolCreateWithoutSchoolDirectorVerificationInput = {
     id?: string
     name: string
@@ -47944,6 +49459,7 @@ export namespace Prisma {
     terms?: TermCreateNestedManyWithoutSchoolInput
     fees?: FeesCreateNestedManyWithoutSchoolInput
     payouts?: PayoutCreateNestedManyWithoutSchoolInput
+    kycverification?: KYCVerificationCreateNestedOneWithoutSchoolInput
   }
 
   export type SchoolUncheckedCreateWithoutSchoolDirectorVerificationInput = {
@@ -47976,6 +49492,7 @@ export namespace Prisma {
     terms?: TermUncheckedCreateNestedManyWithoutSchoolInput
     fees?: FeesUncheckedCreateNestedManyWithoutSchoolInput
     payouts?: PayoutUncheckedCreateNestedManyWithoutSchoolInput
+    kycverification?: KYCVerificationUncheckedCreateNestedOneWithoutSchoolInput
   }
 
   export type SchoolCreateOrConnectWithoutSchoolDirectorVerificationInput = {
@@ -48024,6 +49541,7 @@ export namespace Prisma {
     terms?: TermUpdateManyWithoutSchoolNestedInput
     fees?: FeesUpdateManyWithoutSchoolNestedInput
     payouts?: PayoutUpdateManyWithoutSchoolNestedInput
+    kycverification?: KYCVerificationUpdateOneWithoutSchoolNestedInput
   }
 
   export type SchoolUncheckedUpdateWithoutSchoolDirectorVerificationInput = {
@@ -48056,6 +49574,7 @@ export namespace Prisma {
     terms?: TermUncheckedUpdateManyWithoutSchoolNestedInput
     fees?: FeesUncheckedUpdateManyWithoutSchoolNestedInput
     payouts?: PayoutUncheckedUpdateManyWithoutSchoolNestedInput
+    kycverification?: KYCVerificationUncheckedUpdateOneWithoutSchoolNestedInput
   }
 
   export type SchoolCreateWithoutSchoolOwnershipVerificationInput = {
@@ -48088,6 +49607,7 @@ export namespace Prisma {
     terms?: TermCreateNestedManyWithoutSchoolInput
     fees?: FeesCreateNestedManyWithoutSchoolInput
     payouts?: PayoutCreateNestedManyWithoutSchoolInput
+    kycverification?: KYCVerificationCreateNestedOneWithoutSchoolInput
   }
 
   export type SchoolUncheckedCreateWithoutSchoolOwnershipVerificationInput = {
@@ -48120,6 +49640,7 @@ export namespace Prisma {
     terms?: TermUncheckedCreateNestedManyWithoutSchoolInput
     fees?: FeesUncheckedCreateNestedManyWithoutSchoolInput
     payouts?: PayoutUncheckedCreateNestedManyWithoutSchoolInput
+    kycverification?: KYCVerificationUncheckedCreateNestedOneWithoutSchoolInput
   }
 
   export type SchoolCreateOrConnectWithoutSchoolOwnershipVerificationInput = {
@@ -48168,6 +49689,7 @@ export namespace Prisma {
     terms?: TermUpdateManyWithoutSchoolNestedInput
     fees?: FeesUpdateManyWithoutSchoolNestedInput
     payouts?: PayoutUpdateManyWithoutSchoolNestedInput
+    kycverification?: KYCVerificationUpdateOneWithoutSchoolNestedInput
   }
 
   export type SchoolUncheckedUpdateWithoutSchoolOwnershipVerificationInput = {
@@ -48200,6 +49722,7 @@ export namespace Prisma {
     terms?: TermUncheckedUpdateManyWithoutSchoolNestedInput
     fees?: FeesUncheckedUpdateManyWithoutSchoolNestedInput
     payouts?: PayoutUncheckedUpdateManyWithoutSchoolNestedInput
+    kycverification?: KYCVerificationUncheckedUpdateOneWithoutSchoolNestedInput
   }
 
   export type SchoolCreateWithoutSchoolVerificationInput = {
@@ -48232,6 +49755,7 @@ export namespace Prisma {
     terms?: TermCreateNestedManyWithoutSchoolInput
     fees?: FeesCreateNestedManyWithoutSchoolInput
     payouts?: PayoutCreateNestedManyWithoutSchoolInput
+    kycverification?: KYCVerificationCreateNestedOneWithoutSchoolInput
   }
 
   export type SchoolUncheckedCreateWithoutSchoolVerificationInput = {
@@ -48264,6 +49788,7 @@ export namespace Prisma {
     terms?: TermUncheckedCreateNestedManyWithoutSchoolInput
     fees?: FeesUncheckedCreateNestedManyWithoutSchoolInput
     payouts?: PayoutUncheckedCreateNestedManyWithoutSchoolInput
+    kycverification?: KYCVerificationUncheckedCreateNestedOneWithoutSchoolInput
   }
 
   export type SchoolCreateOrConnectWithoutSchoolVerificationInput = {
@@ -48312,6 +49837,7 @@ export namespace Prisma {
     terms?: TermUpdateManyWithoutSchoolNestedInput
     fees?: FeesUpdateManyWithoutSchoolNestedInput
     payouts?: PayoutUpdateManyWithoutSchoolNestedInput
+    kycverification?: KYCVerificationUpdateOneWithoutSchoolNestedInput
   }
 
   export type SchoolUncheckedUpdateWithoutSchoolVerificationInput = {
@@ -48344,6 +49870,7 @@ export namespace Prisma {
     terms?: TermUncheckedUpdateManyWithoutSchoolNestedInput
     fees?: FeesUncheckedUpdateManyWithoutSchoolNestedInput
     payouts?: PayoutUncheckedUpdateManyWithoutSchoolNestedInput
+    kycverification?: KYCVerificationUncheckedUpdateOneWithoutSchoolNestedInput
   }
 
   export type SchoolCreateWithoutSchoolPayoutDetailInput = {
@@ -48376,6 +49903,7 @@ export namespace Prisma {
     terms?: TermCreateNestedManyWithoutSchoolInput
     fees?: FeesCreateNestedManyWithoutSchoolInput
     payouts?: PayoutCreateNestedManyWithoutSchoolInput
+    kycverification?: KYCVerificationCreateNestedOneWithoutSchoolInput
   }
 
   export type SchoolUncheckedCreateWithoutSchoolPayoutDetailInput = {
@@ -48408,6 +49936,7 @@ export namespace Prisma {
     terms?: TermUncheckedCreateNestedManyWithoutSchoolInput
     fees?: FeesUncheckedCreateNestedManyWithoutSchoolInput
     payouts?: PayoutUncheckedCreateNestedManyWithoutSchoolInput
+    kycverification?: KYCVerificationUncheckedCreateNestedOneWithoutSchoolInput
   }
 
   export type SchoolCreateOrConnectWithoutSchoolPayoutDetailInput = {
@@ -48456,6 +49985,7 @@ export namespace Prisma {
     terms?: TermUpdateManyWithoutSchoolNestedInput
     fees?: FeesUpdateManyWithoutSchoolNestedInput
     payouts?: PayoutUpdateManyWithoutSchoolNestedInput
+    kycverification?: KYCVerificationUpdateOneWithoutSchoolNestedInput
   }
 
   export type SchoolUncheckedUpdateWithoutSchoolPayoutDetailInput = {
@@ -48488,6 +50018,7 @@ export namespace Prisma {
     terms?: TermUncheckedUpdateManyWithoutSchoolNestedInput
     fees?: FeesUncheckedUpdateManyWithoutSchoolNestedInput
     payouts?: PayoutUncheckedUpdateManyWithoutSchoolNestedInput
+    kycverification?: KYCVerificationUncheckedUpdateOneWithoutSchoolNestedInput
   }
 
   export type SchoolCreateWithoutSchoolAndPlatformLegalAgreementInput = {
@@ -48520,6 +50051,7 @@ export namespace Prisma {
     terms?: TermCreateNestedManyWithoutSchoolInput
     fees?: FeesCreateNestedManyWithoutSchoolInput
     payouts?: PayoutCreateNestedManyWithoutSchoolInput
+    kycverification?: KYCVerificationCreateNestedOneWithoutSchoolInput
   }
 
   export type SchoolUncheckedCreateWithoutSchoolAndPlatformLegalAgreementInput = {
@@ -48552,6 +50084,7 @@ export namespace Prisma {
     terms?: TermUncheckedCreateNestedManyWithoutSchoolInput
     fees?: FeesUncheckedCreateNestedManyWithoutSchoolInput
     payouts?: PayoutUncheckedCreateNestedManyWithoutSchoolInput
+    kycverification?: KYCVerificationUncheckedCreateNestedOneWithoutSchoolInput
   }
 
   export type SchoolCreateOrConnectWithoutSchoolAndPlatformLegalAgreementInput = {
@@ -48584,6 +50117,7 @@ export namespace Prisma {
     wallet?: WalletCreateNestedOneWithoutUserInput
     refreshTokens?: RefreshTokenCreateNestedManyWithoutUserInput
     firebaseToken?: FirebaseTokenCreateNestedOneWithoutUserInput
+    kycverification?: KYCVerificationCreateNestedOneWithoutUserInput
   }
 
   export type UserUncheckedCreateWithoutSchoolAndPlatformLegalAgreementInput = {
@@ -48611,6 +50145,7 @@ export namespace Prisma {
     wallet?: WalletUncheckedCreateNestedOneWithoutUserInput
     refreshTokens?: RefreshTokenUncheckedCreateNestedManyWithoutUserInput
     firebaseToken?: FirebaseTokenUncheckedCreateNestedOneWithoutUserInput
+    kycverification?: KYCVerificationUncheckedCreateNestedOneWithoutUserInput
   }
 
   export type UserCreateOrConnectWithoutSchoolAndPlatformLegalAgreementInput = {
@@ -48659,6 +50194,7 @@ export namespace Prisma {
     terms?: TermUpdateManyWithoutSchoolNestedInput
     fees?: FeesUpdateManyWithoutSchoolNestedInput
     payouts?: PayoutUpdateManyWithoutSchoolNestedInput
+    kycverification?: KYCVerificationUpdateOneWithoutSchoolNestedInput
   }
 
   export type SchoolUncheckedUpdateWithoutSchoolAndPlatformLegalAgreementInput = {
@@ -48691,6 +50227,7 @@ export namespace Prisma {
     terms?: TermUncheckedUpdateManyWithoutSchoolNestedInput
     fees?: FeesUncheckedUpdateManyWithoutSchoolNestedInput
     payouts?: PayoutUncheckedUpdateManyWithoutSchoolNestedInput
+    kycverification?: KYCVerificationUncheckedUpdateOneWithoutSchoolNestedInput
   }
 
   export type UserUpsertWithoutSchoolAndPlatformLegalAgreementInput = {
@@ -48729,6 +50266,7 @@ export namespace Prisma {
     wallet?: WalletUpdateOneWithoutUserNestedInput
     refreshTokens?: RefreshTokenUpdateManyWithoutUserNestedInput
     firebaseToken?: FirebaseTokenUpdateOneWithoutUserNestedInput
+    kycverification?: KYCVerificationUpdateOneWithoutUserNestedInput
   }
 
   export type UserUncheckedUpdateWithoutSchoolAndPlatformLegalAgreementInput = {
@@ -48756,6 +50294,283 @@ export namespace Prisma {
     wallet?: WalletUncheckedUpdateOneWithoutUserNestedInput
     refreshTokens?: RefreshTokenUncheckedUpdateManyWithoutUserNestedInput
     firebaseToken?: FirebaseTokenUncheckedUpdateOneWithoutUserNestedInput
+    kycverification?: KYCVerificationUncheckedUpdateOneWithoutUserNestedInput
+  }
+
+  export type UserCreateWithoutKycverificationInput = {
+    id?: string
+    firstName: string
+    lastName: string
+    profileImage?: string | null
+    email: string
+    type: $Enums.UserType
+    phone?: string | null
+    accountStatus?: $Enums.AccountStatus
+    verifiedAt?: Date | string | null
+    lastSeenAt?: Date | string | null
+    isTermsAccepted?: boolean
+    isPrivacyAccepted?: boolean
+    isDeleted?: boolean
+    createdAt?: Date | string
+    updatedAt?: Date | string
+    administrator?: AdministratorCreateNestedOneWithoutUserInput
+    guardian?: GuardianCreateNestedOneWithoutUserInput
+    verifications?: VerificationCreateNestedManyWithoutUserInput
+    school?: SchoolCreateNestedOneWithoutOwnerInput
+    schoolAndPlatformLegalAgreement?: SchoolAndPlatformLegalAgreementCreateNestedOneWithoutSignedByInput
+    notifications?: NotificationCreateNestedManyWithoutUserInput
+    credential?: CredentialCreateNestedOneWithoutUserInput
+    wallet?: WalletCreateNestedOneWithoutUserInput
+    refreshTokens?: RefreshTokenCreateNestedManyWithoutUserInput
+    firebaseToken?: FirebaseTokenCreateNestedOneWithoutUserInput
+  }
+
+  export type UserUncheckedCreateWithoutKycverificationInput = {
+    id?: string
+    firstName: string
+    lastName: string
+    profileImage?: string | null
+    email: string
+    type: $Enums.UserType
+    phone?: string | null
+    accountStatus?: $Enums.AccountStatus
+    verifiedAt?: Date | string | null
+    lastSeenAt?: Date | string | null
+    isTermsAccepted?: boolean
+    isPrivacyAccepted?: boolean
+    isDeleted?: boolean
+    createdAt?: Date | string
+    updatedAt?: Date | string
+    administrator?: AdministratorUncheckedCreateNestedOneWithoutUserInput
+    guardian?: GuardianUncheckedCreateNestedOneWithoutUserInput
+    verifications?: VerificationUncheckedCreateNestedManyWithoutUserInput
+    school?: SchoolUncheckedCreateNestedOneWithoutOwnerInput
+    schoolAndPlatformLegalAgreement?: SchoolAndPlatformLegalAgreementUncheckedCreateNestedOneWithoutSignedByInput
+    notifications?: NotificationUncheckedCreateNestedManyWithoutUserInput
+    credential?: CredentialUncheckedCreateNestedOneWithoutUserInput
+    wallet?: WalletUncheckedCreateNestedOneWithoutUserInput
+    refreshTokens?: RefreshTokenUncheckedCreateNestedManyWithoutUserInput
+    firebaseToken?: FirebaseTokenUncheckedCreateNestedOneWithoutUserInput
+  }
+
+  export type UserCreateOrConnectWithoutKycverificationInput = {
+    where: UserWhereUniqueInput
+    create: XOR<UserCreateWithoutKycverificationInput, UserUncheckedCreateWithoutKycverificationInput>
+  }
+
+  export type SchoolCreateWithoutKycverificationInput = {
+    id?: string
+    name: string
+    address?: string | null
+    city?: string | null
+    state?: string | null
+    country?: string | null
+    lga?: string | null
+    postalCode?: string | null
+    email: string
+    phoneNumber?: string | null
+    establishedYear?: number | null
+    website?: string | null
+    logo?: string | null
+    schoolType: $Enums.SchoolType
+    ownership: $Enums.SchoolOwnership
+    status?: $Enums.SchoolStatus
+    isDeleted?: boolean
+    createdAt?: Date | string
+    updatedAt?: Date | string
+    owner: UserCreateNestedOneWithoutSchoolInput
+    schoolDirectorVerification?: SchoolDirectorVerificationCreateNestedOneWithoutSchoolInput
+    schoolOwnershipVerification?: SchoolOwnershipVerificationCreateNestedOneWithoutSchoolInput
+    schoolVerification?: SchoolVerificationCreateNestedOneWithoutSchoolInput
+    schoolPayoutDetail?: SchoolPayoutDetailCreateNestedOneWithoutSchoolInput
+    schoolAndPlatformLegalAgreement?: SchoolAndPlatformLegalAgreementCreateNestedOneWithoutSchoolInput
+    classes?: ClassCreateNestedManyWithoutSchoolInput
+    academicSessions?: AcademicSessionCreateNestedManyWithoutSchoolInput
+    terms?: TermCreateNestedManyWithoutSchoolInput
+    fees?: FeesCreateNestedManyWithoutSchoolInput
+    payouts?: PayoutCreateNestedManyWithoutSchoolInput
+  }
+
+  export type SchoolUncheckedCreateWithoutKycverificationInput = {
+    id?: string
+    ownerId: string
+    name: string
+    address?: string | null
+    city?: string | null
+    state?: string | null
+    country?: string | null
+    lga?: string | null
+    postalCode?: string | null
+    email: string
+    phoneNumber?: string | null
+    establishedYear?: number | null
+    website?: string | null
+    logo?: string | null
+    schoolType: $Enums.SchoolType
+    ownership: $Enums.SchoolOwnership
+    status?: $Enums.SchoolStatus
+    isDeleted?: boolean
+    createdAt?: Date | string
+    updatedAt?: Date | string
+    schoolDirectorVerification?: SchoolDirectorVerificationUncheckedCreateNestedOneWithoutSchoolInput
+    schoolOwnershipVerification?: SchoolOwnershipVerificationUncheckedCreateNestedOneWithoutSchoolInput
+    schoolVerification?: SchoolVerificationUncheckedCreateNestedOneWithoutSchoolInput
+    schoolPayoutDetail?: SchoolPayoutDetailUncheckedCreateNestedOneWithoutSchoolInput
+    schoolAndPlatformLegalAgreement?: SchoolAndPlatformLegalAgreementUncheckedCreateNestedOneWithoutSchoolInput
+    classes?: ClassUncheckedCreateNestedManyWithoutSchoolInput
+    academicSessions?: AcademicSessionUncheckedCreateNestedManyWithoutSchoolInput
+    terms?: TermUncheckedCreateNestedManyWithoutSchoolInput
+    fees?: FeesUncheckedCreateNestedManyWithoutSchoolInput
+    payouts?: PayoutUncheckedCreateNestedManyWithoutSchoolInput
+  }
+
+  export type SchoolCreateOrConnectWithoutKycverificationInput = {
+    where: SchoolWhereUniqueInput
+    create: XOR<SchoolCreateWithoutKycverificationInput, SchoolUncheckedCreateWithoutKycverificationInput>
+  }
+
+  export type UserUpsertWithoutKycverificationInput = {
+    update: XOR<UserUpdateWithoutKycverificationInput, UserUncheckedUpdateWithoutKycverificationInput>
+    create: XOR<UserCreateWithoutKycverificationInput, UserUncheckedCreateWithoutKycverificationInput>
+    where?: UserWhereInput
+  }
+
+  export type UserUpdateToOneWithWhereWithoutKycverificationInput = {
+    where?: UserWhereInput
+    data: XOR<UserUpdateWithoutKycverificationInput, UserUncheckedUpdateWithoutKycverificationInput>
+  }
+
+  export type UserUpdateWithoutKycverificationInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    firstName?: StringFieldUpdateOperationsInput | string
+    lastName?: StringFieldUpdateOperationsInput | string
+    profileImage?: NullableStringFieldUpdateOperationsInput | string | null
+    email?: StringFieldUpdateOperationsInput | string
+    type?: EnumUserTypeFieldUpdateOperationsInput | $Enums.UserType
+    phone?: NullableStringFieldUpdateOperationsInput | string | null
+    accountStatus?: EnumAccountStatusFieldUpdateOperationsInput | $Enums.AccountStatus
+    verifiedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    lastSeenAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    isTermsAccepted?: BoolFieldUpdateOperationsInput | boolean
+    isPrivacyAccepted?: BoolFieldUpdateOperationsInput | boolean
+    isDeleted?: BoolFieldUpdateOperationsInput | boolean
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    administrator?: AdministratorUpdateOneWithoutUserNestedInput
+    guardian?: GuardianUpdateOneWithoutUserNestedInput
+    verifications?: VerificationUpdateManyWithoutUserNestedInput
+    school?: SchoolUpdateOneWithoutOwnerNestedInput
+    schoolAndPlatformLegalAgreement?: SchoolAndPlatformLegalAgreementUpdateOneWithoutSignedByNestedInput
+    notifications?: NotificationUpdateManyWithoutUserNestedInput
+    credential?: CredentialUpdateOneWithoutUserNestedInput
+    wallet?: WalletUpdateOneWithoutUserNestedInput
+    refreshTokens?: RefreshTokenUpdateManyWithoutUserNestedInput
+    firebaseToken?: FirebaseTokenUpdateOneWithoutUserNestedInput
+  }
+
+  export type UserUncheckedUpdateWithoutKycverificationInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    firstName?: StringFieldUpdateOperationsInput | string
+    lastName?: StringFieldUpdateOperationsInput | string
+    profileImage?: NullableStringFieldUpdateOperationsInput | string | null
+    email?: StringFieldUpdateOperationsInput | string
+    type?: EnumUserTypeFieldUpdateOperationsInput | $Enums.UserType
+    phone?: NullableStringFieldUpdateOperationsInput | string | null
+    accountStatus?: EnumAccountStatusFieldUpdateOperationsInput | $Enums.AccountStatus
+    verifiedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    lastSeenAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    isTermsAccepted?: BoolFieldUpdateOperationsInput | boolean
+    isPrivacyAccepted?: BoolFieldUpdateOperationsInput | boolean
+    isDeleted?: BoolFieldUpdateOperationsInput | boolean
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    administrator?: AdministratorUncheckedUpdateOneWithoutUserNestedInput
+    guardian?: GuardianUncheckedUpdateOneWithoutUserNestedInput
+    verifications?: VerificationUncheckedUpdateManyWithoutUserNestedInput
+    school?: SchoolUncheckedUpdateOneWithoutOwnerNestedInput
+    schoolAndPlatformLegalAgreement?: SchoolAndPlatformLegalAgreementUncheckedUpdateOneWithoutSignedByNestedInput
+    notifications?: NotificationUncheckedUpdateManyWithoutUserNestedInput
+    credential?: CredentialUncheckedUpdateOneWithoutUserNestedInput
+    wallet?: WalletUncheckedUpdateOneWithoutUserNestedInput
+    refreshTokens?: RefreshTokenUncheckedUpdateManyWithoutUserNestedInput
+    firebaseToken?: FirebaseTokenUncheckedUpdateOneWithoutUserNestedInput
+  }
+
+  export type SchoolUpsertWithoutKycverificationInput = {
+    update: XOR<SchoolUpdateWithoutKycverificationInput, SchoolUncheckedUpdateWithoutKycverificationInput>
+    create: XOR<SchoolCreateWithoutKycverificationInput, SchoolUncheckedCreateWithoutKycverificationInput>
+    where?: SchoolWhereInput
+  }
+
+  export type SchoolUpdateToOneWithWhereWithoutKycverificationInput = {
+    where?: SchoolWhereInput
+    data: XOR<SchoolUpdateWithoutKycverificationInput, SchoolUncheckedUpdateWithoutKycverificationInput>
+  }
+
+  export type SchoolUpdateWithoutKycverificationInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    name?: StringFieldUpdateOperationsInput | string
+    address?: NullableStringFieldUpdateOperationsInput | string | null
+    city?: NullableStringFieldUpdateOperationsInput | string | null
+    state?: NullableStringFieldUpdateOperationsInput | string | null
+    country?: NullableStringFieldUpdateOperationsInput | string | null
+    lga?: NullableStringFieldUpdateOperationsInput | string | null
+    postalCode?: NullableStringFieldUpdateOperationsInput | string | null
+    email?: StringFieldUpdateOperationsInput | string
+    phoneNumber?: NullableStringFieldUpdateOperationsInput | string | null
+    establishedYear?: NullableIntFieldUpdateOperationsInput | number | null
+    website?: NullableStringFieldUpdateOperationsInput | string | null
+    logo?: NullableStringFieldUpdateOperationsInput | string | null
+    schoolType?: EnumSchoolTypeFieldUpdateOperationsInput | $Enums.SchoolType
+    ownership?: EnumSchoolOwnershipFieldUpdateOperationsInput | $Enums.SchoolOwnership
+    status?: EnumSchoolStatusFieldUpdateOperationsInput | $Enums.SchoolStatus
+    isDeleted?: BoolFieldUpdateOperationsInput | boolean
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    owner?: UserUpdateOneRequiredWithoutSchoolNestedInput
+    schoolDirectorVerification?: SchoolDirectorVerificationUpdateOneWithoutSchoolNestedInput
+    schoolOwnershipVerification?: SchoolOwnershipVerificationUpdateOneWithoutSchoolNestedInput
+    schoolVerification?: SchoolVerificationUpdateOneWithoutSchoolNestedInput
+    schoolPayoutDetail?: SchoolPayoutDetailUpdateOneWithoutSchoolNestedInput
+    schoolAndPlatformLegalAgreement?: SchoolAndPlatformLegalAgreementUpdateOneWithoutSchoolNestedInput
+    classes?: ClassUpdateManyWithoutSchoolNestedInput
+    academicSessions?: AcademicSessionUpdateManyWithoutSchoolNestedInput
+    terms?: TermUpdateManyWithoutSchoolNestedInput
+    fees?: FeesUpdateManyWithoutSchoolNestedInput
+    payouts?: PayoutUpdateManyWithoutSchoolNestedInput
+  }
+
+  export type SchoolUncheckedUpdateWithoutKycverificationInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    ownerId?: StringFieldUpdateOperationsInput | string
+    name?: StringFieldUpdateOperationsInput | string
+    address?: NullableStringFieldUpdateOperationsInput | string | null
+    city?: NullableStringFieldUpdateOperationsInput | string | null
+    state?: NullableStringFieldUpdateOperationsInput | string | null
+    country?: NullableStringFieldUpdateOperationsInput | string | null
+    lga?: NullableStringFieldUpdateOperationsInput | string | null
+    postalCode?: NullableStringFieldUpdateOperationsInput | string | null
+    email?: StringFieldUpdateOperationsInput | string
+    phoneNumber?: NullableStringFieldUpdateOperationsInput | string | null
+    establishedYear?: NullableIntFieldUpdateOperationsInput | number | null
+    website?: NullableStringFieldUpdateOperationsInput | string | null
+    logo?: NullableStringFieldUpdateOperationsInput | string | null
+    schoolType?: EnumSchoolTypeFieldUpdateOperationsInput | $Enums.SchoolType
+    ownership?: EnumSchoolOwnershipFieldUpdateOperationsInput | $Enums.SchoolOwnership
+    status?: EnumSchoolStatusFieldUpdateOperationsInput | $Enums.SchoolStatus
+    isDeleted?: BoolFieldUpdateOperationsInput | boolean
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    schoolDirectorVerification?: SchoolDirectorVerificationUncheckedUpdateOneWithoutSchoolNestedInput
+    schoolOwnershipVerification?: SchoolOwnershipVerificationUncheckedUpdateOneWithoutSchoolNestedInput
+    schoolVerification?: SchoolVerificationUncheckedUpdateOneWithoutSchoolNestedInput
+    schoolPayoutDetail?: SchoolPayoutDetailUncheckedUpdateOneWithoutSchoolNestedInput
+    schoolAndPlatformLegalAgreement?: SchoolAndPlatformLegalAgreementUncheckedUpdateOneWithoutSchoolNestedInput
+    classes?: ClassUncheckedUpdateManyWithoutSchoolNestedInput
+    academicSessions?: AcademicSessionUncheckedUpdateManyWithoutSchoolNestedInput
+    terms?: TermUncheckedUpdateManyWithoutSchoolNestedInput
+    fees?: FeesUncheckedUpdateManyWithoutSchoolNestedInput
+    payouts?: PayoutUncheckedUpdateManyWithoutSchoolNestedInput
   }
 
   export type SchoolCreateWithoutClassesInput = {
@@ -48788,6 +50603,7 @@ export namespace Prisma {
     terms?: TermCreateNestedManyWithoutSchoolInput
     fees?: FeesCreateNestedManyWithoutSchoolInput
     payouts?: PayoutCreateNestedManyWithoutSchoolInput
+    kycverification?: KYCVerificationCreateNestedOneWithoutSchoolInput
   }
 
   export type SchoolUncheckedCreateWithoutClassesInput = {
@@ -48820,6 +50636,7 @@ export namespace Prisma {
     terms?: TermUncheckedCreateNestedManyWithoutSchoolInput
     fees?: FeesUncheckedCreateNestedManyWithoutSchoolInput
     payouts?: PayoutUncheckedCreateNestedManyWithoutSchoolInput
+    kycverification?: KYCVerificationUncheckedCreateNestedOneWithoutSchoolInput
   }
 
   export type SchoolCreateOrConnectWithoutClassesInput = {
@@ -48986,6 +50803,7 @@ export namespace Prisma {
     terms?: TermUpdateManyWithoutSchoolNestedInput
     fees?: FeesUpdateManyWithoutSchoolNestedInput
     payouts?: PayoutUpdateManyWithoutSchoolNestedInput
+    kycverification?: KYCVerificationUpdateOneWithoutSchoolNestedInput
   }
 
   export type SchoolUncheckedUpdateWithoutClassesInput = {
@@ -49018,6 +50836,7 @@ export namespace Prisma {
     terms?: TermUncheckedUpdateManyWithoutSchoolNestedInput
     fees?: FeesUncheckedUpdateManyWithoutSchoolNestedInput
     payouts?: PayoutUncheckedUpdateManyWithoutSchoolNestedInput
+    kycverification?: KYCVerificationUncheckedUpdateOneWithoutSchoolNestedInput
   }
 
   export type FeesUpsertWithWhereUniqueWithoutClassInput = {
@@ -49098,6 +50917,7 @@ export namespace Prisma {
     terms?: TermCreateNestedManyWithoutSchoolInput
     fees?: FeesCreateNestedManyWithoutSchoolInput
     payouts?: PayoutCreateNestedManyWithoutSchoolInput
+    kycverification?: KYCVerificationCreateNestedOneWithoutSchoolInput
   }
 
   export type SchoolUncheckedCreateWithoutAcademicSessionsInput = {
@@ -49130,6 +50950,7 @@ export namespace Prisma {
     terms?: TermUncheckedCreateNestedManyWithoutSchoolInput
     fees?: FeesUncheckedCreateNestedManyWithoutSchoolInput
     payouts?: PayoutUncheckedCreateNestedManyWithoutSchoolInput
+    kycverification?: KYCVerificationUncheckedCreateNestedOneWithoutSchoolInput
   }
 
   export type SchoolCreateOrConnectWithoutAcademicSessionsInput = {
@@ -49258,6 +51079,7 @@ export namespace Prisma {
     terms?: TermUpdateManyWithoutSchoolNestedInput
     fees?: FeesUpdateManyWithoutSchoolNestedInput
     payouts?: PayoutUpdateManyWithoutSchoolNestedInput
+    kycverification?: KYCVerificationUpdateOneWithoutSchoolNestedInput
   }
 
   export type SchoolUncheckedUpdateWithoutAcademicSessionsInput = {
@@ -49290,6 +51112,7 @@ export namespace Prisma {
     terms?: TermUncheckedUpdateManyWithoutSchoolNestedInput
     fees?: FeesUncheckedUpdateManyWithoutSchoolNestedInput
     payouts?: PayoutUncheckedUpdateManyWithoutSchoolNestedInput
+    kycverification?: KYCVerificationUncheckedUpdateOneWithoutSchoolNestedInput
   }
 
   export type FeesUpsertWithWhereUniqueWithoutAcademicSessionInput = {
@@ -49354,6 +51177,7 @@ export namespace Prisma {
     academicSessions?: AcademicSessionCreateNestedManyWithoutSchoolInput
     fees?: FeesCreateNestedManyWithoutSchoolInput
     payouts?: PayoutCreateNestedManyWithoutSchoolInput
+    kycverification?: KYCVerificationCreateNestedOneWithoutSchoolInput
   }
 
   export type SchoolUncheckedCreateWithoutTermsInput = {
@@ -49386,6 +51210,7 @@ export namespace Prisma {
     academicSessions?: AcademicSessionUncheckedCreateNestedManyWithoutSchoolInput
     fees?: FeesUncheckedCreateNestedManyWithoutSchoolInput
     payouts?: PayoutUncheckedCreateNestedManyWithoutSchoolInput
+    kycverification?: KYCVerificationUncheckedCreateNestedOneWithoutSchoolInput
   }
 
   export type SchoolCreateOrConnectWithoutTermsInput = {
@@ -49514,6 +51339,7 @@ export namespace Prisma {
     academicSessions?: AcademicSessionUpdateManyWithoutSchoolNestedInput
     fees?: FeesUpdateManyWithoutSchoolNestedInput
     payouts?: PayoutUpdateManyWithoutSchoolNestedInput
+    kycverification?: KYCVerificationUpdateOneWithoutSchoolNestedInput
   }
 
   export type SchoolUncheckedUpdateWithoutTermsInput = {
@@ -49546,6 +51372,7 @@ export namespace Prisma {
     academicSessions?: AcademicSessionUncheckedUpdateManyWithoutSchoolNestedInput
     fees?: FeesUncheckedUpdateManyWithoutSchoolNestedInput
     payouts?: PayoutUncheckedUpdateManyWithoutSchoolNestedInput
+    kycverification?: KYCVerificationUncheckedUpdateOneWithoutSchoolNestedInput
   }
 
   export type FeesUpsertWithWhereUniqueWithoutTermInput = {
@@ -49687,6 +51514,7 @@ export namespace Prisma {
     academicSessions?: AcademicSessionCreateNestedManyWithoutSchoolInput
     terms?: TermCreateNestedManyWithoutSchoolInput
     payouts?: PayoutCreateNestedManyWithoutSchoolInput
+    kycverification?: KYCVerificationCreateNestedOneWithoutSchoolInput
   }
 
   export type SchoolUncheckedCreateWithoutFeesInput = {
@@ -49719,6 +51547,7 @@ export namespace Prisma {
     academicSessions?: AcademicSessionUncheckedCreateNestedManyWithoutSchoolInput
     terms?: TermUncheckedCreateNestedManyWithoutSchoolInput
     payouts?: PayoutUncheckedCreateNestedManyWithoutSchoolInput
+    kycverification?: KYCVerificationUncheckedCreateNestedOneWithoutSchoolInput
   }
 
   export type SchoolCreateOrConnectWithoutFeesInput = {
@@ -49890,6 +51719,7 @@ export namespace Prisma {
     academicSessions?: AcademicSessionUpdateManyWithoutSchoolNestedInput
     terms?: TermUpdateManyWithoutSchoolNestedInput
     payouts?: PayoutUpdateManyWithoutSchoolNestedInput
+    kycverification?: KYCVerificationUpdateOneWithoutSchoolNestedInput
   }
 
   export type SchoolUncheckedUpdateWithoutFeesInput = {
@@ -49922,6 +51752,7 @@ export namespace Prisma {
     academicSessions?: AcademicSessionUncheckedUpdateManyWithoutSchoolNestedInput
     terms?: TermUncheckedUpdateManyWithoutSchoolNestedInput
     payouts?: PayoutUncheckedUpdateManyWithoutSchoolNestedInput
+    kycverification?: KYCVerificationUncheckedUpdateOneWithoutSchoolNestedInput
   }
 
   export type FeeBreakdownUpsertWithWhereUniqueWithoutFeeInput = {
@@ -51173,6 +53004,7 @@ export namespace Prisma {
     academicSessions?: AcademicSessionCreateNestedManyWithoutSchoolInput
     terms?: TermCreateNestedManyWithoutSchoolInput
     fees?: FeesCreateNestedManyWithoutSchoolInput
+    kycverification?: KYCVerificationCreateNestedOneWithoutSchoolInput
   }
 
   export type SchoolUncheckedCreateWithoutPayoutsInput = {
@@ -51205,6 +53037,7 @@ export namespace Prisma {
     academicSessions?: AcademicSessionUncheckedCreateNestedManyWithoutSchoolInput
     terms?: TermUncheckedCreateNestedManyWithoutSchoolInput
     fees?: FeesUncheckedCreateNestedManyWithoutSchoolInput
+    kycverification?: KYCVerificationUncheckedCreateNestedOneWithoutSchoolInput
   }
 
   export type SchoolCreateOrConnectWithoutPayoutsInput = {
@@ -51253,6 +53086,7 @@ export namespace Prisma {
     academicSessions?: AcademicSessionUpdateManyWithoutSchoolNestedInput
     terms?: TermUpdateManyWithoutSchoolNestedInput
     fees?: FeesUpdateManyWithoutSchoolNestedInput
+    kycverification?: KYCVerificationUpdateOneWithoutSchoolNestedInput
   }
 
   export type SchoolUncheckedUpdateWithoutPayoutsInput = {
@@ -51285,6 +53119,7 @@ export namespace Prisma {
     academicSessions?: AcademicSessionUncheckedUpdateManyWithoutSchoolNestedInput
     terms?: TermUncheckedUpdateManyWithoutSchoolNestedInput
     fees?: FeesUncheckedUpdateManyWithoutSchoolNestedInput
+    kycverification?: KYCVerificationUncheckedUpdateOneWithoutSchoolNestedInput
   }
 
   export type UserCreateWithoutNotificationsInput = {
@@ -51312,6 +53147,7 @@ export namespace Prisma {
     wallet?: WalletCreateNestedOneWithoutUserInput
     refreshTokens?: RefreshTokenCreateNestedManyWithoutUserInput
     firebaseToken?: FirebaseTokenCreateNestedOneWithoutUserInput
+    kycverification?: KYCVerificationCreateNestedOneWithoutUserInput
   }
 
   export type UserUncheckedCreateWithoutNotificationsInput = {
@@ -51339,6 +53175,7 @@ export namespace Prisma {
     wallet?: WalletUncheckedCreateNestedOneWithoutUserInput
     refreshTokens?: RefreshTokenUncheckedCreateNestedManyWithoutUserInput
     firebaseToken?: FirebaseTokenUncheckedCreateNestedOneWithoutUserInput
+    kycverification?: KYCVerificationUncheckedCreateNestedOneWithoutUserInput
   }
 
   export type UserCreateOrConnectWithoutNotificationsInput = {
@@ -51382,6 +53219,7 @@ export namespace Prisma {
     wallet?: WalletUpdateOneWithoutUserNestedInput
     refreshTokens?: RefreshTokenUpdateManyWithoutUserNestedInput
     firebaseToken?: FirebaseTokenUpdateOneWithoutUserNestedInput
+    kycverification?: KYCVerificationUpdateOneWithoutUserNestedInput
   }
 
   export type UserUncheckedUpdateWithoutNotificationsInput = {
@@ -51409,6 +53247,7 @@ export namespace Prisma {
     wallet?: WalletUncheckedUpdateOneWithoutUserNestedInput
     refreshTokens?: RefreshTokenUncheckedUpdateManyWithoutUserNestedInput
     firebaseToken?: FirebaseTokenUncheckedUpdateOneWithoutUserNestedInput
+    kycverification?: KYCVerificationUncheckedUpdateOneWithoutUserNestedInput
   }
 
   export type UserCreateWithoutWalletInput = {
@@ -51436,6 +53275,7 @@ export namespace Prisma {
     credential?: CredentialCreateNestedOneWithoutUserInput
     refreshTokens?: RefreshTokenCreateNestedManyWithoutUserInput
     firebaseToken?: FirebaseTokenCreateNestedOneWithoutUserInput
+    kycverification?: KYCVerificationCreateNestedOneWithoutUserInput
   }
 
   export type UserUncheckedCreateWithoutWalletInput = {
@@ -51463,6 +53303,7 @@ export namespace Prisma {
     credential?: CredentialUncheckedCreateNestedOneWithoutUserInput
     refreshTokens?: RefreshTokenUncheckedCreateNestedManyWithoutUserInput
     firebaseToken?: FirebaseTokenUncheckedCreateNestedOneWithoutUserInput
+    kycverification?: KYCVerificationUncheckedCreateNestedOneWithoutUserInput
   }
 
   export type UserCreateOrConnectWithoutWalletInput = {
@@ -51592,6 +53433,7 @@ export namespace Prisma {
     credential?: CredentialUpdateOneWithoutUserNestedInput
     refreshTokens?: RefreshTokenUpdateManyWithoutUserNestedInput
     firebaseToken?: FirebaseTokenUpdateOneWithoutUserNestedInput
+    kycverification?: KYCVerificationUpdateOneWithoutUserNestedInput
   }
 
   export type UserUncheckedUpdateWithoutWalletInput = {
@@ -51619,6 +53461,7 @@ export namespace Prisma {
     credential?: CredentialUncheckedUpdateOneWithoutUserNestedInput
     refreshTokens?: RefreshTokenUncheckedUpdateManyWithoutUserNestedInput
     firebaseToken?: FirebaseTokenUncheckedUpdateOneWithoutUserNestedInput
+    kycverification?: KYCVerificationUncheckedUpdateOneWithoutUserNestedInput
   }
 
   export type LedgerUpsertWithWhereUniqueWithoutWalletInput = {
@@ -51867,6 +53710,7 @@ export namespace Prisma {
     credential?: CredentialCreateNestedOneWithoutUserInput
     wallet?: WalletCreateNestedOneWithoutUserInput
     refreshTokens?: RefreshTokenCreateNestedManyWithoutUserInput
+    kycverification?: KYCVerificationCreateNestedOneWithoutUserInput
   }
 
   export type UserUncheckedCreateWithoutFirebaseTokenInput = {
@@ -51894,6 +53738,7 @@ export namespace Prisma {
     credential?: CredentialUncheckedCreateNestedOneWithoutUserInput
     wallet?: WalletUncheckedCreateNestedOneWithoutUserInput
     refreshTokens?: RefreshTokenUncheckedCreateNestedManyWithoutUserInput
+    kycverification?: KYCVerificationUncheckedCreateNestedOneWithoutUserInput
   }
 
   export type UserCreateOrConnectWithoutFirebaseTokenInput = {
@@ -51937,6 +53782,7 @@ export namespace Prisma {
     credential?: CredentialUpdateOneWithoutUserNestedInput
     wallet?: WalletUpdateOneWithoutUserNestedInput
     refreshTokens?: RefreshTokenUpdateManyWithoutUserNestedInput
+    kycverification?: KYCVerificationUpdateOneWithoutUserNestedInput
   }
 
   export type UserUncheckedUpdateWithoutFirebaseTokenInput = {
@@ -51964,6 +53810,7 @@ export namespace Prisma {
     credential?: CredentialUncheckedUpdateOneWithoutUserNestedInput
     wallet?: WalletUncheckedUpdateOneWithoutUserNestedInput
     refreshTokens?: RefreshTokenUncheckedUpdateManyWithoutUserNestedInput
+    kycverification?: KYCVerificationUncheckedUpdateOneWithoutUserNestedInput
   }
 
   export type VerificationCreateManyUserInput = {

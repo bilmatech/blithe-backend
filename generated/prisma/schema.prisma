@@ -150,6 +150,7 @@ model User {
   wallet                          Wallet?
   refreshTokens                   RefreshToken[]
   firebaseToken                   FirebaseToken?
+  kycverification                 KYCVerification?
 
   @@index([email, isDeleted])
   @@index([type, accountStatus, isDeleted])
@@ -294,6 +295,7 @@ model School {
   terms                           Term[]
   fees                            Fees[]
   payouts                         Payout[]
+  kycverification                 KYCVerification?
 
   @@index([email, isDeleted])
   @@index([ownerId, isDeleted])
@@ -306,13 +308,12 @@ model School {
 }
 
 model SchoolDirectorVerification {
-  id               String                @id @default(cuid())
-  schoolId         String                @unique
+  id               String         @id @default(cuid())
+  schoolId         String         @unique
   directorFullName String
   directorIDType   DirectorIDType
   directorIDNumber String
   document         String
-  status           KYCVerificationStatus @default(pending)
 
   isDeleted Boolean  @default(false)
   createdAt DateTime @default(now())
@@ -322,17 +323,14 @@ model SchoolDirectorVerification {
   school School @relation(fields: [schoolId], references: [id], onDelete: Cascade)
 
   @@index([schoolId, isDeleted])
-  @@index([status, isDeleted])
-  @@index([schoolId, status, isDeleted])
   @@index([createdAt, isDeleted])
 }
 
 model SchoolOwnershipVerification {
-  id                    String                @id @default(cuid())
-  schoolId              String                @unique
+  id                    String @id @default(cuid())
+  schoolId              String @unique
   cacform7              String
   cacShareAllotmentForm String
-  status                KYCVerificationStatus @default(pending)
 
   isDeleted Boolean  @default(false)
   createdAt DateTime @default(now())
@@ -342,19 +340,16 @@ model SchoolOwnershipVerification {
   school School @relation(fields: [schoolId], references: [id], onDelete: Cascade)
 
   @@index([schoolId, isDeleted])
-  @@index([status, isDeleted])
-  @@index([schoolId, status, isDeleted])
   @@index([createdAt, isDeleted])
 }
 
 model SchoolVerification {
-  id                      String                @id @default(cuid())
-  schoolId                String                @unique
+  id                      String @id @default(cuid())
+  schoolId                String @unique
   cacCertificate          String
   accreditationDocument   String
   taxIdentificationNumber String
   licenseDocument         String
-  status                  KYCVerificationStatus @default(pending)
 
   isDeleted Boolean  @default(false)
   createdAt DateTime @default(now())
@@ -364,8 +359,6 @@ model SchoolVerification {
   school School @relation(fields: [schoolId], references: [id], onDelete: Cascade)
 
   @@index([schoolId, isDeleted])
-  @@index([status, isDeleted])
-  @@index([schoolId, status, isDeleted])
   @@index([createdAt, isDeleted])
 }
 
@@ -389,13 +382,12 @@ model SchoolPayoutDetail {
 }
 
 model SchoolAndPlatformLegalAgreement {
-  id               String                @id @default(cuid())
-  schoolId         String                @unique
-  signedById       String                @unique
+  id               String   @id @default(cuid())
+  schoolId         String   @unique
+  signedById       String   @unique
   signature        String
   signedAt         DateTime
   legalDocumentRef String
-  status           KYCVerificationStatus @default(pending)
 
   isDeleted Boolean  @default(false)
   createdAt DateTime @default(now())
@@ -407,9 +399,27 @@ model SchoolAndPlatformLegalAgreement {
 
   @@index([schoolId, isDeleted])
   @@index([signedById, isDeleted])
-  @@index([status, isDeleted])
-  @@index([schoolId, status, isDeleted])
   @@index([signedAt, isDeleted])
+}
+
+model KYCVerification {
+  id       String                @id @default(cuid())
+  userId   String                @unique
+  schoolId String                @unique
+  status   KYCVerificationStatus @default(pending)
+
+  isDeleted Boolean  @default(false)
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  // Relations
+  user   User   @relation(fields: [userId], references: [id], onDelete: Cascade)
+  school School @relation(fields: [schoolId], references: [id], onDelete: Cascade)
+
+  @@index([userId, isDeleted])
+  @@index([schoolId, isDeleted])
+  @@index([userId, schoolId, isDeleted])
+  @@index([createdAt, isDeleted])
 }
 
 model Class {

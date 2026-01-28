@@ -1,11 +1,14 @@
 import { Injectable } from '@nestjs/common';
 import { CreateKycDto } from './dto/create-kyc.dto';
 import { UpdateKycDto } from './dto/update-kyc.dto';
+import { PrismaService } from '../database/prisma.service';
 
 @Injectable()
 export class KycService {
+  constructor(private readonly prisma: PrismaService) {}
   create(createKycDto: CreateKycDto) {
     return 'This action adds a new kyc';
+    // this.prisma.kYCVerification.create({ data: createKycDto });
   }
 
   findAll() {
