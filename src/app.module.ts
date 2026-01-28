@@ -14,6 +14,7 @@ import { FirebaseAdminModule } from './common/firebase/firebase-admin.module';
 import { DatabaseModule } from './services/database/database.module';
 import { SentryModule } from '@sentry/nestjs/setup';
 import { MediaModule } from './services/media/media.module';
+import { KycModule } from './services/kyc/kyc.module';
 
 @Module({
   imports: [
@@ -52,6 +53,7 @@ import { MediaModule } from './services/media/media.module';
     FirebaseMessagingModule,
     FirebaseAdminModule,
     MediaModule,
+    KycModule,
   ],
   controllers: [AppController],
   providers: [AppService],

@@ -1,14 +1,4 @@
-import {
-  Controller,
-  Get,
-  Post,
-  Body,
-  Patch,
-  Param,
-  Delete,
-  UseGuards,
-  Query,
-} from '@nestjs/common';
+import { Controller, Get, Post, Body, UseGuards, Query } from '@nestjs/common';
 import { AccountService } from './account.service';
 import { ApiBody, ApiOkResponse, ApiOperation, ApiTags } from '@nestjs/swagger';
 import { CredentialsService } from './credentials.service';
@@ -16,7 +6,6 @@ import { CreateApppinDto } from './dto/create-apppin.dto';
 import { AppPinResponse } from './entities/app-pin.entity';
 import { ResponseMessage } from '@Blithe/common/decorators/response-message.decorator';
 import { PaginationQueryDto } from '@Blithe/common/dto/pagination-query.dto';
-import { UpdateAccountDto } from './dto/update-account.dto';
 import { JwtAuthGuard } from '../auth/guards/auth.guard';
 import { AuthUser } from '../auth/auth.type';
 import { AuthorizedUser } from '../auth/decorators/authorized-user.decorator';
