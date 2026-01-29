@@ -21,6 +21,8 @@ import { maskEmail } from '@Blithe/common/utils/funcs.util';
 import { EncryptionService } from '../encryption/encryption.service';
 import { ResetPasswordDto } from '../account/dto/reset-password.dto';
 import { AuthorizeUserDto, SourceType } from './dto/authorize-user.dto';
+import { WalletEnqueueService } from '../wallet/queue/wallet-enqueue.service';
+import { WalletService } from '../wallet/wallet.service';
 
 @Injectable()
 export class AuthService {
@@ -30,6 +32,8 @@ export class AuthService {
     private readonly credentialsService: CredentialsService,
     private readonly verificationService: VerificationService,
     private readonly encryptionService: EncryptionService,
+    private readonly walletEnqueueService: WalletEnqueueService,
+    private readonly walletService: WalletService,
   ) {}
 
   /**
@@ -69,6 +73,11 @@ export class AuthService {
     }
   }
 
+  /**
+   * Resend account verification code to the user's email.
+   * @param resendCodeDto The DTO containing the user's email
+   * @return A message indicating that the new verification code has been sent
+   */
   async resendAccountVerificationCode(resendCodeDto: ResendCodeDto) {
     try {
       const account = await this.accountService.findByEmail(
@@ -130,6 +139,10 @@ export class AuthService {
       );
 
       // TODO: Initialize other user account services here (e.g., wallet)
+      if (verification.user.type === UserType.guardian) {
+        // Create user wallet
+        await this.walletEnqueueService.createWallet(verification.user.id);
+      }
 
       return { tokens: tokenInfo, user: verification.user };
     } catch (error) {
@@ -416,6 +429,26 @@ export class AuthService {
         throw new AppError('Invalid email or password.');
       }
 
+      // Validation: Make sure the user attempting to login from allowed source
+      // e.g., a school user should not login from mobile app
+      if (
+        user.type === UserType.school &&
+        authorizedUserDto.source === SourceType.MOBILE
+      ) {
+        throw new AppError(
+          'Sorry, your account is not permitted to login from mobile app.',
+        );
+      }
+
+      if (
+        user.type === UserType.guardian &&
+        authorizedUserDto.source === SourceType.WEB
+      ) {
+        throw new AppError(
+          'Sorry, your account is not permitted to login from web.',
+        );
+      }
+
       // Validation: If user is not verified, send verification code again.
       if (!user.verifiedAt) {
         // Send verification code
@@ -447,26 +480,6 @@ export class AuthService {
         );
       }
 
-      // Validation: Make sure the user attempting to login from allowed source
-      // e.g., a school user should not login from mobile app
-      if (
-        user.type === UserType.school &&
-        authorizedUserDto.source === SourceType.MOBILE
-      ) {
-        throw new AppError(
-          'Sorry, your account is not permitted to login from mobile app.',
-        );
-      }
-
-      if (
-        user.type === UserType.guardian &&
-        authorizedUserDto.source === SourceType.WEB
-      ) {
-        throw new AppError(
-          'Sorry, your account is not permitted to login from web.',
-        );
-      }
-
       // Verify the user's password
       const isPasswordValid = await this.credentialsService.verifyPassword(
         user.id,
@@ -481,6 +494,17 @@ export class AuthService {
 
       // Generate new user tokens
       const tokenInfo = await this.tokenService.issueTokens(user.id);
+
+      // Attach user wallet info if user is guardian
+      if (user.type === UserType.guardian) {
+        const wallet = await this.walletService.getUserWallet(user.id);
+
+        return {
+          tokens: tokenInfo,
+          user,
+          wallet,
+        };
+      }
 
       return { tokens: tokenInfo, user };
     } catch (error) {

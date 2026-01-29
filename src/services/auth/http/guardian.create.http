@@ -1,8 +1,9 @@
 POST {{ baseUrl }}/api/v1/auth/create_guardian_account
 Content-Type: application/json
 {
-    "email": "pascalobi83@gmail.com",
-    "fullName": "Pascal OBI",
+    "email": "bilmatechnologiesltd@gmail.com",
+    "fullName": "Guardian User Test",
     "password": "StrongP@ssw0rd!",
-    "phone": "+2348131234567"
+    "phone": "+2348131234567",
+    "isTermsAndPrivacyAccepted": true
 }
