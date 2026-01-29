@@ -1,5 +1,5 @@
 POST {{ baseUrl }}/api/v1/auth/verify_account
 Content-Type: application/json
 {
-    "code": "678330"
+    "code": "661370"
 }

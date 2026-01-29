@@ -495,18 +495,21 @@ export class AuthService {
       // Generate new user tokens
       const tokenInfo = await this.tokenService.issueTokens(user.id);
 
+      // Fetch updated user info
+      const updatedUser = await this.accountService.findOne(user.id);
+
       // Attach user wallet info if user is guardian
-      if (user.type === UserType.guardian) {
-        const wallet = await this.walletService.getUserWallet(user.id);
+      if (updatedUser.type === UserType.guardian) {
+        const wallet = await this.walletService.getUserWallet(updatedUser.id);
 
         return {
           tokens: tokenInfo,
-          user,
+          user: updatedUser,
           wallet,
         };
       }
 
-      return { tokens: tokenInfo, user };
+      return { tokens: tokenInfo, user: updatedUser };
     } catch (error) {
       if (error instanceof AppError) {
         throw new BadRequestException(error.message, { cause: error });

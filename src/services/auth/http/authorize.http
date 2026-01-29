@@ -1,6 +1,7 @@
 POST {{ baseUrl }}/api/v1/auth/authorize
 Content-Type: application/json
 {
-    "email": "pascalobi83@gmail.com",
-    "password": "NewStr0ngP@ssw0rd!"
+    "email": "bilmatechnologiesltd@gmail.com",
+    "password": "StrongP@ssw0rd!",
+    "source": "mobile"
 }
