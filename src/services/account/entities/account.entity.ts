@@ -3,6 +3,7 @@ import { AccountStatus, UserType } from '@DB/Client';
 import { ApiProperty } from '@nestjs/swagger';
 import { Credential } from './credentials.entity';
 import { BaseEntity } from '@Blithe/common/entity/base.entity';
+import { Wallet } from '@Blithe/services/wallet/entity/wallet.entity';
 
 export class Account extends BaseEntity {
   @ApiProperty({
@@ -89,6 +90,8 @@ export class AuthCredentials {
   user: Account;
   @ApiProperty({ type: Tokens, description: 'Authorization tokens' })
   tokens: Tokens;
+  @ApiProperty({ type: Wallet, description: 'User wallet information' })
+  wallet: Wallet;
 }
 
 export class AuthCredentialsResponse extends ResponseBody {
