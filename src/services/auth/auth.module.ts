@@ -11,6 +11,7 @@ import { AccountModule } from '../account/account.module';
 import { EncryptionModule } from '../encryption/encryption.module';
 import appConfig from '@Blithe/common/config/app.config';
 import { VerificationModule } from '../verification/verification.module';
+import { WalletModule } from '../wallet/wallet.module';
 
 @Module({
   imports: [
@@ -29,6 +30,7 @@ import { VerificationModule } from '../verification/verification.module';
     AccountModule,
     EncryptionModule,
     VerificationModule,
+    WalletModule,
   ],
   controllers: [AuthController],
   providers: [AuthService, JwtStrategy, TokenService],

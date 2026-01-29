@@ -21,6 +21,7 @@ import { maskEmail } from '@Blithe/common/utils/funcs.util';
 import { EncryptionService } from '../encryption/encryption.service';
 import { ResetPasswordDto } from '../account/dto/reset-password.dto';
 import { AuthorizeUserDto, SourceType } from './dto/authorize-user.dto';
+import { WalletEnqueueService } from '../wallet/queue/wallet-enqueue.service';
 
 @Injectable()
 export class AuthService {
@@ -30,6 +31,7 @@ export class AuthService {
     private readonly credentialsService: CredentialsService,
     private readonly verificationService: VerificationService,
     private readonly encryptionService: EncryptionService,
+    private readonly walletEnqueueService: WalletEnqueueService,
   ) {}
 
   /**
@@ -127,6 +129,10 @@ export class AuthService {
       );
 
       // TODO: Initialize other user account services here (e.g., wallet)
+      if (verification.user.type === UserType.guardian) {
+        // Create user wallet
+        await this.walletEnqueueService.createWallet(verification.user.id);
+      }
 
       return { tokens: tokenInfo, user: verification.user };
     } catch (error) {

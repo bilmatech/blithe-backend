@@ -1,7 +1,5 @@
 import {
   BadRequestException,
-  forwardRef,
-  Inject,
   Injectable,
   InternalServerErrorException,
 } from '@nestjs/common';
@@ -27,10 +25,6 @@ import {
 } from '@Blithe/services/database/prisma.service';
 import { EncryptionService } from '@Blithe/services/encryption/encryption.service';
 import { BaseLedgerService } from '@Blithe/common/services/base-ledger.service';
-import {
-  formatAmountForStorage,
-  normalizeAmount,
-} from '@Blithe/common/utils/money.util';
 
 @Injectable()
 export class WalletService extends BaseLedgerService {
@@ -76,7 +70,7 @@ export class WalletService extends BaseLedgerService {
       name: paystackWallet.accountName,
       tag: paystackWallet.bankName,
       routingNumber: paystackWallet.bankCode,
-      balance: formatAmountForStorage(0),
+      balance: '0',
       status: WalletStatus.Active,
     };
 

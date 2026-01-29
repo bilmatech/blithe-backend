@@ -1,22 +1,22 @@
 import { InjectQueue } from '@nestjs/bullmq';
 import { Injectable } from '@nestjs/common';
 import { Queue } from 'bullmq';
-import { WalletQueue } from './queue/wallet.queue';
-import { WalletEvents, WalletJobPayload } from './queue/wallet-queue.types';
-import { WebhookEvent, WebhookPayload } from './wallet.types';
+import { WalletQueue } from './wallet.queue';
+import { WalletEvents, WalletJobPayload } from './wallet-queue.types';
+import { WebhookEvent, WebhookPayload } from '../wallet.types';
 
 @Injectable()
-export class WalletEmitterService {
+export class WalletEnqueueService {
   constructor(
     @InjectQueue(WalletQueue)
     private readonly queue: Queue<WalletJobPayload>,
   ) {}
 
-  emitCreateWalletJob(userId: string) {
+  createWallet(userId: string) {
     return this.queue.add(WalletEvents.CREATE_WALLET, { payload: userId });
   }
 
-  async emitWalletJob(webhookPayload: WebhookPayload) {
+  async handleWebhook(webhookPayload: WebhookPayload) {
     switch (webhookPayload.event) {
       case WebhookEvent.CHARGE_SUCCESS:
         await this.queue.add(WalletEvents.FUND_WALLET, {
@@ -41,7 +41,7 @@ export class WalletEmitterService {
     }
   }
 
-  emitCreditWalletJob(walletAddress: string, transaction: any) {
+  creditWallet(walletAddress: string, transaction: any) {
     return this.queue.add(WalletEvents.CREDIT_WALLET, {
       payload: { walletAddress, transaction },
     });
