@@ -245,7 +245,7 @@ exports.Prisma.SchoolVerificationScalarFieldEnum = {
   schoolId: 'schoolId',
   cacCertificate: 'cacCertificate',
   accreditationDocument: 'accreditationDocument',
-  taxIdentificationNumber: 'taxIdentificationNumber',
+  taxIdentificationNumberCertificate: 'taxIdentificationNumberCertificate',
   licenseDocument: 'licenseDocument',
   isDeleted: 'isDeleted',
   createdAt: 'createdAt',
@@ -259,19 +259,31 @@ exports.Prisma.SchoolPayoutDetailScalarFieldEnum = {
   bankCode: 'bankCode',
   accountNumber: 'accountNumber',
   accountName: 'accountName',
+  bankReferenceLetter: 'bankReferenceLetter',
   isDeleted: 'isDeleted',
   createdAt: 'createdAt',
   updatedAt: 'updatedAt'
+};
+
+exports.Prisma.SchoolContactPersonScalarFieldEnum = {
+  id: 'id',
+  schoolId: 'schoolId',
+  role: 'role',
+  name: 'name',
+  phone: 'phone',
+  email: 'email',
+  createdAt: 'createdAt',
+  updatedAt: 'updatedAt',
+  isDeleted: 'isDeleted'
 };
 
 exports.Prisma.SchoolAndPlatformLegalAgreementScalarFieldEnum = {
   id: 'id',
   schoolId: 'schoolId',
   signedById: 'signedById',
-  signature: 'signature',
-  signedAt: 'signedAt',
+  agreedByName: 'agreedByName',
   legalDocumentRef: 'legalDocumentRef',
-  isDeleted: 'isDeleted',
+  signedAt: 'signedAt',
   createdAt: 'createdAt',
   updatedAt: 'updatedAt'
 };
@@ -526,6 +538,12 @@ exports.DirectorIDType = exports.$Enums.DirectorIDType = {
   voters_id: 'voters_id'
 };
 
+exports.ContactRole = exports.$Enums.ContactRole = {
+  bursar: 'bursar',
+  ict_officer: 'ict_officer',
+  other: 'other'
+};
+
 exports.KYCVerificationStatus = exports.$Enums.KYCVerificationStatus = {
   pending: 'pending',
   verified: 'verified',
@@ -596,6 +614,7 @@ exports.Prisma.ModelName = {
   SchoolOwnershipVerification: 'SchoolOwnershipVerification',
   SchoolVerification: 'SchoolVerification',
   SchoolPayoutDetail: 'SchoolPayoutDetail',
+  SchoolContactPerson: 'SchoolContactPerson',
   SchoolAndPlatformLegalAgreement: 'SchoolAndPlatformLegalAgreement',
   KYCVerification: 'KYCVerification',
   Class: 'Class',

@@ -69,6 +69,11 @@ export type SchoolVerification = $Result.DefaultSelection<Prisma.$SchoolVerifica
  */
 export type SchoolPayoutDetail = $Result.DefaultSelection<Prisma.$SchoolPayoutDetailPayload>
 /**
+ * Model SchoolContactPerson
+ * 
+ */
+export type SchoolContactPerson = $Result.DefaultSelection<Prisma.$SchoolContactPersonPayload>
+/**
  * Model SchoolAndPlatformLegalAgreement
  * 
  */
@@ -213,6 +218,15 @@ export const DirectorIDType: {
 export type DirectorIDType = (typeof DirectorIDType)[keyof typeof DirectorIDType]
 
 
+export const ContactRole: {
+  bursar: 'bursar',
+  ict_officer: 'ict_officer',
+  other: 'other'
+};
+
+export type ContactRole = (typeof ContactRole)[keyof typeof ContactRole]
+
+
 export const InvoiceStatus: {
   pending: 'pending',
   paid: 'paid'
@@ -331,6 +345,10 @@ export const SchoolOwnership: typeof $Enums.SchoolOwnership
 export type DirectorIDType = $Enums.DirectorIDType
 
 export const DirectorIDType: typeof $Enums.DirectorIDType
+
+export type ContactRole = $Enums.ContactRole
+
+export const ContactRole: typeof $Enums.ContactRole
 
 export type InvoiceStatus = $Enums.InvoiceStatus
 
@@ -598,6 +616,16 @@ export class PrismaClient<
     * ```
     */
   get schoolPayoutDetail(): Prisma.SchoolPayoutDetailDelegate<ExtArgs, ClientOptions>;
+
+  /**
+   * `prisma.schoolContactPerson`: Exposes CRUD operations for the **SchoolContactPerson** model.
+    * Example usage:
+    * ```ts
+    * // Fetch zero or more SchoolContactPeople
+    * const schoolContactPeople = await prisma.schoolContactPerson.findMany()
+    * ```
+    */
+  get schoolContactPerson(): Prisma.SchoolContactPersonDelegate<ExtArgs, ClientOptions>;
 
   /**
    * `prisma.schoolAndPlatformLegalAgreement`: Exposes CRUD operations for the **SchoolAndPlatformLegalAgreement** model.
@@ -1213,6 +1241,7 @@ export namespace Prisma {
     SchoolOwnershipVerification: 'SchoolOwnershipVerification',
     SchoolVerification: 'SchoolVerification',
     SchoolPayoutDetail: 'SchoolPayoutDetail',
+    SchoolContactPerson: 'SchoolContactPerson',
     SchoolAndPlatformLegalAgreement: 'SchoolAndPlatformLegalAgreement',
     KYCVerification: 'KYCVerification',
     Class: 'Class',
@@ -1245,7 +1274,7 @@ export namespace Prisma {
       omit: GlobalOmitOptions
     }
     meta: {
-      modelProps: "user" | "credential" | "refreshToken" | "administrator" | "guardian" | "verification" | "school" | "schoolDirectorVerification" | "schoolOwnershipVerification" | "schoolVerification" | "schoolPayoutDetail" | "schoolAndPlatformLegalAgreement" | "kYCVerification" | "class" | "academicSession" | "term" | "fees" | "feeBreakdown" | "invoice" | "student" | "linkedStudentProfile" | "transaction" | "transactionFee" | "payout" | "notification" | "wallet" | "ledger" | "firebaseToken"
+      modelProps: "user" | "credential" | "refreshToken" | "administrator" | "guardian" | "verification" | "school" | "schoolDirectorVerification" | "schoolOwnershipVerification" | "schoolVerification" | "schoolPayoutDetail" | "schoolContactPerson" | "schoolAndPlatformLegalAgreement" | "kYCVerification" | "class" | "academicSession" | "term" | "fees" | "feeBreakdown" | "invoice" | "student" | "linkedStudentProfile" | "transaction" | "transactionFee" | "payout" | "notification" | "wallet" | "ledger" | "firebaseToken"
       txIsolationLevel: Prisma.TransactionIsolationLevel
     }
     model: {
@@ -2060,6 +2089,80 @@ export namespace Prisma {
           count: {
             args: Prisma.SchoolPayoutDetailCountArgs<ExtArgs>
             result: $Utils.Optional<SchoolPayoutDetailCountAggregateOutputType> | number
+          }
+        }
+      }
+      SchoolContactPerson: {
+        payload: Prisma.$SchoolContactPersonPayload<ExtArgs>
+        fields: Prisma.SchoolContactPersonFieldRefs
+        operations: {
+          findUnique: {
+            args: Prisma.SchoolContactPersonFindUniqueArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$SchoolContactPersonPayload> | null
+          }
+          findUniqueOrThrow: {
+            args: Prisma.SchoolContactPersonFindUniqueOrThrowArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$SchoolContactPersonPayload>
+          }
+          findFirst: {
+            args: Prisma.SchoolContactPersonFindFirstArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$SchoolContactPersonPayload> | null
+          }
+          findFirstOrThrow: {
+            args: Prisma.SchoolContactPersonFindFirstOrThrowArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$SchoolContactPersonPayload>
+          }
+          findMany: {
+            args: Prisma.SchoolContactPersonFindManyArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$SchoolContactPersonPayload>[]
+          }
+          create: {
+            args: Prisma.SchoolContactPersonCreateArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$SchoolContactPersonPayload>
+          }
+          createMany: {
+            args: Prisma.SchoolContactPersonCreateManyArgs<ExtArgs>
+            result: BatchPayload
+          }
+          createManyAndReturn: {
+            args: Prisma.SchoolContactPersonCreateManyAndReturnArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$SchoolContactPersonPayload>[]
+          }
+          delete: {
+            args: Prisma.SchoolContactPersonDeleteArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$SchoolContactPersonPayload>
+          }
+          update: {
+            args: Prisma.SchoolContactPersonUpdateArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$SchoolContactPersonPayload>
+          }
+          deleteMany: {
+            args: Prisma.SchoolContactPersonDeleteManyArgs<ExtArgs>
+            result: BatchPayload
+          }
+          updateMany: {
+            args: Prisma.SchoolContactPersonUpdateManyArgs<ExtArgs>
+            result: BatchPayload
+          }
+          updateManyAndReturn: {
+            args: Prisma.SchoolContactPersonUpdateManyAndReturnArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$SchoolContactPersonPayload>[]
+          }
+          upsert: {
+            args: Prisma.SchoolContactPersonUpsertArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$SchoolContactPersonPayload>
+          }
+          aggregate: {
+            args: Prisma.SchoolContactPersonAggregateArgs<ExtArgs>
+            result: $Utils.Optional<AggregateSchoolContactPerson>
+          }
+          groupBy: {
+            args: Prisma.SchoolContactPersonGroupByArgs<ExtArgs>
+            result: $Utils.Optional<SchoolContactPersonGroupByOutputType>[]
+          }
+          count: {
+            args: Prisma.SchoolContactPersonCountArgs<ExtArgs>
+            result: $Utils.Optional<SchoolContactPersonCountAggregateOutputType> | number
           }
         }
       }
@@ -3440,6 +3543,7 @@ export namespace Prisma {
     schoolOwnershipVerification?: SchoolOwnershipVerificationOmit
     schoolVerification?: SchoolVerificationOmit
     schoolPayoutDetail?: SchoolPayoutDetailOmit
+    schoolContactPerson?: SchoolContactPersonOmit
     schoolAndPlatformLegalAgreement?: SchoolAndPlatformLegalAgreementOmit
     kYCVerification?: KYCVerificationOmit
     class?: ClassOmit
@@ -4189,7 +4293,6 @@ export namespace Prisma {
     guardian?: boolean | User$guardianArgs<ExtArgs>
     verifications?: boolean | User$verificationsArgs<ExtArgs>
     school?: boolean | User$schoolArgs<ExtArgs>
-    schoolAndPlatformLegalAgreement?: boolean | User$schoolAndPlatformLegalAgreementArgs<ExtArgs>
     notifications?: boolean | User$notificationsArgs<ExtArgs>
     credential?: boolean | User$credentialArgs<ExtArgs>
     wallet?: boolean | User$walletArgs<ExtArgs>
@@ -4259,7 +4362,6 @@ export namespace Prisma {
     guardian?: boolean | User$guardianArgs<ExtArgs>
     verifications?: boolean | User$verificationsArgs<ExtArgs>
     school?: boolean | User$schoolArgs<ExtArgs>
-    schoolAndPlatformLegalAgreement?: boolean | User$schoolAndPlatformLegalAgreementArgs<ExtArgs>
     notifications?: boolean | User$notificationsArgs<ExtArgs>
     credential?: boolean | User$credentialArgs<ExtArgs>
     wallet?: boolean | User$walletArgs<ExtArgs>
@@ -4278,7 +4380,6 @@ export namespace Prisma {
       guardian: Prisma.$GuardianPayload<ExtArgs> | null
       verifications: Prisma.$VerificationPayload<ExtArgs>[]
       school: Prisma.$SchoolPayload<ExtArgs> | null
-      schoolAndPlatformLegalAgreement: Prisma.$SchoolAndPlatformLegalAgreementPayload<ExtArgs> | null
       notifications: Prisma.$NotificationPayload<ExtArgs>[]
       credential: Prisma.$CredentialPayload<ExtArgs> | null
       wallet: Prisma.$WalletPayload<ExtArgs> | null
@@ -4700,7 +4801,6 @@ export namespace Prisma {
     guardian<T extends User$guardianArgs<ExtArgs> = {}>(args?: Subset<T, User$guardianArgs<ExtArgs>>): Prisma__GuardianClient<$Result.GetResult<Prisma.$GuardianPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
     verifications<T extends User$verificationsArgs<ExtArgs> = {}>(args?: Subset<T, User$verificationsArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$VerificationPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
     school<T extends User$schoolArgs<ExtArgs> = {}>(args?: Subset<T, User$schoolArgs<ExtArgs>>): Prisma__SchoolClient<$Result.GetResult<Prisma.$SchoolPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
-    schoolAndPlatformLegalAgreement<T extends User$schoolAndPlatformLegalAgreementArgs<ExtArgs> = {}>(args?: Subset<T, User$schoolAndPlatformLegalAgreementArgs<ExtArgs>>): Prisma__SchoolAndPlatformLegalAgreementClient<$Result.GetResult<Prisma.$SchoolAndPlatformLegalAgreementPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
     notifications<T extends User$notificationsArgs<ExtArgs> = {}>(args?: Subset<T, User$notificationsArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$NotificationPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
     credential<T extends User$credentialArgs<ExtArgs> = {}>(args?: Subset<T, User$credentialArgs<ExtArgs>>): Prisma__CredentialClient<$Result.GetResult<Prisma.$CredentialPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
     wallet<T extends User$walletArgs<ExtArgs> = {}>(args?: Subset<T, User$walletArgs<ExtArgs>>): Prisma__WalletClient<$Result.GetResult<Prisma.$WalletPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
@@ -5217,25 +5317,6 @@ export namespace Prisma {
      */
     include?: SchoolInclude<ExtArgs> | null
     where?: SchoolWhereInput
-  }
-
-  /**
-   * User.schoolAndPlatformLegalAgreement
-   */
-  export type User$schoolAndPlatformLegalAgreementArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    /**
-     * Select specific fields to fetch from the SchoolAndPlatformLegalAgreement
-     */
-    select?: SchoolAndPlatformLegalAgreementSelect<ExtArgs> | null
-    /**
-     * Omit specific fields from the SchoolAndPlatformLegalAgreement
-     */
-    omit?: SchoolAndPlatformLegalAgreementOmit<ExtArgs> | null
-    /**
-     * Choose, which related nodes to fetch as well
-     */
-    include?: SchoolAndPlatformLegalAgreementInclude<ExtArgs> | null
-    where?: SchoolAndPlatformLegalAgreementWhereInput
   }
 
   /**
@@ -11364,6 +11445,7 @@ export namespace Prisma {
     schoolVerification?: boolean | School$schoolVerificationArgs<ExtArgs>
     schoolPayoutDetail?: boolean | School$schoolPayoutDetailArgs<ExtArgs>
     schoolAndPlatformLegalAgreement?: boolean | School$schoolAndPlatformLegalAgreementArgs<ExtArgs>
+    SchoolContactPerson?: boolean | School$SchoolContactPersonArgs<ExtArgs>
     classes?: boolean | School$classesArgs<ExtArgs>
     academicSessions?: boolean | School$academicSessionsArgs<ExtArgs>
     terms?: boolean | School$termsArgs<ExtArgs>
@@ -11452,6 +11534,7 @@ export namespace Prisma {
     schoolVerification?: boolean | School$schoolVerificationArgs<ExtArgs>
     schoolPayoutDetail?: boolean | School$schoolPayoutDetailArgs<ExtArgs>
     schoolAndPlatformLegalAgreement?: boolean | School$schoolAndPlatformLegalAgreementArgs<ExtArgs>
+    SchoolContactPerson?: boolean | School$SchoolContactPersonArgs<ExtArgs>
     classes?: boolean | School$classesArgs<ExtArgs>
     academicSessions?: boolean | School$academicSessionsArgs<ExtArgs>
     terms?: boolean | School$termsArgs<ExtArgs>
@@ -11476,6 +11559,7 @@ export namespace Prisma {
       schoolVerification: Prisma.$SchoolVerificationPayload<ExtArgs> | null
       schoolPayoutDetail: Prisma.$SchoolPayoutDetailPayload<ExtArgs> | null
       schoolAndPlatformLegalAgreement: Prisma.$SchoolAndPlatformLegalAgreementPayload<ExtArgs> | null
+      SchoolContactPerson: Prisma.$SchoolContactPersonPayload<ExtArgs> | null
       classes: Prisma.$ClassPayload<ExtArgs>[]
       academicSessions: Prisma.$AcademicSessionPayload<ExtArgs>[]
       terms: Prisma.$TermPayload<ExtArgs>[]
@@ -11904,6 +11988,7 @@ export namespace Prisma {
     schoolVerification<T extends School$schoolVerificationArgs<ExtArgs> = {}>(args?: Subset<T, School$schoolVerificationArgs<ExtArgs>>): Prisma__SchoolVerificationClient<$Result.GetResult<Prisma.$SchoolVerificationPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
     schoolPayoutDetail<T extends School$schoolPayoutDetailArgs<ExtArgs> = {}>(args?: Subset<T, School$schoolPayoutDetailArgs<ExtArgs>>): Prisma__SchoolPayoutDetailClient<$Result.GetResult<Prisma.$SchoolPayoutDetailPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
     schoolAndPlatformLegalAgreement<T extends School$schoolAndPlatformLegalAgreementArgs<ExtArgs> = {}>(args?: Subset<T, School$schoolAndPlatformLegalAgreementArgs<ExtArgs>>): Prisma__SchoolAndPlatformLegalAgreementClient<$Result.GetResult<Prisma.$SchoolAndPlatformLegalAgreementPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
+    SchoolContactPerson<T extends School$SchoolContactPersonArgs<ExtArgs> = {}>(args?: Subset<T, School$SchoolContactPersonArgs<ExtArgs>>): Prisma__SchoolContactPersonClient<$Result.GetResult<Prisma.$SchoolContactPersonPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
     classes<T extends School$classesArgs<ExtArgs> = {}>(args?: Subset<T, School$classesArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$ClassPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
     academicSessions<T extends School$academicSessionsArgs<ExtArgs> = {}>(args?: Subset<T, School$academicSessionsArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$AcademicSessionPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
     terms<T extends School$termsArgs<ExtArgs> = {}>(args?: Subset<T, School$termsArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$TermPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
@@ -12447,6 +12532,25 @@ export namespace Prisma {
      */
     include?: SchoolAndPlatformLegalAgreementInclude<ExtArgs> | null
     where?: SchoolAndPlatformLegalAgreementWhereInput
+  }
+
+  /**
+   * School.SchoolContactPerson
+   */
+  export type School$SchoolContactPersonArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the SchoolContactPerson
+     */
+    select?: SchoolContactPersonSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the SchoolContactPerson
+     */
+    omit?: SchoolContactPersonOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: SchoolContactPersonInclude<ExtArgs> | null
+    where?: SchoolContactPersonWhereInput
   }
 
   /**
@@ -14816,7 +14920,7 @@ export namespace Prisma {
     schoolId: string | null
     cacCertificate: string | null
     accreditationDocument: string | null
-    taxIdentificationNumber: string | null
+    taxIdentificationNumberCertificate: string | null
     licenseDocument: string | null
     isDeleted: boolean | null
     createdAt: Date | null
@@ -14828,7 +14932,7 @@ export namespace Prisma {
     schoolId: string | null
     cacCertificate: string | null
     accreditationDocument: string | null
-    taxIdentificationNumber: string | null
+    taxIdentificationNumberCertificate: string | null
     licenseDocument: string | null
     isDeleted: boolean | null
     createdAt: Date | null
@@ -14840,7 +14944,7 @@ export namespace Prisma {
     schoolId: number
     cacCertificate: number
     accreditationDocument: number
-    taxIdentificationNumber: number
+    taxIdentificationNumberCertificate: number
     licenseDocument: number
     isDeleted: number
     createdAt: number
@@ -14854,7 +14958,7 @@ export namespace Prisma {
     schoolId?: true
     cacCertificate?: true
     accreditationDocument?: true
-    taxIdentificationNumber?: true
+    taxIdentificationNumberCertificate?: true
     licenseDocument?: true
     isDeleted?: true
     createdAt?: true
@@ -14866,7 +14970,7 @@ export namespace Prisma {
     schoolId?: true
     cacCertificate?: true
     accreditationDocument?: true
-    taxIdentificationNumber?: true
+    taxIdentificationNumberCertificate?: true
     licenseDocument?: true
     isDeleted?: true
     createdAt?: true
@@ -14878,7 +14982,7 @@ export namespace Prisma {
     schoolId?: true
     cacCertificate?: true
     accreditationDocument?: true
-    taxIdentificationNumber?: true
+    taxIdentificationNumberCertificate?: true
     licenseDocument?: true
     isDeleted?: true
     createdAt?: true
@@ -14963,7 +15067,7 @@ export namespace Prisma {
     schoolId: string
     cacCertificate: string
     accreditationDocument: string
-    taxIdentificationNumber: string
+    taxIdentificationNumberCertificate: string
     licenseDocument: string
     isDeleted: boolean
     createdAt: Date
@@ -14992,7 +15096,7 @@ export namespace Prisma {
     schoolId?: boolean
     cacCertificate?: boolean
     accreditationDocument?: boolean
-    taxIdentificationNumber?: boolean
+    taxIdentificationNumberCertificate?: boolean
     licenseDocument?: boolean
     isDeleted?: boolean
     createdAt?: boolean
@@ -15005,7 +15109,7 @@ export namespace Prisma {
     schoolId?: boolean
     cacCertificate?: boolean
     accreditationDocument?: boolean
-    taxIdentificationNumber?: boolean
+    taxIdentificationNumberCertificate?: boolean
     licenseDocument?: boolean
     isDeleted?: boolean
     createdAt?: boolean
@@ -15018,7 +15122,7 @@ export namespace Prisma {
     schoolId?: boolean
     cacCertificate?: boolean
     accreditationDocument?: boolean
-    taxIdentificationNumber?: boolean
+    taxIdentificationNumberCertificate?: boolean
     licenseDocument?: boolean
     isDeleted?: boolean
     createdAt?: boolean
@@ -15031,14 +15135,14 @@ export namespace Prisma {
     schoolId?: boolean
     cacCertificate?: boolean
     accreditationDocument?: boolean
-    taxIdentificationNumber?: boolean
+    taxIdentificationNumberCertificate?: boolean
     licenseDocument?: boolean
     isDeleted?: boolean
     createdAt?: boolean
     updatedAt?: boolean
   }
 
-  export type SchoolVerificationOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "schoolId" | "cacCertificate" | "accreditationDocument" | "taxIdentificationNumber" | "licenseDocument" | "isDeleted" | "createdAt" | "updatedAt", ExtArgs["result"]["schoolVerification"]>
+  export type SchoolVerificationOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "schoolId" | "cacCertificate" | "accreditationDocument" | "taxIdentificationNumberCertificate" | "licenseDocument" | "isDeleted" | "createdAt" | "updatedAt", ExtArgs["result"]["schoolVerification"]>
   export type SchoolVerificationInclude<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     school?: boolean | SchoolDefaultArgs<ExtArgs>
   }
@@ -15059,7 +15163,7 @@ export namespace Prisma {
       schoolId: string
       cacCertificate: string
       accreditationDocument: string
-      taxIdentificationNumber: string
+      taxIdentificationNumberCertificate: string
       licenseDocument: string
       isDeleted: boolean
       createdAt: Date
@@ -15492,7 +15596,7 @@ export namespace Prisma {
     readonly schoolId: FieldRef<"SchoolVerification", 'String'>
     readonly cacCertificate: FieldRef<"SchoolVerification", 'String'>
     readonly accreditationDocument: FieldRef<"SchoolVerification", 'String'>
-    readonly taxIdentificationNumber: FieldRef<"SchoolVerification", 'String'>
+    readonly taxIdentificationNumberCertificate: FieldRef<"SchoolVerification", 'String'>
     readonly licenseDocument: FieldRef<"SchoolVerification", 'String'>
     readonly isDeleted: FieldRef<"SchoolVerification", 'Boolean'>
     readonly createdAt: FieldRef<"SchoolVerification", 'DateTime'>
@@ -15928,6 +16032,7 @@ export namespace Prisma {
     bankCode: string | null
     accountNumber: string | null
     accountName: string | null
+    bankReferenceLetter: string | null
     isDeleted: boolean | null
     createdAt: Date | null
     updatedAt: Date | null
@@ -15940,6 +16045,7 @@ export namespace Prisma {
     bankCode: string | null
     accountNumber: string | null
     accountName: string | null
+    bankReferenceLetter: string | null
     isDeleted: boolean | null
     createdAt: Date | null
     updatedAt: Date | null
@@ -15952,6 +16058,7 @@ export namespace Prisma {
     bankCode: number
     accountNumber: number
     accountName: number
+    bankReferenceLetter: number
     isDeleted: number
     createdAt: number
     updatedAt: number
@@ -15966,6 +16073,7 @@ export namespace Prisma {
     bankCode?: true
     accountNumber?: true
     accountName?: true
+    bankReferenceLetter?: true
     isDeleted?: true
     createdAt?: true
     updatedAt?: true
@@ -15978,6 +16086,7 @@ export namespace Prisma {
     bankCode?: true
     accountNumber?: true
     accountName?: true
+    bankReferenceLetter?: true
     isDeleted?: true
     createdAt?: true
     updatedAt?: true
@@ -15990,6 +16099,7 @@ export namespace Prisma {
     bankCode?: true
     accountNumber?: true
     accountName?: true
+    bankReferenceLetter?: true
     isDeleted?: true
     createdAt?: true
     updatedAt?: true
@@ -16075,6 +16185,7 @@ export namespace Prisma {
     bankCode: string
     accountNumber: string
     accountName: string
+    bankReferenceLetter: string
     isDeleted: boolean
     createdAt: Date
     updatedAt: Date
@@ -16104,6 +16215,7 @@ export namespace Prisma {
     bankCode?: boolean
     accountNumber?: boolean
     accountName?: boolean
+    bankReferenceLetter?: boolean
     isDeleted?: boolean
     createdAt?: boolean
     updatedAt?: boolean
@@ -16117,6 +16229,7 @@ export namespace Prisma {
     bankCode?: boolean
     accountNumber?: boolean
     accountName?: boolean
+    bankReferenceLetter?: boolean
     isDeleted?: boolean
     createdAt?: boolean
     updatedAt?: boolean
@@ -16130,6 +16243,7 @@ export namespace Prisma {
     bankCode?: boolean
     accountNumber?: boolean
     accountName?: boolean
+    bankReferenceLetter?: boolean
     isDeleted?: boolean
     createdAt?: boolean
     updatedAt?: boolean
@@ -16143,12 +16257,13 @@ export namespace Prisma {
     bankCode?: boolean
     accountNumber?: boolean
     accountName?: boolean
+    bankReferenceLetter?: boolean
     isDeleted?: boolean
     createdAt?: boolean
     updatedAt?: boolean
   }
 
-  export type SchoolPayoutDetailOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "schoolId" | "bankName" | "bankCode" | "accountNumber" | "accountName" | "isDeleted" | "createdAt" | "updatedAt", ExtArgs["result"]["schoolPayoutDetail"]>
+  export type SchoolPayoutDetailOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "schoolId" | "bankName" | "bankCode" | "accountNumber" | "accountName" | "bankReferenceLetter" | "isDeleted" | "createdAt" | "updatedAt", ExtArgs["result"]["schoolPayoutDetail"]>
   export type SchoolPayoutDetailInclude<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     school?: boolean | SchoolDefaultArgs<ExtArgs>
   }
@@ -16171,6 +16286,7 @@ export namespace Prisma {
       bankCode: string
       accountNumber: string
       accountName: string
+      bankReferenceLetter: string
       isDeleted: boolean
       createdAt: Date
       updatedAt: Date
@@ -16604,6 +16720,7 @@ export namespace Prisma {
     readonly bankCode: FieldRef<"SchoolPayoutDetail", 'String'>
     readonly accountNumber: FieldRef<"SchoolPayoutDetail", 'String'>
     readonly accountName: FieldRef<"SchoolPayoutDetail", 'String'>
+    readonly bankReferenceLetter: FieldRef<"SchoolPayoutDetail", 'String'>
     readonly isDeleted: FieldRef<"SchoolPayoutDetail", 'Boolean'>
     readonly createdAt: FieldRef<"SchoolPayoutDetail", 'DateTime'>
     readonly updatedAt: FieldRef<"SchoolPayoutDetail", 'DateTime'>
@@ -17022,6 +17139,1116 @@ export namespace Prisma {
 
 
   /**
+   * Model SchoolContactPerson
+   */
+
+  export type AggregateSchoolContactPerson = {
+    _count: SchoolContactPersonCountAggregateOutputType | null
+    _min: SchoolContactPersonMinAggregateOutputType | null
+    _max: SchoolContactPersonMaxAggregateOutputType | null
+  }
+
+  export type SchoolContactPersonMinAggregateOutputType = {
+    id: string | null
+    schoolId: string | null
+    role: $Enums.ContactRole | null
+    name: string | null
+    phone: string | null
+    email: string | null
+    createdAt: Date | null
+    updatedAt: Date | null
+    isDeleted: boolean | null
+  }
+
+  export type SchoolContactPersonMaxAggregateOutputType = {
+    id: string | null
+    schoolId: string | null
+    role: $Enums.ContactRole | null
+    name: string | null
+    phone: string | null
+    email: string | null
+    createdAt: Date | null
+    updatedAt: Date | null
+    isDeleted: boolean | null
+  }
+
+  export type SchoolContactPersonCountAggregateOutputType = {
+    id: number
+    schoolId: number
+    role: number
+    name: number
+    phone: number
+    email: number
+    createdAt: number
+    updatedAt: number
+    isDeleted: number
+    _all: number
+  }
+
+
+  export type SchoolContactPersonMinAggregateInputType = {
+    id?: true
+    schoolId?: true
+    role?: true
+    name?: true
+    phone?: true
+    email?: true
+    createdAt?: true
+    updatedAt?: true
+    isDeleted?: true
+  }
+
+  export type SchoolContactPersonMaxAggregateInputType = {
+    id?: true
+    schoolId?: true
+    role?: true
+    name?: true
+    phone?: true
+    email?: true
+    createdAt?: true
+    updatedAt?: true
+    isDeleted?: true
+  }
+
+  export type SchoolContactPersonCountAggregateInputType = {
+    id?: true
+    schoolId?: true
+    role?: true
+    name?: true
+    phone?: true
+    email?: true
+    createdAt?: true
+    updatedAt?: true
+    isDeleted?: true
+    _all?: true
+  }
+
+  export type SchoolContactPersonAggregateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Filter which SchoolContactPerson to aggregate.
+     */
+    where?: SchoolContactPersonWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of SchoolContactPeople to fetch.
+     */
+    orderBy?: SchoolContactPersonOrderByWithRelationInput | SchoolContactPersonOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the start position
+     */
+    cursor?: SchoolContactPersonWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` SchoolContactPeople from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` SchoolContactPeople.
+     */
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Count returned SchoolContactPeople
+    **/
+    _count?: true | SchoolContactPersonCountAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to find the minimum value
+    **/
+    _min?: SchoolContactPersonMinAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to find the maximum value
+    **/
+    _max?: SchoolContactPersonMaxAggregateInputType
+  }
+
+  export type GetSchoolContactPersonAggregateType<T extends SchoolContactPersonAggregateArgs> = {
+        [P in keyof T & keyof AggregateSchoolContactPerson]: P extends '_count' | 'count'
+      ? T[P] extends true
+        ? number
+        : GetScalarType<T[P], AggregateSchoolContactPerson[P]>
+      : GetScalarType<T[P], AggregateSchoolContactPerson[P]>
+  }
+
+
+
+
+  export type SchoolContactPersonGroupByArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    where?: SchoolContactPersonWhereInput
+    orderBy?: SchoolContactPersonOrderByWithAggregationInput | SchoolContactPersonOrderByWithAggregationInput[]
+    by: SchoolContactPersonScalarFieldEnum[] | SchoolContactPersonScalarFieldEnum
+    having?: SchoolContactPersonScalarWhereWithAggregatesInput
+    take?: number
+    skip?: number
+    _count?: SchoolContactPersonCountAggregateInputType | true
+    _min?: SchoolContactPersonMinAggregateInputType
+    _max?: SchoolContactPersonMaxAggregateInputType
+  }
+
+  export type SchoolContactPersonGroupByOutputType = {
+    id: string
+    schoolId: string
+    role: $Enums.ContactRole
+    name: string
+    phone: string
+    email: string
+    createdAt: Date
+    updatedAt: Date
+    isDeleted: boolean
+    _count: SchoolContactPersonCountAggregateOutputType | null
+    _min: SchoolContactPersonMinAggregateOutputType | null
+    _max: SchoolContactPersonMaxAggregateOutputType | null
+  }
+
+  type GetSchoolContactPersonGroupByPayload<T extends SchoolContactPersonGroupByArgs> = Prisma.PrismaPromise<
+    Array<
+      PickEnumerable<SchoolContactPersonGroupByOutputType, T['by']> &
+        {
+          [P in ((keyof T) & (keyof SchoolContactPersonGroupByOutputType))]: P extends '_count'
+            ? T[P] extends boolean
+              ? number
+              : GetScalarType<T[P], SchoolContactPersonGroupByOutputType[P]>
+            : GetScalarType<T[P], SchoolContactPersonGroupByOutputType[P]>
+        }
+      >
+    >
+
+
+  export type SchoolContactPersonSelect<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
+    id?: boolean
+    schoolId?: boolean
+    role?: boolean
+    name?: boolean
+    phone?: boolean
+    email?: boolean
+    createdAt?: boolean
+    updatedAt?: boolean
+    isDeleted?: boolean
+    school?: boolean | SchoolDefaultArgs<ExtArgs>
+  }, ExtArgs["result"]["schoolContactPerson"]>
+
+  export type SchoolContactPersonSelectCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
+    id?: boolean
+    schoolId?: boolean
+    role?: boolean
+    name?: boolean
+    phone?: boolean
+    email?: boolean
+    createdAt?: boolean
+    updatedAt?: boolean
+    isDeleted?: boolean
+    school?: boolean | SchoolDefaultArgs<ExtArgs>
+  }, ExtArgs["result"]["schoolContactPerson"]>
+
+  export type SchoolContactPersonSelectUpdateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
+    id?: boolean
+    schoolId?: boolean
+    role?: boolean
+    name?: boolean
+    phone?: boolean
+    email?: boolean
+    createdAt?: boolean
+    updatedAt?: boolean
+    isDeleted?: boolean
+    school?: boolean | SchoolDefaultArgs<ExtArgs>
+  }, ExtArgs["result"]["schoolContactPerson"]>
+
+  export type SchoolContactPersonSelectScalar = {
+    id?: boolean
+    schoolId?: boolean
+    role?: boolean
+    name?: boolean
+    phone?: boolean
+    email?: boolean
+    createdAt?: boolean
+    updatedAt?: boolean
+    isDeleted?: boolean
+  }
+
+  export type SchoolContactPersonOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "schoolId" | "role" | "name" | "phone" | "email" | "createdAt" | "updatedAt" | "isDeleted", ExtArgs["result"]["schoolContactPerson"]>
+  export type SchoolContactPersonInclude<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    school?: boolean | SchoolDefaultArgs<ExtArgs>
+  }
+  export type SchoolContactPersonIncludeCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    school?: boolean | SchoolDefaultArgs<ExtArgs>
+  }
+  export type SchoolContactPersonIncludeUpdateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    school?: boolean | SchoolDefaultArgs<ExtArgs>
+  }
+
+  export type $SchoolContactPersonPayload<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    name: "SchoolContactPerson"
+    objects: {
+      school: Prisma.$SchoolPayload<ExtArgs>
+    }
+    scalars: $Extensions.GetPayloadResult<{
+      id: string
+      schoolId: string
+      role: $Enums.ContactRole
+      name: string
+      phone: string
+      email: string
+      createdAt: Date
+      updatedAt: Date
+      isDeleted: boolean
+    }, ExtArgs["result"]["schoolContactPerson"]>
+    composites: {}
+  }
+
+  type SchoolContactPersonGetPayload<S extends boolean | null | undefined | SchoolContactPersonDefaultArgs> = $Result.GetResult<Prisma.$SchoolContactPersonPayload, S>
+
+  type SchoolContactPersonCountArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> =
+    Omit<SchoolContactPersonFindManyArgs, 'select' | 'include' | 'distinct' | 'omit'> & {
+      select?: SchoolContactPersonCountAggregateInputType | true
+    }
+
+  export interface SchoolContactPersonDelegate<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs, GlobalOmitOptions = {}> {
+    [K: symbol]: { types: Prisma.TypeMap<ExtArgs>['model']['SchoolContactPerson'], meta: { name: 'SchoolContactPerson' } }
+    /**
+     * Find zero or one SchoolContactPerson that matches the filter.
+     * @param {SchoolContactPersonFindUniqueArgs} args - Arguments to find a SchoolContactPerson
+     * @example
+     * // Get one SchoolContactPerson
+     * const schoolContactPerson = await prisma.schoolContactPerson.findUnique({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findUnique<T extends SchoolContactPersonFindUniqueArgs>(args: SelectSubset<T, SchoolContactPersonFindUniqueArgs<ExtArgs>>): Prisma__SchoolContactPersonClient<$Result.GetResult<Prisma.$SchoolContactPersonPayload<ExtArgs>, T, "findUnique", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find one SchoolContactPerson that matches the filter or throw an error with `error.code='P2025'`
+     * if no matches were found.
+     * @param {SchoolContactPersonFindUniqueOrThrowArgs} args - Arguments to find a SchoolContactPerson
+     * @example
+     * // Get one SchoolContactPerson
+     * const schoolContactPerson = await prisma.schoolContactPerson.findUniqueOrThrow({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findUniqueOrThrow<T extends SchoolContactPersonFindUniqueOrThrowArgs>(args: SelectSubset<T, SchoolContactPersonFindUniqueOrThrowArgs<ExtArgs>>): Prisma__SchoolContactPersonClient<$Result.GetResult<Prisma.$SchoolContactPersonPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find the first SchoolContactPerson that matches the filter.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {SchoolContactPersonFindFirstArgs} args - Arguments to find a SchoolContactPerson
+     * @example
+     * // Get one SchoolContactPerson
+     * const schoolContactPerson = await prisma.schoolContactPerson.findFirst({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findFirst<T extends SchoolContactPersonFindFirstArgs>(args?: SelectSubset<T, SchoolContactPersonFindFirstArgs<ExtArgs>>): Prisma__SchoolContactPersonClient<$Result.GetResult<Prisma.$SchoolContactPersonPayload<ExtArgs>, T, "findFirst", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find the first SchoolContactPerson that matches the filter or
+     * throw `PrismaKnownClientError` with `P2025` code if no matches were found.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {SchoolContactPersonFindFirstOrThrowArgs} args - Arguments to find a SchoolContactPerson
+     * @example
+     * // Get one SchoolContactPerson
+     * const schoolContactPerson = await prisma.schoolContactPerson.findFirstOrThrow({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findFirstOrThrow<T extends SchoolContactPersonFindFirstOrThrowArgs>(args?: SelectSubset<T, SchoolContactPersonFindFirstOrThrowArgs<ExtArgs>>): Prisma__SchoolContactPersonClient<$Result.GetResult<Prisma.$SchoolContactPersonPayload<ExtArgs>, T, "findFirstOrThrow", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find zero or more SchoolContactPeople that matches the filter.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {SchoolContactPersonFindManyArgs} args - Arguments to filter and select certain fields only.
+     * @example
+     * // Get all SchoolContactPeople
+     * const schoolContactPeople = await prisma.schoolContactPerson.findMany()
+     * 
+     * // Get first 10 SchoolContactPeople
+     * const schoolContactPeople = await prisma.schoolContactPerson.findMany({ take: 10 })
+     * 
+     * // Only select the `id`
+     * const schoolContactPersonWithIdOnly = await prisma.schoolContactPerson.findMany({ select: { id: true } })
+     * 
+     */
+    findMany<T extends SchoolContactPersonFindManyArgs>(args?: SelectSubset<T, SchoolContactPersonFindManyArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$SchoolContactPersonPayload<ExtArgs>, T, "findMany", GlobalOmitOptions>>
+
+    /**
+     * Create a SchoolContactPerson.
+     * @param {SchoolContactPersonCreateArgs} args - Arguments to create a SchoolContactPerson.
+     * @example
+     * // Create one SchoolContactPerson
+     * const SchoolContactPerson = await prisma.schoolContactPerson.create({
+     *   data: {
+     *     // ... data to create a SchoolContactPerson
+     *   }
+     * })
+     * 
+     */
+    create<T extends SchoolContactPersonCreateArgs>(args: SelectSubset<T, SchoolContactPersonCreateArgs<ExtArgs>>): Prisma__SchoolContactPersonClient<$Result.GetResult<Prisma.$SchoolContactPersonPayload<ExtArgs>, T, "create", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Create many SchoolContactPeople.
+     * @param {SchoolContactPersonCreateManyArgs} args - Arguments to create many SchoolContactPeople.
+     * @example
+     * // Create many SchoolContactPeople
+     * const schoolContactPerson = await prisma.schoolContactPerson.createMany({
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     *     
+     */
+    createMany<T extends SchoolContactPersonCreateManyArgs>(args?: SelectSubset<T, SchoolContactPersonCreateManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
+
+    /**
+     * Create many SchoolContactPeople and returns the data saved in the database.
+     * @param {SchoolContactPersonCreateManyAndReturnArgs} args - Arguments to create many SchoolContactPeople.
+     * @example
+     * // Create many SchoolContactPeople
+     * const schoolContactPerson = await prisma.schoolContactPerson.createManyAndReturn({
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     * 
+     * // Create many SchoolContactPeople and only return the `id`
+     * const schoolContactPersonWithIdOnly = await prisma.schoolContactPerson.createManyAndReturn({
+     *   select: { id: true },
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * 
+     */
+    createManyAndReturn<T extends SchoolContactPersonCreateManyAndReturnArgs>(args?: SelectSubset<T, SchoolContactPersonCreateManyAndReturnArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$SchoolContactPersonPayload<ExtArgs>, T, "createManyAndReturn", GlobalOmitOptions>>
+
+    /**
+     * Delete a SchoolContactPerson.
+     * @param {SchoolContactPersonDeleteArgs} args - Arguments to delete one SchoolContactPerson.
+     * @example
+     * // Delete one SchoolContactPerson
+     * const SchoolContactPerson = await prisma.schoolContactPerson.delete({
+     *   where: {
+     *     // ... filter to delete one SchoolContactPerson
+     *   }
+     * })
+     * 
+     */
+    delete<T extends SchoolContactPersonDeleteArgs>(args: SelectSubset<T, SchoolContactPersonDeleteArgs<ExtArgs>>): Prisma__SchoolContactPersonClient<$Result.GetResult<Prisma.$SchoolContactPersonPayload<ExtArgs>, T, "delete", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Update one SchoolContactPerson.
+     * @param {SchoolContactPersonUpdateArgs} args - Arguments to update one SchoolContactPerson.
+     * @example
+     * // Update one SchoolContactPerson
+     * const schoolContactPerson = await prisma.schoolContactPerson.update({
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: {
+     *     // ... provide data here
+     *   }
+     * })
+     * 
+     */
+    update<T extends SchoolContactPersonUpdateArgs>(args: SelectSubset<T, SchoolContactPersonUpdateArgs<ExtArgs>>): Prisma__SchoolContactPersonClient<$Result.GetResult<Prisma.$SchoolContactPersonPayload<ExtArgs>, T, "update", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Delete zero or more SchoolContactPeople.
+     * @param {SchoolContactPersonDeleteManyArgs} args - Arguments to filter SchoolContactPeople to delete.
+     * @example
+     * // Delete a few SchoolContactPeople
+     * const { count } = await prisma.schoolContactPerson.deleteMany({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     * 
+     */
+    deleteMany<T extends SchoolContactPersonDeleteManyArgs>(args?: SelectSubset<T, SchoolContactPersonDeleteManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
+
+    /**
+     * Update zero or more SchoolContactPeople.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {SchoolContactPersonUpdateManyArgs} args - Arguments to update one or more rows.
+     * @example
+     * // Update many SchoolContactPeople
+     * const schoolContactPerson = await prisma.schoolContactPerson.updateMany({
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: {
+     *     // ... provide data here
+     *   }
+     * })
+     * 
+     */
+    updateMany<T extends SchoolContactPersonUpdateManyArgs>(args: SelectSubset<T, SchoolContactPersonUpdateManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
+
+    /**
+     * Update zero or more SchoolContactPeople and returns the data updated in the database.
+     * @param {SchoolContactPersonUpdateManyAndReturnArgs} args - Arguments to update many SchoolContactPeople.
+     * @example
+     * // Update many SchoolContactPeople
+     * const schoolContactPerson = await prisma.schoolContactPerson.updateManyAndReturn({
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     * 
+     * // Update zero or more SchoolContactPeople and only return the `id`
+     * const schoolContactPersonWithIdOnly = await prisma.schoolContactPerson.updateManyAndReturn({
+     *   select: { id: true },
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * 
+     */
+    updateManyAndReturn<T extends SchoolContactPersonUpdateManyAndReturnArgs>(args: SelectSubset<T, SchoolContactPersonUpdateManyAndReturnArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$SchoolContactPersonPayload<ExtArgs>, T, "updateManyAndReturn", GlobalOmitOptions>>
+
+    /**
+     * Create or update one SchoolContactPerson.
+     * @param {SchoolContactPersonUpsertArgs} args - Arguments to update or create a SchoolContactPerson.
+     * @example
+     * // Update or create a SchoolContactPerson
+     * const schoolContactPerson = await prisma.schoolContactPerson.upsert({
+     *   create: {
+     *     // ... data to create a SchoolContactPerson
+     *   },
+     *   update: {
+     *     // ... in case it already exists, update
+     *   },
+     *   where: {
+     *     // ... the filter for the SchoolContactPerson we want to update
+     *   }
+     * })
+     */
+    upsert<T extends SchoolContactPersonUpsertArgs>(args: SelectSubset<T, SchoolContactPersonUpsertArgs<ExtArgs>>): Prisma__SchoolContactPersonClient<$Result.GetResult<Prisma.$SchoolContactPersonPayload<ExtArgs>, T, "upsert", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+
+    /**
+     * Count the number of SchoolContactPeople.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {SchoolContactPersonCountArgs} args - Arguments to filter SchoolContactPeople to count.
+     * @example
+     * // Count the number of SchoolContactPeople
+     * const count = await prisma.schoolContactPerson.count({
+     *   where: {
+     *     // ... the filter for the SchoolContactPeople we want to count
+     *   }
+     * })
+    **/
+    count<T extends SchoolContactPersonCountArgs>(
+      args?: Subset<T, SchoolContactPersonCountArgs>,
+    ): Prisma.PrismaPromise<
+      T extends $Utils.Record<'select', any>
+        ? T['select'] extends true
+          ? number
+          : GetScalarType<T['select'], SchoolContactPersonCountAggregateOutputType>
+        : number
+    >
+
+    /**
+     * Allows you to perform aggregations operations on a SchoolContactPerson.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {SchoolContactPersonAggregateArgs} args - Select which aggregations you would like to apply and on what fields.
+     * @example
+     * // Ordered by age ascending
+     * // Where email contains prisma.io
+     * // Limited to the 10 users
+     * const aggregations = await prisma.user.aggregate({
+     *   _avg: {
+     *     age: true,
+     *   },
+     *   where: {
+     *     email: {
+     *       contains: "prisma.io",
+     *     },
+     *   },
+     *   orderBy: {
+     *     age: "asc",
+     *   },
+     *   take: 10,
+     * })
+    **/
+    aggregate<T extends SchoolContactPersonAggregateArgs>(args: Subset<T, SchoolContactPersonAggregateArgs>): Prisma.PrismaPromise<GetSchoolContactPersonAggregateType<T>>
+
+    /**
+     * Group by SchoolContactPerson.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {SchoolContactPersonGroupByArgs} args - Group by arguments.
+     * @example
+     * // Group by city, order by createdAt, get count
+     * const result = await prisma.user.groupBy({
+     *   by: ['city', 'createdAt'],
+     *   orderBy: {
+     *     createdAt: true
+     *   },
+     *   _count: {
+     *     _all: true
+     *   },
+     * })
+     * 
+    **/
+    groupBy<
+      T extends SchoolContactPersonGroupByArgs,
+      HasSelectOrTake extends Or<
+        Extends<'skip', Keys<T>>,
+        Extends<'take', Keys<T>>
+      >,
+      OrderByArg extends True extends HasSelectOrTake
+        ? { orderBy: SchoolContactPersonGroupByArgs['orderBy'] }
+        : { orderBy?: SchoolContactPersonGroupByArgs['orderBy'] },
+      OrderFields extends ExcludeUnderscoreKeys<Keys<MaybeTupleToUnion<T['orderBy']>>>,
+      ByFields extends MaybeTupleToUnion<T['by']>,
+      ByValid extends Has<ByFields, OrderFields>,
+      HavingFields extends GetHavingFields<T['having']>,
+      HavingValid extends Has<ByFields, HavingFields>,
+      ByEmpty extends T['by'] extends never[] ? True : False,
+      InputErrors extends ByEmpty extends True
+      ? `Error: "by" must not be empty.`
+      : HavingValid extends False
+      ? {
+          [P in HavingFields]: P extends ByFields
+            ? never
+            : P extends string
+            ? `Error: Field "${P}" used in "having" needs to be provided in "by".`
+            : [
+                Error,
+                'Field ',
+                P,
+                ` in "having" needs to be provided in "by"`,
+              ]
+        }[HavingFields]
+      : 'take' extends Keys<T>
+      ? 'orderBy' extends Keys<T>
+        ? ByValid extends True
+          ? {}
+          : {
+              [P in OrderFields]: P extends ByFields
+                ? never
+                : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
+            }[OrderFields]
+        : 'Error: If you provide "take", you also need to provide "orderBy"'
+      : 'skip' extends Keys<T>
+      ? 'orderBy' extends Keys<T>
+        ? ByValid extends True
+          ? {}
+          : {
+              [P in OrderFields]: P extends ByFields
+                ? never
+                : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
+            }[OrderFields]
+        : 'Error: If you provide "skip", you also need to provide "orderBy"'
+      : ByValid extends True
+      ? {}
+      : {
+          [P in OrderFields]: P extends ByFields
+            ? never
+            : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
+        }[OrderFields]
+    >(args: SubsetIntersection<T, SchoolContactPersonGroupByArgs, OrderByArg> & InputErrors): {} extends InputErrors ? GetSchoolContactPersonGroupByPayload<T> : Prisma.PrismaPromise<InputErrors>
+  /**
+   * Fields of the SchoolContactPerson model
+   */
+  readonly fields: SchoolContactPersonFieldRefs;
+  }
+
+  /**
+   * The delegate class that acts as a "Promise-like" for SchoolContactPerson.
+   * Why is this prefixed with `Prisma__`?
+   * Because we want to prevent naming conflicts as mentioned in
+   * https://github.com/prisma/prisma-client-js/issues/707
+   */
+  export interface Prisma__SchoolContactPersonClient<T, Null = never, ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs, GlobalOmitOptions = {}> extends Prisma.PrismaPromise<T> {
+    readonly [Symbol.toStringTag]: "PrismaPromise"
+    school<T extends SchoolDefaultArgs<ExtArgs> = {}>(args?: Subset<T, SchoolDefaultArgs<ExtArgs>>): Prisma__SchoolClient<$Result.GetResult<Prisma.$SchoolPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | Null, Null, ExtArgs, GlobalOmitOptions>
+    /**
+     * Attaches callbacks for the resolution and/or rejection of the Promise.
+     * @param onfulfilled The callback to execute when the Promise is resolved.
+     * @param onrejected The callback to execute when the Promise is rejected.
+     * @returns A Promise for the completion of which ever callback is executed.
+     */
+    then<TResult1 = T, TResult2 = never>(onfulfilled?: ((value: T) => TResult1 | PromiseLike<TResult1>) | undefined | null, onrejected?: ((reason: any) => TResult2 | PromiseLike<TResult2>) | undefined | null): $Utils.JsPromise<TResult1 | TResult2>
+    /**
+     * Attaches a callback for only the rejection of the Promise.
+     * @param onrejected The callback to execute when the Promise is rejected.
+     * @returns A Promise for the completion of the callback.
+     */
+    catch<TResult = never>(onrejected?: ((reason: any) => TResult | PromiseLike<TResult>) | undefined | null): $Utils.JsPromise<T | TResult>
+    /**
+     * Attaches a callback that is invoked when the Promise is settled (fulfilled or rejected). The
+     * resolved value cannot be modified from the callback.
+     * @param onfinally The callback to execute when the Promise is settled (fulfilled or rejected).
+     * @returns A Promise for the completion of the callback.
+     */
+    finally(onfinally?: (() => void) | undefined | null): $Utils.JsPromise<T>
+  }
+
+
+
+
+  /**
+   * Fields of the SchoolContactPerson model
+   */
+  interface SchoolContactPersonFieldRefs {
+    readonly id: FieldRef<"SchoolContactPerson", 'String'>
+    readonly schoolId: FieldRef<"SchoolContactPerson", 'String'>
+    readonly role: FieldRef<"SchoolContactPerson", 'ContactRole'>
+    readonly name: FieldRef<"SchoolContactPerson", 'String'>
+    readonly phone: FieldRef<"SchoolContactPerson", 'String'>
+    readonly email: FieldRef<"SchoolContactPerson", 'String'>
+    readonly createdAt: FieldRef<"SchoolContactPerson", 'DateTime'>
+    readonly updatedAt: FieldRef<"SchoolContactPerson", 'DateTime'>
+    readonly isDeleted: FieldRef<"SchoolContactPerson", 'Boolean'>
+  }
+    
+
+  // Custom InputTypes
+  /**
+   * SchoolContactPerson findUnique
+   */
+  export type SchoolContactPersonFindUniqueArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the SchoolContactPerson
+     */
+    select?: SchoolContactPersonSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the SchoolContactPerson
+     */
+    omit?: SchoolContactPersonOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: SchoolContactPersonInclude<ExtArgs> | null
+    /**
+     * Filter, which SchoolContactPerson to fetch.
+     */
+    where: SchoolContactPersonWhereUniqueInput
+  }
+
+  /**
+   * SchoolContactPerson findUniqueOrThrow
+   */
+  export type SchoolContactPersonFindUniqueOrThrowArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the SchoolContactPerson
+     */
+    select?: SchoolContactPersonSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the SchoolContactPerson
+     */
+    omit?: SchoolContactPersonOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: SchoolContactPersonInclude<ExtArgs> | null
+    /**
+     * Filter, which SchoolContactPerson to fetch.
+     */
+    where: SchoolContactPersonWhereUniqueInput
+  }
+
+  /**
+   * SchoolContactPerson findFirst
+   */
+  export type SchoolContactPersonFindFirstArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the SchoolContactPerson
+     */
+    select?: SchoolContactPersonSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the SchoolContactPerson
+     */
+    omit?: SchoolContactPersonOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: SchoolContactPersonInclude<ExtArgs> | null
+    /**
+     * Filter, which SchoolContactPerson to fetch.
+     */
+    where?: SchoolContactPersonWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of SchoolContactPeople to fetch.
+     */
+    orderBy?: SchoolContactPersonOrderByWithRelationInput | SchoolContactPersonOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the position for searching for SchoolContactPeople.
+     */
+    cursor?: SchoolContactPersonWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` SchoolContactPeople from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` SchoolContactPeople.
+     */
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/distinct Distinct Docs}
+     * 
+     * Filter by unique combinations of SchoolContactPeople.
+     */
+    distinct?: SchoolContactPersonScalarFieldEnum | SchoolContactPersonScalarFieldEnum[]
+  }
+
+  /**
+   * SchoolContactPerson findFirstOrThrow
+   */
+  export type SchoolContactPersonFindFirstOrThrowArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the SchoolContactPerson
+     */
+    select?: SchoolContactPersonSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the SchoolContactPerson
+     */
+    omit?: SchoolContactPersonOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: SchoolContactPersonInclude<ExtArgs> | null
+    /**
+     * Filter, which SchoolContactPerson to fetch.
+     */
+    where?: SchoolContactPersonWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of SchoolContactPeople to fetch.
+     */
+    orderBy?: SchoolContactPersonOrderByWithRelationInput | SchoolContactPersonOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the position for searching for SchoolContactPeople.
+     */
+    cursor?: SchoolContactPersonWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` SchoolContactPeople from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` SchoolContactPeople.
+     */
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/distinct Distinct Docs}
+     * 
+     * Filter by unique combinations of SchoolContactPeople.
+     */
+    distinct?: SchoolContactPersonScalarFieldEnum | SchoolContactPersonScalarFieldEnum[]
+  }
+
+  /**
+   * SchoolContactPerson findMany
+   */
+  export type SchoolContactPersonFindManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the SchoolContactPerson
+     */
+    select?: SchoolContactPersonSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the SchoolContactPerson
+     */
+    omit?: SchoolContactPersonOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: SchoolContactPersonInclude<ExtArgs> | null
+    /**
+     * Filter, which SchoolContactPeople to fetch.
+     */
+    where?: SchoolContactPersonWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of SchoolContactPeople to fetch.
+     */
+    orderBy?: SchoolContactPersonOrderByWithRelationInput | SchoolContactPersonOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the position for listing SchoolContactPeople.
+     */
+    cursor?: SchoolContactPersonWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` SchoolContactPeople from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` SchoolContactPeople.
+     */
+    skip?: number
+    distinct?: SchoolContactPersonScalarFieldEnum | SchoolContactPersonScalarFieldEnum[]
+  }
+
+  /**
+   * SchoolContactPerson create
+   */
+  export type SchoolContactPersonCreateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the SchoolContactPerson
+     */
+    select?: SchoolContactPersonSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the SchoolContactPerson
+     */
+    omit?: SchoolContactPersonOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: SchoolContactPersonInclude<ExtArgs> | null
+    /**
+     * The data needed to create a SchoolContactPerson.
+     */
+    data: XOR<SchoolContactPersonCreateInput, SchoolContactPersonUncheckedCreateInput>
+  }
+
+  /**
+   * SchoolContactPerson createMany
+   */
+  export type SchoolContactPersonCreateManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * The data used to create many SchoolContactPeople.
+     */
+    data: SchoolContactPersonCreateManyInput | SchoolContactPersonCreateManyInput[]
+    skipDuplicates?: boolean
+  }
+
+  /**
+   * SchoolContactPerson createManyAndReturn
+   */
+  export type SchoolContactPersonCreateManyAndReturnArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the SchoolContactPerson
+     */
+    select?: SchoolContactPersonSelectCreateManyAndReturn<ExtArgs> | null
+    /**
+     * Omit specific fields from the SchoolContactPerson
+     */
+    omit?: SchoolContactPersonOmit<ExtArgs> | null
+    /**
+     * The data used to create many SchoolContactPeople.
+     */
+    data: SchoolContactPersonCreateManyInput | SchoolContactPersonCreateManyInput[]
+    skipDuplicates?: boolean
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: SchoolContactPersonIncludeCreateManyAndReturn<ExtArgs> | null
+  }
+
+  /**
+   * SchoolContactPerson update
+   */
+  export type SchoolContactPersonUpdateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the SchoolContactPerson
+     */
+    select?: SchoolContactPersonSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the SchoolContactPerson
+     */
+    omit?: SchoolContactPersonOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: SchoolContactPersonInclude<ExtArgs> | null
+    /**
+     * The data needed to update a SchoolContactPerson.
+     */
+    data: XOR<SchoolContactPersonUpdateInput, SchoolContactPersonUncheckedUpdateInput>
+    /**
+     * Choose, which SchoolContactPerson to update.
+     */
+    where: SchoolContactPersonWhereUniqueInput
+  }
+
+  /**
+   * SchoolContactPerson updateMany
+   */
+  export type SchoolContactPersonUpdateManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * The data used to update SchoolContactPeople.
+     */
+    data: XOR<SchoolContactPersonUpdateManyMutationInput, SchoolContactPersonUncheckedUpdateManyInput>
+    /**
+     * Filter which SchoolContactPeople to update
+     */
+    where?: SchoolContactPersonWhereInput
+    /**
+     * Limit how many SchoolContactPeople to update.
+     */
+    limit?: number
+  }
+
+  /**
+   * SchoolContactPerson updateManyAndReturn
+   */
+  export type SchoolContactPersonUpdateManyAndReturnArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the SchoolContactPerson
+     */
+    select?: SchoolContactPersonSelectUpdateManyAndReturn<ExtArgs> | null
+    /**
+     * Omit specific fields from the SchoolContactPerson
+     */
+    omit?: SchoolContactPersonOmit<ExtArgs> | null
+    /**
+     * The data used to update SchoolContactPeople.
+     */
+    data: XOR<SchoolContactPersonUpdateManyMutationInput, SchoolContactPersonUncheckedUpdateManyInput>
+    /**
+     * Filter which SchoolContactPeople to update
+     */
+    where?: SchoolContactPersonWhereInput
+    /**
+     * Limit how many SchoolContactPeople to update.
+     */
+    limit?: number
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: SchoolContactPersonIncludeUpdateManyAndReturn<ExtArgs> | null
+  }
+
+  /**
+   * SchoolContactPerson upsert
+   */
+  export type SchoolContactPersonUpsertArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the SchoolContactPerson
+     */
+    select?: SchoolContactPersonSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the SchoolContactPerson
+     */
+    omit?: SchoolContactPersonOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: SchoolContactPersonInclude<ExtArgs> | null
+    /**
+     * The filter to search for the SchoolContactPerson to update in case it exists.
+     */
+    where: SchoolContactPersonWhereUniqueInput
+    /**
+     * In case the SchoolContactPerson found by the `where` argument doesn't exist, create a new SchoolContactPerson with this data.
+     */
+    create: XOR<SchoolContactPersonCreateInput, SchoolContactPersonUncheckedCreateInput>
+    /**
+     * In case the SchoolContactPerson was found with the provided `where` argument, update it with this data.
+     */
+    update: XOR<SchoolContactPersonUpdateInput, SchoolContactPersonUncheckedUpdateInput>
+  }
+
+  /**
+   * SchoolContactPerson delete
+   */
+  export type SchoolContactPersonDeleteArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the SchoolContactPerson
+     */
+    select?: SchoolContactPersonSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the SchoolContactPerson
+     */
+    omit?: SchoolContactPersonOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: SchoolContactPersonInclude<ExtArgs> | null
+    /**
+     * Filter which SchoolContactPerson to delete.
+     */
+    where: SchoolContactPersonWhereUniqueInput
+  }
+
+  /**
+   * SchoolContactPerson deleteMany
+   */
+  export type SchoolContactPersonDeleteManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Filter which SchoolContactPeople to delete
+     */
+    where?: SchoolContactPersonWhereInput
+    /**
+     * Limit how many SchoolContactPeople to delete.
+     */
+    limit?: number
+  }
+
+  /**
+   * SchoolContactPerson without action
+   */
+  export type SchoolContactPersonDefaultArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the SchoolContactPerson
+     */
+    select?: SchoolContactPersonSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the SchoolContactPerson
+     */
+    omit?: SchoolContactPersonOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: SchoolContactPersonInclude<ExtArgs> | null
+  }
+
+
+  /**
    * Model SchoolAndPlatformLegalAgreement
    */
 
@@ -17035,10 +18262,9 @@ export namespace Prisma {
     id: string | null
     schoolId: string | null
     signedById: string | null
-    signature: string | null
-    signedAt: Date | null
+    agreedByName: string | null
     legalDocumentRef: string | null
-    isDeleted: boolean | null
+    signedAt: Date | null
     createdAt: Date | null
     updatedAt: Date | null
   }
@@ -17047,10 +18273,9 @@ export namespace Prisma {
     id: string | null
     schoolId: string | null
     signedById: string | null
-    signature: string | null
-    signedAt: Date | null
+    agreedByName: string | null
     legalDocumentRef: string | null
-    isDeleted: boolean | null
+    signedAt: Date | null
     createdAt: Date | null
     updatedAt: Date | null
   }
@@ -17059,10 +18284,9 @@ export namespace Prisma {
     id: number
     schoolId: number
     signedById: number
-    signature: number
-    signedAt: number
+    agreedByName: number
     legalDocumentRef: number
-    isDeleted: number
+    signedAt: number
     createdAt: number
     updatedAt: number
     _all: number
@@ -17073,10 +18297,9 @@ export namespace Prisma {
     id?: true
     schoolId?: true
     signedById?: true
-    signature?: true
-    signedAt?: true
+    agreedByName?: true
     legalDocumentRef?: true
-    isDeleted?: true
+    signedAt?: true
     createdAt?: true
     updatedAt?: true
   }
@@ -17085,10 +18308,9 @@ export namespace Prisma {
     id?: true
     schoolId?: true
     signedById?: true
-    signature?: true
-    signedAt?: true
+    agreedByName?: true
     legalDocumentRef?: true
-    isDeleted?: true
+    signedAt?: true
     createdAt?: true
     updatedAt?: true
   }
@@ -17097,10 +18319,9 @@ export namespace Prisma {
     id?: true
     schoolId?: true
     signedById?: true
-    signature?: true
-    signedAt?: true
+    agreedByName?: true
     legalDocumentRef?: true
-    isDeleted?: true
+    signedAt?: true
     createdAt?: true
     updatedAt?: true
     _all?: true
@@ -17182,10 +18403,9 @@ export namespace Prisma {
     id: string
     schoolId: string
     signedById: string
-    signature: string
-    signedAt: Date
+    agreedByName: string
     legalDocumentRef: string
-    isDeleted: boolean
+    signedAt: Date
     createdAt: Date
     updatedAt: Date
     _count: SchoolAndPlatformLegalAgreementCountAggregateOutputType | null
@@ -17211,84 +18431,72 @@ export namespace Prisma {
     id?: boolean
     schoolId?: boolean
     signedById?: boolean
-    signature?: boolean
-    signedAt?: boolean
+    agreedByName?: boolean
     legalDocumentRef?: boolean
-    isDeleted?: boolean
+    signedAt?: boolean
     createdAt?: boolean
     updatedAt?: boolean
     school?: boolean | SchoolDefaultArgs<ExtArgs>
-    signedBy?: boolean | UserDefaultArgs<ExtArgs>
   }, ExtArgs["result"]["schoolAndPlatformLegalAgreement"]>
 
   export type SchoolAndPlatformLegalAgreementSelectCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
     id?: boolean
     schoolId?: boolean
     signedById?: boolean
-    signature?: boolean
-    signedAt?: boolean
+    agreedByName?: boolean
     legalDocumentRef?: boolean
-    isDeleted?: boolean
+    signedAt?: boolean
     createdAt?: boolean
     updatedAt?: boolean
     school?: boolean | SchoolDefaultArgs<ExtArgs>
-    signedBy?: boolean | UserDefaultArgs<ExtArgs>
   }, ExtArgs["result"]["schoolAndPlatformLegalAgreement"]>
 
   export type SchoolAndPlatformLegalAgreementSelectUpdateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
     id?: boolean
     schoolId?: boolean
     signedById?: boolean
-    signature?: boolean
-    signedAt?: boolean
+    agreedByName?: boolean
     legalDocumentRef?: boolean
-    isDeleted?: boolean
+    signedAt?: boolean
     createdAt?: boolean
     updatedAt?: boolean
     school?: boolean | SchoolDefaultArgs<ExtArgs>
-    signedBy?: boolean | UserDefaultArgs<ExtArgs>
   }, ExtArgs["result"]["schoolAndPlatformLegalAgreement"]>
 
   export type SchoolAndPlatformLegalAgreementSelectScalar = {
     id?: boolean
     schoolId?: boolean
     signedById?: boolean
-    signature?: boolean
-    signedAt?: boolean
+    agreedByName?: boolean
     legalDocumentRef?: boolean
-    isDeleted?: boolean
+    signedAt?: boolean
     createdAt?: boolean
     updatedAt?: boolean
   }
 
-  export type SchoolAndPlatformLegalAgreementOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "schoolId" | "signedById" | "signature" | "signedAt" | "legalDocumentRef" | "isDeleted" | "createdAt" | "updatedAt", ExtArgs["result"]["schoolAndPlatformLegalAgreement"]>
+  export type SchoolAndPlatformLegalAgreementOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "schoolId" | "signedById" | "agreedByName" | "legalDocumentRef" | "signedAt" | "createdAt" | "updatedAt", ExtArgs["result"]["schoolAndPlatformLegalAgreement"]>
   export type SchoolAndPlatformLegalAgreementInclude<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     school?: boolean | SchoolDefaultArgs<ExtArgs>
-    signedBy?: boolean | UserDefaultArgs<ExtArgs>
   }
   export type SchoolAndPlatformLegalAgreementIncludeCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     school?: boolean | SchoolDefaultArgs<ExtArgs>
-    signedBy?: boolean | UserDefaultArgs<ExtArgs>
   }
   export type SchoolAndPlatformLegalAgreementIncludeUpdateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     school?: boolean | SchoolDefaultArgs<ExtArgs>
-    signedBy?: boolean | UserDefaultArgs<ExtArgs>
   }
 
   export type $SchoolAndPlatformLegalAgreementPayload<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     name: "SchoolAndPlatformLegalAgreement"
     objects: {
       school: Prisma.$SchoolPayload<ExtArgs>
-      signedBy: Prisma.$UserPayload<ExtArgs>
     }
     scalars: $Extensions.GetPayloadResult<{
       id: string
       schoolId: string
       signedById: string
-      signature: string
-      signedAt: Date
+      agreedByName: string
       legalDocumentRef: string
-      isDeleted: boolean
+      signedAt: Date
       createdAt: Date
       updatedAt: Date
     }, ExtArgs["result"]["schoolAndPlatformLegalAgreement"]>
@@ -17686,7 +18894,6 @@ export namespace Prisma {
   export interface Prisma__SchoolAndPlatformLegalAgreementClient<T, Null = never, ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs, GlobalOmitOptions = {}> extends Prisma.PrismaPromise<T> {
     readonly [Symbol.toStringTag]: "PrismaPromise"
     school<T extends SchoolDefaultArgs<ExtArgs> = {}>(args?: Subset<T, SchoolDefaultArgs<ExtArgs>>): Prisma__SchoolClient<$Result.GetResult<Prisma.$SchoolPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | Null, Null, ExtArgs, GlobalOmitOptions>
-    signedBy<T extends UserDefaultArgs<ExtArgs> = {}>(args?: Subset<T, UserDefaultArgs<ExtArgs>>): Prisma__UserClient<$Result.GetResult<Prisma.$UserPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | Null, Null, ExtArgs, GlobalOmitOptions>
     /**
      * Attaches callbacks for the resolution and/or rejection of the Promise.
      * @param onfulfilled The callback to execute when the Promise is resolved.
@@ -17719,10 +18926,9 @@ export namespace Prisma {
     readonly id: FieldRef<"SchoolAndPlatformLegalAgreement", 'String'>
     readonly schoolId: FieldRef<"SchoolAndPlatformLegalAgreement", 'String'>
     readonly signedById: FieldRef<"SchoolAndPlatformLegalAgreement", 'String'>
-    readonly signature: FieldRef<"SchoolAndPlatformLegalAgreement", 'String'>
-    readonly signedAt: FieldRef<"SchoolAndPlatformLegalAgreement", 'DateTime'>
+    readonly agreedByName: FieldRef<"SchoolAndPlatformLegalAgreement", 'String'>
     readonly legalDocumentRef: FieldRef<"SchoolAndPlatformLegalAgreement", 'String'>
-    readonly isDeleted: FieldRef<"SchoolAndPlatformLegalAgreement", 'Boolean'>
+    readonly signedAt: FieldRef<"SchoolAndPlatformLegalAgreement", 'DateTime'>
     readonly createdAt: FieldRef<"SchoolAndPlatformLegalAgreement", 'DateTime'>
     readonly updatedAt: FieldRef<"SchoolAndPlatformLegalAgreement", 'DateTime'>
   }
@@ -36867,7 +38073,7 @@ export namespace Prisma {
     schoolId: 'schoolId',
     cacCertificate: 'cacCertificate',
     accreditationDocument: 'accreditationDocument',
-    taxIdentificationNumber: 'taxIdentificationNumber',
+    taxIdentificationNumberCertificate: 'taxIdentificationNumberCertificate',
     licenseDocument: 'licenseDocument',
     isDeleted: 'isDeleted',
     createdAt: 'createdAt',
@@ -36884,6 +38090,7 @@ export namespace Prisma {
     bankCode: 'bankCode',
     accountNumber: 'accountNumber',
     accountName: 'accountName',
+    bankReferenceLetter: 'bankReferenceLetter',
     isDeleted: 'isDeleted',
     createdAt: 'createdAt',
     updatedAt: 'updatedAt'
@@ -36892,14 +38099,28 @@ export namespace Prisma {
   export type SchoolPayoutDetailScalarFieldEnum = (typeof SchoolPayoutDetailScalarFieldEnum)[keyof typeof SchoolPayoutDetailScalarFieldEnum]
 
 
+  export const SchoolContactPersonScalarFieldEnum: {
+    id: 'id',
+    schoolId: 'schoolId',
+    role: 'role',
+    name: 'name',
+    phone: 'phone',
+    email: 'email',
+    createdAt: 'createdAt',
+    updatedAt: 'updatedAt',
+    isDeleted: 'isDeleted'
+  };
+
+  export type SchoolContactPersonScalarFieldEnum = (typeof SchoolContactPersonScalarFieldEnum)[keyof typeof SchoolContactPersonScalarFieldEnum]
+
+
   export const SchoolAndPlatformLegalAgreementScalarFieldEnum: {
     id: 'id',
     schoolId: 'schoolId',
     signedById: 'signedById',
-    signature: 'signature',
-    signedAt: 'signedAt',
+    agreedByName: 'agreedByName',
     legalDocumentRef: 'legalDocumentRef',
-    isDeleted: 'isDeleted',
+    signedAt: 'signedAt',
     createdAt: 'createdAt',
     updatedAt: 'updatedAt'
   };
@@ -37325,6 +38546,20 @@ export namespace Prisma {
 
 
   /**
+   * Reference to a field of type 'ContactRole'
+   */
+  export type EnumContactRoleFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'ContactRole'>
+    
+
+
+  /**
+   * Reference to a field of type 'ContactRole[]'
+   */
+  export type ListEnumContactRoleFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'ContactRole[]'>
+    
+
+
+  /**
    * Reference to a field of type 'KYCVerificationStatus'
    */
   export type EnumKYCVerificationStatusFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'KYCVerificationStatus'>
@@ -37504,7 +38739,6 @@ export namespace Prisma {
     guardian?: XOR<GuardianNullableScalarRelationFilter, GuardianWhereInput> | null
     verifications?: VerificationListRelationFilter
     school?: XOR<SchoolNullableScalarRelationFilter, SchoolWhereInput> | null
-    schoolAndPlatformLegalAgreement?: XOR<SchoolAndPlatformLegalAgreementNullableScalarRelationFilter, SchoolAndPlatformLegalAgreementWhereInput> | null
     notifications?: NotificationListRelationFilter
     credential?: XOR<CredentialNullableScalarRelationFilter, CredentialWhereInput> | null
     wallet?: XOR<WalletNullableScalarRelationFilter, WalletWhereInput> | null
@@ -37533,7 +38767,6 @@ export namespace Prisma {
     guardian?: GuardianOrderByWithRelationInput
     verifications?: VerificationOrderByRelationAggregateInput
     school?: SchoolOrderByWithRelationInput
-    schoolAndPlatformLegalAgreement?: SchoolAndPlatformLegalAgreementOrderByWithRelationInput
     notifications?: NotificationOrderByRelationAggregateInput
     credential?: CredentialOrderByWithRelationInput
     wallet?: WalletOrderByWithRelationInput
@@ -37565,7 +38798,6 @@ export namespace Prisma {
     guardian?: XOR<GuardianNullableScalarRelationFilter, GuardianWhereInput> | null
     verifications?: VerificationListRelationFilter
     school?: XOR<SchoolNullableScalarRelationFilter, SchoolWhereInput> | null
-    schoolAndPlatformLegalAgreement?: XOR<SchoolAndPlatformLegalAgreementNullableScalarRelationFilter, SchoolAndPlatformLegalAgreementWhereInput> | null
     notifications?: NotificationListRelationFilter
     credential?: XOR<CredentialNullableScalarRelationFilter, CredentialWhereInput> | null
     wallet?: XOR<WalletNullableScalarRelationFilter, WalletWhereInput> | null
@@ -38020,6 +39252,7 @@ export namespace Prisma {
     schoolVerification?: XOR<SchoolVerificationNullableScalarRelationFilter, SchoolVerificationWhereInput> | null
     schoolPayoutDetail?: XOR<SchoolPayoutDetailNullableScalarRelationFilter, SchoolPayoutDetailWhereInput> | null
     schoolAndPlatformLegalAgreement?: XOR<SchoolAndPlatformLegalAgreementNullableScalarRelationFilter, SchoolAndPlatformLegalAgreementWhereInput> | null
+    SchoolContactPerson?: XOR<SchoolContactPersonNullableScalarRelationFilter, SchoolContactPersonWhereInput> | null
     classes?: ClassListRelationFilter
     academicSessions?: AcademicSessionListRelationFilter
     terms?: TermListRelationFilter
@@ -38055,6 +39288,7 @@ export namespace Prisma {
     schoolVerification?: SchoolVerificationOrderByWithRelationInput
     schoolPayoutDetail?: SchoolPayoutDetailOrderByWithRelationInput
     schoolAndPlatformLegalAgreement?: SchoolAndPlatformLegalAgreementOrderByWithRelationInput
+    SchoolContactPerson?: SchoolContactPersonOrderByWithRelationInput
     classes?: ClassOrderByRelationAggregateInput
     academicSessions?: AcademicSessionOrderByRelationAggregateInput
     terms?: TermOrderByRelationAggregateInput
@@ -38093,6 +39327,7 @@ export namespace Prisma {
     schoolVerification?: XOR<SchoolVerificationNullableScalarRelationFilter, SchoolVerificationWhereInput> | null
     schoolPayoutDetail?: XOR<SchoolPayoutDetailNullableScalarRelationFilter, SchoolPayoutDetailWhereInput> | null
     schoolAndPlatformLegalAgreement?: XOR<SchoolAndPlatformLegalAgreementNullableScalarRelationFilter, SchoolAndPlatformLegalAgreementWhereInput> | null
+    SchoolContactPerson?: XOR<SchoolContactPersonNullableScalarRelationFilter, SchoolContactPersonWhereInput> | null
     classes?: ClassListRelationFilter
     academicSessions?: AcademicSessionListRelationFilter
     terms?: TermListRelationFilter
@@ -38303,7 +39538,7 @@ export namespace Prisma {
     schoolId?: StringFilter<"SchoolVerification"> | string
     cacCertificate?: StringFilter<"SchoolVerification"> | string
     accreditationDocument?: StringFilter<"SchoolVerification"> | string
-    taxIdentificationNumber?: StringFilter<"SchoolVerification"> | string
+    taxIdentificationNumberCertificate?: StringFilter<"SchoolVerification"> | string
     licenseDocument?: StringFilter<"SchoolVerification"> | string
     isDeleted?: BoolFilter<"SchoolVerification"> | boolean
     createdAt?: DateTimeFilter<"SchoolVerification"> | Date | string
@@ -38316,7 +39551,7 @@ export namespace Prisma {
     schoolId?: SortOrder
     cacCertificate?: SortOrder
     accreditationDocument?: SortOrder
-    taxIdentificationNumber?: SortOrder
+    taxIdentificationNumberCertificate?: SortOrder
     licenseDocument?: SortOrder
     isDeleted?: SortOrder
     createdAt?: SortOrder
@@ -38332,7 +39567,7 @@ export namespace Prisma {
     NOT?: SchoolVerificationWhereInput | SchoolVerificationWhereInput[]
     cacCertificate?: StringFilter<"SchoolVerification"> | string
     accreditationDocument?: StringFilter<"SchoolVerification"> | string
-    taxIdentificationNumber?: StringFilter<"SchoolVerification"> | string
+    taxIdentificationNumberCertificate?: StringFilter<"SchoolVerification"> | string
     licenseDocument?: StringFilter<"SchoolVerification"> | string
     isDeleted?: BoolFilter<"SchoolVerification"> | boolean
     createdAt?: DateTimeFilter<"SchoolVerification"> | Date | string
@@ -38345,7 +39580,7 @@ export namespace Prisma {
     schoolId?: SortOrder
     cacCertificate?: SortOrder
     accreditationDocument?: SortOrder
-    taxIdentificationNumber?: SortOrder
+    taxIdentificationNumberCertificate?: SortOrder
     licenseDocument?: SortOrder
     isDeleted?: SortOrder
     createdAt?: SortOrder
@@ -38363,7 +39598,7 @@ export namespace Prisma {
     schoolId?: StringWithAggregatesFilter<"SchoolVerification"> | string
     cacCertificate?: StringWithAggregatesFilter<"SchoolVerification"> | string
     accreditationDocument?: StringWithAggregatesFilter<"SchoolVerification"> | string
-    taxIdentificationNumber?: StringWithAggregatesFilter<"SchoolVerification"> | string
+    taxIdentificationNumberCertificate?: StringWithAggregatesFilter<"SchoolVerification"> | string
     licenseDocument?: StringWithAggregatesFilter<"SchoolVerification"> | string
     isDeleted?: BoolWithAggregatesFilter<"SchoolVerification"> | boolean
     createdAt?: DateTimeWithAggregatesFilter<"SchoolVerification"> | Date | string
@@ -38380,6 +39615,7 @@ export namespace Prisma {
     bankCode?: StringFilter<"SchoolPayoutDetail"> | string
     accountNumber?: StringFilter<"SchoolPayoutDetail"> | string
     accountName?: StringFilter<"SchoolPayoutDetail"> | string
+    bankReferenceLetter?: StringFilter<"SchoolPayoutDetail"> | string
     isDeleted?: BoolFilter<"SchoolPayoutDetail"> | boolean
     createdAt?: DateTimeFilter<"SchoolPayoutDetail"> | Date | string
     updatedAt?: DateTimeFilter<"SchoolPayoutDetail"> | Date | string
@@ -38393,6 +39629,7 @@ export namespace Prisma {
     bankCode?: SortOrder
     accountNumber?: SortOrder
     accountName?: SortOrder
+    bankReferenceLetter?: SortOrder
     isDeleted?: SortOrder
     createdAt?: SortOrder
     updatedAt?: SortOrder
@@ -38409,6 +39646,7 @@ export namespace Prisma {
     bankCode?: StringFilter<"SchoolPayoutDetail"> | string
     accountNumber?: StringFilter<"SchoolPayoutDetail"> | string
     accountName?: StringFilter<"SchoolPayoutDetail"> | string
+    bankReferenceLetter?: StringFilter<"SchoolPayoutDetail"> | string
     isDeleted?: BoolFilter<"SchoolPayoutDetail"> | boolean
     createdAt?: DateTimeFilter<"SchoolPayoutDetail"> | Date | string
     updatedAt?: DateTimeFilter<"SchoolPayoutDetail"> | Date | string
@@ -38422,6 +39660,7 @@ export namespace Prisma {
     bankCode?: SortOrder
     accountNumber?: SortOrder
     accountName?: SortOrder
+    bankReferenceLetter?: SortOrder
     isDeleted?: SortOrder
     createdAt?: SortOrder
     updatedAt?: SortOrder
@@ -38440,9 +39679,86 @@ export namespace Prisma {
     bankCode?: StringWithAggregatesFilter<"SchoolPayoutDetail"> | string
     accountNumber?: StringWithAggregatesFilter<"SchoolPayoutDetail"> | string
     accountName?: StringWithAggregatesFilter<"SchoolPayoutDetail"> | string
+    bankReferenceLetter?: StringWithAggregatesFilter<"SchoolPayoutDetail"> | string
     isDeleted?: BoolWithAggregatesFilter<"SchoolPayoutDetail"> | boolean
     createdAt?: DateTimeWithAggregatesFilter<"SchoolPayoutDetail"> | Date | string
     updatedAt?: DateTimeWithAggregatesFilter<"SchoolPayoutDetail"> | Date | string
+  }
+
+  export type SchoolContactPersonWhereInput = {
+    AND?: SchoolContactPersonWhereInput | SchoolContactPersonWhereInput[]
+    OR?: SchoolContactPersonWhereInput[]
+    NOT?: SchoolContactPersonWhereInput | SchoolContactPersonWhereInput[]
+    id?: StringFilter<"SchoolContactPerson"> | string
+    schoolId?: StringFilter<"SchoolContactPerson"> | string
+    role?: EnumContactRoleFilter<"SchoolContactPerson"> | $Enums.ContactRole
+    name?: StringFilter<"SchoolContactPerson"> | string
+    phone?: StringFilter<"SchoolContactPerson"> | string
+    email?: StringFilter<"SchoolContactPerson"> | string
+    createdAt?: DateTimeFilter<"SchoolContactPerson"> | Date | string
+    updatedAt?: DateTimeFilter<"SchoolContactPerson"> | Date | string
+    isDeleted?: BoolFilter<"SchoolContactPerson"> | boolean
+    school?: XOR<SchoolScalarRelationFilter, SchoolWhereInput>
+  }
+
+  export type SchoolContactPersonOrderByWithRelationInput = {
+    id?: SortOrder
+    schoolId?: SortOrder
+    role?: SortOrder
+    name?: SortOrder
+    phone?: SortOrder
+    email?: SortOrder
+    createdAt?: SortOrder
+    updatedAt?: SortOrder
+    isDeleted?: SortOrder
+    school?: SchoolOrderByWithRelationInput
+  }
+
+  export type SchoolContactPersonWhereUniqueInput = Prisma.AtLeast<{
+    id?: string
+    schoolId?: string
+    schoolId_role?: SchoolContactPersonSchoolIdRoleCompoundUniqueInput
+    AND?: SchoolContactPersonWhereInput | SchoolContactPersonWhereInput[]
+    OR?: SchoolContactPersonWhereInput[]
+    NOT?: SchoolContactPersonWhereInput | SchoolContactPersonWhereInput[]
+    role?: EnumContactRoleFilter<"SchoolContactPerson"> | $Enums.ContactRole
+    name?: StringFilter<"SchoolContactPerson"> | string
+    phone?: StringFilter<"SchoolContactPerson"> | string
+    email?: StringFilter<"SchoolContactPerson"> | string
+    createdAt?: DateTimeFilter<"SchoolContactPerson"> | Date | string
+    updatedAt?: DateTimeFilter<"SchoolContactPerson"> | Date | string
+    isDeleted?: BoolFilter<"SchoolContactPerson"> | boolean
+    school?: XOR<SchoolScalarRelationFilter, SchoolWhereInput>
+  }, "id" | "schoolId" | "schoolId_role">
+
+  export type SchoolContactPersonOrderByWithAggregationInput = {
+    id?: SortOrder
+    schoolId?: SortOrder
+    role?: SortOrder
+    name?: SortOrder
+    phone?: SortOrder
+    email?: SortOrder
+    createdAt?: SortOrder
+    updatedAt?: SortOrder
+    isDeleted?: SortOrder
+    _count?: SchoolContactPersonCountOrderByAggregateInput
+    _max?: SchoolContactPersonMaxOrderByAggregateInput
+    _min?: SchoolContactPersonMinOrderByAggregateInput
+  }
+
+  export type SchoolContactPersonScalarWhereWithAggregatesInput = {
+    AND?: SchoolContactPersonScalarWhereWithAggregatesInput | SchoolContactPersonScalarWhereWithAggregatesInput[]
+    OR?: SchoolContactPersonScalarWhereWithAggregatesInput[]
+    NOT?: SchoolContactPersonScalarWhereWithAggregatesInput | SchoolContactPersonScalarWhereWithAggregatesInput[]
+    id?: StringWithAggregatesFilter<"SchoolContactPerson"> | string
+    schoolId?: StringWithAggregatesFilter<"SchoolContactPerson"> | string
+    role?: EnumContactRoleWithAggregatesFilter<"SchoolContactPerson"> | $Enums.ContactRole
+    name?: StringWithAggregatesFilter<"SchoolContactPerson"> | string
+    phone?: StringWithAggregatesFilter<"SchoolContactPerson"> | string
+    email?: StringWithAggregatesFilter<"SchoolContactPerson"> | string
+    createdAt?: DateTimeWithAggregatesFilter<"SchoolContactPerson"> | Date | string
+    updatedAt?: DateTimeWithAggregatesFilter<"SchoolContactPerson"> | Date | string
+    isDeleted?: BoolWithAggregatesFilter<"SchoolContactPerson"> | boolean
   }
 
   export type SchoolAndPlatformLegalAgreementWhereInput = {
@@ -38452,55 +39768,48 @@ export namespace Prisma {
     id?: StringFilter<"SchoolAndPlatformLegalAgreement"> | string
     schoolId?: StringFilter<"SchoolAndPlatformLegalAgreement"> | string
     signedById?: StringFilter<"SchoolAndPlatformLegalAgreement"> | string
-    signature?: StringFilter<"SchoolAndPlatformLegalAgreement"> | string
-    signedAt?: DateTimeFilter<"SchoolAndPlatformLegalAgreement"> | Date | string
+    agreedByName?: StringFilter<"SchoolAndPlatformLegalAgreement"> | string
     legalDocumentRef?: StringFilter<"SchoolAndPlatformLegalAgreement"> | string
-    isDeleted?: BoolFilter<"SchoolAndPlatformLegalAgreement"> | boolean
+    signedAt?: DateTimeFilter<"SchoolAndPlatformLegalAgreement"> | Date | string
     createdAt?: DateTimeFilter<"SchoolAndPlatformLegalAgreement"> | Date | string
     updatedAt?: DateTimeFilter<"SchoolAndPlatformLegalAgreement"> | Date | string
     school?: XOR<SchoolScalarRelationFilter, SchoolWhereInput>
-    signedBy?: XOR<UserScalarRelationFilter, UserWhereInput>
   }
 
   export type SchoolAndPlatformLegalAgreementOrderByWithRelationInput = {
     id?: SortOrder
     schoolId?: SortOrder
     signedById?: SortOrder
-    signature?: SortOrder
-    signedAt?: SortOrder
+    agreedByName?: SortOrder
     legalDocumentRef?: SortOrder
-    isDeleted?: SortOrder
+    signedAt?: SortOrder
     createdAt?: SortOrder
     updatedAt?: SortOrder
     school?: SchoolOrderByWithRelationInput
-    signedBy?: UserOrderByWithRelationInput
   }
 
   export type SchoolAndPlatformLegalAgreementWhereUniqueInput = Prisma.AtLeast<{
     id?: string
     schoolId?: string
-    signedById?: string
     AND?: SchoolAndPlatformLegalAgreementWhereInput | SchoolAndPlatformLegalAgreementWhereInput[]
     OR?: SchoolAndPlatformLegalAgreementWhereInput[]
     NOT?: SchoolAndPlatformLegalAgreementWhereInput | SchoolAndPlatformLegalAgreementWhereInput[]
-    signature?: StringFilter<"SchoolAndPlatformLegalAgreement"> | string
-    signedAt?: DateTimeFilter<"SchoolAndPlatformLegalAgreement"> | Date | string
+    signedById?: StringFilter<"SchoolAndPlatformLegalAgreement"> | string
+    agreedByName?: StringFilter<"SchoolAndPlatformLegalAgreement"> | string
     legalDocumentRef?: StringFilter<"SchoolAndPlatformLegalAgreement"> | string
-    isDeleted?: BoolFilter<"SchoolAndPlatformLegalAgreement"> | boolean
+    signedAt?: DateTimeFilter<"SchoolAndPlatformLegalAgreement"> | Date | string
     createdAt?: DateTimeFilter<"SchoolAndPlatformLegalAgreement"> | Date | string
     updatedAt?: DateTimeFilter<"SchoolAndPlatformLegalAgreement"> | Date | string
     school?: XOR<SchoolScalarRelationFilter, SchoolWhereInput>
-    signedBy?: XOR<UserScalarRelationFilter, UserWhereInput>
-  }, "id" | "schoolId" | "signedById">
+  }, "id" | "schoolId">
 
   export type SchoolAndPlatformLegalAgreementOrderByWithAggregationInput = {
     id?: SortOrder
     schoolId?: SortOrder
     signedById?: SortOrder
-    signature?: SortOrder
-    signedAt?: SortOrder
+    agreedByName?: SortOrder
     legalDocumentRef?: SortOrder
-    isDeleted?: SortOrder
+    signedAt?: SortOrder
     createdAt?: SortOrder
     updatedAt?: SortOrder
     _count?: SchoolAndPlatformLegalAgreementCountOrderByAggregateInput
@@ -38515,10 +39824,9 @@ export namespace Prisma {
     id?: StringWithAggregatesFilter<"SchoolAndPlatformLegalAgreement"> | string
     schoolId?: StringWithAggregatesFilter<"SchoolAndPlatformLegalAgreement"> | string
     signedById?: StringWithAggregatesFilter<"SchoolAndPlatformLegalAgreement"> | string
-    signature?: StringWithAggregatesFilter<"SchoolAndPlatformLegalAgreement"> | string
-    signedAt?: DateTimeWithAggregatesFilter<"SchoolAndPlatformLegalAgreement"> | Date | string
+    agreedByName?: StringWithAggregatesFilter<"SchoolAndPlatformLegalAgreement"> | string
     legalDocumentRef?: StringWithAggregatesFilter<"SchoolAndPlatformLegalAgreement"> | string
-    isDeleted?: BoolWithAggregatesFilter<"SchoolAndPlatformLegalAgreement"> | boolean
+    signedAt?: DateTimeWithAggregatesFilter<"SchoolAndPlatformLegalAgreement"> | Date | string
     createdAt?: DateTimeWithAggregatesFilter<"SchoolAndPlatformLegalAgreement"> | Date | string
     updatedAt?: DateTimeWithAggregatesFilter<"SchoolAndPlatformLegalAgreement"> | Date | string
   }
@@ -39840,7 +41148,6 @@ export namespace Prisma {
     guardian?: GuardianCreateNestedOneWithoutUserInput
     verifications?: VerificationCreateNestedManyWithoutUserInput
     school?: SchoolCreateNestedOneWithoutOwnerInput
-    schoolAndPlatformLegalAgreement?: SchoolAndPlatformLegalAgreementCreateNestedOneWithoutSignedByInput
     notifications?: NotificationCreateNestedManyWithoutUserInput
     credential?: CredentialCreateNestedOneWithoutUserInput
     wallet?: WalletCreateNestedOneWithoutUserInput
@@ -39869,7 +41176,6 @@ export namespace Prisma {
     guardian?: GuardianUncheckedCreateNestedOneWithoutUserInput
     verifications?: VerificationUncheckedCreateNestedManyWithoutUserInput
     school?: SchoolUncheckedCreateNestedOneWithoutOwnerInput
-    schoolAndPlatformLegalAgreement?: SchoolAndPlatformLegalAgreementUncheckedCreateNestedOneWithoutSignedByInput
     notifications?: NotificationUncheckedCreateNestedManyWithoutUserInput
     credential?: CredentialUncheckedCreateNestedOneWithoutUserInput
     wallet?: WalletUncheckedCreateNestedOneWithoutUserInput
@@ -39898,7 +41204,6 @@ export namespace Prisma {
     guardian?: GuardianUpdateOneWithoutUserNestedInput
     verifications?: VerificationUpdateManyWithoutUserNestedInput
     school?: SchoolUpdateOneWithoutOwnerNestedInput
-    schoolAndPlatformLegalAgreement?: SchoolAndPlatformLegalAgreementUpdateOneWithoutSignedByNestedInput
     notifications?: NotificationUpdateManyWithoutUserNestedInput
     credential?: CredentialUpdateOneWithoutUserNestedInput
     wallet?: WalletUpdateOneWithoutUserNestedInput
@@ -39927,7 +41232,6 @@ export namespace Prisma {
     guardian?: GuardianUncheckedUpdateOneWithoutUserNestedInput
     verifications?: VerificationUncheckedUpdateManyWithoutUserNestedInput
     school?: SchoolUncheckedUpdateOneWithoutOwnerNestedInput
-    schoolAndPlatformLegalAgreement?: SchoolAndPlatformLegalAgreementUncheckedUpdateOneWithoutSignedByNestedInput
     notifications?: NotificationUncheckedUpdateManyWithoutUserNestedInput
     credential?: CredentialUncheckedUpdateOneWithoutUserNestedInput
     wallet?: WalletUncheckedUpdateOneWithoutUserNestedInput
@@ -40426,6 +41730,7 @@ export namespace Prisma {
     schoolVerification?: SchoolVerificationCreateNestedOneWithoutSchoolInput
     schoolPayoutDetail?: SchoolPayoutDetailCreateNestedOneWithoutSchoolInput
     schoolAndPlatformLegalAgreement?: SchoolAndPlatformLegalAgreementCreateNestedOneWithoutSchoolInput
+    SchoolContactPerson?: SchoolContactPersonCreateNestedOneWithoutSchoolInput
     classes?: ClassCreateNestedManyWithoutSchoolInput
     academicSessions?: AcademicSessionCreateNestedManyWithoutSchoolInput
     terms?: TermCreateNestedManyWithoutSchoolInput
@@ -40460,6 +41765,7 @@ export namespace Prisma {
     schoolVerification?: SchoolVerificationUncheckedCreateNestedOneWithoutSchoolInput
     schoolPayoutDetail?: SchoolPayoutDetailUncheckedCreateNestedOneWithoutSchoolInput
     schoolAndPlatformLegalAgreement?: SchoolAndPlatformLegalAgreementUncheckedCreateNestedOneWithoutSchoolInput
+    SchoolContactPerson?: SchoolContactPersonUncheckedCreateNestedOneWithoutSchoolInput
     classes?: ClassUncheckedCreateNestedManyWithoutSchoolInput
     academicSessions?: AcademicSessionUncheckedCreateNestedManyWithoutSchoolInput
     terms?: TermUncheckedCreateNestedManyWithoutSchoolInput
@@ -40494,6 +41800,7 @@ export namespace Prisma {
     schoolVerification?: SchoolVerificationUpdateOneWithoutSchoolNestedInput
     schoolPayoutDetail?: SchoolPayoutDetailUpdateOneWithoutSchoolNestedInput
     schoolAndPlatformLegalAgreement?: SchoolAndPlatformLegalAgreementUpdateOneWithoutSchoolNestedInput
+    SchoolContactPerson?: SchoolContactPersonUpdateOneWithoutSchoolNestedInput
     classes?: ClassUpdateManyWithoutSchoolNestedInput
     academicSessions?: AcademicSessionUpdateManyWithoutSchoolNestedInput
     terms?: TermUpdateManyWithoutSchoolNestedInput
@@ -40528,6 +41835,7 @@ export namespace Prisma {
     schoolVerification?: SchoolVerificationUncheckedUpdateOneWithoutSchoolNestedInput
     schoolPayoutDetail?: SchoolPayoutDetailUncheckedUpdateOneWithoutSchoolNestedInput
     schoolAndPlatformLegalAgreement?: SchoolAndPlatformLegalAgreementUncheckedUpdateOneWithoutSchoolNestedInput
+    SchoolContactPerson?: SchoolContactPersonUncheckedUpdateOneWithoutSchoolNestedInput
     classes?: ClassUncheckedUpdateManyWithoutSchoolNestedInput
     academicSessions?: AcademicSessionUncheckedUpdateManyWithoutSchoolNestedInput
     terms?: TermUncheckedUpdateManyWithoutSchoolNestedInput
@@ -40760,7 +42068,7 @@ export namespace Prisma {
     id?: string
     cacCertificate: string
     accreditationDocument: string
-    taxIdentificationNumber: string
+    taxIdentificationNumberCertificate: string
     licenseDocument: string
     isDeleted?: boolean
     createdAt?: Date | string
@@ -40773,7 +42081,7 @@ export namespace Prisma {
     schoolId: string
     cacCertificate: string
     accreditationDocument: string
-    taxIdentificationNumber: string
+    taxIdentificationNumberCertificate: string
     licenseDocument: string
     isDeleted?: boolean
     createdAt?: Date | string
@@ -40784,7 +42092,7 @@ export namespace Prisma {
     id?: StringFieldUpdateOperationsInput | string
     cacCertificate?: StringFieldUpdateOperationsInput | string
     accreditationDocument?: StringFieldUpdateOperationsInput | string
-    taxIdentificationNumber?: StringFieldUpdateOperationsInput | string
+    taxIdentificationNumberCertificate?: StringFieldUpdateOperationsInput | string
     licenseDocument?: StringFieldUpdateOperationsInput | string
     isDeleted?: BoolFieldUpdateOperationsInput | boolean
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
@@ -40797,7 +42105,7 @@ export namespace Prisma {
     schoolId?: StringFieldUpdateOperationsInput | string
     cacCertificate?: StringFieldUpdateOperationsInput | string
     accreditationDocument?: StringFieldUpdateOperationsInput | string
-    taxIdentificationNumber?: StringFieldUpdateOperationsInput | string
+    taxIdentificationNumberCertificate?: StringFieldUpdateOperationsInput | string
     licenseDocument?: StringFieldUpdateOperationsInput | string
     isDeleted?: BoolFieldUpdateOperationsInput | boolean
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
@@ -40809,7 +42117,7 @@ export namespace Prisma {
     schoolId: string
     cacCertificate: string
     accreditationDocument: string
-    taxIdentificationNumber: string
+    taxIdentificationNumberCertificate: string
     licenseDocument: string
     isDeleted?: boolean
     createdAt?: Date | string
@@ -40820,7 +42128,7 @@ export namespace Prisma {
     id?: StringFieldUpdateOperationsInput | string
     cacCertificate?: StringFieldUpdateOperationsInput | string
     accreditationDocument?: StringFieldUpdateOperationsInput | string
-    taxIdentificationNumber?: StringFieldUpdateOperationsInput | string
+    taxIdentificationNumberCertificate?: StringFieldUpdateOperationsInput | string
     licenseDocument?: StringFieldUpdateOperationsInput | string
     isDeleted?: BoolFieldUpdateOperationsInput | boolean
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
@@ -40832,7 +42140,7 @@ export namespace Prisma {
     schoolId?: StringFieldUpdateOperationsInput | string
     cacCertificate?: StringFieldUpdateOperationsInput | string
     accreditationDocument?: StringFieldUpdateOperationsInput | string
-    taxIdentificationNumber?: StringFieldUpdateOperationsInput | string
+    taxIdentificationNumberCertificate?: StringFieldUpdateOperationsInput | string
     licenseDocument?: StringFieldUpdateOperationsInput | string
     isDeleted?: BoolFieldUpdateOperationsInput | boolean
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
@@ -40845,6 +42153,7 @@ export namespace Prisma {
     bankCode: string
     accountNumber: string
     accountName: string
+    bankReferenceLetter: string
     isDeleted?: boolean
     createdAt?: Date | string
     updatedAt?: Date | string
@@ -40858,6 +42167,7 @@ export namespace Prisma {
     bankCode: string
     accountNumber: string
     accountName: string
+    bankReferenceLetter: string
     isDeleted?: boolean
     createdAt?: Date | string
     updatedAt?: Date | string
@@ -40869,6 +42179,7 @@ export namespace Prisma {
     bankCode?: StringFieldUpdateOperationsInput | string
     accountNumber?: StringFieldUpdateOperationsInput | string
     accountName?: StringFieldUpdateOperationsInput | string
+    bankReferenceLetter?: StringFieldUpdateOperationsInput | string
     isDeleted?: BoolFieldUpdateOperationsInput | boolean
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
@@ -40882,6 +42193,7 @@ export namespace Prisma {
     bankCode?: StringFieldUpdateOperationsInput | string
     accountNumber?: StringFieldUpdateOperationsInput | string
     accountName?: StringFieldUpdateOperationsInput | string
+    bankReferenceLetter?: StringFieldUpdateOperationsInput | string
     isDeleted?: BoolFieldUpdateOperationsInput | boolean
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
@@ -40894,6 +42206,7 @@ export namespace Prisma {
     bankCode: string
     accountNumber: string
     accountName: string
+    bankReferenceLetter: string
     isDeleted?: boolean
     createdAt?: Date | string
     updatedAt?: Date | string
@@ -40905,6 +42218,7 @@ export namespace Prisma {
     bankCode?: StringFieldUpdateOperationsInput | string
     accountNumber?: StringFieldUpdateOperationsInput | string
     accountName?: StringFieldUpdateOperationsInput | string
+    bankReferenceLetter?: StringFieldUpdateOperationsInput | string
     isDeleted?: BoolFieldUpdateOperationsInput | boolean
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
@@ -40917,55 +42231,135 @@ export namespace Prisma {
     bankCode?: StringFieldUpdateOperationsInput | string
     accountNumber?: StringFieldUpdateOperationsInput | string
     accountName?: StringFieldUpdateOperationsInput | string
+    bankReferenceLetter?: StringFieldUpdateOperationsInput | string
     isDeleted?: BoolFieldUpdateOperationsInput | boolean
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
   }
 
+  export type SchoolContactPersonCreateInput = {
+    id?: string
+    role: $Enums.ContactRole
+    name: string
+    phone: string
+    email: string
+    createdAt?: Date | string
+    updatedAt?: Date | string
+    isDeleted?: boolean
+    school: SchoolCreateNestedOneWithoutSchoolContactPersonInput
+  }
+
+  export type SchoolContactPersonUncheckedCreateInput = {
+    id?: string
+    schoolId: string
+    role: $Enums.ContactRole
+    name: string
+    phone: string
+    email: string
+    createdAt?: Date | string
+    updatedAt?: Date | string
+    isDeleted?: boolean
+  }
+
+  export type SchoolContactPersonUpdateInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    role?: EnumContactRoleFieldUpdateOperationsInput | $Enums.ContactRole
+    name?: StringFieldUpdateOperationsInput | string
+    phone?: StringFieldUpdateOperationsInput | string
+    email?: StringFieldUpdateOperationsInput | string
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    isDeleted?: BoolFieldUpdateOperationsInput | boolean
+    school?: SchoolUpdateOneRequiredWithoutSchoolContactPersonNestedInput
+  }
+
+  export type SchoolContactPersonUncheckedUpdateInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    schoolId?: StringFieldUpdateOperationsInput | string
+    role?: EnumContactRoleFieldUpdateOperationsInput | $Enums.ContactRole
+    name?: StringFieldUpdateOperationsInput | string
+    phone?: StringFieldUpdateOperationsInput | string
+    email?: StringFieldUpdateOperationsInput | string
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    isDeleted?: BoolFieldUpdateOperationsInput | boolean
+  }
+
+  export type SchoolContactPersonCreateManyInput = {
+    id?: string
+    schoolId: string
+    role: $Enums.ContactRole
+    name: string
+    phone: string
+    email: string
+    createdAt?: Date | string
+    updatedAt?: Date | string
+    isDeleted?: boolean
+  }
+
+  export type SchoolContactPersonUpdateManyMutationInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    role?: EnumContactRoleFieldUpdateOperationsInput | $Enums.ContactRole
+    name?: StringFieldUpdateOperationsInput | string
+    phone?: StringFieldUpdateOperationsInput | string
+    email?: StringFieldUpdateOperationsInput | string
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    isDeleted?: BoolFieldUpdateOperationsInput | boolean
+  }
+
+  export type SchoolContactPersonUncheckedUpdateManyInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    schoolId?: StringFieldUpdateOperationsInput | string
+    role?: EnumContactRoleFieldUpdateOperationsInput | $Enums.ContactRole
+    name?: StringFieldUpdateOperationsInput | string
+    phone?: StringFieldUpdateOperationsInput | string
+    email?: StringFieldUpdateOperationsInput | string
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    isDeleted?: BoolFieldUpdateOperationsInput | boolean
+  }
+
   export type SchoolAndPlatformLegalAgreementCreateInput = {
     id?: string
-    signature: string
-    signedAt: Date | string
+    signedById: string
+    agreedByName: string
     legalDocumentRef: string
-    isDeleted?: boolean
+    signedAt?: Date | string
     createdAt?: Date | string
     updatedAt?: Date | string
     school: SchoolCreateNestedOneWithoutSchoolAndPlatformLegalAgreementInput
-    signedBy: UserCreateNestedOneWithoutSchoolAndPlatformLegalAgreementInput
   }
 
   export type SchoolAndPlatformLegalAgreementUncheckedCreateInput = {
     id?: string
     schoolId: string
     signedById: string
-    signature: string
-    signedAt: Date | string
+    agreedByName: string
     legalDocumentRef: string
-    isDeleted?: boolean
+    signedAt?: Date | string
     createdAt?: Date | string
     updatedAt?: Date | string
   }
 
   export type SchoolAndPlatformLegalAgreementUpdateInput = {
     id?: StringFieldUpdateOperationsInput | string
-    signature?: StringFieldUpdateOperationsInput | string
-    signedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    signedById?: StringFieldUpdateOperationsInput | string
+    agreedByName?: StringFieldUpdateOperationsInput | string
     legalDocumentRef?: StringFieldUpdateOperationsInput | string
-    isDeleted?: BoolFieldUpdateOperationsInput | boolean
+    signedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     school?: SchoolUpdateOneRequiredWithoutSchoolAndPlatformLegalAgreementNestedInput
-    signedBy?: UserUpdateOneRequiredWithoutSchoolAndPlatformLegalAgreementNestedInput
   }
 
   export type SchoolAndPlatformLegalAgreementUncheckedUpdateInput = {
     id?: StringFieldUpdateOperationsInput | string
     schoolId?: StringFieldUpdateOperationsInput | string
     signedById?: StringFieldUpdateOperationsInput | string
-    signature?: StringFieldUpdateOperationsInput | string
-    signedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    agreedByName?: StringFieldUpdateOperationsInput | string
     legalDocumentRef?: StringFieldUpdateOperationsInput | string
-    isDeleted?: BoolFieldUpdateOperationsInput | boolean
+    signedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
   }
@@ -40974,20 +42368,19 @@ export namespace Prisma {
     id?: string
     schoolId: string
     signedById: string
-    signature: string
-    signedAt: Date | string
+    agreedByName: string
     legalDocumentRef: string
-    isDeleted?: boolean
+    signedAt?: Date | string
     createdAt?: Date | string
     updatedAt?: Date | string
   }
 
   export type SchoolAndPlatformLegalAgreementUpdateManyMutationInput = {
     id?: StringFieldUpdateOperationsInput | string
-    signature?: StringFieldUpdateOperationsInput | string
-    signedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    signedById?: StringFieldUpdateOperationsInput | string
+    agreedByName?: StringFieldUpdateOperationsInput | string
     legalDocumentRef?: StringFieldUpdateOperationsInput | string
-    isDeleted?: BoolFieldUpdateOperationsInput | boolean
+    signedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
   }
@@ -40996,10 +42389,9 @@ export namespace Prisma {
     id?: StringFieldUpdateOperationsInput | string
     schoolId?: StringFieldUpdateOperationsInput | string
     signedById?: StringFieldUpdateOperationsInput | string
-    signature?: StringFieldUpdateOperationsInput | string
-    signedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    agreedByName?: StringFieldUpdateOperationsInput | string
     legalDocumentRef?: StringFieldUpdateOperationsInput | string
-    isDeleted?: BoolFieldUpdateOperationsInput | boolean
+    signedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
   }
@@ -42475,11 +43867,6 @@ export namespace Prisma {
     isNot?: SchoolWhereInput | null
   }
 
-  export type SchoolAndPlatformLegalAgreementNullableScalarRelationFilter = {
-    is?: SchoolAndPlatformLegalAgreementWhereInput | null
-    isNot?: SchoolAndPlatformLegalAgreementWhereInput | null
-  }
-
   export type NotificationListRelationFilter = {
     every?: NotificationWhereInput
     some?: NotificationWhereInput
@@ -42995,6 +44382,16 @@ export namespace Prisma {
     isNot?: SchoolPayoutDetailWhereInput | null
   }
 
+  export type SchoolAndPlatformLegalAgreementNullableScalarRelationFilter = {
+    is?: SchoolAndPlatformLegalAgreementWhereInput | null
+    isNot?: SchoolAndPlatformLegalAgreementWhereInput | null
+  }
+
+  export type SchoolContactPersonNullableScalarRelationFilter = {
+    is?: SchoolContactPersonWhereInput | null
+    isNot?: SchoolContactPersonWhereInput | null
+  }
+
   export type ClassListRelationFilter = {
     every?: ClassWhereInput
     some?: ClassWhereInput
@@ -43261,7 +44658,7 @@ export namespace Prisma {
     schoolId?: SortOrder
     cacCertificate?: SortOrder
     accreditationDocument?: SortOrder
-    taxIdentificationNumber?: SortOrder
+    taxIdentificationNumberCertificate?: SortOrder
     licenseDocument?: SortOrder
     isDeleted?: SortOrder
     createdAt?: SortOrder
@@ -43273,7 +44670,7 @@ export namespace Prisma {
     schoolId?: SortOrder
     cacCertificate?: SortOrder
     accreditationDocument?: SortOrder
-    taxIdentificationNumber?: SortOrder
+    taxIdentificationNumberCertificate?: SortOrder
     licenseDocument?: SortOrder
     isDeleted?: SortOrder
     createdAt?: SortOrder
@@ -43285,7 +44682,7 @@ export namespace Prisma {
     schoolId?: SortOrder
     cacCertificate?: SortOrder
     accreditationDocument?: SortOrder
-    taxIdentificationNumber?: SortOrder
+    taxIdentificationNumberCertificate?: SortOrder
     licenseDocument?: SortOrder
     isDeleted?: SortOrder
     createdAt?: SortOrder
@@ -43299,6 +44696,7 @@ export namespace Prisma {
     bankCode?: SortOrder
     accountNumber?: SortOrder
     accountName?: SortOrder
+    bankReferenceLetter?: SortOrder
     isDeleted?: SortOrder
     createdAt?: SortOrder
     updatedAt?: SortOrder
@@ -43311,6 +44709,7 @@ export namespace Prisma {
     bankCode?: SortOrder
     accountNumber?: SortOrder
     accountName?: SortOrder
+    bankReferenceLetter?: SortOrder
     isDeleted?: SortOrder
     createdAt?: SortOrder
     updatedAt?: SortOrder
@@ -43323,19 +44722,77 @@ export namespace Prisma {
     bankCode?: SortOrder
     accountNumber?: SortOrder
     accountName?: SortOrder
+    bankReferenceLetter?: SortOrder
     isDeleted?: SortOrder
     createdAt?: SortOrder
     updatedAt?: SortOrder
+  }
+
+  export type EnumContactRoleFilter<$PrismaModel = never> = {
+    equals?: $Enums.ContactRole | EnumContactRoleFieldRefInput<$PrismaModel>
+    in?: $Enums.ContactRole[] | ListEnumContactRoleFieldRefInput<$PrismaModel>
+    notIn?: $Enums.ContactRole[] | ListEnumContactRoleFieldRefInput<$PrismaModel>
+    not?: NestedEnumContactRoleFilter<$PrismaModel> | $Enums.ContactRole
+  }
+
+  export type SchoolContactPersonSchoolIdRoleCompoundUniqueInput = {
+    schoolId: string
+    role: $Enums.ContactRole
+  }
+
+  export type SchoolContactPersonCountOrderByAggregateInput = {
+    id?: SortOrder
+    schoolId?: SortOrder
+    role?: SortOrder
+    name?: SortOrder
+    phone?: SortOrder
+    email?: SortOrder
+    createdAt?: SortOrder
+    updatedAt?: SortOrder
+    isDeleted?: SortOrder
+  }
+
+  export type SchoolContactPersonMaxOrderByAggregateInput = {
+    id?: SortOrder
+    schoolId?: SortOrder
+    role?: SortOrder
+    name?: SortOrder
+    phone?: SortOrder
+    email?: SortOrder
+    createdAt?: SortOrder
+    updatedAt?: SortOrder
+    isDeleted?: SortOrder
+  }
+
+  export type SchoolContactPersonMinOrderByAggregateInput = {
+    id?: SortOrder
+    schoolId?: SortOrder
+    role?: SortOrder
+    name?: SortOrder
+    phone?: SortOrder
+    email?: SortOrder
+    createdAt?: SortOrder
+    updatedAt?: SortOrder
+    isDeleted?: SortOrder
+  }
+
+  export type EnumContactRoleWithAggregatesFilter<$PrismaModel = never> = {
+    equals?: $Enums.ContactRole | EnumContactRoleFieldRefInput<$PrismaModel>
+    in?: $Enums.ContactRole[] | ListEnumContactRoleFieldRefInput<$PrismaModel>
+    notIn?: $Enums.ContactRole[] | ListEnumContactRoleFieldRefInput<$PrismaModel>
+    not?: NestedEnumContactRoleWithAggregatesFilter<$PrismaModel> | $Enums.ContactRole
+    _count?: NestedIntFilter<$PrismaModel>
+    _min?: NestedEnumContactRoleFilter<$PrismaModel>
+    _max?: NestedEnumContactRoleFilter<$PrismaModel>
   }
 
   export type SchoolAndPlatformLegalAgreementCountOrderByAggregateInput = {
     id?: SortOrder
     schoolId?: SortOrder
     signedById?: SortOrder
-    signature?: SortOrder
-    signedAt?: SortOrder
+    agreedByName?: SortOrder
     legalDocumentRef?: SortOrder
-    isDeleted?: SortOrder
+    signedAt?: SortOrder
     createdAt?: SortOrder
     updatedAt?: SortOrder
   }
@@ -43344,10 +44801,9 @@ export namespace Prisma {
     id?: SortOrder
     schoolId?: SortOrder
     signedById?: SortOrder
-    signature?: SortOrder
-    signedAt?: SortOrder
+    agreedByName?: SortOrder
     legalDocumentRef?: SortOrder
-    isDeleted?: SortOrder
+    signedAt?: SortOrder
     createdAt?: SortOrder
     updatedAt?: SortOrder
   }
@@ -43356,10 +44812,9 @@ export namespace Prisma {
     id?: SortOrder
     schoolId?: SortOrder
     signedById?: SortOrder
-    signature?: SortOrder
-    signedAt?: SortOrder
+    agreedByName?: SortOrder
     legalDocumentRef?: SortOrder
-    isDeleted?: SortOrder
+    signedAt?: SortOrder
     createdAt?: SortOrder
     updatedAt?: SortOrder
   }
@@ -44298,12 +45753,6 @@ export namespace Prisma {
     connect?: SchoolWhereUniqueInput
   }
 
-  export type SchoolAndPlatformLegalAgreementCreateNestedOneWithoutSignedByInput = {
-    create?: XOR<SchoolAndPlatformLegalAgreementCreateWithoutSignedByInput, SchoolAndPlatformLegalAgreementUncheckedCreateWithoutSignedByInput>
-    connectOrCreate?: SchoolAndPlatformLegalAgreementCreateOrConnectWithoutSignedByInput
-    connect?: SchoolAndPlatformLegalAgreementWhereUniqueInput
-  }
-
   export type NotificationCreateNestedManyWithoutUserInput = {
     create?: XOR<NotificationCreateWithoutUserInput, NotificationUncheckedCreateWithoutUserInput> | NotificationCreateWithoutUserInput[] | NotificationUncheckedCreateWithoutUserInput[]
     connectOrCreate?: NotificationCreateOrConnectWithoutUserInput | NotificationCreateOrConnectWithoutUserInput[]
@@ -44365,12 +45814,6 @@ export namespace Prisma {
     create?: XOR<SchoolCreateWithoutOwnerInput, SchoolUncheckedCreateWithoutOwnerInput>
     connectOrCreate?: SchoolCreateOrConnectWithoutOwnerInput
     connect?: SchoolWhereUniqueInput
-  }
-
-  export type SchoolAndPlatformLegalAgreementUncheckedCreateNestedOneWithoutSignedByInput = {
-    create?: XOR<SchoolAndPlatformLegalAgreementCreateWithoutSignedByInput, SchoolAndPlatformLegalAgreementUncheckedCreateWithoutSignedByInput>
-    connectOrCreate?: SchoolAndPlatformLegalAgreementCreateOrConnectWithoutSignedByInput
-    connect?: SchoolAndPlatformLegalAgreementWhereUniqueInput
   }
 
   export type NotificationUncheckedCreateNestedManyWithoutUserInput = {
@@ -44483,16 +45926,6 @@ export namespace Prisma {
     update?: XOR<XOR<SchoolUpdateToOneWithWhereWithoutOwnerInput, SchoolUpdateWithoutOwnerInput>, SchoolUncheckedUpdateWithoutOwnerInput>
   }
 
-  export type SchoolAndPlatformLegalAgreementUpdateOneWithoutSignedByNestedInput = {
-    create?: XOR<SchoolAndPlatformLegalAgreementCreateWithoutSignedByInput, SchoolAndPlatformLegalAgreementUncheckedCreateWithoutSignedByInput>
-    connectOrCreate?: SchoolAndPlatformLegalAgreementCreateOrConnectWithoutSignedByInput
-    upsert?: SchoolAndPlatformLegalAgreementUpsertWithoutSignedByInput
-    disconnect?: SchoolAndPlatformLegalAgreementWhereInput | boolean
-    delete?: SchoolAndPlatformLegalAgreementWhereInput | boolean
-    connect?: SchoolAndPlatformLegalAgreementWhereUniqueInput
-    update?: XOR<XOR<SchoolAndPlatformLegalAgreementUpdateToOneWithWhereWithoutSignedByInput, SchoolAndPlatformLegalAgreementUpdateWithoutSignedByInput>, SchoolAndPlatformLegalAgreementUncheckedUpdateWithoutSignedByInput>
-  }
-
   export type NotificationUpdateManyWithoutUserNestedInput = {
     create?: XOR<NotificationCreateWithoutUserInput, NotificationUncheckedCreateWithoutUserInput> | NotificationCreateWithoutUserInput[] | NotificationUncheckedCreateWithoutUserInput[]
     connectOrCreate?: NotificationCreateOrConnectWithoutUserInput | NotificationCreateOrConnectWithoutUserInput[]
@@ -44603,16 +46036,6 @@ export namespace Prisma {
     delete?: SchoolWhereInput | boolean
     connect?: SchoolWhereUniqueInput
     update?: XOR<XOR<SchoolUpdateToOneWithWhereWithoutOwnerInput, SchoolUpdateWithoutOwnerInput>, SchoolUncheckedUpdateWithoutOwnerInput>
-  }
-
-  export type SchoolAndPlatformLegalAgreementUncheckedUpdateOneWithoutSignedByNestedInput = {
-    create?: XOR<SchoolAndPlatformLegalAgreementCreateWithoutSignedByInput, SchoolAndPlatformLegalAgreementUncheckedCreateWithoutSignedByInput>
-    connectOrCreate?: SchoolAndPlatformLegalAgreementCreateOrConnectWithoutSignedByInput
-    upsert?: SchoolAndPlatformLegalAgreementUpsertWithoutSignedByInput
-    disconnect?: SchoolAndPlatformLegalAgreementWhereInput | boolean
-    delete?: SchoolAndPlatformLegalAgreementWhereInput | boolean
-    connect?: SchoolAndPlatformLegalAgreementWhereUniqueInput
-    update?: XOR<XOR<SchoolAndPlatformLegalAgreementUpdateToOneWithWhereWithoutSignedByInput, SchoolAndPlatformLegalAgreementUpdateWithoutSignedByInput>, SchoolAndPlatformLegalAgreementUncheckedUpdateWithoutSignedByInput>
   }
 
   export type NotificationUncheckedUpdateManyWithoutUserNestedInput = {
@@ -44969,6 +46392,12 @@ export namespace Prisma {
     connect?: SchoolAndPlatformLegalAgreementWhereUniqueInput
   }
 
+  export type SchoolContactPersonCreateNestedOneWithoutSchoolInput = {
+    create?: XOR<SchoolContactPersonCreateWithoutSchoolInput, SchoolContactPersonUncheckedCreateWithoutSchoolInput>
+    connectOrCreate?: SchoolContactPersonCreateOrConnectWithoutSchoolInput
+    connect?: SchoolContactPersonWhereUniqueInput
+  }
+
   export type ClassCreateNestedManyWithoutSchoolInput = {
     create?: XOR<ClassCreateWithoutSchoolInput, ClassUncheckedCreateWithoutSchoolInput> | ClassCreateWithoutSchoolInput[] | ClassUncheckedCreateWithoutSchoolInput[]
     connectOrCreate?: ClassCreateOrConnectWithoutSchoolInput | ClassCreateOrConnectWithoutSchoolInput[]
@@ -45038,6 +46467,12 @@ export namespace Prisma {
     create?: XOR<SchoolAndPlatformLegalAgreementCreateWithoutSchoolInput, SchoolAndPlatformLegalAgreementUncheckedCreateWithoutSchoolInput>
     connectOrCreate?: SchoolAndPlatformLegalAgreementCreateOrConnectWithoutSchoolInput
     connect?: SchoolAndPlatformLegalAgreementWhereUniqueInput
+  }
+
+  export type SchoolContactPersonUncheckedCreateNestedOneWithoutSchoolInput = {
+    create?: XOR<SchoolContactPersonCreateWithoutSchoolInput, SchoolContactPersonUncheckedCreateWithoutSchoolInput>
+    connectOrCreate?: SchoolContactPersonCreateOrConnectWithoutSchoolInput
+    connect?: SchoolContactPersonWhereUniqueInput
   }
 
   export type ClassUncheckedCreateNestedManyWithoutSchoolInput = {
@@ -45157,6 +46592,16 @@ export namespace Prisma {
     delete?: SchoolAndPlatformLegalAgreementWhereInput | boolean
     connect?: SchoolAndPlatformLegalAgreementWhereUniqueInput
     update?: XOR<XOR<SchoolAndPlatformLegalAgreementUpdateToOneWithWhereWithoutSchoolInput, SchoolAndPlatformLegalAgreementUpdateWithoutSchoolInput>, SchoolAndPlatformLegalAgreementUncheckedUpdateWithoutSchoolInput>
+  }
+
+  export type SchoolContactPersonUpdateOneWithoutSchoolNestedInput = {
+    create?: XOR<SchoolContactPersonCreateWithoutSchoolInput, SchoolContactPersonUncheckedCreateWithoutSchoolInput>
+    connectOrCreate?: SchoolContactPersonCreateOrConnectWithoutSchoolInput
+    upsert?: SchoolContactPersonUpsertWithoutSchoolInput
+    disconnect?: SchoolContactPersonWhereInput | boolean
+    delete?: SchoolContactPersonWhereInput | boolean
+    connect?: SchoolContactPersonWhereUniqueInput
+    update?: XOR<XOR<SchoolContactPersonUpdateToOneWithWhereWithoutSchoolInput, SchoolContactPersonUpdateWithoutSchoolInput>, SchoolContactPersonUncheckedUpdateWithoutSchoolInput>
   }
 
   export type ClassUpdateManyWithoutSchoolNestedInput = {
@@ -45287,6 +46732,16 @@ export namespace Prisma {
     delete?: SchoolAndPlatformLegalAgreementWhereInput | boolean
     connect?: SchoolAndPlatformLegalAgreementWhereUniqueInput
     update?: XOR<XOR<SchoolAndPlatformLegalAgreementUpdateToOneWithWhereWithoutSchoolInput, SchoolAndPlatformLegalAgreementUpdateWithoutSchoolInput>, SchoolAndPlatformLegalAgreementUncheckedUpdateWithoutSchoolInput>
+  }
+
+  export type SchoolContactPersonUncheckedUpdateOneWithoutSchoolNestedInput = {
+    create?: XOR<SchoolContactPersonCreateWithoutSchoolInput, SchoolContactPersonUncheckedCreateWithoutSchoolInput>
+    connectOrCreate?: SchoolContactPersonCreateOrConnectWithoutSchoolInput
+    upsert?: SchoolContactPersonUpsertWithoutSchoolInput
+    disconnect?: SchoolContactPersonWhereInput | boolean
+    delete?: SchoolContactPersonWhereInput | boolean
+    connect?: SchoolContactPersonWhereUniqueInput
+    update?: XOR<XOR<SchoolContactPersonUpdateToOneWithWhereWithoutSchoolInput, SchoolContactPersonUpdateWithoutSchoolInput>, SchoolContactPersonUncheckedUpdateWithoutSchoolInput>
   }
 
   export type ClassUncheckedUpdateManyWithoutSchoolNestedInput = {
@@ -45429,16 +46884,28 @@ export namespace Prisma {
     update?: XOR<XOR<SchoolUpdateToOneWithWhereWithoutSchoolPayoutDetailInput, SchoolUpdateWithoutSchoolPayoutDetailInput>, SchoolUncheckedUpdateWithoutSchoolPayoutDetailInput>
   }
 
+  export type SchoolCreateNestedOneWithoutSchoolContactPersonInput = {
+    create?: XOR<SchoolCreateWithoutSchoolContactPersonInput, SchoolUncheckedCreateWithoutSchoolContactPersonInput>
+    connectOrCreate?: SchoolCreateOrConnectWithoutSchoolContactPersonInput
+    connect?: SchoolWhereUniqueInput
+  }
+
+  export type EnumContactRoleFieldUpdateOperationsInput = {
+    set?: $Enums.ContactRole
+  }
+
+  export type SchoolUpdateOneRequiredWithoutSchoolContactPersonNestedInput = {
+    create?: XOR<SchoolCreateWithoutSchoolContactPersonInput, SchoolUncheckedCreateWithoutSchoolContactPersonInput>
+    connectOrCreate?: SchoolCreateOrConnectWithoutSchoolContactPersonInput
+    upsert?: SchoolUpsertWithoutSchoolContactPersonInput
+    connect?: SchoolWhereUniqueInput
+    update?: XOR<XOR<SchoolUpdateToOneWithWhereWithoutSchoolContactPersonInput, SchoolUpdateWithoutSchoolContactPersonInput>, SchoolUncheckedUpdateWithoutSchoolContactPersonInput>
+  }
+
   export type SchoolCreateNestedOneWithoutSchoolAndPlatformLegalAgreementInput = {
     create?: XOR<SchoolCreateWithoutSchoolAndPlatformLegalAgreementInput, SchoolUncheckedCreateWithoutSchoolAndPlatformLegalAgreementInput>
     connectOrCreate?: SchoolCreateOrConnectWithoutSchoolAndPlatformLegalAgreementInput
     connect?: SchoolWhereUniqueInput
-  }
-
-  export type UserCreateNestedOneWithoutSchoolAndPlatformLegalAgreementInput = {
-    create?: XOR<UserCreateWithoutSchoolAndPlatformLegalAgreementInput, UserUncheckedCreateWithoutSchoolAndPlatformLegalAgreementInput>
-    connectOrCreate?: UserCreateOrConnectWithoutSchoolAndPlatformLegalAgreementInput
-    connect?: UserWhereUniqueInput
   }
 
   export type SchoolUpdateOneRequiredWithoutSchoolAndPlatformLegalAgreementNestedInput = {
@@ -45447,14 +46914,6 @@ export namespace Prisma {
     upsert?: SchoolUpsertWithoutSchoolAndPlatformLegalAgreementInput
     connect?: SchoolWhereUniqueInput
     update?: XOR<XOR<SchoolUpdateToOneWithWhereWithoutSchoolAndPlatformLegalAgreementInput, SchoolUpdateWithoutSchoolAndPlatformLegalAgreementInput>, SchoolUncheckedUpdateWithoutSchoolAndPlatformLegalAgreementInput>
-  }
-
-  export type UserUpdateOneRequiredWithoutSchoolAndPlatformLegalAgreementNestedInput = {
-    create?: XOR<UserCreateWithoutSchoolAndPlatformLegalAgreementInput, UserUncheckedCreateWithoutSchoolAndPlatformLegalAgreementInput>
-    connectOrCreate?: UserCreateOrConnectWithoutSchoolAndPlatformLegalAgreementInput
-    upsert?: UserUpsertWithoutSchoolAndPlatformLegalAgreementInput
-    connect?: UserWhereUniqueInput
-    update?: XOR<XOR<UserUpdateToOneWithWhereWithoutSchoolAndPlatformLegalAgreementInput, UserUpdateWithoutSchoolAndPlatformLegalAgreementInput>, UserUncheckedUpdateWithoutSchoolAndPlatformLegalAgreementInput>
   }
 
   export type UserCreateNestedOneWithoutKycverificationInput = {
@@ -46775,6 +48234,23 @@ export namespace Prisma {
     _max?: NestedEnumDirectorIDTypeFilter<$PrismaModel>
   }
 
+  export type NestedEnumContactRoleFilter<$PrismaModel = never> = {
+    equals?: $Enums.ContactRole | EnumContactRoleFieldRefInput<$PrismaModel>
+    in?: $Enums.ContactRole[] | ListEnumContactRoleFieldRefInput<$PrismaModel>
+    notIn?: $Enums.ContactRole[] | ListEnumContactRoleFieldRefInput<$PrismaModel>
+    not?: NestedEnumContactRoleFilter<$PrismaModel> | $Enums.ContactRole
+  }
+
+  export type NestedEnumContactRoleWithAggregatesFilter<$PrismaModel = never> = {
+    equals?: $Enums.ContactRole | EnumContactRoleFieldRefInput<$PrismaModel>
+    in?: $Enums.ContactRole[] | ListEnumContactRoleFieldRefInput<$PrismaModel>
+    notIn?: $Enums.ContactRole[] | ListEnumContactRoleFieldRefInput<$PrismaModel>
+    not?: NestedEnumContactRoleWithAggregatesFilter<$PrismaModel> | $Enums.ContactRole
+    _count?: NestedIntFilter<$PrismaModel>
+    _min?: NestedEnumContactRoleFilter<$PrismaModel>
+    _max?: NestedEnumContactRoleFilter<$PrismaModel>
+  }
+
   export type NestedEnumKYCVerificationStatusFilter<$PrismaModel = never> = {
     equals?: $Enums.KYCVerificationStatus | EnumKYCVerificationStatusFieldRefInput<$PrismaModel>
     in?: $Enums.KYCVerificationStatus[] | ListEnumKYCVerificationStatusFieldRefInput<$PrismaModel>
@@ -47070,6 +48546,7 @@ export namespace Prisma {
     schoolVerification?: SchoolVerificationCreateNestedOneWithoutSchoolInput
     schoolPayoutDetail?: SchoolPayoutDetailCreateNestedOneWithoutSchoolInput
     schoolAndPlatformLegalAgreement?: SchoolAndPlatformLegalAgreementCreateNestedOneWithoutSchoolInput
+    SchoolContactPerson?: SchoolContactPersonCreateNestedOneWithoutSchoolInput
     classes?: ClassCreateNestedManyWithoutSchoolInput
     academicSessions?: AcademicSessionCreateNestedManyWithoutSchoolInput
     terms?: TermCreateNestedManyWithoutSchoolInput
@@ -47103,6 +48580,7 @@ export namespace Prisma {
     schoolVerification?: SchoolVerificationUncheckedCreateNestedOneWithoutSchoolInput
     schoolPayoutDetail?: SchoolPayoutDetailUncheckedCreateNestedOneWithoutSchoolInput
     schoolAndPlatformLegalAgreement?: SchoolAndPlatformLegalAgreementUncheckedCreateNestedOneWithoutSchoolInput
+    SchoolContactPerson?: SchoolContactPersonUncheckedCreateNestedOneWithoutSchoolInput
     classes?: ClassUncheckedCreateNestedManyWithoutSchoolInput
     academicSessions?: AcademicSessionUncheckedCreateNestedManyWithoutSchoolInput
     terms?: TermUncheckedCreateNestedManyWithoutSchoolInput
@@ -47114,33 +48592,6 @@ export namespace Prisma {
   export type SchoolCreateOrConnectWithoutOwnerInput = {
     where: SchoolWhereUniqueInput
     create: XOR<SchoolCreateWithoutOwnerInput, SchoolUncheckedCreateWithoutOwnerInput>
-  }
-
-  export type SchoolAndPlatformLegalAgreementCreateWithoutSignedByInput = {
-    id?: string
-    signature: string
-    signedAt: Date | string
-    legalDocumentRef: string
-    isDeleted?: boolean
-    createdAt?: Date | string
-    updatedAt?: Date | string
-    school: SchoolCreateNestedOneWithoutSchoolAndPlatformLegalAgreementInput
-  }
-
-  export type SchoolAndPlatformLegalAgreementUncheckedCreateWithoutSignedByInput = {
-    id?: string
-    schoolId: string
-    signature: string
-    signedAt: Date | string
-    legalDocumentRef: string
-    isDeleted?: boolean
-    createdAt?: Date | string
-    updatedAt?: Date | string
-  }
-
-  export type SchoolAndPlatformLegalAgreementCreateOrConnectWithoutSignedByInput = {
-    where: SchoolAndPlatformLegalAgreementWhereUniqueInput
-    create: XOR<SchoolAndPlatformLegalAgreementCreateWithoutSignedByInput, SchoolAndPlatformLegalAgreementUncheckedCreateWithoutSignedByInput>
   }
 
   export type NotificationCreateWithoutUserInput = {
@@ -47447,6 +48898,7 @@ export namespace Prisma {
     schoolVerification?: SchoolVerificationUpdateOneWithoutSchoolNestedInput
     schoolPayoutDetail?: SchoolPayoutDetailUpdateOneWithoutSchoolNestedInput
     schoolAndPlatformLegalAgreement?: SchoolAndPlatformLegalAgreementUpdateOneWithoutSchoolNestedInput
+    SchoolContactPerson?: SchoolContactPersonUpdateOneWithoutSchoolNestedInput
     classes?: ClassUpdateManyWithoutSchoolNestedInput
     academicSessions?: AcademicSessionUpdateManyWithoutSchoolNestedInput
     terms?: TermUpdateManyWithoutSchoolNestedInput
@@ -47480,45 +48932,13 @@ export namespace Prisma {
     schoolVerification?: SchoolVerificationUncheckedUpdateOneWithoutSchoolNestedInput
     schoolPayoutDetail?: SchoolPayoutDetailUncheckedUpdateOneWithoutSchoolNestedInput
     schoolAndPlatformLegalAgreement?: SchoolAndPlatformLegalAgreementUncheckedUpdateOneWithoutSchoolNestedInput
+    SchoolContactPerson?: SchoolContactPersonUncheckedUpdateOneWithoutSchoolNestedInput
     classes?: ClassUncheckedUpdateManyWithoutSchoolNestedInput
     academicSessions?: AcademicSessionUncheckedUpdateManyWithoutSchoolNestedInput
     terms?: TermUncheckedUpdateManyWithoutSchoolNestedInput
     fees?: FeesUncheckedUpdateManyWithoutSchoolNestedInput
     payouts?: PayoutUncheckedUpdateManyWithoutSchoolNestedInput
     kycverification?: KYCVerificationUncheckedUpdateOneWithoutSchoolNestedInput
-  }
-
-  export type SchoolAndPlatformLegalAgreementUpsertWithoutSignedByInput = {
-    update: XOR<SchoolAndPlatformLegalAgreementUpdateWithoutSignedByInput, SchoolAndPlatformLegalAgreementUncheckedUpdateWithoutSignedByInput>
-    create: XOR<SchoolAndPlatformLegalAgreementCreateWithoutSignedByInput, SchoolAndPlatformLegalAgreementUncheckedCreateWithoutSignedByInput>
-    where?: SchoolAndPlatformLegalAgreementWhereInput
-  }
-
-  export type SchoolAndPlatformLegalAgreementUpdateToOneWithWhereWithoutSignedByInput = {
-    where?: SchoolAndPlatformLegalAgreementWhereInput
-    data: XOR<SchoolAndPlatformLegalAgreementUpdateWithoutSignedByInput, SchoolAndPlatformLegalAgreementUncheckedUpdateWithoutSignedByInput>
-  }
-
-  export type SchoolAndPlatformLegalAgreementUpdateWithoutSignedByInput = {
-    id?: StringFieldUpdateOperationsInput | string
-    signature?: StringFieldUpdateOperationsInput | string
-    signedAt?: DateTimeFieldUpdateOperationsInput | Date | string
-    legalDocumentRef?: StringFieldUpdateOperationsInput | string
-    isDeleted?: BoolFieldUpdateOperationsInput | boolean
-    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
-    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
-    school?: SchoolUpdateOneRequiredWithoutSchoolAndPlatformLegalAgreementNestedInput
-  }
-
-  export type SchoolAndPlatformLegalAgreementUncheckedUpdateWithoutSignedByInput = {
-    id?: StringFieldUpdateOperationsInput | string
-    schoolId?: StringFieldUpdateOperationsInput | string
-    signature?: StringFieldUpdateOperationsInput | string
-    signedAt?: DateTimeFieldUpdateOperationsInput | Date | string
-    legalDocumentRef?: StringFieldUpdateOperationsInput | string
-    isDeleted?: BoolFieldUpdateOperationsInput | boolean
-    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
-    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
   }
 
   export type NotificationUpsertWithWhereUniqueWithoutUserInput = {
@@ -47732,7 +49152,6 @@ export namespace Prisma {
     guardian?: GuardianCreateNestedOneWithoutUserInput
     verifications?: VerificationCreateNestedManyWithoutUserInput
     school?: SchoolCreateNestedOneWithoutOwnerInput
-    schoolAndPlatformLegalAgreement?: SchoolAndPlatformLegalAgreementCreateNestedOneWithoutSignedByInput
     notifications?: NotificationCreateNestedManyWithoutUserInput
     wallet?: WalletCreateNestedOneWithoutUserInput
     refreshTokens?: RefreshTokenCreateNestedManyWithoutUserInput
@@ -47760,7 +49179,6 @@ export namespace Prisma {
     guardian?: GuardianUncheckedCreateNestedOneWithoutUserInput
     verifications?: VerificationUncheckedCreateNestedManyWithoutUserInput
     school?: SchoolUncheckedCreateNestedOneWithoutOwnerInput
-    schoolAndPlatformLegalAgreement?: SchoolAndPlatformLegalAgreementUncheckedCreateNestedOneWithoutSignedByInput
     notifications?: NotificationUncheckedCreateNestedManyWithoutUserInput
     wallet?: WalletUncheckedCreateNestedOneWithoutUserInput
     refreshTokens?: RefreshTokenUncheckedCreateNestedManyWithoutUserInput
@@ -47804,7 +49222,6 @@ export namespace Prisma {
     guardian?: GuardianUpdateOneWithoutUserNestedInput
     verifications?: VerificationUpdateManyWithoutUserNestedInput
     school?: SchoolUpdateOneWithoutOwnerNestedInput
-    schoolAndPlatformLegalAgreement?: SchoolAndPlatformLegalAgreementUpdateOneWithoutSignedByNestedInput
     notifications?: NotificationUpdateManyWithoutUserNestedInput
     wallet?: WalletUpdateOneWithoutUserNestedInput
     refreshTokens?: RefreshTokenUpdateManyWithoutUserNestedInput
@@ -47832,7 +49249,6 @@ export namespace Prisma {
     guardian?: GuardianUncheckedUpdateOneWithoutUserNestedInput
     verifications?: VerificationUncheckedUpdateManyWithoutUserNestedInput
     school?: SchoolUncheckedUpdateOneWithoutOwnerNestedInput
-    schoolAndPlatformLegalAgreement?: SchoolAndPlatformLegalAgreementUncheckedUpdateOneWithoutSignedByNestedInput
     notifications?: NotificationUncheckedUpdateManyWithoutUserNestedInput
     wallet?: WalletUncheckedUpdateOneWithoutUserNestedInput
     refreshTokens?: RefreshTokenUncheckedUpdateManyWithoutUserNestedInput
@@ -47860,7 +49276,6 @@ export namespace Prisma {
     guardian?: GuardianCreateNestedOneWithoutUserInput
     verifications?: VerificationCreateNestedManyWithoutUserInput
     school?: SchoolCreateNestedOneWithoutOwnerInput
-    schoolAndPlatformLegalAgreement?: SchoolAndPlatformLegalAgreementCreateNestedOneWithoutSignedByInput
     notifications?: NotificationCreateNestedManyWithoutUserInput
     credential?: CredentialCreateNestedOneWithoutUserInput
     wallet?: WalletCreateNestedOneWithoutUserInput
@@ -47888,7 +49303,6 @@ export namespace Prisma {
     guardian?: GuardianUncheckedCreateNestedOneWithoutUserInput
     verifications?: VerificationUncheckedCreateNestedManyWithoutUserInput
     school?: SchoolUncheckedCreateNestedOneWithoutOwnerInput
-    schoolAndPlatformLegalAgreement?: SchoolAndPlatformLegalAgreementUncheckedCreateNestedOneWithoutSignedByInput
     notifications?: NotificationUncheckedCreateNestedManyWithoutUserInput
     credential?: CredentialUncheckedCreateNestedOneWithoutUserInput
     wallet?: WalletUncheckedCreateNestedOneWithoutUserInput
@@ -47932,7 +49346,6 @@ export namespace Prisma {
     guardian?: GuardianUpdateOneWithoutUserNestedInput
     verifications?: VerificationUpdateManyWithoutUserNestedInput
     school?: SchoolUpdateOneWithoutOwnerNestedInput
-    schoolAndPlatformLegalAgreement?: SchoolAndPlatformLegalAgreementUpdateOneWithoutSignedByNestedInput
     notifications?: NotificationUpdateManyWithoutUserNestedInput
     credential?: CredentialUpdateOneWithoutUserNestedInput
     wallet?: WalletUpdateOneWithoutUserNestedInput
@@ -47960,7 +49373,6 @@ export namespace Prisma {
     guardian?: GuardianUncheckedUpdateOneWithoutUserNestedInput
     verifications?: VerificationUncheckedUpdateManyWithoutUserNestedInput
     school?: SchoolUncheckedUpdateOneWithoutOwnerNestedInput
-    schoolAndPlatformLegalAgreement?: SchoolAndPlatformLegalAgreementUncheckedUpdateOneWithoutSignedByNestedInput
     notifications?: NotificationUncheckedUpdateManyWithoutUserNestedInput
     credential?: CredentialUncheckedUpdateOneWithoutUserNestedInput
     wallet?: WalletUncheckedUpdateOneWithoutUserNestedInput
@@ -47987,7 +49399,6 @@ export namespace Prisma {
     guardian?: GuardianCreateNestedOneWithoutUserInput
     verifications?: VerificationCreateNestedManyWithoutUserInput
     school?: SchoolCreateNestedOneWithoutOwnerInput
-    schoolAndPlatformLegalAgreement?: SchoolAndPlatformLegalAgreementCreateNestedOneWithoutSignedByInput
     notifications?: NotificationCreateNestedManyWithoutUserInput
     credential?: CredentialCreateNestedOneWithoutUserInput
     wallet?: WalletCreateNestedOneWithoutUserInput
@@ -48015,7 +49426,6 @@ export namespace Prisma {
     guardian?: GuardianUncheckedCreateNestedOneWithoutUserInput
     verifications?: VerificationUncheckedCreateNestedManyWithoutUserInput
     school?: SchoolUncheckedCreateNestedOneWithoutOwnerInput
-    schoolAndPlatformLegalAgreement?: SchoolAndPlatformLegalAgreementUncheckedCreateNestedOneWithoutSignedByInput
     notifications?: NotificationUncheckedCreateNestedManyWithoutUserInput
     credential?: CredentialUncheckedCreateNestedOneWithoutUserInput
     wallet?: WalletUncheckedCreateNestedOneWithoutUserInput
@@ -48059,7 +49469,6 @@ export namespace Prisma {
     guardian?: GuardianUpdateOneWithoutUserNestedInput
     verifications?: VerificationUpdateManyWithoutUserNestedInput
     school?: SchoolUpdateOneWithoutOwnerNestedInput
-    schoolAndPlatformLegalAgreement?: SchoolAndPlatformLegalAgreementUpdateOneWithoutSignedByNestedInput
     notifications?: NotificationUpdateManyWithoutUserNestedInput
     credential?: CredentialUpdateOneWithoutUserNestedInput
     wallet?: WalletUpdateOneWithoutUserNestedInput
@@ -48087,7 +49496,6 @@ export namespace Prisma {
     guardian?: GuardianUncheckedUpdateOneWithoutUserNestedInput
     verifications?: VerificationUncheckedUpdateManyWithoutUserNestedInput
     school?: SchoolUncheckedUpdateOneWithoutOwnerNestedInput
-    schoolAndPlatformLegalAgreement?: SchoolAndPlatformLegalAgreementUncheckedUpdateOneWithoutSignedByNestedInput
     notifications?: NotificationUncheckedUpdateManyWithoutUserNestedInput
     credential?: CredentialUncheckedUpdateOneWithoutUserNestedInput
     wallet?: WalletUncheckedUpdateOneWithoutUserNestedInput
@@ -48115,7 +49523,6 @@ export namespace Prisma {
     administrator?: AdministratorCreateNestedOneWithoutUserInput
     verifications?: VerificationCreateNestedManyWithoutUserInput
     school?: SchoolCreateNestedOneWithoutOwnerInput
-    schoolAndPlatformLegalAgreement?: SchoolAndPlatformLegalAgreementCreateNestedOneWithoutSignedByInput
     notifications?: NotificationCreateNestedManyWithoutUserInput
     credential?: CredentialCreateNestedOneWithoutUserInput
     wallet?: WalletCreateNestedOneWithoutUserInput
@@ -48143,7 +49550,6 @@ export namespace Prisma {
     administrator?: AdministratorUncheckedCreateNestedOneWithoutUserInput
     verifications?: VerificationUncheckedCreateNestedManyWithoutUserInput
     school?: SchoolUncheckedCreateNestedOneWithoutOwnerInput
-    schoolAndPlatformLegalAgreement?: SchoolAndPlatformLegalAgreementUncheckedCreateNestedOneWithoutSignedByInput
     notifications?: NotificationUncheckedCreateNestedManyWithoutUserInput
     credential?: CredentialUncheckedCreateNestedOneWithoutUserInput
     wallet?: WalletUncheckedCreateNestedOneWithoutUserInput
@@ -48347,7 +49753,6 @@ export namespace Prisma {
     administrator?: AdministratorUpdateOneWithoutUserNestedInput
     verifications?: VerificationUpdateManyWithoutUserNestedInput
     school?: SchoolUpdateOneWithoutOwnerNestedInput
-    schoolAndPlatformLegalAgreement?: SchoolAndPlatformLegalAgreementUpdateOneWithoutSignedByNestedInput
     notifications?: NotificationUpdateManyWithoutUserNestedInput
     credential?: CredentialUpdateOneWithoutUserNestedInput
     wallet?: WalletUpdateOneWithoutUserNestedInput
@@ -48375,7 +49780,6 @@ export namespace Prisma {
     administrator?: AdministratorUncheckedUpdateOneWithoutUserNestedInput
     verifications?: VerificationUncheckedUpdateManyWithoutUserNestedInput
     school?: SchoolUncheckedUpdateOneWithoutOwnerNestedInput
-    schoolAndPlatformLegalAgreement?: SchoolAndPlatformLegalAgreementUncheckedUpdateOneWithoutSignedByNestedInput
     notifications?: NotificationUncheckedUpdateManyWithoutUserNestedInput
     credential?: CredentialUncheckedUpdateOneWithoutUserNestedInput
     wallet?: WalletUncheckedUpdateOneWithoutUserNestedInput
@@ -48539,7 +49943,6 @@ export namespace Prisma {
     administrator?: AdministratorCreateNestedOneWithoutUserInput
     guardian?: GuardianCreateNestedOneWithoutUserInput
     school?: SchoolCreateNestedOneWithoutOwnerInput
-    schoolAndPlatformLegalAgreement?: SchoolAndPlatformLegalAgreementCreateNestedOneWithoutSignedByInput
     notifications?: NotificationCreateNestedManyWithoutUserInput
     credential?: CredentialCreateNestedOneWithoutUserInput
     wallet?: WalletCreateNestedOneWithoutUserInput
@@ -48567,7 +49970,6 @@ export namespace Prisma {
     administrator?: AdministratorUncheckedCreateNestedOneWithoutUserInput
     guardian?: GuardianUncheckedCreateNestedOneWithoutUserInput
     school?: SchoolUncheckedCreateNestedOneWithoutOwnerInput
-    schoolAndPlatformLegalAgreement?: SchoolAndPlatformLegalAgreementUncheckedCreateNestedOneWithoutSignedByInput
     notifications?: NotificationUncheckedCreateNestedManyWithoutUserInput
     credential?: CredentialUncheckedCreateNestedOneWithoutUserInput
     wallet?: WalletUncheckedCreateNestedOneWithoutUserInput
@@ -48611,7 +50013,6 @@ export namespace Prisma {
     administrator?: AdministratorUpdateOneWithoutUserNestedInput
     guardian?: GuardianUpdateOneWithoutUserNestedInput
     school?: SchoolUpdateOneWithoutOwnerNestedInput
-    schoolAndPlatformLegalAgreement?: SchoolAndPlatformLegalAgreementUpdateOneWithoutSignedByNestedInput
     notifications?: NotificationUpdateManyWithoutUserNestedInput
     credential?: CredentialUpdateOneWithoutUserNestedInput
     wallet?: WalletUpdateOneWithoutUserNestedInput
@@ -48639,7 +50040,6 @@ export namespace Prisma {
     administrator?: AdministratorUncheckedUpdateOneWithoutUserNestedInput
     guardian?: GuardianUncheckedUpdateOneWithoutUserNestedInput
     school?: SchoolUncheckedUpdateOneWithoutOwnerNestedInput
-    schoolAndPlatformLegalAgreement?: SchoolAndPlatformLegalAgreementUncheckedUpdateOneWithoutSignedByNestedInput
     notifications?: NotificationUncheckedUpdateManyWithoutUserNestedInput
     credential?: CredentialUncheckedUpdateOneWithoutUserNestedInput
     wallet?: WalletUncheckedUpdateOneWithoutUserNestedInput
@@ -48667,7 +50067,6 @@ export namespace Prisma {
     administrator?: AdministratorCreateNestedOneWithoutUserInput
     guardian?: GuardianCreateNestedOneWithoutUserInput
     verifications?: VerificationCreateNestedManyWithoutUserInput
-    schoolAndPlatformLegalAgreement?: SchoolAndPlatformLegalAgreementCreateNestedOneWithoutSignedByInput
     notifications?: NotificationCreateNestedManyWithoutUserInput
     credential?: CredentialCreateNestedOneWithoutUserInput
     wallet?: WalletCreateNestedOneWithoutUserInput
@@ -48695,7 +50094,6 @@ export namespace Prisma {
     administrator?: AdministratorUncheckedCreateNestedOneWithoutUserInput
     guardian?: GuardianUncheckedCreateNestedOneWithoutUserInput
     verifications?: VerificationUncheckedCreateNestedManyWithoutUserInput
-    schoolAndPlatformLegalAgreement?: SchoolAndPlatformLegalAgreementUncheckedCreateNestedOneWithoutSignedByInput
     notifications?: NotificationUncheckedCreateNestedManyWithoutUserInput
     credential?: CredentialUncheckedCreateNestedOneWithoutUserInput
     wallet?: WalletUncheckedCreateNestedOneWithoutUserInput
@@ -48763,7 +50161,7 @@ export namespace Prisma {
     id?: string
     cacCertificate: string
     accreditationDocument: string
-    taxIdentificationNumber: string
+    taxIdentificationNumberCertificate: string
     licenseDocument: string
     isDeleted?: boolean
     createdAt?: Date | string
@@ -48774,7 +50172,7 @@ export namespace Prisma {
     id?: string
     cacCertificate: string
     accreditationDocument: string
-    taxIdentificationNumber: string
+    taxIdentificationNumberCertificate: string
     licenseDocument: string
     isDeleted?: boolean
     createdAt?: Date | string
@@ -48792,6 +50190,7 @@ export namespace Prisma {
     bankCode: string
     accountNumber: string
     accountName: string
+    bankReferenceLetter: string
     isDeleted?: boolean
     createdAt?: Date | string
     updatedAt?: Date | string
@@ -48803,6 +50202,7 @@ export namespace Prisma {
     bankCode: string
     accountNumber: string
     accountName: string
+    bankReferenceLetter: string
     isDeleted?: boolean
     createdAt?: Date | string
     updatedAt?: Date | string
@@ -48815,22 +50215,20 @@ export namespace Prisma {
 
   export type SchoolAndPlatformLegalAgreementCreateWithoutSchoolInput = {
     id?: string
-    signature: string
-    signedAt: Date | string
+    signedById: string
+    agreedByName: string
     legalDocumentRef: string
-    isDeleted?: boolean
+    signedAt?: Date | string
     createdAt?: Date | string
     updatedAt?: Date | string
-    signedBy: UserCreateNestedOneWithoutSchoolAndPlatformLegalAgreementInput
   }
 
   export type SchoolAndPlatformLegalAgreementUncheckedCreateWithoutSchoolInput = {
     id?: string
     signedById: string
-    signature: string
-    signedAt: Date | string
+    agreedByName: string
     legalDocumentRef: string
-    isDeleted?: boolean
+    signedAt?: Date | string
     createdAt?: Date | string
     updatedAt?: Date | string
   }
@@ -48838,6 +50236,33 @@ export namespace Prisma {
   export type SchoolAndPlatformLegalAgreementCreateOrConnectWithoutSchoolInput = {
     where: SchoolAndPlatformLegalAgreementWhereUniqueInput
     create: XOR<SchoolAndPlatformLegalAgreementCreateWithoutSchoolInput, SchoolAndPlatformLegalAgreementUncheckedCreateWithoutSchoolInput>
+  }
+
+  export type SchoolContactPersonCreateWithoutSchoolInput = {
+    id?: string
+    role: $Enums.ContactRole
+    name: string
+    phone: string
+    email: string
+    createdAt?: Date | string
+    updatedAt?: Date | string
+    isDeleted?: boolean
+  }
+
+  export type SchoolContactPersonUncheckedCreateWithoutSchoolInput = {
+    id?: string
+    role: $Enums.ContactRole
+    name: string
+    phone: string
+    email: string
+    createdAt?: Date | string
+    updatedAt?: Date | string
+    isDeleted?: boolean
+  }
+
+  export type SchoolContactPersonCreateOrConnectWithoutSchoolInput = {
+    where: SchoolContactPersonWhereUniqueInput
+    create: XOR<SchoolContactPersonCreateWithoutSchoolInput, SchoolContactPersonUncheckedCreateWithoutSchoolInput>
   }
 
   export type ClassCreateWithoutSchoolInput = {
@@ -49055,7 +50480,6 @@ export namespace Prisma {
     administrator?: AdministratorUpdateOneWithoutUserNestedInput
     guardian?: GuardianUpdateOneWithoutUserNestedInput
     verifications?: VerificationUpdateManyWithoutUserNestedInput
-    schoolAndPlatformLegalAgreement?: SchoolAndPlatformLegalAgreementUpdateOneWithoutSignedByNestedInput
     notifications?: NotificationUpdateManyWithoutUserNestedInput
     credential?: CredentialUpdateOneWithoutUserNestedInput
     wallet?: WalletUpdateOneWithoutUserNestedInput
@@ -49083,7 +50507,6 @@ export namespace Prisma {
     administrator?: AdministratorUncheckedUpdateOneWithoutUserNestedInput
     guardian?: GuardianUncheckedUpdateOneWithoutUserNestedInput
     verifications?: VerificationUncheckedUpdateManyWithoutUserNestedInput
-    schoolAndPlatformLegalAgreement?: SchoolAndPlatformLegalAgreementUncheckedUpdateOneWithoutSignedByNestedInput
     notifications?: NotificationUncheckedUpdateManyWithoutUserNestedInput
     credential?: CredentialUncheckedUpdateOneWithoutUserNestedInput
     wallet?: WalletUncheckedUpdateOneWithoutUserNestedInput
@@ -49169,7 +50592,7 @@ export namespace Prisma {
     id?: StringFieldUpdateOperationsInput | string
     cacCertificate?: StringFieldUpdateOperationsInput | string
     accreditationDocument?: StringFieldUpdateOperationsInput | string
-    taxIdentificationNumber?: StringFieldUpdateOperationsInput | string
+    taxIdentificationNumberCertificate?: StringFieldUpdateOperationsInput | string
     licenseDocument?: StringFieldUpdateOperationsInput | string
     isDeleted?: BoolFieldUpdateOperationsInput | boolean
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
@@ -49180,7 +50603,7 @@ export namespace Prisma {
     id?: StringFieldUpdateOperationsInput | string
     cacCertificate?: StringFieldUpdateOperationsInput | string
     accreditationDocument?: StringFieldUpdateOperationsInput | string
-    taxIdentificationNumber?: StringFieldUpdateOperationsInput | string
+    taxIdentificationNumberCertificate?: StringFieldUpdateOperationsInput | string
     licenseDocument?: StringFieldUpdateOperationsInput | string
     isDeleted?: BoolFieldUpdateOperationsInput | boolean
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
@@ -49204,6 +50627,7 @@ export namespace Prisma {
     bankCode?: StringFieldUpdateOperationsInput | string
     accountNumber?: StringFieldUpdateOperationsInput | string
     accountName?: StringFieldUpdateOperationsInput | string
+    bankReferenceLetter?: StringFieldUpdateOperationsInput | string
     isDeleted?: BoolFieldUpdateOperationsInput | boolean
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
@@ -49215,6 +50639,7 @@ export namespace Prisma {
     bankCode?: StringFieldUpdateOperationsInput | string
     accountNumber?: StringFieldUpdateOperationsInput | string
     accountName?: StringFieldUpdateOperationsInput | string
+    bankReferenceLetter?: StringFieldUpdateOperationsInput | string
     isDeleted?: BoolFieldUpdateOperationsInput | boolean
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
@@ -49233,24 +50658,55 @@ export namespace Prisma {
 
   export type SchoolAndPlatformLegalAgreementUpdateWithoutSchoolInput = {
     id?: StringFieldUpdateOperationsInput | string
-    signature?: StringFieldUpdateOperationsInput | string
-    signedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    signedById?: StringFieldUpdateOperationsInput | string
+    agreedByName?: StringFieldUpdateOperationsInput | string
     legalDocumentRef?: StringFieldUpdateOperationsInput | string
-    isDeleted?: BoolFieldUpdateOperationsInput | boolean
+    signedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
-    signedBy?: UserUpdateOneRequiredWithoutSchoolAndPlatformLegalAgreementNestedInput
   }
 
   export type SchoolAndPlatformLegalAgreementUncheckedUpdateWithoutSchoolInput = {
     id?: StringFieldUpdateOperationsInput | string
     signedById?: StringFieldUpdateOperationsInput | string
-    signature?: StringFieldUpdateOperationsInput | string
-    signedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    agreedByName?: StringFieldUpdateOperationsInput | string
     legalDocumentRef?: StringFieldUpdateOperationsInput | string
-    isDeleted?: BoolFieldUpdateOperationsInput | boolean
+    signedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type SchoolContactPersonUpsertWithoutSchoolInput = {
+    update: XOR<SchoolContactPersonUpdateWithoutSchoolInput, SchoolContactPersonUncheckedUpdateWithoutSchoolInput>
+    create: XOR<SchoolContactPersonCreateWithoutSchoolInput, SchoolContactPersonUncheckedCreateWithoutSchoolInput>
+    where?: SchoolContactPersonWhereInput
+  }
+
+  export type SchoolContactPersonUpdateToOneWithWhereWithoutSchoolInput = {
+    where?: SchoolContactPersonWhereInput
+    data: XOR<SchoolContactPersonUpdateWithoutSchoolInput, SchoolContactPersonUncheckedUpdateWithoutSchoolInput>
+  }
+
+  export type SchoolContactPersonUpdateWithoutSchoolInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    role?: EnumContactRoleFieldUpdateOperationsInput | $Enums.ContactRole
+    name?: StringFieldUpdateOperationsInput | string
+    phone?: StringFieldUpdateOperationsInput | string
+    email?: StringFieldUpdateOperationsInput | string
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    isDeleted?: BoolFieldUpdateOperationsInput | boolean
+  }
+
+  export type SchoolContactPersonUncheckedUpdateWithoutSchoolInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    role?: EnumContactRoleFieldUpdateOperationsInput | $Enums.ContactRole
+    name?: StringFieldUpdateOperationsInput | string
+    phone?: StringFieldUpdateOperationsInput | string
+    email?: StringFieldUpdateOperationsInput | string
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    isDeleted?: BoolFieldUpdateOperationsInput | boolean
   }
 
   export type ClassUpsertWithWhereUniqueWithoutSchoolInput = {
@@ -49455,6 +50911,7 @@ export namespace Prisma {
     schoolVerification?: SchoolVerificationCreateNestedOneWithoutSchoolInput
     schoolPayoutDetail?: SchoolPayoutDetailCreateNestedOneWithoutSchoolInput
     schoolAndPlatformLegalAgreement?: SchoolAndPlatformLegalAgreementCreateNestedOneWithoutSchoolInput
+    SchoolContactPerson?: SchoolContactPersonCreateNestedOneWithoutSchoolInput
     classes?: ClassCreateNestedManyWithoutSchoolInput
     academicSessions?: AcademicSessionCreateNestedManyWithoutSchoolInput
     terms?: TermCreateNestedManyWithoutSchoolInput
@@ -49488,6 +50945,7 @@ export namespace Prisma {
     schoolVerification?: SchoolVerificationUncheckedCreateNestedOneWithoutSchoolInput
     schoolPayoutDetail?: SchoolPayoutDetailUncheckedCreateNestedOneWithoutSchoolInput
     schoolAndPlatformLegalAgreement?: SchoolAndPlatformLegalAgreementUncheckedCreateNestedOneWithoutSchoolInput
+    SchoolContactPerson?: SchoolContactPersonUncheckedCreateNestedOneWithoutSchoolInput
     classes?: ClassUncheckedCreateNestedManyWithoutSchoolInput
     academicSessions?: AcademicSessionUncheckedCreateNestedManyWithoutSchoolInput
     terms?: TermUncheckedCreateNestedManyWithoutSchoolInput
@@ -49537,6 +50995,7 @@ export namespace Prisma {
     schoolVerification?: SchoolVerificationUpdateOneWithoutSchoolNestedInput
     schoolPayoutDetail?: SchoolPayoutDetailUpdateOneWithoutSchoolNestedInput
     schoolAndPlatformLegalAgreement?: SchoolAndPlatformLegalAgreementUpdateOneWithoutSchoolNestedInput
+    SchoolContactPerson?: SchoolContactPersonUpdateOneWithoutSchoolNestedInput
     classes?: ClassUpdateManyWithoutSchoolNestedInput
     academicSessions?: AcademicSessionUpdateManyWithoutSchoolNestedInput
     terms?: TermUpdateManyWithoutSchoolNestedInput
@@ -49570,6 +51029,7 @@ export namespace Prisma {
     schoolVerification?: SchoolVerificationUncheckedUpdateOneWithoutSchoolNestedInput
     schoolPayoutDetail?: SchoolPayoutDetailUncheckedUpdateOneWithoutSchoolNestedInput
     schoolAndPlatformLegalAgreement?: SchoolAndPlatformLegalAgreementUncheckedUpdateOneWithoutSchoolNestedInput
+    SchoolContactPerson?: SchoolContactPersonUncheckedUpdateOneWithoutSchoolNestedInput
     classes?: ClassUncheckedUpdateManyWithoutSchoolNestedInput
     academicSessions?: AcademicSessionUncheckedUpdateManyWithoutSchoolNestedInput
     terms?: TermUncheckedUpdateManyWithoutSchoolNestedInput
@@ -49603,6 +51063,7 @@ export namespace Prisma {
     schoolVerification?: SchoolVerificationCreateNestedOneWithoutSchoolInput
     schoolPayoutDetail?: SchoolPayoutDetailCreateNestedOneWithoutSchoolInput
     schoolAndPlatformLegalAgreement?: SchoolAndPlatformLegalAgreementCreateNestedOneWithoutSchoolInput
+    SchoolContactPerson?: SchoolContactPersonCreateNestedOneWithoutSchoolInput
     classes?: ClassCreateNestedManyWithoutSchoolInput
     academicSessions?: AcademicSessionCreateNestedManyWithoutSchoolInput
     terms?: TermCreateNestedManyWithoutSchoolInput
@@ -49636,6 +51097,7 @@ export namespace Prisma {
     schoolVerification?: SchoolVerificationUncheckedCreateNestedOneWithoutSchoolInput
     schoolPayoutDetail?: SchoolPayoutDetailUncheckedCreateNestedOneWithoutSchoolInput
     schoolAndPlatformLegalAgreement?: SchoolAndPlatformLegalAgreementUncheckedCreateNestedOneWithoutSchoolInput
+    SchoolContactPerson?: SchoolContactPersonUncheckedCreateNestedOneWithoutSchoolInput
     classes?: ClassUncheckedCreateNestedManyWithoutSchoolInput
     academicSessions?: AcademicSessionUncheckedCreateNestedManyWithoutSchoolInput
     terms?: TermUncheckedCreateNestedManyWithoutSchoolInput
@@ -49685,6 +51147,7 @@ export namespace Prisma {
     schoolVerification?: SchoolVerificationUpdateOneWithoutSchoolNestedInput
     schoolPayoutDetail?: SchoolPayoutDetailUpdateOneWithoutSchoolNestedInput
     schoolAndPlatformLegalAgreement?: SchoolAndPlatformLegalAgreementUpdateOneWithoutSchoolNestedInput
+    SchoolContactPerson?: SchoolContactPersonUpdateOneWithoutSchoolNestedInput
     classes?: ClassUpdateManyWithoutSchoolNestedInput
     academicSessions?: AcademicSessionUpdateManyWithoutSchoolNestedInput
     terms?: TermUpdateManyWithoutSchoolNestedInput
@@ -49718,6 +51181,7 @@ export namespace Prisma {
     schoolVerification?: SchoolVerificationUncheckedUpdateOneWithoutSchoolNestedInput
     schoolPayoutDetail?: SchoolPayoutDetailUncheckedUpdateOneWithoutSchoolNestedInput
     schoolAndPlatformLegalAgreement?: SchoolAndPlatformLegalAgreementUncheckedUpdateOneWithoutSchoolNestedInput
+    SchoolContactPerson?: SchoolContactPersonUncheckedUpdateOneWithoutSchoolNestedInput
     classes?: ClassUncheckedUpdateManyWithoutSchoolNestedInput
     academicSessions?: AcademicSessionUncheckedUpdateManyWithoutSchoolNestedInput
     terms?: TermUncheckedUpdateManyWithoutSchoolNestedInput
@@ -49751,6 +51215,7 @@ export namespace Prisma {
     schoolOwnershipVerification?: SchoolOwnershipVerificationCreateNestedOneWithoutSchoolInput
     schoolPayoutDetail?: SchoolPayoutDetailCreateNestedOneWithoutSchoolInput
     schoolAndPlatformLegalAgreement?: SchoolAndPlatformLegalAgreementCreateNestedOneWithoutSchoolInput
+    SchoolContactPerson?: SchoolContactPersonCreateNestedOneWithoutSchoolInput
     classes?: ClassCreateNestedManyWithoutSchoolInput
     academicSessions?: AcademicSessionCreateNestedManyWithoutSchoolInput
     terms?: TermCreateNestedManyWithoutSchoolInput
@@ -49784,6 +51249,7 @@ export namespace Prisma {
     schoolOwnershipVerification?: SchoolOwnershipVerificationUncheckedCreateNestedOneWithoutSchoolInput
     schoolPayoutDetail?: SchoolPayoutDetailUncheckedCreateNestedOneWithoutSchoolInput
     schoolAndPlatformLegalAgreement?: SchoolAndPlatformLegalAgreementUncheckedCreateNestedOneWithoutSchoolInput
+    SchoolContactPerson?: SchoolContactPersonUncheckedCreateNestedOneWithoutSchoolInput
     classes?: ClassUncheckedCreateNestedManyWithoutSchoolInput
     academicSessions?: AcademicSessionUncheckedCreateNestedManyWithoutSchoolInput
     terms?: TermUncheckedCreateNestedManyWithoutSchoolInput
@@ -49833,6 +51299,7 @@ export namespace Prisma {
     schoolOwnershipVerification?: SchoolOwnershipVerificationUpdateOneWithoutSchoolNestedInput
     schoolPayoutDetail?: SchoolPayoutDetailUpdateOneWithoutSchoolNestedInput
     schoolAndPlatformLegalAgreement?: SchoolAndPlatformLegalAgreementUpdateOneWithoutSchoolNestedInput
+    SchoolContactPerson?: SchoolContactPersonUpdateOneWithoutSchoolNestedInput
     classes?: ClassUpdateManyWithoutSchoolNestedInput
     academicSessions?: AcademicSessionUpdateManyWithoutSchoolNestedInput
     terms?: TermUpdateManyWithoutSchoolNestedInput
@@ -49866,6 +51333,7 @@ export namespace Prisma {
     schoolOwnershipVerification?: SchoolOwnershipVerificationUncheckedUpdateOneWithoutSchoolNestedInput
     schoolPayoutDetail?: SchoolPayoutDetailUncheckedUpdateOneWithoutSchoolNestedInput
     schoolAndPlatformLegalAgreement?: SchoolAndPlatformLegalAgreementUncheckedUpdateOneWithoutSchoolNestedInput
+    SchoolContactPerson?: SchoolContactPersonUncheckedUpdateOneWithoutSchoolNestedInput
     classes?: ClassUncheckedUpdateManyWithoutSchoolNestedInput
     academicSessions?: AcademicSessionUncheckedUpdateManyWithoutSchoolNestedInput
     terms?: TermUncheckedUpdateManyWithoutSchoolNestedInput
@@ -49899,6 +51367,7 @@ export namespace Prisma {
     schoolOwnershipVerification?: SchoolOwnershipVerificationCreateNestedOneWithoutSchoolInput
     schoolVerification?: SchoolVerificationCreateNestedOneWithoutSchoolInput
     schoolAndPlatformLegalAgreement?: SchoolAndPlatformLegalAgreementCreateNestedOneWithoutSchoolInput
+    SchoolContactPerson?: SchoolContactPersonCreateNestedOneWithoutSchoolInput
     classes?: ClassCreateNestedManyWithoutSchoolInput
     academicSessions?: AcademicSessionCreateNestedManyWithoutSchoolInput
     terms?: TermCreateNestedManyWithoutSchoolInput
@@ -49932,6 +51401,7 @@ export namespace Prisma {
     schoolOwnershipVerification?: SchoolOwnershipVerificationUncheckedCreateNestedOneWithoutSchoolInput
     schoolVerification?: SchoolVerificationUncheckedCreateNestedOneWithoutSchoolInput
     schoolAndPlatformLegalAgreement?: SchoolAndPlatformLegalAgreementUncheckedCreateNestedOneWithoutSchoolInput
+    SchoolContactPerson?: SchoolContactPersonUncheckedCreateNestedOneWithoutSchoolInput
     classes?: ClassUncheckedCreateNestedManyWithoutSchoolInput
     academicSessions?: AcademicSessionUncheckedCreateNestedManyWithoutSchoolInput
     terms?: TermUncheckedCreateNestedManyWithoutSchoolInput
@@ -49981,6 +51451,7 @@ export namespace Prisma {
     schoolOwnershipVerification?: SchoolOwnershipVerificationUpdateOneWithoutSchoolNestedInput
     schoolVerification?: SchoolVerificationUpdateOneWithoutSchoolNestedInput
     schoolAndPlatformLegalAgreement?: SchoolAndPlatformLegalAgreementUpdateOneWithoutSchoolNestedInput
+    SchoolContactPerson?: SchoolContactPersonUpdateOneWithoutSchoolNestedInput
     classes?: ClassUpdateManyWithoutSchoolNestedInput
     academicSessions?: AcademicSessionUpdateManyWithoutSchoolNestedInput
     terms?: TermUpdateManyWithoutSchoolNestedInput
@@ -50013,6 +51484,159 @@ export namespace Prisma {
     schoolDirectorVerification?: SchoolDirectorVerificationUncheckedUpdateOneWithoutSchoolNestedInput
     schoolOwnershipVerification?: SchoolOwnershipVerificationUncheckedUpdateOneWithoutSchoolNestedInput
     schoolVerification?: SchoolVerificationUncheckedUpdateOneWithoutSchoolNestedInput
+    schoolAndPlatformLegalAgreement?: SchoolAndPlatformLegalAgreementUncheckedUpdateOneWithoutSchoolNestedInput
+    SchoolContactPerson?: SchoolContactPersonUncheckedUpdateOneWithoutSchoolNestedInput
+    classes?: ClassUncheckedUpdateManyWithoutSchoolNestedInput
+    academicSessions?: AcademicSessionUncheckedUpdateManyWithoutSchoolNestedInput
+    terms?: TermUncheckedUpdateManyWithoutSchoolNestedInput
+    fees?: FeesUncheckedUpdateManyWithoutSchoolNestedInput
+    payouts?: PayoutUncheckedUpdateManyWithoutSchoolNestedInput
+    kycverification?: KYCVerificationUncheckedUpdateOneWithoutSchoolNestedInput
+  }
+
+  export type SchoolCreateWithoutSchoolContactPersonInput = {
+    id?: string
+    name: string
+    address?: string | null
+    city?: string | null
+    state?: string | null
+    country?: string | null
+    lga?: string | null
+    postalCode?: string | null
+    email: string
+    phoneNumber?: string | null
+    establishedYear?: number | null
+    website?: string | null
+    logo?: string | null
+    schoolType: $Enums.SchoolType
+    ownership: $Enums.SchoolOwnership
+    status?: $Enums.SchoolStatus
+    isDeleted?: boolean
+    createdAt?: Date | string
+    updatedAt?: Date | string
+    owner: UserCreateNestedOneWithoutSchoolInput
+    schoolDirectorVerification?: SchoolDirectorVerificationCreateNestedOneWithoutSchoolInput
+    schoolOwnershipVerification?: SchoolOwnershipVerificationCreateNestedOneWithoutSchoolInput
+    schoolVerification?: SchoolVerificationCreateNestedOneWithoutSchoolInput
+    schoolPayoutDetail?: SchoolPayoutDetailCreateNestedOneWithoutSchoolInput
+    schoolAndPlatformLegalAgreement?: SchoolAndPlatformLegalAgreementCreateNestedOneWithoutSchoolInput
+    classes?: ClassCreateNestedManyWithoutSchoolInput
+    academicSessions?: AcademicSessionCreateNestedManyWithoutSchoolInput
+    terms?: TermCreateNestedManyWithoutSchoolInput
+    fees?: FeesCreateNestedManyWithoutSchoolInput
+    payouts?: PayoutCreateNestedManyWithoutSchoolInput
+    kycverification?: KYCVerificationCreateNestedOneWithoutSchoolInput
+  }
+
+  export type SchoolUncheckedCreateWithoutSchoolContactPersonInput = {
+    id?: string
+    ownerId: string
+    name: string
+    address?: string | null
+    city?: string | null
+    state?: string | null
+    country?: string | null
+    lga?: string | null
+    postalCode?: string | null
+    email: string
+    phoneNumber?: string | null
+    establishedYear?: number | null
+    website?: string | null
+    logo?: string | null
+    schoolType: $Enums.SchoolType
+    ownership: $Enums.SchoolOwnership
+    status?: $Enums.SchoolStatus
+    isDeleted?: boolean
+    createdAt?: Date | string
+    updatedAt?: Date | string
+    schoolDirectorVerification?: SchoolDirectorVerificationUncheckedCreateNestedOneWithoutSchoolInput
+    schoolOwnershipVerification?: SchoolOwnershipVerificationUncheckedCreateNestedOneWithoutSchoolInput
+    schoolVerification?: SchoolVerificationUncheckedCreateNestedOneWithoutSchoolInput
+    schoolPayoutDetail?: SchoolPayoutDetailUncheckedCreateNestedOneWithoutSchoolInput
+    schoolAndPlatformLegalAgreement?: SchoolAndPlatformLegalAgreementUncheckedCreateNestedOneWithoutSchoolInput
+    classes?: ClassUncheckedCreateNestedManyWithoutSchoolInput
+    academicSessions?: AcademicSessionUncheckedCreateNestedManyWithoutSchoolInput
+    terms?: TermUncheckedCreateNestedManyWithoutSchoolInput
+    fees?: FeesUncheckedCreateNestedManyWithoutSchoolInput
+    payouts?: PayoutUncheckedCreateNestedManyWithoutSchoolInput
+    kycverification?: KYCVerificationUncheckedCreateNestedOneWithoutSchoolInput
+  }
+
+  export type SchoolCreateOrConnectWithoutSchoolContactPersonInput = {
+    where: SchoolWhereUniqueInput
+    create: XOR<SchoolCreateWithoutSchoolContactPersonInput, SchoolUncheckedCreateWithoutSchoolContactPersonInput>
+  }
+
+  export type SchoolUpsertWithoutSchoolContactPersonInput = {
+    update: XOR<SchoolUpdateWithoutSchoolContactPersonInput, SchoolUncheckedUpdateWithoutSchoolContactPersonInput>
+    create: XOR<SchoolCreateWithoutSchoolContactPersonInput, SchoolUncheckedCreateWithoutSchoolContactPersonInput>
+    where?: SchoolWhereInput
+  }
+
+  export type SchoolUpdateToOneWithWhereWithoutSchoolContactPersonInput = {
+    where?: SchoolWhereInput
+    data: XOR<SchoolUpdateWithoutSchoolContactPersonInput, SchoolUncheckedUpdateWithoutSchoolContactPersonInput>
+  }
+
+  export type SchoolUpdateWithoutSchoolContactPersonInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    name?: StringFieldUpdateOperationsInput | string
+    address?: NullableStringFieldUpdateOperationsInput | string | null
+    city?: NullableStringFieldUpdateOperationsInput | string | null
+    state?: NullableStringFieldUpdateOperationsInput | string | null
+    country?: NullableStringFieldUpdateOperationsInput | string | null
+    lga?: NullableStringFieldUpdateOperationsInput | string | null
+    postalCode?: NullableStringFieldUpdateOperationsInput | string | null
+    email?: StringFieldUpdateOperationsInput | string
+    phoneNumber?: NullableStringFieldUpdateOperationsInput | string | null
+    establishedYear?: NullableIntFieldUpdateOperationsInput | number | null
+    website?: NullableStringFieldUpdateOperationsInput | string | null
+    logo?: NullableStringFieldUpdateOperationsInput | string | null
+    schoolType?: EnumSchoolTypeFieldUpdateOperationsInput | $Enums.SchoolType
+    ownership?: EnumSchoolOwnershipFieldUpdateOperationsInput | $Enums.SchoolOwnership
+    status?: EnumSchoolStatusFieldUpdateOperationsInput | $Enums.SchoolStatus
+    isDeleted?: BoolFieldUpdateOperationsInput | boolean
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    owner?: UserUpdateOneRequiredWithoutSchoolNestedInput
+    schoolDirectorVerification?: SchoolDirectorVerificationUpdateOneWithoutSchoolNestedInput
+    schoolOwnershipVerification?: SchoolOwnershipVerificationUpdateOneWithoutSchoolNestedInput
+    schoolVerification?: SchoolVerificationUpdateOneWithoutSchoolNestedInput
+    schoolPayoutDetail?: SchoolPayoutDetailUpdateOneWithoutSchoolNestedInput
+    schoolAndPlatformLegalAgreement?: SchoolAndPlatformLegalAgreementUpdateOneWithoutSchoolNestedInput
+    classes?: ClassUpdateManyWithoutSchoolNestedInput
+    academicSessions?: AcademicSessionUpdateManyWithoutSchoolNestedInput
+    terms?: TermUpdateManyWithoutSchoolNestedInput
+    fees?: FeesUpdateManyWithoutSchoolNestedInput
+    payouts?: PayoutUpdateManyWithoutSchoolNestedInput
+    kycverification?: KYCVerificationUpdateOneWithoutSchoolNestedInput
+  }
+
+  export type SchoolUncheckedUpdateWithoutSchoolContactPersonInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    ownerId?: StringFieldUpdateOperationsInput | string
+    name?: StringFieldUpdateOperationsInput | string
+    address?: NullableStringFieldUpdateOperationsInput | string | null
+    city?: NullableStringFieldUpdateOperationsInput | string | null
+    state?: NullableStringFieldUpdateOperationsInput | string | null
+    country?: NullableStringFieldUpdateOperationsInput | string | null
+    lga?: NullableStringFieldUpdateOperationsInput | string | null
+    postalCode?: NullableStringFieldUpdateOperationsInput | string | null
+    email?: StringFieldUpdateOperationsInput | string
+    phoneNumber?: NullableStringFieldUpdateOperationsInput | string | null
+    establishedYear?: NullableIntFieldUpdateOperationsInput | number | null
+    website?: NullableStringFieldUpdateOperationsInput | string | null
+    logo?: NullableStringFieldUpdateOperationsInput | string | null
+    schoolType?: EnumSchoolTypeFieldUpdateOperationsInput | $Enums.SchoolType
+    ownership?: EnumSchoolOwnershipFieldUpdateOperationsInput | $Enums.SchoolOwnership
+    status?: EnumSchoolStatusFieldUpdateOperationsInput | $Enums.SchoolStatus
+    isDeleted?: BoolFieldUpdateOperationsInput | boolean
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    schoolDirectorVerification?: SchoolDirectorVerificationUncheckedUpdateOneWithoutSchoolNestedInput
+    schoolOwnershipVerification?: SchoolOwnershipVerificationUncheckedUpdateOneWithoutSchoolNestedInput
+    schoolVerification?: SchoolVerificationUncheckedUpdateOneWithoutSchoolNestedInput
+    schoolPayoutDetail?: SchoolPayoutDetailUncheckedUpdateOneWithoutSchoolNestedInput
     schoolAndPlatformLegalAgreement?: SchoolAndPlatformLegalAgreementUncheckedUpdateOneWithoutSchoolNestedInput
     classes?: ClassUncheckedUpdateManyWithoutSchoolNestedInput
     academicSessions?: AcademicSessionUncheckedUpdateManyWithoutSchoolNestedInput
@@ -50047,6 +51671,7 @@ export namespace Prisma {
     schoolOwnershipVerification?: SchoolOwnershipVerificationCreateNestedOneWithoutSchoolInput
     schoolVerification?: SchoolVerificationCreateNestedOneWithoutSchoolInput
     schoolPayoutDetail?: SchoolPayoutDetailCreateNestedOneWithoutSchoolInput
+    SchoolContactPerson?: SchoolContactPersonCreateNestedOneWithoutSchoolInput
     classes?: ClassCreateNestedManyWithoutSchoolInput
     academicSessions?: AcademicSessionCreateNestedManyWithoutSchoolInput
     terms?: TermCreateNestedManyWithoutSchoolInput
@@ -50080,6 +51705,7 @@ export namespace Prisma {
     schoolOwnershipVerification?: SchoolOwnershipVerificationUncheckedCreateNestedOneWithoutSchoolInput
     schoolVerification?: SchoolVerificationUncheckedCreateNestedOneWithoutSchoolInput
     schoolPayoutDetail?: SchoolPayoutDetailUncheckedCreateNestedOneWithoutSchoolInput
+    SchoolContactPerson?: SchoolContactPersonUncheckedCreateNestedOneWithoutSchoolInput
     classes?: ClassUncheckedCreateNestedManyWithoutSchoolInput
     academicSessions?: AcademicSessionUncheckedCreateNestedManyWithoutSchoolInput
     terms?: TermUncheckedCreateNestedManyWithoutSchoolInput
@@ -50091,67 +51717,6 @@ export namespace Prisma {
   export type SchoolCreateOrConnectWithoutSchoolAndPlatformLegalAgreementInput = {
     where: SchoolWhereUniqueInput
     create: XOR<SchoolCreateWithoutSchoolAndPlatformLegalAgreementInput, SchoolUncheckedCreateWithoutSchoolAndPlatformLegalAgreementInput>
-  }
-
-  export type UserCreateWithoutSchoolAndPlatformLegalAgreementInput = {
-    id?: string
-    firstName: string
-    lastName: string
-    profileImage?: string | null
-    email: string
-    type: $Enums.UserType
-    phone?: string | null
-    accountStatus?: $Enums.AccountStatus
-    verifiedAt?: Date | string | null
-    lastSeenAt?: Date | string | null
-    isTermsAccepted?: boolean
-    isPrivacyAccepted?: boolean
-    isDeleted?: boolean
-    createdAt?: Date | string
-    updatedAt?: Date | string
-    administrator?: AdministratorCreateNestedOneWithoutUserInput
-    guardian?: GuardianCreateNestedOneWithoutUserInput
-    verifications?: VerificationCreateNestedManyWithoutUserInput
-    school?: SchoolCreateNestedOneWithoutOwnerInput
-    notifications?: NotificationCreateNestedManyWithoutUserInput
-    credential?: CredentialCreateNestedOneWithoutUserInput
-    wallet?: WalletCreateNestedOneWithoutUserInput
-    refreshTokens?: RefreshTokenCreateNestedManyWithoutUserInput
-    firebaseToken?: FirebaseTokenCreateNestedOneWithoutUserInput
-    kycverification?: KYCVerificationCreateNestedOneWithoutUserInput
-  }
-
-  export type UserUncheckedCreateWithoutSchoolAndPlatformLegalAgreementInput = {
-    id?: string
-    firstName: string
-    lastName: string
-    profileImage?: string | null
-    email: string
-    type: $Enums.UserType
-    phone?: string | null
-    accountStatus?: $Enums.AccountStatus
-    verifiedAt?: Date | string | null
-    lastSeenAt?: Date | string | null
-    isTermsAccepted?: boolean
-    isPrivacyAccepted?: boolean
-    isDeleted?: boolean
-    createdAt?: Date | string
-    updatedAt?: Date | string
-    administrator?: AdministratorUncheckedCreateNestedOneWithoutUserInput
-    guardian?: GuardianUncheckedCreateNestedOneWithoutUserInput
-    verifications?: VerificationUncheckedCreateNestedManyWithoutUserInput
-    school?: SchoolUncheckedCreateNestedOneWithoutOwnerInput
-    notifications?: NotificationUncheckedCreateNestedManyWithoutUserInput
-    credential?: CredentialUncheckedCreateNestedOneWithoutUserInput
-    wallet?: WalletUncheckedCreateNestedOneWithoutUserInput
-    refreshTokens?: RefreshTokenUncheckedCreateNestedManyWithoutUserInput
-    firebaseToken?: FirebaseTokenUncheckedCreateNestedOneWithoutUserInput
-    kycverification?: KYCVerificationUncheckedCreateNestedOneWithoutUserInput
-  }
-
-  export type UserCreateOrConnectWithoutSchoolAndPlatformLegalAgreementInput = {
-    where: UserWhereUniqueInput
-    create: XOR<UserCreateWithoutSchoolAndPlatformLegalAgreementInput, UserUncheckedCreateWithoutSchoolAndPlatformLegalAgreementInput>
   }
 
   export type SchoolUpsertWithoutSchoolAndPlatformLegalAgreementInput = {
@@ -50190,6 +51755,7 @@ export namespace Prisma {
     schoolOwnershipVerification?: SchoolOwnershipVerificationUpdateOneWithoutSchoolNestedInput
     schoolVerification?: SchoolVerificationUpdateOneWithoutSchoolNestedInput
     schoolPayoutDetail?: SchoolPayoutDetailUpdateOneWithoutSchoolNestedInput
+    SchoolContactPerson?: SchoolContactPersonUpdateOneWithoutSchoolNestedInput
     classes?: ClassUpdateManyWithoutSchoolNestedInput
     academicSessions?: AcademicSessionUpdateManyWithoutSchoolNestedInput
     terms?: TermUpdateManyWithoutSchoolNestedInput
@@ -50223,79 +51789,13 @@ export namespace Prisma {
     schoolOwnershipVerification?: SchoolOwnershipVerificationUncheckedUpdateOneWithoutSchoolNestedInput
     schoolVerification?: SchoolVerificationUncheckedUpdateOneWithoutSchoolNestedInput
     schoolPayoutDetail?: SchoolPayoutDetailUncheckedUpdateOneWithoutSchoolNestedInput
+    SchoolContactPerson?: SchoolContactPersonUncheckedUpdateOneWithoutSchoolNestedInput
     classes?: ClassUncheckedUpdateManyWithoutSchoolNestedInput
     academicSessions?: AcademicSessionUncheckedUpdateManyWithoutSchoolNestedInput
     terms?: TermUncheckedUpdateManyWithoutSchoolNestedInput
     fees?: FeesUncheckedUpdateManyWithoutSchoolNestedInput
     payouts?: PayoutUncheckedUpdateManyWithoutSchoolNestedInput
     kycverification?: KYCVerificationUncheckedUpdateOneWithoutSchoolNestedInput
-  }
-
-  export type UserUpsertWithoutSchoolAndPlatformLegalAgreementInput = {
-    update: XOR<UserUpdateWithoutSchoolAndPlatformLegalAgreementInput, UserUncheckedUpdateWithoutSchoolAndPlatformLegalAgreementInput>
-    create: XOR<UserCreateWithoutSchoolAndPlatformLegalAgreementInput, UserUncheckedCreateWithoutSchoolAndPlatformLegalAgreementInput>
-    where?: UserWhereInput
-  }
-
-  export type UserUpdateToOneWithWhereWithoutSchoolAndPlatformLegalAgreementInput = {
-    where?: UserWhereInput
-    data: XOR<UserUpdateWithoutSchoolAndPlatformLegalAgreementInput, UserUncheckedUpdateWithoutSchoolAndPlatformLegalAgreementInput>
-  }
-
-  export type UserUpdateWithoutSchoolAndPlatformLegalAgreementInput = {
-    id?: StringFieldUpdateOperationsInput | string
-    firstName?: StringFieldUpdateOperationsInput | string
-    lastName?: StringFieldUpdateOperationsInput | string
-    profileImage?: NullableStringFieldUpdateOperationsInput | string | null
-    email?: StringFieldUpdateOperationsInput | string
-    type?: EnumUserTypeFieldUpdateOperationsInput | $Enums.UserType
-    phone?: NullableStringFieldUpdateOperationsInput | string | null
-    accountStatus?: EnumAccountStatusFieldUpdateOperationsInput | $Enums.AccountStatus
-    verifiedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
-    lastSeenAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
-    isTermsAccepted?: BoolFieldUpdateOperationsInput | boolean
-    isPrivacyAccepted?: BoolFieldUpdateOperationsInput | boolean
-    isDeleted?: BoolFieldUpdateOperationsInput | boolean
-    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
-    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
-    administrator?: AdministratorUpdateOneWithoutUserNestedInput
-    guardian?: GuardianUpdateOneWithoutUserNestedInput
-    verifications?: VerificationUpdateManyWithoutUserNestedInput
-    school?: SchoolUpdateOneWithoutOwnerNestedInput
-    notifications?: NotificationUpdateManyWithoutUserNestedInput
-    credential?: CredentialUpdateOneWithoutUserNestedInput
-    wallet?: WalletUpdateOneWithoutUserNestedInput
-    refreshTokens?: RefreshTokenUpdateManyWithoutUserNestedInput
-    firebaseToken?: FirebaseTokenUpdateOneWithoutUserNestedInput
-    kycverification?: KYCVerificationUpdateOneWithoutUserNestedInput
-  }
-
-  export type UserUncheckedUpdateWithoutSchoolAndPlatformLegalAgreementInput = {
-    id?: StringFieldUpdateOperationsInput | string
-    firstName?: StringFieldUpdateOperationsInput | string
-    lastName?: StringFieldUpdateOperationsInput | string
-    profileImage?: NullableStringFieldUpdateOperationsInput | string | null
-    email?: StringFieldUpdateOperationsInput | string
-    type?: EnumUserTypeFieldUpdateOperationsInput | $Enums.UserType
-    phone?: NullableStringFieldUpdateOperationsInput | string | null
-    accountStatus?: EnumAccountStatusFieldUpdateOperationsInput | $Enums.AccountStatus
-    verifiedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
-    lastSeenAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
-    isTermsAccepted?: BoolFieldUpdateOperationsInput | boolean
-    isPrivacyAccepted?: BoolFieldUpdateOperationsInput | boolean
-    isDeleted?: BoolFieldUpdateOperationsInput | boolean
-    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
-    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
-    administrator?: AdministratorUncheckedUpdateOneWithoutUserNestedInput
-    guardian?: GuardianUncheckedUpdateOneWithoutUserNestedInput
-    verifications?: VerificationUncheckedUpdateManyWithoutUserNestedInput
-    school?: SchoolUncheckedUpdateOneWithoutOwnerNestedInput
-    notifications?: NotificationUncheckedUpdateManyWithoutUserNestedInput
-    credential?: CredentialUncheckedUpdateOneWithoutUserNestedInput
-    wallet?: WalletUncheckedUpdateOneWithoutUserNestedInput
-    refreshTokens?: RefreshTokenUncheckedUpdateManyWithoutUserNestedInput
-    firebaseToken?: FirebaseTokenUncheckedUpdateOneWithoutUserNestedInput
-    kycverification?: KYCVerificationUncheckedUpdateOneWithoutUserNestedInput
   }
 
   export type UserCreateWithoutKycverificationInput = {
@@ -50318,7 +51818,6 @@ export namespace Prisma {
     guardian?: GuardianCreateNestedOneWithoutUserInput
     verifications?: VerificationCreateNestedManyWithoutUserInput
     school?: SchoolCreateNestedOneWithoutOwnerInput
-    schoolAndPlatformLegalAgreement?: SchoolAndPlatformLegalAgreementCreateNestedOneWithoutSignedByInput
     notifications?: NotificationCreateNestedManyWithoutUserInput
     credential?: CredentialCreateNestedOneWithoutUserInput
     wallet?: WalletCreateNestedOneWithoutUserInput
@@ -50346,7 +51845,6 @@ export namespace Prisma {
     guardian?: GuardianUncheckedCreateNestedOneWithoutUserInput
     verifications?: VerificationUncheckedCreateNestedManyWithoutUserInput
     school?: SchoolUncheckedCreateNestedOneWithoutOwnerInput
-    schoolAndPlatformLegalAgreement?: SchoolAndPlatformLegalAgreementUncheckedCreateNestedOneWithoutSignedByInput
     notifications?: NotificationUncheckedCreateNestedManyWithoutUserInput
     credential?: CredentialUncheckedCreateNestedOneWithoutUserInput
     wallet?: WalletUncheckedCreateNestedOneWithoutUserInput
@@ -50385,6 +51883,7 @@ export namespace Prisma {
     schoolVerification?: SchoolVerificationCreateNestedOneWithoutSchoolInput
     schoolPayoutDetail?: SchoolPayoutDetailCreateNestedOneWithoutSchoolInput
     schoolAndPlatformLegalAgreement?: SchoolAndPlatformLegalAgreementCreateNestedOneWithoutSchoolInput
+    SchoolContactPerson?: SchoolContactPersonCreateNestedOneWithoutSchoolInput
     classes?: ClassCreateNestedManyWithoutSchoolInput
     academicSessions?: AcademicSessionCreateNestedManyWithoutSchoolInput
     terms?: TermCreateNestedManyWithoutSchoolInput
@@ -50418,6 +51917,7 @@ export namespace Prisma {
     schoolVerification?: SchoolVerificationUncheckedCreateNestedOneWithoutSchoolInput
     schoolPayoutDetail?: SchoolPayoutDetailUncheckedCreateNestedOneWithoutSchoolInput
     schoolAndPlatformLegalAgreement?: SchoolAndPlatformLegalAgreementUncheckedCreateNestedOneWithoutSchoolInput
+    SchoolContactPerson?: SchoolContactPersonUncheckedCreateNestedOneWithoutSchoolInput
     classes?: ClassUncheckedCreateNestedManyWithoutSchoolInput
     academicSessions?: AcademicSessionUncheckedCreateNestedManyWithoutSchoolInput
     terms?: TermUncheckedCreateNestedManyWithoutSchoolInput
@@ -50461,7 +51961,6 @@ export namespace Prisma {
     guardian?: GuardianUpdateOneWithoutUserNestedInput
     verifications?: VerificationUpdateManyWithoutUserNestedInput
     school?: SchoolUpdateOneWithoutOwnerNestedInput
-    schoolAndPlatformLegalAgreement?: SchoolAndPlatformLegalAgreementUpdateOneWithoutSignedByNestedInput
     notifications?: NotificationUpdateManyWithoutUserNestedInput
     credential?: CredentialUpdateOneWithoutUserNestedInput
     wallet?: WalletUpdateOneWithoutUserNestedInput
@@ -50489,7 +51988,6 @@ export namespace Prisma {
     guardian?: GuardianUncheckedUpdateOneWithoutUserNestedInput
     verifications?: VerificationUncheckedUpdateManyWithoutUserNestedInput
     school?: SchoolUncheckedUpdateOneWithoutOwnerNestedInput
-    schoolAndPlatformLegalAgreement?: SchoolAndPlatformLegalAgreementUncheckedUpdateOneWithoutSignedByNestedInput
     notifications?: NotificationUncheckedUpdateManyWithoutUserNestedInput
     credential?: CredentialUncheckedUpdateOneWithoutUserNestedInput
     wallet?: WalletUncheckedUpdateOneWithoutUserNestedInput
@@ -50534,6 +52032,7 @@ export namespace Prisma {
     schoolVerification?: SchoolVerificationUpdateOneWithoutSchoolNestedInput
     schoolPayoutDetail?: SchoolPayoutDetailUpdateOneWithoutSchoolNestedInput
     schoolAndPlatformLegalAgreement?: SchoolAndPlatformLegalAgreementUpdateOneWithoutSchoolNestedInput
+    SchoolContactPerson?: SchoolContactPersonUpdateOneWithoutSchoolNestedInput
     classes?: ClassUpdateManyWithoutSchoolNestedInput
     academicSessions?: AcademicSessionUpdateManyWithoutSchoolNestedInput
     terms?: TermUpdateManyWithoutSchoolNestedInput
@@ -50567,6 +52066,7 @@ export namespace Prisma {
     schoolVerification?: SchoolVerificationUncheckedUpdateOneWithoutSchoolNestedInput
     schoolPayoutDetail?: SchoolPayoutDetailUncheckedUpdateOneWithoutSchoolNestedInput
     schoolAndPlatformLegalAgreement?: SchoolAndPlatformLegalAgreementUncheckedUpdateOneWithoutSchoolNestedInput
+    SchoolContactPerson?: SchoolContactPersonUncheckedUpdateOneWithoutSchoolNestedInput
     classes?: ClassUncheckedUpdateManyWithoutSchoolNestedInput
     academicSessions?: AcademicSessionUncheckedUpdateManyWithoutSchoolNestedInput
     terms?: TermUncheckedUpdateManyWithoutSchoolNestedInput
@@ -50600,6 +52100,7 @@ export namespace Prisma {
     schoolVerification?: SchoolVerificationCreateNestedOneWithoutSchoolInput
     schoolPayoutDetail?: SchoolPayoutDetailCreateNestedOneWithoutSchoolInput
     schoolAndPlatformLegalAgreement?: SchoolAndPlatformLegalAgreementCreateNestedOneWithoutSchoolInput
+    SchoolContactPerson?: SchoolContactPersonCreateNestedOneWithoutSchoolInput
     academicSessions?: AcademicSessionCreateNestedManyWithoutSchoolInput
     terms?: TermCreateNestedManyWithoutSchoolInput
     fees?: FeesCreateNestedManyWithoutSchoolInput
@@ -50633,6 +52134,7 @@ export namespace Prisma {
     schoolVerification?: SchoolVerificationUncheckedCreateNestedOneWithoutSchoolInput
     schoolPayoutDetail?: SchoolPayoutDetailUncheckedCreateNestedOneWithoutSchoolInput
     schoolAndPlatformLegalAgreement?: SchoolAndPlatformLegalAgreementUncheckedCreateNestedOneWithoutSchoolInput
+    SchoolContactPerson?: SchoolContactPersonUncheckedCreateNestedOneWithoutSchoolInput
     academicSessions?: AcademicSessionUncheckedCreateNestedManyWithoutSchoolInput
     terms?: TermUncheckedCreateNestedManyWithoutSchoolInput
     fees?: FeesUncheckedCreateNestedManyWithoutSchoolInput
@@ -50800,6 +52302,7 @@ export namespace Prisma {
     schoolVerification?: SchoolVerificationUpdateOneWithoutSchoolNestedInput
     schoolPayoutDetail?: SchoolPayoutDetailUpdateOneWithoutSchoolNestedInput
     schoolAndPlatformLegalAgreement?: SchoolAndPlatformLegalAgreementUpdateOneWithoutSchoolNestedInput
+    SchoolContactPerson?: SchoolContactPersonUpdateOneWithoutSchoolNestedInput
     academicSessions?: AcademicSessionUpdateManyWithoutSchoolNestedInput
     terms?: TermUpdateManyWithoutSchoolNestedInput
     fees?: FeesUpdateManyWithoutSchoolNestedInput
@@ -50833,6 +52336,7 @@ export namespace Prisma {
     schoolVerification?: SchoolVerificationUncheckedUpdateOneWithoutSchoolNestedInput
     schoolPayoutDetail?: SchoolPayoutDetailUncheckedUpdateOneWithoutSchoolNestedInput
     schoolAndPlatformLegalAgreement?: SchoolAndPlatformLegalAgreementUncheckedUpdateOneWithoutSchoolNestedInput
+    SchoolContactPerson?: SchoolContactPersonUncheckedUpdateOneWithoutSchoolNestedInput
     academicSessions?: AcademicSessionUncheckedUpdateManyWithoutSchoolNestedInput
     terms?: TermUncheckedUpdateManyWithoutSchoolNestedInput
     fees?: FeesUncheckedUpdateManyWithoutSchoolNestedInput
@@ -50914,6 +52418,7 @@ export namespace Prisma {
     schoolVerification?: SchoolVerificationCreateNestedOneWithoutSchoolInput
     schoolPayoutDetail?: SchoolPayoutDetailCreateNestedOneWithoutSchoolInput
     schoolAndPlatformLegalAgreement?: SchoolAndPlatformLegalAgreementCreateNestedOneWithoutSchoolInput
+    SchoolContactPerson?: SchoolContactPersonCreateNestedOneWithoutSchoolInput
     classes?: ClassCreateNestedManyWithoutSchoolInput
     terms?: TermCreateNestedManyWithoutSchoolInput
     fees?: FeesCreateNestedManyWithoutSchoolInput
@@ -50947,6 +52452,7 @@ export namespace Prisma {
     schoolVerification?: SchoolVerificationUncheckedCreateNestedOneWithoutSchoolInput
     schoolPayoutDetail?: SchoolPayoutDetailUncheckedCreateNestedOneWithoutSchoolInput
     schoolAndPlatformLegalAgreement?: SchoolAndPlatformLegalAgreementUncheckedCreateNestedOneWithoutSchoolInput
+    SchoolContactPerson?: SchoolContactPersonUncheckedCreateNestedOneWithoutSchoolInput
     classes?: ClassUncheckedCreateNestedManyWithoutSchoolInput
     terms?: TermUncheckedCreateNestedManyWithoutSchoolInput
     fees?: FeesUncheckedCreateNestedManyWithoutSchoolInput
@@ -51076,6 +52582,7 @@ export namespace Prisma {
     schoolVerification?: SchoolVerificationUpdateOneWithoutSchoolNestedInput
     schoolPayoutDetail?: SchoolPayoutDetailUpdateOneWithoutSchoolNestedInput
     schoolAndPlatformLegalAgreement?: SchoolAndPlatformLegalAgreementUpdateOneWithoutSchoolNestedInput
+    SchoolContactPerson?: SchoolContactPersonUpdateOneWithoutSchoolNestedInput
     classes?: ClassUpdateManyWithoutSchoolNestedInput
     terms?: TermUpdateManyWithoutSchoolNestedInput
     fees?: FeesUpdateManyWithoutSchoolNestedInput
@@ -51109,6 +52616,7 @@ export namespace Prisma {
     schoolVerification?: SchoolVerificationUncheckedUpdateOneWithoutSchoolNestedInput
     schoolPayoutDetail?: SchoolPayoutDetailUncheckedUpdateOneWithoutSchoolNestedInput
     schoolAndPlatformLegalAgreement?: SchoolAndPlatformLegalAgreementUncheckedUpdateOneWithoutSchoolNestedInput
+    SchoolContactPerson?: SchoolContactPersonUncheckedUpdateOneWithoutSchoolNestedInput
     classes?: ClassUncheckedUpdateManyWithoutSchoolNestedInput
     terms?: TermUncheckedUpdateManyWithoutSchoolNestedInput
     fees?: FeesUncheckedUpdateManyWithoutSchoolNestedInput
@@ -51174,6 +52682,7 @@ export namespace Prisma {
     schoolVerification?: SchoolVerificationCreateNestedOneWithoutSchoolInput
     schoolPayoutDetail?: SchoolPayoutDetailCreateNestedOneWithoutSchoolInput
     schoolAndPlatformLegalAgreement?: SchoolAndPlatformLegalAgreementCreateNestedOneWithoutSchoolInput
+    SchoolContactPerson?: SchoolContactPersonCreateNestedOneWithoutSchoolInput
     classes?: ClassCreateNestedManyWithoutSchoolInput
     academicSessions?: AcademicSessionCreateNestedManyWithoutSchoolInput
     fees?: FeesCreateNestedManyWithoutSchoolInput
@@ -51207,6 +52716,7 @@ export namespace Prisma {
     schoolVerification?: SchoolVerificationUncheckedCreateNestedOneWithoutSchoolInput
     schoolPayoutDetail?: SchoolPayoutDetailUncheckedCreateNestedOneWithoutSchoolInput
     schoolAndPlatformLegalAgreement?: SchoolAndPlatformLegalAgreementUncheckedCreateNestedOneWithoutSchoolInput
+    SchoolContactPerson?: SchoolContactPersonUncheckedCreateNestedOneWithoutSchoolInput
     classes?: ClassUncheckedCreateNestedManyWithoutSchoolInput
     academicSessions?: AcademicSessionUncheckedCreateNestedManyWithoutSchoolInput
     fees?: FeesUncheckedCreateNestedManyWithoutSchoolInput
@@ -51336,6 +52846,7 @@ export namespace Prisma {
     schoolVerification?: SchoolVerificationUpdateOneWithoutSchoolNestedInput
     schoolPayoutDetail?: SchoolPayoutDetailUpdateOneWithoutSchoolNestedInput
     schoolAndPlatformLegalAgreement?: SchoolAndPlatformLegalAgreementUpdateOneWithoutSchoolNestedInput
+    SchoolContactPerson?: SchoolContactPersonUpdateOneWithoutSchoolNestedInput
     classes?: ClassUpdateManyWithoutSchoolNestedInput
     academicSessions?: AcademicSessionUpdateManyWithoutSchoolNestedInput
     fees?: FeesUpdateManyWithoutSchoolNestedInput
@@ -51369,6 +52880,7 @@ export namespace Prisma {
     schoolVerification?: SchoolVerificationUncheckedUpdateOneWithoutSchoolNestedInput
     schoolPayoutDetail?: SchoolPayoutDetailUncheckedUpdateOneWithoutSchoolNestedInput
     schoolAndPlatformLegalAgreement?: SchoolAndPlatformLegalAgreementUncheckedUpdateOneWithoutSchoolNestedInput
+    SchoolContactPerson?: SchoolContactPersonUncheckedUpdateOneWithoutSchoolNestedInput
     classes?: ClassUncheckedUpdateManyWithoutSchoolNestedInput
     academicSessions?: AcademicSessionUncheckedUpdateManyWithoutSchoolNestedInput
     fees?: FeesUncheckedUpdateManyWithoutSchoolNestedInput
@@ -51511,6 +53023,7 @@ export namespace Prisma {
     schoolVerification?: SchoolVerificationCreateNestedOneWithoutSchoolInput
     schoolPayoutDetail?: SchoolPayoutDetailCreateNestedOneWithoutSchoolInput
     schoolAndPlatformLegalAgreement?: SchoolAndPlatformLegalAgreementCreateNestedOneWithoutSchoolInput
+    SchoolContactPerson?: SchoolContactPersonCreateNestedOneWithoutSchoolInput
     classes?: ClassCreateNestedManyWithoutSchoolInput
     academicSessions?: AcademicSessionCreateNestedManyWithoutSchoolInput
     terms?: TermCreateNestedManyWithoutSchoolInput
@@ -51544,6 +53057,7 @@ export namespace Prisma {
     schoolVerification?: SchoolVerificationUncheckedCreateNestedOneWithoutSchoolInput
     schoolPayoutDetail?: SchoolPayoutDetailUncheckedCreateNestedOneWithoutSchoolInput
     schoolAndPlatformLegalAgreement?: SchoolAndPlatformLegalAgreementUncheckedCreateNestedOneWithoutSchoolInput
+    SchoolContactPerson?: SchoolContactPersonUncheckedCreateNestedOneWithoutSchoolInput
     classes?: ClassUncheckedCreateNestedManyWithoutSchoolInput
     academicSessions?: AcademicSessionUncheckedCreateNestedManyWithoutSchoolInput
     terms?: TermUncheckedCreateNestedManyWithoutSchoolInput
@@ -51716,6 +53230,7 @@ export namespace Prisma {
     schoolVerification?: SchoolVerificationUpdateOneWithoutSchoolNestedInput
     schoolPayoutDetail?: SchoolPayoutDetailUpdateOneWithoutSchoolNestedInput
     schoolAndPlatformLegalAgreement?: SchoolAndPlatformLegalAgreementUpdateOneWithoutSchoolNestedInput
+    SchoolContactPerson?: SchoolContactPersonUpdateOneWithoutSchoolNestedInput
     classes?: ClassUpdateManyWithoutSchoolNestedInput
     academicSessions?: AcademicSessionUpdateManyWithoutSchoolNestedInput
     terms?: TermUpdateManyWithoutSchoolNestedInput
@@ -51749,6 +53264,7 @@ export namespace Prisma {
     schoolVerification?: SchoolVerificationUncheckedUpdateOneWithoutSchoolNestedInput
     schoolPayoutDetail?: SchoolPayoutDetailUncheckedUpdateOneWithoutSchoolNestedInput
     schoolAndPlatformLegalAgreement?: SchoolAndPlatformLegalAgreementUncheckedUpdateOneWithoutSchoolNestedInput
+    SchoolContactPerson?: SchoolContactPersonUncheckedUpdateOneWithoutSchoolNestedInput
     classes?: ClassUncheckedUpdateManyWithoutSchoolNestedInput
     academicSessions?: AcademicSessionUncheckedUpdateManyWithoutSchoolNestedInput
     terms?: TermUncheckedUpdateManyWithoutSchoolNestedInput
@@ -53001,6 +54517,7 @@ export namespace Prisma {
     schoolVerification?: SchoolVerificationCreateNestedOneWithoutSchoolInput
     schoolPayoutDetail?: SchoolPayoutDetailCreateNestedOneWithoutSchoolInput
     schoolAndPlatformLegalAgreement?: SchoolAndPlatformLegalAgreementCreateNestedOneWithoutSchoolInput
+    SchoolContactPerson?: SchoolContactPersonCreateNestedOneWithoutSchoolInput
     classes?: ClassCreateNestedManyWithoutSchoolInput
     academicSessions?: AcademicSessionCreateNestedManyWithoutSchoolInput
     terms?: TermCreateNestedManyWithoutSchoolInput
@@ -53034,6 +54551,7 @@ export namespace Prisma {
     schoolVerification?: SchoolVerificationUncheckedCreateNestedOneWithoutSchoolInput
     schoolPayoutDetail?: SchoolPayoutDetailUncheckedCreateNestedOneWithoutSchoolInput
     schoolAndPlatformLegalAgreement?: SchoolAndPlatformLegalAgreementUncheckedCreateNestedOneWithoutSchoolInput
+    SchoolContactPerson?: SchoolContactPersonUncheckedCreateNestedOneWithoutSchoolInput
     classes?: ClassUncheckedCreateNestedManyWithoutSchoolInput
     academicSessions?: AcademicSessionUncheckedCreateNestedManyWithoutSchoolInput
     terms?: TermUncheckedCreateNestedManyWithoutSchoolInput
@@ -53083,6 +54601,7 @@ export namespace Prisma {
     schoolVerification?: SchoolVerificationUpdateOneWithoutSchoolNestedInput
     schoolPayoutDetail?: SchoolPayoutDetailUpdateOneWithoutSchoolNestedInput
     schoolAndPlatformLegalAgreement?: SchoolAndPlatformLegalAgreementUpdateOneWithoutSchoolNestedInput
+    SchoolContactPerson?: SchoolContactPersonUpdateOneWithoutSchoolNestedInput
     classes?: ClassUpdateManyWithoutSchoolNestedInput
     academicSessions?: AcademicSessionUpdateManyWithoutSchoolNestedInput
     terms?: TermUpdateManyWithoutSchoolNestedInput
@@ -53116,6 +54635,7 @@ export namespace Prisma {
     schoolVerification?: SchoolVerificationUncheckedUpdateOneWithoutSchoolNestedInput
     schoolPayoutDetail?: SchoolPayoutDetailUncheckedUpdateOneWithoutSchoolNestedInput
     schoolAndPlatformLegalAgreement?: SchoolAndPlatformLegalAgreementUncheckedUpdateOneWithoutSchoolNestedInput
+    SchoolContactPerson?: SchoolContactPersonUncheckedUpdateOneWithoutSchoolNestedInput
     classes?: ClassUncheckedUpdateManyWithoutSchoolNestedInput
     academicSessions?: AcademicSessionUncheckedUpdateManyWithoutSchoolNestedInput
     terms?: TermUncheckedUpdateManyWithoutSchoolNestedInput
@@ -53143,7 +54663,6 @@ export namespace Prisma {
     guardian?: GuardianCreateNestedOneWithoutUserInput
     verifications?: VerificationCreateNestedManyWithoutUserInput
     school?: SchoolCreateNestedOneWithoutOwnerInput
-    schoolAndPlatformLegalAgreement?: SchoolAndPlatformLegalAgreementCreateNestedOneWithoutSignedByInput
     credential?: CredentialCreateNestedOneWithoutUserInput
     wallet?: WalletCreateNestedOneWithoutUserInput
     refreshTokens?: RefreshTokenCreateNestedManyWithoutUserInput
@@ -53171,7 +54690,6 @@ export namespace Prisma {
     guardian?: GuardianUncheckedCreateNestedOneWithoutUserInput
     verifications?: VerificationUncheckedCreateNestedManyWithoutUserInput
     school?: SchoolUncheckedCreateNestedOneWithoutOwnerInput
-    schoolAndPlatformLegalAgreement?: SchoolAndPlatformLegalAgreementUncheckedCreateNestedOneWithoutSignedByInput
     credential?: CredentialUncheckedCreateNestedOneWithoutUserInput
     wallet?: WalletUncheckedCreateNestedOneWithoutUserInput
     refreshTokens?: RefreshTokenUncheckedCreateNestedManyWithoutUserInput
@@ -53215,7 +54733,6 @@ export namespace Prisma {
     guardian?: GuardianUpdateOneWithoutUserNestedInput
     verifications?: VerificationUpdateManyWithoutUserNestedInput
     school?: SchoolUpdateOneWithoutOwnerNestedInput
-    schoolAndPlatformLegalAgreement?: SchoolAndPlatformLegalAgreementUpdateOneWithoutSignedByNestedInput
     credential?: CredentialUpdateOneWithoutUserNestedInput
     wallet?: WalletUpdateOneWithoutUserNestedInput
     refreshTokens?: RefreshTokenUpdateManyWithoutUserNestedInput
@@ -53243,7 +54760,6 @@ export namespace Prisma {
     guardian?: GuardianUncheckedUpdateOneWithoutUserNestedInput
     verifications?: VerificationUncheckedUpdateManyWithoutUserNestedInput
     school?: SchoolUncheckedUpdateOneWithoutOwnerNestedInput
-    schoolAndPlatformLegalAgreement?: SchoolAndPlatformLegalAgreementUncheckedUpdateOneWithoutSignedByNestedInput
     credential?: CredentialUncheckedUpdateOneWithoutUserNestedInput
     wallet?: WalletUncheckedUpdateOneWithoutUserNestedInput
     refreshTokens?: RefreshTokenUncheckedUpdateManyWithoutUserNestedInput
@@ -53271,7 +54787,6 @@ export namespace Prisma {
     guardian?: GuardianCreateNestedOneWithoutUserInput
     verifications?: VerificationCreateNestedManyWithoutUserInput
     school?: SchoolCreateNestedOneWithoutOwnerInput
-    schoolAndPlatformLegalAgreement?: SchoolAndPlatformLegalAgreementCreateNestedOneWithoutSignedByInput
     notifications?: NotificationCreateNestedManyWithoutUserInput
     credential?: CredentialCreateNestedOneWithoutUserInput
     refreshTokens?: RefreshTokenCreateNestedManyWithoutUserInput
@@ -53299,7 +54814,6 @@ export namespace Prisma {
     guardian?: GuardianUncheckedCreateNestedOneWithoutUserInput
     verifications?: VerificationUncheckedCreateNestedManyWithoutUserInput
     school?: SchoolUncheckedCreateNestedOneWithoutOwnerInput
-    schoolAndPlatformLegalAgreement?: SchoolAndPlatformLegalAgreementUncheckedCreateNestedOneWithoutSignedByInput
     notifications?: NotificationUncheckedCreateNestedManyWithoutUserInput
     credential?: CredentialUncheckedCreateNestedOneWithoutUserInput
     refreshTokens?: RefreshTokenUncheckedCreateNestedManyWithoutUserInput
@@ -53429,7 +54943,6 @@ export namespace Prisma {
     guardian?: GuardianUpdateOneWithoutUserNestedInput
     verifications?: VerificationUpdateManyWithoutUserNestedInput
     school?: SchoolUpdateOneWithoutOwnerNestedInput
-    schoolAndPlatformLegalAgreement?: SchoolAndPlatformLegalAgreementUpdateOneWithoutSignedByNestedInput
     notifications?: NotificationUpdateManyWithoutUserNestedInput
     credential?: CredentialUpdateOneWithoutUserNestedInput
     refreshTokens?: RefreshTokenUpdateManyWithoutUserNestedInput
@@ -53457,7 +54970,6 @@ export namespace Prisma {
     guardian?: GuardianUncheckedUpdateOneWithoutUserNestedInput
     verifications?: VerificationUncheckedUpdateManyWithoutUserNestedInput
     school?: SchoolUncheckedUpdateOneWithoutOwnerNestedInput
-    schoolAndPlatformLegalAgreement?: SchoolAndPlatformLegalAgreementUncheckedUpdateOneWithoutSignedByNestedInput
     notifications?: NotificationUncheckedUpdateManyWithoutUserNestedInput
     credential?: CredentialUncheckedUpdateOneWithoutUserNestedInput
     refreshTokens?: RefreshTokenUncheckedUpdateManyWithoutUserNestedInput
@@ -53706,7 +55218,6 @@ export namespace Prisma {
     guardian?: GuardianCreateNestedOneWithoutUserInput
     verifications?: VerificationCreateNestedManyWithoutUserInput
     school?: SchoolCreateNestedOneWithoutOwnerInput
-    schoolAndPlatformLegalAgreement?: SchoolAndPlatformLegalAgreementCreateNestedOneWithoutSignedByInput
     notifications?: NotificationCreateNestedManyWithoutUserInput
     credential?: CredentialCreateNestedOneWithoutUserInput
     wallet?: WalletCreateNestedOneWithoutUserInput
@@ -53734,7 +55245,6 @@ export namespace Prisma {
     guardian?: GuardianUncheckedCreateNestedOneWithoutUserInput
     verifications?: VerificationUncheckedCreateNestedManyWithoutUserInput
     school?: SchoolUncheckedCreateNestedOneWithoutOwnerInput
-    schoolAndPlatformLegalAgreement?: SchoolAndPlatformLegalAgreementUncheckedCreateNestedOneWithoutSignedByInput
     notifications?: NotificationUncheckedCreateNestedManyWithoutUserInput
     credential?: CredentialUncheckedCreateNestedOneWithoutUserInput
     wallet?: WalletUncheckedCreateNestedOneWithoutUserInput
@@ -53778,7 +55288,6 @@ export namespace Prisma {
     guardian?: GuardianUpdateOneWithoutUserNestedInput
     verifications?: VerificationUpdateManyWithoutUserNestedInput
     school?: SchoolUpdateOneWithoutOwnerNestedInput
-    schoolAndPlatformLegalAgreement?: SchoolAndPlatformLegalAgreementUpdateOneWithoutSignedByNestedInput
     notifications?: NotificationUpdateManyWithoutUserNestedInput
     credential?: CredentialUpdateOneWithoutUserNestedInput
     wallet?: WalletUpdateOneWithoutUserNestedInput
@@ -53806,7 +55315,6 @@ export namespace Prisma {
     guardian?: GuardianUncheckedUpdateOneWithoutUserNestedInput
     verifications?: VerificationUncheckedUpdateManyWithoutUserNestedInput
     school?: SchoolUncheckedUpdateOneWithoutOwnerNestedInput
-    schoolAndPlatformLegalAgreement?: SchoolAndPlatformLegalAgreementUncheckedUpdateOneWithoutSignedByNestedInput
     notifications?: NotificationUncheckedUpdateManyWithoutUserNestedInput
     credential?: CredentialUncheckedUpdateOneWithoutUserNestedInput
     wallet?: WalletUncheckedUpdateOneWithoutUserNestedInput

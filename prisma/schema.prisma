@@ -51,6 +51,12 @@ enum DirectorIDType {
   voters_id
 }
 
+enum ContactRole {
+  bursar
+  ict_officer
+  other
+}
+
 enum InvoiceStatus {
   pending
   paid
@@ -141,17 +147,16 @@ model User {
   updatedAt DateTime @updatedAt
 
   // Relations
-  administrator                   Administrator?
-  guardian                        Guardian?
-  verifications                   Verification[]
-  school                          School?
-  schoolAndPlatformLegalAgreement SchoolAndPlatformLegalAgreement?
-  notifications                   Notification[]
-  credential                      Credential?
-  wallet                          Wallet?
-  refreshTokens                   RefreshToken[]
-  firebaseToken                   FirebaseToken?
-  kycverification                 KYCVerification?
+  administrator   Administrator?
+  guardian        Guardian?
+  verifications   Verification[]
+  school          School?
+  notifications   Notification[]
+  credential      Credential?
+  wallet          Wallet?
+  refreshTokens   RefreshToken[]
+  firebaseToken   FirebaseToken?
+  kycverification KYCVerification?
 
   @@index([email, isDeleted])
   @@index([type, accountStatus, isDeleted])
@@ -291,6 +296,7 @@ model School {
   schoolVerification              SchoolVerification?
   schoolPayoutDetail              SchoolPayoutDetail?
   schoolAndPlatformLegalAgreement SchoolAndPlatformLegalAgreement?
+  SchoolContactPerson             SchoolContactPerson?
   classes                         Class[]
   academicSessions                AcademicSession[]
   terms                           Term[]
@@ -345,12 +351,12 @@ model SchoolOwnershipVerification {
 }
 
 model SchoolVerification {
-  id                      String @id @default(cuid())
-  schoolId                String @unique
-  cacCertificate          String
-  accreditationDocument   String
-  taxIdentificationNumber String
-  licenseDocument         String
+  id                                 String @id @default(cuid())
+  schoolId                           String @unique
+  cacCertificate                     String
+  accreditationDocument              String
+  taxIdentificationNumberCertificate String
+  licenseDocument                    String
 
   isDeleted Boolean  @default(false)
   createdAt DateTime @default(now())
@@ -364,12 +370,13 @@ model SchoolVerification {
 }
 
 model SchoolPayoutDetail {
-  id            String @id @default(cuid())
-  schoolId      String @unique
-  bankName      String
-  bankCode      String
-  accountNumber String
-  accountName   String
+  id                  String @id @default(cuid())
+  schoolId            String @unique
+  bankName            String
+  bankCode            String
+  accountNumber       String
+  accountName         String
+  bankReferenceLetter String
 
   isDeleted Boolean  @default(false)
   createdAt DateTime @default(now())
@@ -382,25 +389,38 @@ model SchoolPayoutDetail {
   @@index([bankCode, accountNumber, isDeleted])
 }
 
-model SchoolAndPlatformLegalAgreement {
-  id               String   @id @default(cuid())
-  schoolId         String   @unique
-  signedById       String   @unique
-  signature        String
-  signedAt         DateTime
-  legalDocumentRef String
+model SchoolContactPerson {
+  id       String      @id @default(uuid())
+  schoolId String      @unique
+  role     ContactRole
 
-  isDeleted Boolean  @default(false)
+  name  String
+  phone String
+  email String
+
   createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt
+  isDeleted Boolean  @default(false)
 
   // Relations
-  school   School @relation(fields: [schoolId], references: [id], onDelete: Cascade)
-  signedBy User   @relation(fields: [signedById], references: [id], onDelete: Cascade)
+  school School @relation(fields: [schoolId], references: [id], onDelete: Cascade)
 
-  @@index([schoolId, isDeleted])
-  @@index([signedById, isDeleted])
-  @@index([signedAt, isDeleted])
+  @@unique([schoolId, role])
+}
+
+model SchoolAndPlatformLegalAgreement {
+  id String @id @default(uuid())
+
+  schoolId String @unique
+  school   School @relation(fields: [schoolId], references: [id], onDelete: Cascade)
+
+  signedById       String // just store userId, NO relation
+  agreedByName     String
+  legalDocumentRef String
+  signedAt         DateTime @default(now())
+
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
 }
 
 model KYCVerification {

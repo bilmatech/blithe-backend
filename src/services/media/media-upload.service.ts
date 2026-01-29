@@ -107,4 +107,41 @@ export class MediaUploadService {
       });
     }
   }
+
+  /**
+   * Uploads a document file for KYC verification.
+   * Routes files to specific KYC folders for better security management.
+   * @param file The document file to upload.
+   */
+  async uploadDocumentMedia(kycfile: Express.Multer.File) {
+    try {
+      const { buffer, originalname, mimetype } = kycfile;
+
+      // You can add document-specific validation here (e.g., PDF, JPG, PNG)
+      const allowedMimes = ['application/pdf', 'image/jpeg', 'image/png'];
+      if (!allowedMimes.includes(mimetype)) {
+        throw new AppError('Invalid document type. Only PDF and Images are allowed.');
+      }
+
+      const folder =
+        this.config.get<string>('NODE_ENV') === 'production'
+          ? 'prod-kyc'
+          : 'dev-kyc';
+
+      return this.awsS3Service.singleUpload(
+        buffer,
+        originalname,
+        mimetype,
+        folder,
+      );
+    } catch (error: any) {
+      if (error instanceof AppError) {
+        throw new BadRequestException(error.message, { cause: error });
+      }
+      throw new InternalServerErrorException('Failed to upload KYC document', {
+        cause: error,
+      });
+    }
+  }
+
 }
