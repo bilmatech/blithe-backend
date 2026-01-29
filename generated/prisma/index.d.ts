@@ -169,6 +169,7 @@ export type UserType = (typeof UserType)[keyof typeof UserType]
 
 export const AccountStatus: {
   active: 'active',
+  inactive: 'inactive',
   suspended: 'suspended',
   blocked: 'blocked',
   deleted: 'deleted'
