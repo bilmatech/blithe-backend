@@ -22,6 +22,6 @@ export class WalletController {
   // -------------------------------------------------------------------
   @Get()
   getWalletInfo(@AuthorizedUser() user: AuthUser) {
-    this.walletService.getUserWallet(user.id);
+    return this.walletService.getUserWallet(user.id);
   }
 }

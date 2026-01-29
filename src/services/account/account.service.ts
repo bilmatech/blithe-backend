@@ -108,9 +108,14 @@ export class AccountService {
    */
   async findOne(id: string) {
     try {
-      return await this.prisma.user.findUnique({
+      const user = await this.prisma.user.findUnique({
         where: { id, isDeleted: false },
       });
+      if (!user) {
+        throw new AppError('User not found');
+      }
+
+      return user;
     } catch (error) {
       if (error instanceof AppError) {
         throw new BadRequestException(error.message, { cause: error });

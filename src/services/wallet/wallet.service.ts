@@ -91,12 +91,14 @@ export class WalletService extends BaseLedgerService {
   async getUserWallet(userId: string) {
     try {
       const wallet = await this.findByUserId(userId);
+      if (!wallet) {
+        throw new AppError('Wallet not found for the user');
+      }
+
       return {
         ...wallet,
-        balance: new Prisma.Decimal(wallet?.balance as string).toDecimalPlaces(
-          2,
-        ),
-        ngnBalance: new Prisma.Decimal(wallet?.balance as string)
+        balance: new Prisma.Decimal(wallet.balance).toDecimalPlaces(2),
+        ngnBalance: new Prisma.Decimal(wallet.balance)
           .toDecimalPlaces(2)
           .toNumber()
           .toLocaleString('en-NG', { style: 'currency', currency: 'NGN' }),
@@ -383,7 +385,6 @@ export class WalletService extends BaseLedgerService {
   findByUserId(userId: string) {
     return this.prisma.ext.wallet.findFirst({
       where: { userId, status: WalletStatus.Active, isDeleted: false },
-      include: { user: true },
     });
   }
 
