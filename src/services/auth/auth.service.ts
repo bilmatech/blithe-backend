@@ -7,7 +7,7 @@ import {
 import { CreateAuthUserDto } from './dto/create-auth-user.dto';
 import { TokenService } from './token.service';
 import { AppError } from '@Blithe/common/utils/error-handler.util';
-import { UserType, VerificationType } from '@DB/Client';
+import { AccountStatus, UserType, VerificationType } from '@DB/Client';
 import { AuthChallengeType } from './auth.type';
 import * as Sentry from '@sentry/nestjs';
 import { VerificationService } from '@Blithe/services/verification/verification.service';
@@ -20,7 +20,7 @@ import { ResendCodeDto } from './dto/resend-code.dto';
 import { maskEmail } from '@Blithe/common/utils/funcs.util';
 import { EncryptionService } from '../encryption/encryption.service';
 import { ResetPasswordDto } from '../account/dto/reset-password.dto';
-import { AuthorizeUserDto } from './dto/authorize-user.dto';
+import { AuthorizeUserDto, SourceType } from './dto/authorize-user.dto';
 
 @Injectable()
 export class AuthService {
@@ -398,6 +398,11 @@ export class AuthService {
     }
   }
 
+  /**
+   * Authorize user by verifying email and password, then issue auth tokens.
+   * @param authorizedUserDto The DTO containing user email and password
+   * @returns Auth tokens and user information upon successful authorization
+   */
   async authorize(authorizedUserDto: AuthorizeUserDto) {
     try {
       // Find the user by email
@@ -406,6 +411,57 @@ export class AuthService {
       );
       if (!user) {
         throw new AppError('Invalid email or password.');
+      }
+
+      // Validation: If user is not verified, send verification code again.
+      if (!user.verifiedAt) {
+        // Send verification code
+        await this.verificationService.sendVerificationCode(
+          user.id,
+          user.email,
+          VerificationType.account_activation,
+          NotificationType.AccountVerification,
+        );
+
+        // just return the user information
+        return {
+          user,
+          message:
+            'Your account is not verified. A new verification code has been sent to your email.',
+        };
+      }
+
+      // Validation: Check if the user account is closed
+      if (
+        [
+          AccountStatus.blocked,
+          AccountStatus.suspended,
+          AccountStatus.deleted,
+        ].some((status) => status === user.accountStatus)
+      ) {
+        throw new AppError(
+          `Your account is currently ${user.accountStatus}. Please contact support for assistance.`,
+        );
+      }
+
+      // Validation: Make sure the user attempting to login from allowed source
+      // e.g., a school user should not login from mobile app
+      if (
+        user.type === UserType.school &&
+        authorizedUserDto.source === SourceType.MOBILE
+      ) {
+        throw new AppError(
+          'Sorry, your account is not permitted to login from mobile app.',
+        );
+      }
+
+      if (
+        user.type === UserType.guardian &&
+        authorizedUserDto.source === SourceType.WEB
+      ) {
+        throw new AppError(
+          'Sorry, your account is not permitted to login from web.',
+        );
       }
 
       // Verify the user's password
