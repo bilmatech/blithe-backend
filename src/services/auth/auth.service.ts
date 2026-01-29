@@ -123,6 +123,9 @@ export class AuthService {
       );
       if (!verification.valid) throw new AppError('Invalid verification code.');
 
+      // Update user account status to active
+      await this.accountService.verifiedEmail(verification.user.id);
+
       // Generate auth tokens
       const tokenInfo = await this.tokenService.issueTokens(
         verification.user.id,

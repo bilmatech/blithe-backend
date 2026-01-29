@@ -52,7 +52,7 @@ export class AccountService {
           email: createAccountDto.email,
           profileImage: createAccountDto.profileImage,
           phone: createAccountDto.phone,
-          accountStatus: AccountStatus.active,
+          accountStatus: AccountStatus.inactive,
           type,
           isTermsAccepted: true,
           isPrivacyAccepted: true,
@@ -221,6 +221,17 @@ export class AccountService {
     return this.prisma.user.update({
       where: { id },
       data: { lastSeenAt: new Date() },
+    });
+  }
+
+  verifiedEmail(id: string) {
+    return this.prisma.user.update({
+      where: { id },
+      data: {
+        verifiedAt: new Date(),
+        accountStatus: AccountStatus.active,
+        lastSeenAt: new Date(),
+      },
     });
   }
 }

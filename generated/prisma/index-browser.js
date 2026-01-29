@@ -491,6 +491,7 @@ exports.UserType = exports.$Enums.UserType = {
 
 exports.AccountStatus = exports.$Enums.AccountStatus = {
   active: 'active',
+  inactive: 'inactive',
   suspended: 'suspended',
   blocked: 'blocked',
   deleted: 'deleted'
