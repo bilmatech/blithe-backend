@@ -385,15 +385,12 @@ exports.Prisma.TransactionScalarFieldEnum = {
   amount: 'amount',
   fees: 'fees',
   status: 'status',
-  type: 'type',
-  flow: 'flow',
   transactionAt: 'transactionAt',
   processedAt: 'processedAt',
   description: 'description',
   isDeleted: 'isDeleted',
   createdAt: 'createdAt',
-  updatedAt: 'updatedAt',
-  walletId: 'walletId'
+  updatedAt: 'updatedAt'
 };
 
 exports.Prisma.TransactionFeeScalarFieldEnum = {
@@ -440,6 +437,24 @@ exports.Prisma.WalletScalarFieldEnum = {
   tag: 'tag',
   routingNumber: 'routingNumber',
   balance: 'balance',
+  status: 'status',
+  isDeleted: 'isDeleted',
+  updatedAt: 'updatedAt',
+  createdAt: 'createdAt'
+};
+
+exports.Prisma.WalletTransactionScalarFieldEnum = {
+  id: 'id',
+  walletId: 'walletId',
+  amount: 'amount',
+  fees: 'fees',
+  netAmount: 'netAmount',
+  reference: 'reference',
+  type: 'type',
+  flow: 'flow',
+  transactionAt: 'transactionAt',
+  processedAt: 'processedAt',
+  desc: 'desc',
   status: 'status',
   isDeleted: 'isDeleted',
   updatedAt: 'updatedAt',
@@ -550,20 +565,6 @@ exports.TransactionStatus = exports.$Enums.TransactionStatus = {
   success: 'success'
 };
 
-exports.TransactionType = exports.$Enums.TransactionType = {
-  Deposit: 'Deposit',
-  Withdrawal: 'Withdrawal',
-  Transfer: 'Transfer',
-  Refund: 'Refund',
-  Reversal: 'Reversal',
-  Distribution: 'Distribution'
-};
-
-exports.TransactionFlow = exports.$Enums.TransactionFlow = {
-  Inflow: 'Inflow',
-  Outflow: 'Outflow'
-};
-
 exports.PayoutStatus = exports.$Enums.PayoutStatus = {
   pending: 'pending',
   sent: 'sent',
@@ -582,6 +583,20 @@ exports.WalletStatus = exports.$Enums.WalletStatus = {
   Suspended: 'Suspended',
   Blocked: 'Blocked',
   Deleted: 'Deleted'
+};
+
+exports.TransactionType = exports.$Enums.TransactionType = {
+  Deposit: 'Deposit',
+  Withdrawal: 'Withdrawal',
+  Transfer: 'Transfer',
+  Refund: 'Refund',
+  Reversal: 'Reversal',
+  Distribution: 'Distribution'
+};
+
+exports.TransactionFlow = exports.$Enums.TransactionFlow = {
+  Inflow: 'Inflow',
+  Outflow: 'Outflow'
 };
 
 exports.Prisma.ModelName = {
@@ -611,6 +626,7 @@ exports.Prisma.ModelName = {
   Payout: 'Payout',
   Notification: 'Notification',
   Wallet: 'Wallet',
+  WalletTransaction: 'WalletTransaction',
   Ledger: 'Ledger',
   FirebaseToken: 'FirebaseToken'
 };

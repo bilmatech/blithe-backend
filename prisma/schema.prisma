@@ -621,8 +621,6 @@ model Transaction {
   amount        Decimal           @default(0.00) @db.Decimal(10, 2)
   fees          Decimal           @default(0.00) @db.Decimal(10, 2)
   status        TransactionStatus @default(pending)
-  type          TransactionType   @default(Deposit)
-  flow          TransactionFlow   @default(Inflow)
   transactionAt DateTime?
   processedAt   DateTime?
   description   String?
@@ -635,9 +633,6 @@ model Transaction {
   invoice        Invoice         @relation(fields: [invoiceId], references: [id], onDelete: Cascade)
   guardian       Guardian        @relation(fields: [guardianId], references: [id], onDelete: Cascade)
   transactionFee TransactionFee?
-  wallet         Wallet?         @relation(fields: [walletId], references: [id])
-  walletId       String?
-  ledger         Ledger?
 
   @@index([guardianId, isDeleted])
   @@index([invoiceId, isDeleted])
@@ -738,9 +733,9 @@ model Wallet {
   createdAt DateTime @default(now())
 
   // Relations
-  user        User          @relation(fields: [userId], references: [id], onDelete: Cascade)
+  user        User                @relation(fields: [userId], references: [id], onDelete: Cascade)
   Ledger      Ledger[]
-  Transaction Transaction[]
+  Transaction WalletTransaction[]
 
   // Optimized indexes for wallet operations (userId and address already have unique indexes)
   @@index([id, status, isDeleted])
@@ -749,6 +744,35 @@ model Wallet {
   @@index([status, isDeleted])
   @@index([routingNumber, isDeleted])
   @@index([createdAt, isDeleted])
+}
+
+model WalletTransaction {
+  id            String            @id @default(cuid())
+  walletId      String
+  amount        Decimal           @default(0) @db.Decimal(10, 2)
+  fees          Decimal           @default(0) @db.Decimal(10, 2)
+  // Amount after fees deduction
+  netAmount     Decimal           @default(0) @db.Decimal(10, 2)
+  reference     String            @unique
+  type          TransactionType
+  flow          TransactionFlow
+  transactionAt DateTime?
+  processedAt   DateTime?
+  desc          String?
+  status        TransactionStatus @default(pending)
+
+  isDeleted Boolean  @default(false)
+  updatedAt DateTime @updatedAt
+  createdAt DateTime @default(now())
+
+  // Relations
+  wallet Wallet  @relation(fields: [walletId], references: [id], onDelete: Cascade)
+  ledger Ledger?
+
+  // Optimized indexes for wallet transaction queries (transactionId already have unique indexes)
+  @@index([reference, isDeleted])
+  @@index([walletId, isDeleted, createdAt])
+  @@index([walletId, createdAt, isDeleted])
 }
 
 model Ledger {
@@ -766,8 +790,8 @@ model Ledger {
   createdAt DateTime @default(now())
 
   // Relations
-  Wallet      Wallet      @relation(fields: [walletId], references: [id], onDelete: Cascade)
-  Transaction Transaction @relation(fields: [transactionId], references: [id], onDelete: Cascade)
+  wallet      Wallet            @relation(fields: [walletId], references: [id], onDelete: Cascade)
+  transaction WalletTransaction @relation(fields: [transactionId], references: [id], onDelete: Cascade)
 
   // Optimized indexes for ledger queries (transactionId already have unique indexes)
   @@index([transactionId, isDeleted])
