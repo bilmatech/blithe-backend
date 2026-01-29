@@ -90,7 +90,17 @@ export class WalletService extends BaseLedgerService {
    */
   async getUserWallet(userId: string) {
     try {
-      return await this.findByUserId(userId);
+      const wallet = await this.findByUserId(userId);
+      return {
+        ...wallet,
+        balance: new Prisma.Decimal(wallet?.balance as string).toDecimalPlaces(
+          2,
+        ),
+        ngnBalance: new Prisma.Decimal(wallet?.balance as string)
+          .toDecimalPlaces(2)
+          .toNumber()
+          .toLocaleString('en-NG', { style: 'currency', currency: 'NGN' }),
+      };
     } catch (error) {
       if (error instanceof AppError) {
         throw new BadRequestException(error.message, { cause: error });

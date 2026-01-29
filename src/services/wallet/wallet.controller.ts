@@ -21,15 +21,7 @@ export class WalletController {
   @ResponseMessage('Successfully retrieved wallet information.')
   // -------------------------------------------------------------------
   @Get()
-  async getWalletInfo(@AuthorizedUser() user: AuthUser) {
-    const wallet = await this.walletService.getUserWallet(user.id);
-    return {
-      ...wallet,
-      balance: new Prisma.Decimal(wallet?.balance as string).toDecimalPlaces(2),
-      ngnBalance: new Prisma.Decimal(wallet?.balance as string)
-        .toDecimalPlaces(2)
-        .toNumber()
-        .toLocaleString('en-NG', { style: 'currency', currency: 'NGN' }),
-    };
+  getWalletInfo(@AuthorizedUser() user: AuthUser) {
+    this.walletService.getUserWallet(user.id);
   }
 }
