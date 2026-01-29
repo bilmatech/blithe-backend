@@ -13,6 +13,7 @@ import { ConfigModule } from '@nestjs/config';
 import thirdPartyConfig from '@Blithe/services/third-party/config/third-party.config';
 import redisConfig from '@Blithe/common/config/redis.config';
 import { WalletEnqueueService } from './queue/wallet-enqueue.service';
+import { WalletTransactionService } from './wallet-transaction.service';
 
 @Module({
   imports: [
@@ -32,6 +33,7 @@ import { WalletEnqueueService } from './queue/wallet-enqueue.service';
     LedgerService,
     WalletEnqueueService,
     WalletProcessor,
+    WalletTransactionService,
   ],
   exports: [WalletService, LedgerService, WalletEnqueueService],
 })
