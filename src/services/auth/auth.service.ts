@@ -64,6 +64,8 @@ export class AuthService {
     } catch (error) {
       if (error instanceof AppError) {
         throw new BadRequestException(error.message, { cause: error });
+      } else if (error instanceof BadRequestException) {
+        throw error;
       }
 
       throw new InternalServerErrorException(
@@ -108,6 +110,8 @@ export class AuthService {
     } catch (error) {
       if (error instanceof AppError) {
         throw new BadRequestException(error.message, { cause: error });
+      } else if (error instanceof BadRequestException) {
+        throw error;
       }
 
       throw new InternalServerErrorException(
@@ -148,6 +152,8 @@ export class AuthService {
     } catch (error) {
       if (error instanceof AppError) {
         throw new BadRequestException(error.message, { cause: error });
+      } else if (error instanceof BadRequestException) {
+        throw error;
       }
 
       throw new InternalServerErrorException(
@@ -186,6 +192,8 @@ export class AuthService {
     } catch (error) {
       if (error instanceof AppError) {
         throw new BadRequestException(error.message, { cause: error });
+      } else if (error instanceof BadRequestException) {
+        throw error;
       }
 
       throw new InternalServerErrorException(
@@ -223,6 +231,8 @@ export class AuthService {
     } catch (error) {
       if (error instanceof AppError) {
         throw new BadRequestException(error.message, { cause: error });
+      } else if (error instanceof BadRequestException) {
+        throw error;
       }
 
       throw new InternalServerErrorException(
@@ -261,6 +271,8 @@ export class AuthService {
     } catch (error) {
       if (error instanceof AppError) {
         throw new BadRequestException(error.message, { cause: error });
+      } else if (error instanceof BadRequestException) {
+        throw error;
       }
 
       throw new InternalServerErrorException(
@@ -305,6 +317,8 @@ export class AuthService {
     } catch (error) {
       if (error instanceof AppError) {
         throw new BadRequestException(error.message, { cause: error });
+      } else if (error instanceof BadRequestException) {
+        throw error;
       }
 
       throw new InternalServerErrorException(
@@ -328,6 +342,8 @@ export class AuthService {
     } catch (error) {
       if (error instanceof AppError) {
         throw new BadRequestException(error.message, { cause: error });
+      } else if (error instanceof BadRequestException) {
+        throw error;
       }
 
       throw new InternalServerErrorException(
@@ -348,6 +364,8 @@ export class AuthService {
     } catch (error) {
       if (error instanceof AppError) {
         throw new BadRequestException(error.message, { cause: error });
+      } else if (error instanceof BadRequestException) {
+        throw error;
       }
 
       throw new InternalServerErrorException(
@@ -381,6 +399,8 @@ export class AuthService {
     } catch (error) {
       if (error instanceof AppError) {
         throw new BadRequestException(error.message, { cause: error });
+      } else if (error instanceof BadRequestException) {
+        throw error;
       }
 
       throw new InternalServerErrorException('Internal server error', {
@@ -513,6 +533,8 @@ export class AuthService {
     } catch (error) {
       if (error instanceof AppError) {
         throw new BadRequestException(error.message, { cause: error });
+      } else if (error instanceof BadRequestException) {
+        throw error;
       }
 
       throw new InternalServerErrorException(
